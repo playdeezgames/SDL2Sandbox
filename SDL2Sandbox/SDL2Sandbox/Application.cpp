@@ -1,7 +1,7 @@
 #include "Application.h"
 #include "SDL.h"
 
-int Application::Run(int argc, char** argv)
+int Application::Run(const std::vector<std::string>& arguments)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_Window* window = nullptr;

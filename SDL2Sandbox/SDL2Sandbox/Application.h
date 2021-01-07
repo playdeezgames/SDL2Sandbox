@@ -1,8 +1,10 @@
 #pragma once
 #include "SDL.h"
+#include <string>
+#include <vector>
 class Application
 {
 public:
-	static int Run(int, char**);
+	static int Run(const std::vector<std::string>& arguments);
 };
 
