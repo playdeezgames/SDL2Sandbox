@@ -8,6 +8,8 @@ private:
 	static Application* s_application;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	int windowWidth;
+	int windowHeight;
 protected:
 	virtual void Start() = 0;
 	virtual void Finish() = 0;
@@ -15,7 +17,7 @@ protected:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 public:
-	Application();
-	static int Run(const std::vector<std::string>& arguments);
+	Application(int, int);
+	static int Run(const std::vector<std::string>&);
 };
 

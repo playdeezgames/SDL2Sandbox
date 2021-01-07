@@ -1,4 +1,11 @@
 #include "SandboxApplication.h"
+
+SandboxApplication::SandboxApplication()
+	: Application(640, 480)
+{
+
+}
+
 void SandboxApplication::Start()
 {
 

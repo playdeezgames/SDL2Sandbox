@@ -10,5 +10,7 @@ protected:
 	bool OnEvent(const SDL_Event&);
 	void Update();
 	void Draw();
+public:
+	SandboxApplication();
 };
 

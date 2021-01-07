@@ -3,9 +3,11 @@
 
 Application* Application::s_application = nullptr;
 
-Application::Application()
+Application::Application(int width, int height)
 	: window(nullptr)
 	, renderer(nullptr)
+	, windowWidth(width)
+	, windowHeight(height)
 {
 	if (!s_application)
 	{
@@ -18,7 +20,12 @@ int Application::Run(const std::vector<std::string>& arguments)
 	if (s_application)
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
-		SDL_CreateWindowAndRenderer(640, 480, 0, &s_application->window, &s_application->renderer);
+		SDL_CreateWindowAndRenderer(
+			s_application->windowWidth, 
+			s_application->windowHeight, 
+			0, 
+			&s_application->window, 
+			&s_application->renderer);
 		s_application->Start();
 		SDL_Event evt;
 		for (;;)
