@@ -11,7 +11,7 @@ protected:
 	void Start();
 	void Finish();
 	bool OnEvent(const SDL_Event&);
-	void Update();
+	void Update(int);
 	void Draw();
 public:
 	SandboxApplication();
