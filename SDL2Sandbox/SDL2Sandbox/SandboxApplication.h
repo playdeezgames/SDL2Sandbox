@@ -7,6 +7,7 @@ class SandboxApplication: public Application
 private:
 	static SandboxApplication sandboxApplication;
 	std::vector<int> blocks;
+	int counter;
 protected:
 	void Start();
 	void Finish();

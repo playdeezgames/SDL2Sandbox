@@ -3,6 +3,7 @@
 SandboxApplication::SandboxApplication()
 	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT)
 	, blocks(GameConstants::BOARD_ROWS)
+	, counter(0)
 {
 
 }
@@ -28,11 +29,16 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 
 void SandboxApplication::Update(int milliseconds)
 {
-	for (size_t row = 0; row < blocks.size() - 1; ++row)
+	counter += milliseconds;
+	while (counter > GameConstants::FRAME_MILLISECONDS)
 	{
-		blocks[row] = blocks[(size_t)(row + 1)];
+		for (size_t row = 0; row < blocks.size() - 1; ++row)
+		{
+			blocks[row] = blocks[(size_t)(row + 1)];
+		}
+		blocks[blocks.size() - 1] = rand() % (GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 1) + GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
+		counter -= GameConstants::FRAME_MILLISECONDS;
 	}
-	blocks[blocks.size() - 1] = rand() % (GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 1) + GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
 }
 
 void SandboxApplication::Draw()

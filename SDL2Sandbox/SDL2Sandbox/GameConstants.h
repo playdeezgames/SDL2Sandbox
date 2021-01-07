@@ -11,5 +11,6 @@ public:
 	static const int BLOCK_INITIAL_COLUMN = 0;
 	static const int BLOCK_MINIMUM_RANDOM_COLUMN = 1;
 	static const int BLOCK_MAXIMUM_RANDOM_COLUMN = BOARD_COLUMNS - 2;
+	static const int FRAME_MILLISECONDS = 100;
 };
 
