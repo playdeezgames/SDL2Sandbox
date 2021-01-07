@@ -9,5 +9,7 @@ public:
 	static const int WINDOW_WIDTH = BOARD_COLUMNS * CELL_WIDTH;
 	static const int WINDOW_HEIGHT = BOARD_ROWS * CELL_HEIGHT;
 	static const int BLOCK_INITIAL_COLUMN = 0;
+	static const int BLOCK_MINIMUM_RANDOM_COLUMN = 1;
+	static const int BLOCK_MAXIMUM_RANDOM_COLUMN = BOARD_COLUMNS - 2;
 };
 

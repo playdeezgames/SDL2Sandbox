@@ -33,10 +33,12 @@ int Application::Run(const std::vector<std::string>& arguments)
 			s_application->Update();
 			s_application->Draw();
 			SDL_RenderPresent(s_application->renderer);
-			SDL_WaitEvent(&evt);
-			if (!s_application->OnEvent(evt))
+			if (SDL_WaitEventTimeout(&evt, 100))
 			{
-				break;
+				if (!s_application->OnEvent(evt))
+				{
+					break;
+				}
 			}
 		}
 		s_application->Finish();
