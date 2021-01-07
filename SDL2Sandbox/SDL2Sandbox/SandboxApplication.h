@@ -10,6 +10,9 @@ private:
 	std::vector<int> tail;
 	int counter;
 	int direction;
+
+	void ResetGame();
+	void RestartGame();
 protected:
 	void Start();
 	void Finish();

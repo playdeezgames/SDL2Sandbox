@@ -1,4 +1,5 @@
 #include "SandboxApplication.h"
+SandboxApplication SandboxApplication::sandboxApplication;
 
 SandboxApplication::SandboxApplication()
 	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT)
@@ -11,19 +12,7 @@ SandboxApplication::SandboxApplication()
 
 void SandboxApplication::Start()
 {
-	blocks.clear();
-	while (blocks.size() < GameConstants::BOARD_ROWS)
-	{
-		blocks.push_back(GameConstants::BLOCK_INITIAL_COLUMN);
-	}
-
-	tail.clear();
-	while (tail.size() < GameConstants::TAIL_LENGTH)
-	{
-		tail.push_back(GameConstants::TAIL_INITIAL_COLUMN);
-	}
-
-	direction = 1;
+	ResetGame();
 }
 
 void SandboxApplication::Finish()
@@ -106,5 +95,25 @@ void SandboxApplication::Draw()
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
 }
 
-SandboxApplication SandboxApplication::sandboxApplication;
 
+void SandboxApplication::ResetGame()
+{
+	blocks.clear();
+	while (blocks.size() < GameConstants::BOARD_ROWS)
+	{
+		blocks.push_back(GameConstants::BLOCK_INITIAL_COLUMN);
+	}
+
+	tail.clear();
+	while (tail.size() < GameConstants::TAIL_LENGTH)
+	{
+		tail.push_back(GameConstants::TAIL_INITIAL_COLUMN);
+	}
+
+	direction = 1;
+}
+
+void SandboxApplication::RestartGame()
+{
+	
+}
