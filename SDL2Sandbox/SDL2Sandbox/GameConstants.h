@@ -8,5 +8,6 @@ public:
 	static const int CELL_HEIGHT = 16;
 	static const int WINDOW_WIDTH = BOARD_COLUMNS * CELL_WIDTH;
 	static const int WINDOW_HEIGHT = BOARD_ROWS * CELL_HEIGHT;
+	static const int BLOCK_INITIAL_COLUMN = 0;
 };
 

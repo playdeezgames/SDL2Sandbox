@@ -11,6 +11,7 @@ private:
 	int windowWidth;
 	int windowHeight;
 protected:
+	SDL_Renderer* GetMainRenderer() const { return renderer; }
 	virtual void Start() = 0;
 	virtual void Finish() = 0;
 	virtual bool OnEvent(const SDL_Event&) = 0;

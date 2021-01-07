@@ -31,7 +31,6 @@ int Application::Run(const std::vector<std::string>& arguments)
 		for (;;)
 		{
 			s_application->Update();
-			SDL_RenderClear(s_application->renderer);
 			s_application->Draw();
 			SDL_RenderPresent(s_application->renderer);
 			SDL_WaitEvent(&evt);
