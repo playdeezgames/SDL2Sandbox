@@ -10,7 +10,7 @@ private:
 	SDL_Renderer* renderer;
 	int windowWidth;
 	int windowHeight;
-	int eventTimeout;
+	int frameMilliseconds;
 protected:
 	SDL_Renderer* GetMainRenderer() const { return renderer; }
 	virtual void Start() = 0;

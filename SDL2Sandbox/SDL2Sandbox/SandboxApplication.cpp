@@ -1,7 +1,7 @@
 #include "SandboxApplication.h"
 
 SandboxApplication::SandboxApplication()
-	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::EVENT_TIMEOUT)
+	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::FRAME_MILLISECONDS)
 	, blocks(GameConstants::BOARD_ROWS)
 {
 
@@ -28,7 +28,11 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 
 void SandboxApplication::Update()
 {
-
+	for (auto row = 0; row < blocks.size() - 1; ++row)
+	{
+		blocks[row] = blocks[row + 1];
+	}
+	blocks[blocks.size() - 1] = rand() % (GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 1) + GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
 }
 
 void SandboxApplication::Draw()

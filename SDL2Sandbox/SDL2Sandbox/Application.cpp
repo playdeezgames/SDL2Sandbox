@@ -3,12 +3,12 @@
 
 Application* Application::s_application = nullptr;
 
-Application::Application(int width, int height, int timeout)
+Application::Application(int width, int height, int milliseconds)
 	: window(nullptr)
 	, renderer(nullptr)
 	, windowWidth(width)
 	, windowHeight(height)
-	, eventTimeout(timeout)
+	, frameMilliseconds(milliseconds)
 {
 	if (!s_application)
 	{
@@ -28,13 +28,18 @@ int Application::Run(const std::vector<std::string>& arguments)
 			&s_application->window,
 			&s_application->renderer);
 		s_application->Start();
+		auto frameCounter = SDL_GetTicks();
 		SDL_Event evt;
 		for (;;)
 		{
-			s_application->Update();
+			while (frameCounter + s_application->frameMilliseconds < SDL_GetTicks())
+			{
+				s_application->Update();
+				frameCounter += s_application->frameMilliseconds;
+			}
 			s_application->Draw();
 			SDL_RenderPresent(s_application->renderer);
-			if (SDL_WaitEventTimeout(&evt, s_application->eventTimeout))
+			if (SDL_PollEvent(&evt))
 			{
 				if (!s_application->OnEvent(evt))
 				{
