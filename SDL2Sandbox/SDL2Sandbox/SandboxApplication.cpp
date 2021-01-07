@@ -6,6 +6,7 @@ SandboxApplication::SandboxApplication()
 	, blocks(GameConstants::BOARD_ROWS)
 	, counter(0)
 	, direction(1)
+	, gameOver(true)
 {
 
 }
@@ -31,7 +32,7 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 		{
 			direction = -1;
 		}
-		else if(evt.key.keysym.sym == SDLK_RIGHT)
+		else if (evt.key.keysym.sym == SDLK_RIGHT)
 		{
 			direction = 1;
 		}
@@ -46,17 +47,25 @@ void SandboxApplication::Update(int milliseconds)
 	counter += milliseconds;
 	while (counter > GameConstants::FRAME_MILLISECONDS)
 	{
-		for (size_t row = 0; row < tail.size() - 1; ++row)
+		if (!gameOver)
 		{
-			tail[row] = tail[row + 1];
-		}
-		tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
+			for (size_t row = 0; row < tail.size() - 1; ++row)
+			{
+				tail[row] = tail[row + 1];
+			}
+			tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
 
-		for (size_t row = 0; row < blocks.size() - 1; ++row)
-		{
-			blocks[row] = blocks[(size_t)(row + 1)];
+			for (size_t row = 0; row < blocks.size() - 1; ++row)
+			{
+				blocks[row] = blocks[(size_t)(row + 1)];
+			}
+			blocks[blocks.size() - 1] = 
+				rand() % 
+				(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - 
+					GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 
+					1) + 
+				GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
 		}
-		blocks[blocks.size() - 1] = rand() % (GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 1) + GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
 
 		counter -= GameConstants::FRAME_MILLISECONDS;
 	}
@@ -115,5 +124,5 @@ void SandboxApplication::ResetGame()
 
 void SandboxApplication::RestartGame()
 {
-	
+
 }

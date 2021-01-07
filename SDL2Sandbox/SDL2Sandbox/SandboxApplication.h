@@ -10,6 +10,7 @@ private:
 	std::vector<int> tail;
 	int counter;
 	int direction;
+	bool gameOver;
 
 	void ResetGame();
 	void RestartGame();
