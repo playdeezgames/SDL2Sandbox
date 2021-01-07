@@ -28,13 +28,23 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	case SDL_QUIT:
 		return false;
 	case SDL_KEYDOWN:
-		if (evt.key.keysym.sym == SDLK_LEFT)
+		if (!gameOver)
 		{
-			direction = -1;
+			if (evt.key.keysym.sym == SDLK_LEFT)
+			{
+				direction = -1;
+			}
+			else if (evt.key.keysym.sym == SDLK_RIGHT)
+			{
+				direction = 1;
+			}
 		}
-		else if (evt.key.keysym.sym == SDLK_RIGHT)
+		else
 		{
-			direction = 1;
+			if (evt.key.keysym.sym == SDLK_SPACE)
+			{
+				RestartGame();
+			}
 		}
 		return true;
 	default:
@@ -59,12 +69,17 @@ void SandboxApplication::Update(int milliseconds)
 			{
 				blocks[row] = blocks[(size_t)(row + 1)];
 			}
-			blocks[blocks.size() - 1] = 
-				rand() % 
-				(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - 
-					GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 
-					1) + 
+			blocks[blocks.size() - 1] =
+				rand() %
+				(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN -
+					GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN +
+					1) +
 				GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
+
+			gameOver = 
+				blocks[tail.size() - 1] == tail[tail.size() - 1] ||
+				tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN || 
+				tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
 		}
 
 		counter -= GameConstants::FRAME_MILLISECONDS;
@@ -124,5 +139,6 @@ void SandboxApplication::ResetGame()
 
 void SandboxApplication::RestartGame()
 {
-
+	ResetGame();
+	gameOver = false;
 }
