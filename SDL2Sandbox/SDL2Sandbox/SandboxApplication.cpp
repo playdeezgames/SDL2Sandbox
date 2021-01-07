@@ -1,7 +1,7 @@
 #include "SandboxApplication.h"
 
 SandboxApplication::SandboxApplication()
-	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT)
+	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::EVENT_TIMEOUT)
 	, blocks(GameConstants::BOARD_ROWS)
 {
 

@@ -10,6 +10,7 @@ private:
 	SDL_Renderer* renderer;
 	int windowWidth;
 	int windowHeight;
+	int eventTimeout;
 protected:
 	SDL_Renderer* GetMainRenderer() const { return renderer; }
 	virtual void Start() = 0;
@@ -18,7 +19,7 @@ protected:
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 public:
-	Application(int, int);
+	Application(int, int, int);
 	static int Run(const std::vector<std::string>&);
 };
 

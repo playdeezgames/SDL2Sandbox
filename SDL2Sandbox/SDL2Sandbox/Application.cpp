@@ -3,11 +3,12 @@
 
 Application* Application::s_application = nullptr;
 
-Application::Application(int width, int height)
+Application::Application(int width, int height, int timeout)
 	: window(nullptr)
 	, renderer(nullptr)
 	, windowWidth(width)
 	, windowHeight(height)
+	, eventTimeout(timeout)
 {
 	if (!s_application)
 	{
@@ -21,10 +22,10 @@ int Application::Run(const std::vector<std::string>& arguments)
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		SDL_CreateWindowAndRenderer(
-			s_application->windowWidth, 
-			s_application->windowHeight, 
-			0, 
-			&s_application->window, 
+			s_application->windowWidth,
+			s_application->windowHeight,
+			0,
+			&s_application->window,
 			&s_application->renderer);
 		s_application->Start();
 		SDL_Event evt;
@@ -33,7 +34,7 @@ int Application::Run(const std::vector<std::string>& arguments)
 			s_application->Update();
 			s_application->Draw();
 			SDL_RenderPresent(s_application->renderer);
-			if (SDL_WaitEventTimeout(&evt, 100))
+			if (SDL_WaitEventTimeout(&evt, s_application->eventTimeout))
 			{
 				if (!s_application->OnEvent(evt))
 				{
@@ -53,6 +54,6 @@ int Application::Run(const std::vector<std::string>& arguments)
 			s_application->window = nullptr;
 		}
 		SDL_Quit();
-		return 0;
 	}
+	return 0;
 }
