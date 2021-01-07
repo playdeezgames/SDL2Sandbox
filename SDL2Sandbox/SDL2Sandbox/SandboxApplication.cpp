@@ -7,18 +7,23 @@ SandboxApplication::SandboxApplication()
 	, counter(0)
 	, direction(1)
 	, gameOver(true)
+	, turnSound(nullptr)
+	, deathSound(nullptr)
 {
 
 }
 
 void SandboxApplication::Start()
 {
+	turnSound = Mix_LoadWAV("jl2017turn.wav");
+	deathSound = Mix_LoadWAV("jl2017death.wav");
 	ResetGame();
 }
 
 void SandboxApplication::Finish()
 {
-
+	Mix_FreeChunk(turnSound);
+	Mix_FreeChunk(deathSound);
 }
 
 bool SandboxApplication::OnEvent(const SDL_Event& evt)
@@ -30,12 +35,14 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	case SDL_KEYDOWN:
 		if (!gameOver)
 		{
-			if (evt.key.keysym.sym == SDLK_LEFT)
+			if (evt.key.keysym.sym == SDLK_LEFT && direction!=-1)
 			{
+				Mix_PlayChannel(-1, turnSound, 0);
 				direction = -1;
 			}
-			else if (evt.key.keysym.sym == SDLK_RIGHT)
+			else if (evt.key.keysym.sym == SDLK_RIGHT && direction != 1)
 			{
+				Mix_PlayChannel(-1, turnSound, 0);
 				direction = 1;
 			}
 		}
@@ -80,6 +87,11 @@ void SandboxApplication::Update(int milliseconds)
 				blocks[tail.size() - 1] == tail[tail.size() - 1] ||
 				tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN || 
 				tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
+
+			if (gameOver)
+			{
+				Mix_PlayChannel(-1, deathSound, 0);
+			}
 		}
 
 		counter -= GameConstants::FRAME_MILLISECONDS;

@@ -2,9 +2,13 @@
 #include "Application.h"
 #include "GameConstants.h"
 #include <vector>
+#include "SDL_Mixer.h"
 class SandboxApplication: public Application
 {
 private:
+	Mix_Chunk* turnSound;
+	Mix_Chunk* deathSound;
+
 	static SandboxApplication sandboxApplication;
 	std::vector<int> blocks;
 	std::vector<int> tail;

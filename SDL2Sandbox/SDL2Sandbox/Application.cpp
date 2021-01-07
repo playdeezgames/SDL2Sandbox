@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "SDL.h"
+#include "SDL_mixer.h"
 
 Application* Application::s_application = nullptr;
 
@@ -21,6 +22,8 @@ int Application::Run(const std::vector<std::string>& arguments)
 	if (s_application)
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
+		Mix_Init(0);
+		Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
 		SDL_CreateWindowAndRenderer(
 			s_application->windowWidth,
 			s_application->windowHeight,
@@ -58,6 +61,8 @@ int Application::Run(const std::vector<std::string>& arguments)
 			SDL_DestroyWindow(s_application->window);
 			s_application->window = nullptr;
 		}
+		Mix_CloseAudio();
+		Mix_Quit();
 		SDL_Quit();
 	}
 	return 0;
