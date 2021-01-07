@@ -1,7 +1,8 @@
 #include "SandboxApplication.h"
+#include "GameConstants.h"
 
 SandboxApplication::SandboxApplication()
-	: Application(640, 480)
+	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT)
 {
 
 }
