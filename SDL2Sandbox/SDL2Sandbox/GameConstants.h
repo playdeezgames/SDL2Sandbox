@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class GameConstants
 {
 public:
@@ -14,5 +15,6 @@ public:
 	static const int FRAME_MILLISECONDS = 100;
 	static const int TAIL_LENGTH = 6;
 	static const int TAIL_INITIAL_COLUMN = BOARD_COLUMNS / 2;
+	static const std::string WINDOW_TITLE;
 };
 

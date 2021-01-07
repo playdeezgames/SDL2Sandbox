@@ -2,7 +2,7 @@
 SandboxApplication SandboxApplication::sandboxApplication;
 
 SandboxApplication::SandboxApplication()
-	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT)
+	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::WINDOW_TITLE)
 	, blocks(GameConstants::BOARD_ROWS)
 	, counter(0)
 	, direction(1)

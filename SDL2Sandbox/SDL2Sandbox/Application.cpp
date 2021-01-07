@@ -3,11 +3,12 @@
 
 Application* Application::s_application = nullptr;
 
-Application::Application(int width, int height)
+Application::Application(int width, int height, const std::string& title)
 	: window(nullptr)
 	, renderer(nullptr)
 	, windowWidth(width)
 	, windowHeight(height)
+	, windowTitle(title)
 {
 	if (!s_application)
 	{
@@ -26,6 +27,7 @@ int Application::Run(const std::vector<std::string>& arguments)
 			0,
 			&s_application->window,
 			&s_application->renderer);
+		SDL_SetWindowTitle(s_application->window, s_application->windowTitle.c_str());
 		s_application->Start();
 		int oldCounter = SDL_GetTicks();
 		int frameCounter;
