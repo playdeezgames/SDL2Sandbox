@@ -54,6 +54,15 @@ void SandboxApplication::Draw()
 		rc.y = row * GameConstants::CELL_HEIGHT;
 		SDL_RenderFillRect(GetMainRenderer(), &rc);
 	}
+
+	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 255, 255);
+	rc.x = 0;
+	rc.y = 0;
+	rc.w = GameConstants::CELL_WIDTH;
+	rc.h = GameConstants::WINDOW_HEIGHT;
+	SDL_RenderFillRect(GetMainRenderer(), &rc);
+	rc.x = GameConstants::WINDOW_WIDTH - GameConstants::CELL_WIDTH;
+	SDL_RenderFillRect(GetMainRenderer(), &rc);
 }
 
 SandboxApplication SandboxApplication::sandboxApplication;
