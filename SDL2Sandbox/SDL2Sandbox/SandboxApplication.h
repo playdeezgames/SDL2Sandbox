@@ -7,7 +7,9 @@ class SandboxApplication: public Application
 private:
 	static SandboxApplication sandboxApplication;
 	std::vector<int> blocks;
+	std::vector<int> tail;
 	int counter;
+	int direction;
 protected:
 	void Start();
 	void Finish();

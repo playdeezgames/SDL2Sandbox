@@ -4,6 +4,7 @@ SandboxApplication::SandboxApplication()
 	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT)
 	, blocks(GameConstants::BOARD_ROWS)
 	, counter(0)
+	, direction(1)
 {
 
 }
@@ -15,6 +16,14 @@ void SandboxApplication::Start()
 	{
 		blocks.push_back(GameConstants::BLOCK_INITIAL_COLUMN);
 	}
+
+	tail.clear();
+	while (tail.size() < GameConstants::TAIL_LENGTH)
+	{
+		tail.push_back(GameConstants::TAIL_INITIAL_COLUMN);
+	}
+
+	direction = 1;
 }
 
 void SandboxApplication::Finish()
@@ -24,7 +33,23 @@ void SandboxApplication::Finish()
 
 bool SandboxApplication::OnEvent(const SDL_Event& evt)
 {
-	return evt.type != SDL_QUIT;
+	switch (evt.type)
+	{
+	case SDL_QUIT:
+		return false;
+	case SDL_KEYDOWN:
+		if (evt.key.keysym.sym == SDLK_LEFT)
+		{
+			direction = -1;
+		}
+		else if(evt.key.keysym.sym == SDLK_RIGHT)
+		{
+			direction = 1;
+		}
+		return true;
+	default:
+		return true;
+	}
 }
 
 void SandboxApplication::Update(int milliseconds)
@@ -32,11 +57,18 @@ void SandboxApplication::Update(int milliseconds)
 	counter += milliseconds;
 	while (counter > GameConstants::FRAME_MILLISECONDS)
 	{
+		for (size_t row = 0; row < tail.size() - 1; ++row)
+		{
+			tail[row] = tail[row + 1];
+		}
+		tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
+
 		for (size_t row = 0; row < blocks.size() - 1; ++row)
 		{
 			blocks[row] = blocks[(size_t)(row + 1)];
 		}
 		blocks[blocks.size() - 1] = rand() % (GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN - GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN + 1) + GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
+
 		counter -= GameConstants::FRAME_MILLISECONDS;
 	}
 }
@@ -46,8 +78,17 @@ void SandboxApplication::Draw()
 	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 0, 255);
 	SDL_RenderClear(GetMainRenderer());
 
-	SDL_SetRenderDrawColor(GetMainRenderer(), 255, 255, 255, 255);
 	SDL_Rect rc = { 0,0,GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
+	for (int row = 0; row < tail.size(); ++row)
+	{
+		SDL_SetRenderDrawColor(GetMainRenderer(), 255, (row < tail.size() - 1) ? (255) : (0), 0, 255);
+		rc.x = tail[row] * GameConstants::CELL_WIDTH;
+		rc.y = row * GameConstants::CELL_HEIGHT;
+		SDL_RenderFillRect(GetMainRenderer(), &rc);
+
+	}
+
+	SDL_SetRenderDrawColor(GetMainRenderer(), 255, 255, 255, 255);
 	for (int row = 0; row < blocks.size(); ++row)
 	{
 		rc.x = blocks[row] * GameConstants::CELL_WIDTH;
