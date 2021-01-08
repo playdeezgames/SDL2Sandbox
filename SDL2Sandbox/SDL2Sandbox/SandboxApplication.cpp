@@ -10,17 +10,16 @@ SandboxApplication SandboxApplication::sandboxApplication;
 SandboxApplication::SandboxApplication()
 	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::WINDOW_TITLE)
 	, blocks(GameConstants::BOARD_ROWS)
-	, counter(0)
+	, counter(GameConstants::INITIAL_COUNTER)
 	, direction(GameConstants::DIRECTION_RIGHT)
-	, gameOver(true)
+	, gameOver(GameConstants::INITIAL_GAME_OVER)
 	, turnSound(nullptr)
 	, deathSound(nullptr)
 	, romfontTexture(nullptr)
 	, runLength(GameConstants::INITIAL_RUN_LENGTH)
 	, score(GameConstants::INITIAL_SCORE)
-	, muted(false)
+	, muted(GameConstants::INITIAL_MUTED)
 {
-
 }
 
 void SandboxApplication::SaveOptions()
@@ -44,18 +43,14 @@ void SandboxApplication::LoadOptions()
 	if (f)
 	{
 		GameOptions options;
-		fseek(f, 0, SEEK_END);
+		fseek(f, 0, SEEK_END);//seek to end of file to determine position
 		if (ftell(f) == sizeof(GameOptions))
 		{
-			fseek(f, 0, SEEK_SET);
+			fseek(f, 0, SEEK_SET);//reset to start of file for reading
 			fread(&options, sizeof(GameOptions), GameConstants::OPTIONS_RECORD_COUNT, f);
 			muted = options.muted;
 		}
 		fclose(f);
-	}
-	else
-	{
-		muted = false;
 	}
 }
 
@@ -77,12 +72,19 @@ void SandboxApplication::Finish()
 	IMG_Quit();
 }
 
+static int CalculateScoreFromRunLength(int runLength)
+{
+	//"triangular number"
+	//incentivizes risk by keeping going in a particular direction without turning
+	return (runLength * (runLength + 1)) / 2;
+}
+
 void SandboxApplication::SetNextDirection(int nextDirection)
 {
 	if (nextDirection != direction)
 	{
-		score += (runLength * (runLength + 1)) / 2;
-		runLength = 0;
+		score += CalculateScoreFromRunLength(runLength);
+		runLength = GameConstants::INITIAL_RUN_LENGTH;
 		PlaySound(turnSound);
 		direction = nextDirection;
 	}
@@ -99,11 +101,11 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 		{
 			if (evt.key.keysym.sym == SDLK_LEFT)
 			{
-				SetNextDirection(-1);
+				SetNextDirection(GameConstants::DIRECTION_LEFT);
 			}
 			else if (evt.key.keysym.sym == SDLK_RIGHT)
 			{
-				SetNextDirection(1);
+				SetNextDirection(GameConstants::DIRECTION_RIGHT);
 			}
 		}
 		else
@@ -204,7 +206,7 @@ void SandboxApplication::Draw()
 	rc.y = 0;
 	rc.w = GameConstants::CELL_WIDTH;
 	rc.h = GameConstants::CELL_HEIGHT;
-	int digits = 1;
+	int digits = 1;//there is always at least one score digit
 	int temp = score;
 	while (temp >= GameConstants::SCORE_RADIX)
 	{
@@ -220,7 +222,7 @@ void SandboxApplication::Draw()
 			GameConstants::CELL_HEIGHT 
 		};
 	temp = score;
-	while (digits > 0)
+	while (digits)
 	{
 		int digit = temp % GameConstants::SCORE_RADIX;
 		temp /= GameConstants::SCORE_RADIX;
@@ -234,13 +236,13 @@ void SandboxApplication::Draw()
 	{
 		if (muted)
 		{
-			DrawCenteredText(GameConstants::BOARD_ROWS - 2, "<M> to unmute", 128, 0, 128);
+			DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, "<M> to unmute", 128, 0, 128);
 		}
 		else
 		{
-			DrawCenteredText(GameConstants::BOARD_ROWS - 2, "<M> to mute", 128, 0, 128);
+			DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, "<M> to mute", 128, 0, 128);
 		}
-		DrawCenteredText(GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
+		DrawCenteredText(GameConstants::START_MESSAGE_ROW, "Press <SPACE> to Start!!", 128, 0, 128);
 	}
 }
 

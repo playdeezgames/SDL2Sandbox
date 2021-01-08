@@ -34,5 +34,10 @@ public:
 	static const int DEFAULT_Y = 0;
 	static const int SCORE_RADIX = 10;
 	static const int ROMFONT_DIGITS_ROW = 3;
+	static const int INITIAL_COUNTER = 0;
+	static const bool INITIAL_GAME_OVER = true;
+	static const bool INITIAL_MUTED = false;
+	static const int START_MESSAGE_ROW = BOARD_ROWS - 1;
+	static const int MUTE_MESSAGE_ROW = BOARD_ROWS - 2;
 };
 
