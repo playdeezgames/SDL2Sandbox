@@ -11,13 +11,13 @@ SandboxApplication::SandboxApplication()
 	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::WINDOW_TITLE)
 	, blocks(GameConstants::BOARD_ROWS)
 	, counter(0)
-	, direction(1)
+	, direction(GameConstants::DIRECTION_RIGHT)
 	, gameOver(true)
 	, turnSound(nullptr)
 	, deathSound(nullptr)
 	, romfontTexture(nullptr)
-	, runLength(0)
-	, score(0)
+	, runLength(GameConstants::INITIAL_RUN_LENGTH)
+	, score(GameConstants::INITIAL_SCORE)
 	, muted(false)
 {
 
@@ -27,12 +27,12 @@ void SandboxApplication::SaveOptions()
 {
 	remove(GameConstants::OPTIONS_FILE_NAME.c_str());
 	FILE* f = nullptr;
-	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), "wb");
+	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), GameConstants::OPTIONS_WRITE_MODE.c_str());
 	if (f)
 	{
-		GameOptions options;
+		GameOptions options = { 0 };
 		options.muted = muted;
-		fwrite(&options, sizeof(GameOptions), 1, f);
+		fwrite(&options, sizeof(GameOptions), GameConstants::OPTIONS_RECORD_COUNT, f);
 		fclose(f);
 	}
 }
@@ -40,7 +40,7 @@ void SandboxApplication::SaveOptions()
 void SandboxApplication::LoadOptions()
 {
 	FILE* f = nullptr;
-	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), "rb");
+	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), GameConstants::OPTIONS_READ_MODE.c_str());
 	if (f)
 	{
 		GameOptions options;
@@ -48,7 +48,7 @@ void SandboxApplication::LoadOptions()
 		if (ftell(f) == sizeof(GameOptions))
 		{
 			fseek(f, 0, SEEK_SET);
-			fread(&options, sizeof(GameOptions), 1, f);
+			fread(&options, sizeof(GameOptions), GameConstants::OPTIONS_RECORD_COUNT, f);
 			muted = options.muted;
 		}
 		fclose(f);
@@ -63,9 +63,9 @@ void SandboxApplication::Start()
 {
 	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
-	romfontTexture = IMG_LoadTexture(GetMainRenderer(), "romfont8x8.png");
-	turnSound = Mix_LoadWAV("jl2017turn.wav");
-	deathSound = Mix_LoadWAV("jl2017death.wav");
+	romfontTexture = IMG_LoadTexture(GetMainRenderer(), GameConstants::ROMFONT_IMAGE_FILE_NAME.c_str());
+	turnSound = Mix_LoadWAV(GameConstants::TURN_SOUND_FILE_NAME.c_str());
+	deathSound = Mix_LoadWAV(GameConstants::DEATH_SOUND_FILE_NAME.c_str());
 	ResetGame();
 }
 
@@ -77,6 +77,17 @@ void SandboxApplication::Finish()
 	IMG_Quit();
 }
 
+void SandboxApplication::SetNextDirection(int nextDirection)
+{
+	if (nextDirection != direction)
+	{
+		score += (runLength * (runLength + 1)) / 2;
+		runLength = 0;
+		PlaySound(turnSound);
+		direction = nextDirection;
+	}
+}
+
 bool SandboxApplication::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)
@@ -86,19 +97,13 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	case SDL_KEYDOWN:
 		if (!gameOver)
 		{
-			if (evt.key.keysym.sym == SDLK_LEFT && direction != -1)
+			if (evt.key.keysym.sym == SDLK_LEFT)
 			{
-				score += (runLength * (runLength + 1)) / 2;
-				runLength = 0;
-				PlaySound(turnSound);
-				direction = -1;
+				SetNextDirection(-1);
 			}
-			else if (evt.key.keysym.sym == SDLK_RIGHT && direction != 1)
+			else if (evt.key.keysym.sym == SDLK_RIGHT)
 			{
-				score += (runLength * (runLength + 1)) / 2;
-				runLength = 0;
-				PlaySound(turnSound);
-				direction = 1;
+				SetNextDirection(1);
 			}
 		}
 		else
@@ -201,18 +206,24 @@ void SandboxApplication::Draw()
 	rc.h = GameConstants::CELL_HEIGHT;
 	int digits = 1;
 	int temp = score;
-	while (temp > 9)
+	while (temp >= GameConstants::SCORE_RADIX)
 	{
 		digits++;
-		temp /= 10;
+		temp /= GameConstants::SCORE_RADIX;
 		rc.x += GameConstants::CELL_WIDTH;
 	}
-	SDL_Rect rcSrc = { 0, GameConstants::CELL_HEIGHT * 3, GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
+	SDL_Rect rcSrc = 
+		{ 
+			GameConstants::DEFAULT_X, 
+			GameConstants::CELL_HEIGHT * GameConstants::ROMFONT_DIGITS_ROW, 
+			GameConstants::CELL_WIDTH, 
+			GameConstants::CELL_HEIGHT 
+		};
 	temp = score;
 	while (digits > 0)
 	{
-		int digit = temp % 10;
-		temp /= 10;
+		int digit = temp % GameConstants::SCORE_RADIX;
+		temp /= GameConstants::SCORE_RADIX;
 		digits--;
 		rcSrc.x = digit * GameConstants::CELL_WIDTH;
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rc);
@@ -223,13 +234,13 @@ void SandboxApplication::Draw()
 	{
 		if (muted)
 		{
-			DrawText((GameConstants::BOARD_COLUMNS - 13) / 2, GameConstants::BOARD_ROWS - 2, "<M> to unmute", 128, 0, 128);
+			DrawCenteredText(GameConstants::BOARD_ROWS - 2, "<M> to unmute", 128, 0, 128);
 		}
 		else
 		{
-			DrawText((GameConstants::BOARD_COLUMNS - 11) / 2, GameConstants::BOARD_ROWS - 2, "<M> to mute", 128, 0, 128);
+			DrawCenteredText(GameConstants::BOARD_ROWS - 2, "<M> to mute", 128, 0, 128);
 		}
-		DrawText((GameConstants::BOARD_COLUMNS - 24) / 2, GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
+		DrawCenteredText(GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
 	}
 }
 
@@ -248,9 +259,9 @@ void SandboxApplication::ResetGame()
 		tail.push_back(GameConstants::TAIL_INITIAL_COLUMN);
 	}
 
-	direction = 1;
-	score = 0;
-	runLength = 0;
+	direction = GameConstants::DIRECTION_RIGHT;
+	score = GameConstants::INITIAL_SCORE;
+	runLength = GameConstants::INITIAL_RUN_LENGTH;
 }
 
 void SandboxApplication::RestartGame()
@@ -259,15 +270,32 @@ void SandboxApplication::RestartGame()
 	gameOver = false;
 }
 
+void SandboxApplication::DrawCenteredText(int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
+{
+	DrawText((GameConstants::BOARD_COLUMNS - text.size()) / 2, row, text, r, g, b);
+}
+
 void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
 {
 	SDL_SetTextureColorMod(romfontTexture, r, g, b);
-	SDL_Rect rcSrc = { 0, 0, GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
-	SDL_Rect rcDst = { column * GameConstants::CELL_WIDTH, row * GameConstants::CELL_HEIGHT, GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
+	SDL_Rect rcSrc = 
+		{ 
+			GameConstants::DEFAULT_X, 
+			GameConstants::DEFAULT_Y, 
+			GameConstants::CELL_WIDTH, 
+			GameConstants::CELL_HEIGHT 
+		};
+	SDL_Rect rcDst = 
+		{ 
+			column * GameConstants::CELL_WIDTH, 
+			row * GameConstants::CELL_HEIGHT, 
+			GameConstants::CELL_WIDTH, 
+			GameConstants::CELL_HEIGHT 
+		};
 	for (auto ch : text)
 	{
-		rcSrc.x = (ch % 16) * GameConstants::CELL_WIDTH;
-		rcSrc.y = (ch / 16) * GameConstants::CELL_HEIGHT;
+		rcSrc.x = (ch % GameConstants::ROMFONT_COLUMNS) * GameConstants::CELL_WIDTH;
+		rcSrc.y = (ch / GameConstants::ROMFONT_COLUMNS) * GameConstants::CELL_HEIGHT;
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rcDst);
 		rcDst.x += GameConstants::CELL_WIDTH;
 	}
@@ -276,6 +304,6 @@ void SandboxApplication::PlaySound(Mix_Chunk* chunk)
 {
 	if (!muted)
 	{
-		Mix_PlayChannel(-1, chunk, 0);
+		Mix_PlayChannel(GameConstants::ANY_CHANNEL, chunk, GameConstants::NO_LOOPS);
 	}
 }
