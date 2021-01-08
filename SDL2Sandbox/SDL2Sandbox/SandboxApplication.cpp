@@ -19,6 +19,7 @@ SandboxApplication::SandboxApplication()
 	, runLength(GameConstants::INITIAL_RUN_LENGTH)
 	, score(GameConstants::INITIAL_SCORE)
 	, muted(GameConstants::INITIAL_MUTED)
+	, romfontSrcRects()
 {
 }
 
@@ -56,6 +57,16 @@ void SandboxApplication::LoadOptions()
 
 void SandboxApplication::Start()
 {
+	for (int index = 0; index < GameConstants::ROMFONT_CELL_COUNT; ++index)
+	{
+		int column = index % GameConstants::ROMFONT_COLUMNS;
+		int row = index / GameConstants::ROMFONT_COLUMNS;
+		romfontSrcRects[index].x = column * GameConstants::ROMFONT_CELL_WIDTH;
+		romfontSrcRects[index].y = row * GameConstants::ROMFONT_CELL_HEIGHT;
+		romfontSrcRects[index].w = GameConstants::ROMFONT_CELL_WIDTH;
+		romfontSrcRects[index].h = GameConstants::ROMFONT_CELL_HEIGHT;
+	}
+
 	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), GameConstants::ROMFONT_IMAGE_FILE_NAME.c_str());
@@ -260,21 +271,13 @@ void SandboxApplication::DrawScore()
 		temp /= GameConstants::SCORE_RADIX;
 		rc.x += GameConstants::CELL_WIDTH;
 	}
-	SDL_Rect rcSrc =
-	{
-		GameConstants::DEFAULT_X,
-		GameConstants::CELL_HEIGHT * GameConstants::ROMFONT_DIGITS_ROW,
-		GameConstants::CELL_WIDTH,
-		GameConstants::CELL_HEIGHT
-	};
 	temp = score;
 	while (digits)
 	{
 		int digit = temp % GameConstants::SCORE_RADIX;
 		temp /= GameConstants::SCORE_RADIX;
 		digits--;
-		rcSrc.x = digit * GameConstants::CELL_WIDTH;
-		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rc);
+		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects['0'+digit]), &rc);
 		rc.x -= GameConstants::CELL_WIDTH;
 	}
 }
@@ -308,9 +311,9 @@ void SandboxApplication::DrawHints()
 void SandboxApplication::Draw()
 {
 	DrawBackground();
-	DrawTail();
 	DrawBlocks();
 	DrawWalls();
+	DrawTail();
 	DrawScore();
 	DrawHints();
 }
@@ -347,16 +350,9 @@ void SandboxApplication::DrawCenteredText(int row, const std::string& text, Uint
 	DrawText((GameConstants::BOARD_COLUMNS - (int)text.size()) / 2, row, text, r, g, b);
 }
 
-void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
+void SandboxApplication::DrawCharacter(int column, int row, char character, Uint8 r, Uint8 g, Uint8 b)
 {
 	SDL_SetTextureColorMod(romfontTexture, r, g, b);
-	SDL_Rect rcSrc =
-	{
-		GameConstants::DEFAULT_X,
-		GameConstants::DEFAULT_Y,
-		GameConstants::CELL_WIDTH,
-		GameConstants::CELL_HEIGHT
-	};
 	SDL_Rect rcDst =
 	{
 		column * GameConstants::CELL_WIDTH,
@@ -364,12 +360,15 @@ void SandboxApplication::DrawText(int column, int row, const std::string& text, 
 		GameConstants::CELL_WIDTH,
 		GameConstants::CELL_HEIGHT
 	};
+	SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
+}
+
+void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
+{
 	for (auto ch : text)
 	{
-		rcSrc.x = (ch % GameConstants::ROMFONT_COLUMNS) * GameConstants::CELL_WIDTH;
-		rcSrc.y = (ch / GameConstants::ROMFONT_COLUMNS) * GameConstants::CELL_HEIGHT;
-		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rcDst);
-		rcDst.x += GameConstants::CELL_WIDTH;
+		DrawCharacter(column, row, ch, r, g, b);
+		column++;
 	}
 }
 void SandboxApplication::PlaySound(Mix_Chunk* chunk)

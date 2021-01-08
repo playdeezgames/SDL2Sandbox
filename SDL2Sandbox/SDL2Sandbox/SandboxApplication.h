@@ -14,6 +14,7 @@ private:
 	static SandboxApplication sandboxApplication;
 	std::vector<int> blocks;
 	std::vector<int> tail;
+	SDL_Rect romfontSrcRects[GameConstants::ROMFONT_CELL_COUNT];
 	int counter;
 	int direction;
 	bool gameOver;
@@ -23,6 +24,7 @@ private:
 
 	void ResetGame();
 	void RestartGame();
+	void DrawCharacter(int, int, char, Uint8, Uint8, Uint8);
 	void DrawText(int, int, const std::string&, Uint8, Uint8, Uint8);
 	void DrawCenteredText(int, const std::string&, Uint8, Uint8, Uint8);
 	void PlaySound(Mix_Chunk*);

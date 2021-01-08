@@ -28,6 +28,10 @@ public:
 	static const int INITIAL_SCORE = 0;
 	static const int OPTIONS_RECORD_COUNT = 1;
 	static const int ROMFONT_COLUMNS = 16;
+	static const int ROMFONT_ROWS = 16;
+	static const int ROMFONT_CELL_COUNT = ROMFONT_COLUMNS * ROMFONT_ROWS;
+	static const int ROMFONT_CELL_WIDTH = CELL_WIDTH;
+	static const int ROMFONT_CELL_HEIGHT = CELL_HEIGHT;
 	static const int ANY_CHANNEL = -1;
 	static const int NO_LOOPS = 0;
 	static const int DEFAULT_X = 0;
