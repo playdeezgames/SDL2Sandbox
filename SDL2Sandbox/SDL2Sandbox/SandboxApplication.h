@@ -30,6 +30,7 @@ private:
 	void SaveOptions();
 	void SetNextDirection(int);
 	void DrawBackground();
+	void DrawTail();
 protected:
 	void Start();
 	void Finish();

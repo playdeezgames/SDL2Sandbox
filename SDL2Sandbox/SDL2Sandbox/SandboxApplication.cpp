@@ -175,10 +175,8 @@ void SandboxApplication::DrawBackground()
 	SDL_RenderClear(GetMainRenderer());
 }
 
-void SandboxApplication::Draw()
+void SandboxApplication::DrawTail()
 {
-	DrawBackground();
-
 	SDL_Rect rc = { 0,0,GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
 	for (int row = 0; row < tail.size(); ++row)
 	{
@@ -188,7 +186,14 @@ void SandboxApplication::Draw()
 		SDL_RenderFillRect(GetMainRenderer(), &rc);
 
 	}
+}
 
+void SandboxApplication::Draw()
+{
+	DrawBackground();
+	DrawTail();
+
+	SDL_Rect rc = { 0,0,GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
 	SDL_SetRenderDrawColor(GetMainRenderer(), 255, 255, 255, 255);
 	for (int row = 0; row < blocks.size(); ++row)
 	{
