@@ -42,11 +42,15 @@ public:
 	static const int INITIAL_COUNTER = 0;
 	static const bool INITIAL_GAME_OVER = true;
 	static const bool INITIAL_MUTED = false;
+	static const bool INITIAL_DEAD = false;
 	static const int START_MESSAGE_ROW = BOARD_ROWS - 1;
 	static const int MUTE_MESSAGE_ROW = BOARD_ROWS - 2;
 	static const std::string MUTE_HINT_TEXT;
 	static const std::string UNMUTE_HINT_TEXT;
 	static const std::string START_HINT_TEXT;
 	static const SDL_Color DARK_MAGENTA;
+	static const SDL_Color BROWN;
+	static const SDL_Color WHITE;
+	static const SDL_Color RED;
 };
 

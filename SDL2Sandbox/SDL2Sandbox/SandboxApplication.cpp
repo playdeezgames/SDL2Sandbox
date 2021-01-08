@@ -20,6 +20,7 @@ SandboxApplication::SandboxApplication()
 	, score(GameConstants::INITIAL_SCORE)
 	, muted(GameConstants::INITIAL_MUTED)
 	, romfontSrcRects()
+	, dead(GameConstants::INITIAL_DEAD)
 {
 }
 
@@ -186,6 +187,7 @@ void SandboxApplication::CheckForGameOver()
 
 	if (gameOver)
 	{
+		dead = true;
 		PlaySound(deathSound);
 	}
 	else
@@ -223,12 +225,17 @@ void SandboxApplication::DrawBackground()
 void SandboxApplication::DrawTail()
 {
 	SDL_Rect rc = { 0,0,GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
-	for (int row = 0; row < tail.size(); ++row)
+	for (int row = 0; row < tail.size() - 1; ++row)
 	{
-		SDL_SetRenderDrawColor(GetMainRenderer(), 255, (row < tail.size() - 1) ? (255) : (0), 0, 255);
-		rc.x = tail[row] * GameConstants::CELL_WIDTH;
-		rc.y = row * GameConstants::CELL_HEIGHT;
-		SDL_RenderFillRect(GetMainRenderer(), &rc);
+		DrawCharacter(tail[row], row, '*', GameConstants::BROWN);
+	}
+	if (dead)
+	{
+		DrawCharacter(tail[tail.size() - 1], tail.size() - 1, '\x0F', GameConstants::RED);
+	}
+	else
+	{
+		DrawCharacter(tail[tail.size() - 1], tail.size() - 1, '\x02', GameConstants::WHITE);
 	}
 }
 
@@ -277,7 +284,7 @@ void SandboxApplication::DrawScore()
 		int digit = temp % GameConstants::SCORE_RADIX;
 		temp /= GameConstants::SCORE_RADIX;
 		digits--;
-		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects['0'+digit]), &rc);
+		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects['0' + digit]), &rc);
 		rc.x -= GameConstants::CELL_WIDTH;
 	}
 }
@@ -336,6 +343,7 @@ void SandboxApplication::ResetGame()
 	direction = GameConstants::DIRECTION_RIGHT;
 	score = GameConstants::INITIAL_SCORE;
 	runLength = GameConstants::INITIAL_RUN_LENGTH;
+	dead = GameConstants::INITIAL_DEAD;
 }
 
 void SandboxApplication::RestartGame()

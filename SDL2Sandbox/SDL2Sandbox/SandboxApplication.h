@@ -21,6 +21,7 @@ private:
 	int score;
 	int runLength;
 	bool muted;
+	bool dead;
 
 	void ResetGame();
 	void RestartGame();
