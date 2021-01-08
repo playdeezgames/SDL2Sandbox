@@ -42,6 +42,8 @@ private:
 	void UpdateBlocks();
 	void CheckForGameOver();
 	bool HandleKeyDown(SDL_Keycode);
+	bool HandleInPlayKeyDown(SDL_Keycode);
+	bool HandleGameOverKeyDown(SDL_Keycode);
 protected:
 	void Start();
 	void Finish();

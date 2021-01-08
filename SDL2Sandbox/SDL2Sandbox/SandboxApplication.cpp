@@ -90,34 +90,44 @@ void SandboxApplication::SetNextDirection(int nextDirection)
 	}
 }
 
+bool SandboxApplication::HandleInPlayKeyDown(SDL_Keycode sym)
+{
+	if (sym == SDLK_LEFT)
+	{
+		SetNextDirection(GameConstants::DIRECTION_LEFT);
+	}
+	else if (sym == SDLK_RIGHT)
+	{
+		SetNextDirection(GameConstants::DIRECTION_RIGHT);
+	}
+	return true;
+}
+
+bool SandboxApplication::HandleGameOverKeyDown(SDL_Keycode sym)
+{
+	if (sym == SDLK_SPACE)
+	{
+		RestartGame();
+	}
+	else if (sym == SDLK_m)
+	{
+		muted = !muted;
+		SaveOptions();
+	}
+	return true;
+}
+
+
 bool SandboxApplication::HandleKeyDown(SDL_Keycode sym)
 {
 	if (!gameOver)
 	{
-		//handle keydown in play
-		if (sym == SDLK_LEFT)
-		{
-			SetNextDirection(GameConstants::DIRECTION_LEFT);
-		}
-		else if (sym == SDLK_RIGHT)
-		{
-			SetNextDirection(GameConstants::DIRECTION_RIGHT);
-		}
+		return HandleInPlayKeyDown(sym);
 	}
 	else
 	{
-		//handle keydown game over
-		if (sym == SDLK_SPACE)
-		{
-			RestartGame();
-		}
-		else if (sym == SDLK_m)
-		{
-			muted = !muted;
-			SaveOptions();
-		}
+		return HandleGameOverKeyDown(sym);
 	}
-	return true;
 }
 
 bool SandboxApplication::OnEvent(const SDL_Event& evt)
