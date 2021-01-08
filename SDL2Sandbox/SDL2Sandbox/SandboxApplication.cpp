@@ -11,6 +11,8 @@ SandboxApplication::SandboxApplication()
 	, turnSound(nullptr)
 	, deathSound(nullptr)
 	, romfontTexture(nullptr)
+	, runLength(0)
+	, score(0)
 {
 
 }
