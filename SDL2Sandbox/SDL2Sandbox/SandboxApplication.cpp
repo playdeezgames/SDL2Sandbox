@@ -126,43 +126,53 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	}
 }
 
+void SandboxApplication::UpdateTail()
+{
+	for (size_t row = 0; row < tail.size() - 1; ++row)
+	{
+		tail[row] = tail[row + 1];
+	}
+	tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
+}
+
+void SandboxApplication::UpdateBlocks()
+{
+	for (size_t row = 0; row < blocks.size() - 1; ++row)
+	{
+		blocks[row] = blocks[(size_t)(row + 1)];
+	}
+	blocks[blocks.size() - 1] =
+		rand() %
+		(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN -
+			GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN +
+			1) +
+		GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
+}
+
+void SandboxApplication::CheckForGameOver()
+{
+	gameOver =
+		blocks[tail.size() - 1] == tail[tail.size() - 1] ||
+		tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN ||
+		tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
+
+	if (gameOver)
+	{
+		PlaySound(deathSound);
+	}
+	else
+	{
+		runLength++;
+	}
+}
+
 void SandboxApplication::UpdateBoard()
 {
 	if (!gameOver)
 	{
-		//update tail
-		for (size_t row = 0; row < tail.size() - 1; ++row)
-		{
-			tail[row] = tail[row + 1];
-		}
-		tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
-
-		//update blocks
-		for (size_t row = 0; row < blocks.size() - 1; ++row)
-		{
-			blocks[row] = blocks[(size_t)(row + 1)];
-		}
-		blocks[blocks.size() - 1] =
-			rand() %
-			(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN -
-				GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN +
-				1) +
-			GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
-
-		//check for game over
-		gameOver =
-			blocks[tail.size() - 1] == tail[tail.size() - 1] ||
-			tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN ||
-			tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
-
-		if (gameOver)
-		{
-			PlaySound(deathSound);
-		}
-		else
-		{
-			runLength++;
-		}
+		UpdateTail();
+		UpdateBlocks();
+		CheckForGameOver();
 	}
 }
 

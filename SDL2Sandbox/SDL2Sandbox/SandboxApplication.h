@@ -38,6 +38,9 @@ private:
 	void DrawMuteHint();
 	void DrawStartHint();
 	void UpdateBoard();
+	void UpdateTail();
+	void UpdateBlocks();
+	void CheckForGameOver();
 protected:
 	void Start();
 	void Finish();
