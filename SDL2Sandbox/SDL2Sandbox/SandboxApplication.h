@@ -8,6 +8,7 @@ class SandboxApplication: public Application
 private:
 	Mix_Chunk* turnSound;
 	Mix_Chunk* deathSound;
+	SDL_Texture* romfontTexture;
 
 	static SandboxApplication sandboxApplication;
 	std::vector<int> blocks;

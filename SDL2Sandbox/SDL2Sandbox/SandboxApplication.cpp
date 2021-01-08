@@ -1,4 +1,5 @@
 #include "SandboxApplication.h"
+#include "SDL_image.h"
 SandboxApplication SandboxApplication::sandboxApplication;
 
 SandboxApplication::SandboxApplication()
@@ -9,12 +10,15 @@ SandboxApplication::SandboxApplication()
 	, gameOver(true)
 	, turnSound(nullptr)
 	, deathSound(nullptr)
+	, romfontTexture(nullptr)
 {
 
 }
 
 void SandboxApplication::Start()
 {
+	IMG_Init(IMG_INIT_PNG);
+	romfontTexture = IMG_LoadTexture(GetMainRenderer(), "romfont8x8.png");
 	turnSound = Mix_LoadWAV("jl2017turn.wav");
 	deathSound = Mix_LoadWAV("jl2017death.wav");
 	ResetGame();
@@ -24,6 +28,8 @@ void SandboxApplication::Finish()
 {
 	Mix_FreeChunk(turnSound);
 	Mix_FreeChunk(deathSound);
+	SDL_DestroyTexture(romfontTexture);
+	IMG_Quit();
 }
 
 bool SandboxApplication::OnEvent(const SDL_Event& evt)
