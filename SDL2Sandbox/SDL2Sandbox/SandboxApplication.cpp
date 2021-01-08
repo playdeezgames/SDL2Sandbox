@@ -41,7 +41,7 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	case SDL_KEYDOWN:
 		if (!gameOver)
 		{
-			if (evt.key.keysym.sym == SDLK_LEFT && direction!=-1)
+			if (evt.key.keysym.sym == SDLK_LEFT && direction != -1)
 			{
 				score += (runLength * (runLength + 1)) / 2;
 				runLength = 0;
@@ -93,9 +93,9 @@ void SandboxApplication::Update(int milliseconds)
 					1) +
 				GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
 
-			gameOver = 
+			gameOver =
 				blocks[tail.size() - 1] == tail[tail.size() - 1] ||
-				tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN || 
+				tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN ||
 				tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
 
 			if (gameOver)
@@ -143,6 +143,31 @@ void SandboxApplication::Draw()
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
 	rc.x = GameConstants::WINDOW_WIDTH - GameConstants::CELL_WIDTH;
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
+
+	SDL_SetTextureColorMod(romfontTexture, 0, 255, 0);
+	rc.x = GameConstants::CELL_WIDTH;
+	rc.y = 0;
+	rc.w = GameConstants::CELL_WIDTH;
+	rc.h = GameConstants::CELL_HEIGHT;
+	int digits = 1;
+	int temp = score;
+	while (temp > 9)
+	{
+		digits++;
+		temp /= 10;
+		rc.x += GameConstants::CELL_WIDTH;
+	}
+	SDL_Rect rcSrc = { 0, GameConstants::CELL_HEIGHT * 3, GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
+	temp = score;
+	while (digits > 0)
+	{
+		int digit = temp % 10;
+		temp /= 10;
+		digits--;
+		rcSrc.x = digit * GameConstants::CELL_WIDTH;
+		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rc);
+		rc.x -= GameConstants::CELL_WIDTH;
+	}
 }
 
 
