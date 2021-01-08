@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "SDL.h"
 class GameConstants
 {
 public:
@@ -46,5 +47,6 @@ public:
 	static const std::string MUTE_HINT_TEXT;
 	static const std::string UNMUTE_HINT_TEXT;
 	static const std::string START_HINT_TEXT;
+	static const SDL_Color DARK_MAGENTA;
 };
 

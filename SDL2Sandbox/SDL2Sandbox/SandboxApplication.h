@@ -24,9 +24,9 @@ private:
 
 	void ResetGame();
 	void RestartGame();
-	void DrawCharacter(int, int, char, Uint8, Uint8, Uint8);
-	void DrawText(int, int, const std::string&, Uint8, Uint8, Uint8);
-	void DrawCenteredText(int, const std::string&, Uint8, Uint8, Uint8);
+	void DrawCharacter(int, int, char, const SDL_Color&);
+	void DrawText(int, int, const std::string&, const SDL_Color&);
+	void DrawCenteredText(int, const std::string&, const SDL_Color&);
 	void PlaySound(Mix_Chunk*);
 	void LoadOptions();
 	void SaveOptions();

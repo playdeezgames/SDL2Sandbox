@@ -286,17 +286,17 @@ void SandboxApplication::DrawMuteHint()
 {
 	if (muted)
 	{
-		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::UNMUTE_HINT_TEXT, 128, 0, 128);
+		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::UNMUTE_HINT_TEXT, GameConstants::DARK_MAGENTA);
 	}
 	else
 	{
-		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::MUTE_HINT_TEXT, 128, 0, 128);
+		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::MUTE_HINT_TEXT, GameConstants::DARK_MAGENTA);
 	}
 }
 
 void SandboxApplication::DrawStartHint()
 {
-	DrawCenteredText(GameConstants::START_MESSAGE_ROW, GameConstants::START_HINT_TEXT, 128, 0, 128);
+	DrawCenteredText(GameConstants::START_MESSAGE_ROW, GameConstants::START_HINT_TEXT, GameConstants::DARK_MAGENTA);
 }
 
 void SandboxApplication::DrawHints()
@@ -344,15 +344,15 @@ void SandboxApplication::RestartGame()
 	gameOver = false;
 }
 
-void SandboxApplication::DrawCenteredText(int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
+void SandboxApplication::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
 {
 	//you center things by dividing by 2
-	DrawText((GameConstants::BOARD_COLUMNS - (int)text.size()) / 2, row, text, r, g, b);
+	DrawText((GameConstants::BOARD_COLUMNS - (int)text.size()) / 2, row, text, color);
 }
 
-void SandboxApplication::DrawCharacter(int column, int row, char character, Uint8 r, Uint8 g, Uint8 b)
+void SandboxApplication::DrawCharacter(int column, int row, char character, const SDL_Color& color)
 {
-	SDL_SetTextureColorMod(romfontTexture, r, g, b);
+	SDL_SetTextureColorMod(romfontTexture, color.r, color.g, color.b);
 	SDL_Rect rcDst =
 	{
 		column * GameConstants::CELL_WIDTH,
@@ -363,11 +363,11 @@ void SandboxApplication::DrawCharacter(int column, int row, char character, Uint
 	SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
 }
 
-void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
+void SandboxApplication::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
 {
 	for (auto ch : text)
 	{
-		DrawCharacter(column, row, ch, r, g, b);
+		DrawCharacter(column, row, ch, color);
 		column++;
 	}
 }
