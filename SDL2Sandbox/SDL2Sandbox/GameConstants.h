@@ -39,5 +39,8 @@ public:
 	static const bool INITIAL_MUTED = false;
 	static const int START_MESSAGE_ROW = BOARD_ROWS - 1;
 	static const int MUTE_MESSAGE_ROW = BOARD_ROWS - 2;
+	static const std::string MUTE_HINT_TEXT;
+	static const std::string UNMUTE_HINT_TEXT;
+	static const std::string START_HINT_TEXT;
 };
 
