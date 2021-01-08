@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "GameConstants.h"
 #include <vector>
+#include <string>
 #include "SDL_Mixer.h"
 class SandboxApplication: public Application
 {
@@ -21,6 +22,7 @@ private:
 
 	void ResetGame();
 	void RestartGame();
+	void DrawText(int, int, const std::string&, Uint8, Uint8, Uint8);
 protected:
 	void Start();
 	void Finish();

@@ -170,6 +170,11 @@ void SandboxApplication::Draw()
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rc);
 		rc.x -= GameConstants::CELL_WIDTH;
 	}
+
+	if (gameOver)
+	{
+		DrawText((GameConstants::BOARD_COLUMNS - 24)/2, GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
+	}
 }
 
 
@@ -196,4 +201,18 @@ void SandboxApplication::RestartGame()
 {
 	ResetGame();
 	gameOver = false;
+}
+
+void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
+{
+	SDL_SetTextureColorMod(romfontTexture, r, g, b);
+	SDL_Rect rcSrc = { 0, 0, GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
+	SDL_Rect rcDst = { column * GameConstants::CELL_WIDTH, row * GameConstants::CELL_HEIGHT, GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
+	for (auto ch : text)
+	{
+		rcSrc.x = (ch % 16) * GameConstants::CELL_WIDTH;
+		rcSrc.y = (ch / 16) * GameConstants::CELL_HEIGHT;
+		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rcDst);
+		rcDst.x += GameConstants::CELL_WIDTH;
+	}
 }
