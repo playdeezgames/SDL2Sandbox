@@ -208,13 +208,8 @@ void SandboxApplication::DrawWalls()
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
 }
 
-void SandboxApplication::Draw()
+void SandboxApplication::DrawScore()
 {
-	DrawBackground();
-	DrawTail();
-	DrawBlocks();
-	DrawWalls();
-
 	SDL_SetTextureColorMod(romfontTexture, 0, 255, 0);
 	SDL_Rect rc =
 	{
@@ -248,6 +243,15 @@ void SandboxApplication::Draw()
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rc);
 		rc.x -= GameConstants::CELL_WIDTH;
 	}
+}
+
+void SandboxApplication::Draw()
+{
+	DrawBackground();
+	DrawTail();
+	DrawBlocks();
+	DrawWalls();
+	DrawScore();
 
 	if (gameOver)
 	{

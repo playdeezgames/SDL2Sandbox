@@ -33,6 +33,7 @@ private:
 	void DrawTail();
 	void DrawBlocks();
 	void DrawWalls();
+	void DrawScore();
 protected:
 	void Start();
 	void Finish();
