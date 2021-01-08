@@ -16,6 +16,8 @@ private:
 	int counter;
 	int direction;
 	bool gameOver;
+	int score;
+	int runLength;
 
 	void ResetGame();
 	void RestartGame();
