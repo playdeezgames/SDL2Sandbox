@@ -34,6 +34,7 @@ private:
 	void DrawBlocks();
 	void DrawWalls();
 	void DrawScore();
+	void DrawHints();
 protected:
 	void Start();
 	void Finish();

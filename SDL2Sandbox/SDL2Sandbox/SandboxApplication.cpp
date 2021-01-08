@@ -245,14 +245,8 @@ void SandboxApplication::DrawScore()
 	}
 }
 
-void SandboxApplication::Draw()
+void SandboxApplication::DrawHints()
 {
-	DrawBackground();
-	DrawTail();
-	DrawBlocks();
-	DrawWalls();
-	DrawScore();
-
 	if (gameOver)
 	{
 		if (muted)
@@ -265,6 +259,16 @@ void SandboxApplication::Draw()
 		}
 		DrawCenteredText(GameConstants::START_MESSAGE_ROW, "Press <SPACE> to Start!!", 128, 0, 128);
 	}
+}
+
+void SandboxApplication::Draw()
+{
+	DrawBackground();
+	DrawTail();
+	DrawBlocks();
+	DrawWalls();
+	DrawScore();
+	DrawHints();
 }
 
 
