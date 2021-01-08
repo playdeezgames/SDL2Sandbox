@@ -41,6 +41,7 @@ private:
 	void UpdateTail();
 	void UpdateBlocks();
 	void CheckForGameOver();
+	bool HandleKeyDown(SDL_Keycode);
 protected:
 	void Start();
 	void Finish();

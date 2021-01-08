@@ -90,6 +90,36 @@ void SandboxApplication::SetNextDirection(int nextDirection)
 	}
 }
 
+bool SandboxApplication::HandleKeyDown(SDL_Keycode sym)
+{
+	if (!gameOver)
+	{
+		//handle keydown in play
+		if (sym == SDLK_LEFT)
+		{
+			SetNextDirection(GameConstants::DIRECTION_LEFT);
+		}
+		else if (sym == SDLK_RIGHT)
+		{
+			SetNextDirection(GameConstants::DIRECTION_RIGHT);
+		}
+	}
+	else
+	{
+		//handle keydown game over
+		if (sym == SDLK_SPACE)
+		{
+			RestartGame();
+		}
+		else if (sym == SDLK_m)
+		{
+			muted = !muted;
+			SaveOptions();
+		}
+	}
+	return true;
+}
+
 bool SandboxApplication::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)
@@ -97,30 +127,7 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	case SDL_QUIT:
 		return false;
 	case SDL_KEYDOWN:
-		if (!gameOver)
-		{
-			if (evt.key.keysym.sym == SDLK_LEFT)
-			{
-				SetNextDirection(GameConstants::DIRECTION_LEFT);
-			}
-			else if (evt.key.keysym.sym == SDLK_RIGHT)
-			{
-				SetNextDirection(GameConstants::DIRECTION_RIGHT);
-			}
-		}
-		else
-		{
-			if (evt.key.keysym.sym == SDLK_SPACE)
-			{
-				RestartGame();
-			}
-			else if (evt.key.keysym.sym == SDLK_m)
-			{
-				muted = !muted;
-				SaveOptions();
-			}
-		}
-		return true;
+		return HandleKeyDown(evt.key.keysym.sym);
 	default:
 		return true;
 	}
