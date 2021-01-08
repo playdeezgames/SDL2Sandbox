@@ -44,12 +44,14 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 			if (evt.key.keysym.sym == SDLK_LEFT && direction!=-1)
 			{
 				score += (runLength * (runLength + 1)) / 2;
+				runLength = 0;
 				Mix_PlayChannel(-1, turnSound, 0);
 				direction = -1;
 			}
 			else if (evt.key.keysym.sym == SDLK_RIGHT && direction != 1)
 			{
 				score += (runLength * (runLength + 1)) / 2;
+				runLength = 0;
 				Mix_PlayChannel(-1, turnSound, 0);
 				direction = 1;
 			}
