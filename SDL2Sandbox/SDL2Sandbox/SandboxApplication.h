@@ -31,6 +31,7 @@ private:
 	void SetNextDirection(int);
 	void DrawBackground();
 	void DrawTail();
+	void DrawBlocks();
 protected:
 	void Start();
 	void Finish();
