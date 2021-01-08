@@ -274,7 +274,7 @@ void SandboxApplication::RestartGame()
 
 void SandboxApplication::DrawCenteredText(int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
 {
-	DrawText((GameConstants::BOARD_COLUMNS - text.size()) / 2, row, text, r, g, b);
+	DrawText((GameConstants::BOARD_COLUMNS - (int)text.size()) / 2, row, text, r, g, b);
 }
 
 void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
