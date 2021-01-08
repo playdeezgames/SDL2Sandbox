@@ -19,10 +19,12 @@ private:
 	bool gameOver;
 	int score;
 	int runLength;
+	bool muted;
 
 	void ResetGame();
 	void RestartGame();
 	void DrawText(int, int, const std::string&, Uint8, Uint8, Uint8);
+	void PlaySound(Mix_Chunk*);
 protected:
 	void Start();
 	void Finish();

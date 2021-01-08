@@ -13,6 +13,7 @@ SandboxApplication::SandboxApplication()
 	, romfontTexture(nullptr)
 	, runLength(0)
 	, score(0)
+	, muted(false)
 {
 
 }
@@ -47,14 +48,14 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 			{
 				score += (runLength * (runLength + 1)) / 2;
 				runLength = 0;
-				Mix_PlayChannel(-1, turnSound, 0);
+				PlaySound(turnSound);
 				direction = -1;
 			}
 			else if (evt.key.keysym.sym == SDLK_RIGHT && direction != 1)
 			{
 				score += (runLength * (runLength + 1)) / 2;
 				runLength = 0;
-				Mix_PlayChannel(-1, turnSound, 0);
+				PlaySound(turnSound);
 				direction = 1;
 			}
 		}
@@ -63,6 +64,10 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 			if (evt.key.keysym.sym == SDLK_SPACE)
 			{
 				RestartGame();
+			}
+			else if (evt.key.keysym.sym == SDLK_m)
+			{
+				muted = !muted;
 			}
 		}
 		return true;
@@ -102,7 +107,7 @@ void SandboxApplication::Update(int milliseconds)
 
 			if (gameOver)
 			{
-				Mix_PlayChannel(-1, deathSound, 0);
+				PlaySound(deathSound);
 			}
 			else
 			{
@@ -173,6 +178,14 @@ void SandboxApplication::Draw()
 
 	if (gameOver)
 	{
+		if (muted)
+		{
+			DrawText((GameConstants::BOARD_COLUMNS - 13) / 2, GameConstants::BOARD_ROWS - 2, "<M> to unmute", 128, 0, 128);
+		}
+		else
+		{
+			DrawText((GameConstants::BOARD_COLUMNS - 11) / 2, GameConstants::BOARD_ROWS - 2, "<M> to mute", 128, 0, 128);
+		}
 		DrawText((GameConstants::BOARD_COLUMNS - 24)/2, GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
 	}
 }
@@ -214,5 +227,12 @@ void SandboxApplication::DrawText(int column, int row, const std::string& text, 
 		rcSrc.y = (ch / 16) * GameConstants::CELL_HEIGHT;
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &rcSrc, &rcDst);
 		rcDst.x += GameConstants::CELL_WIDTH;
+	}
+}
+void SandboxApplication::PlaySound(Mix_Chunk* chunk)
+{
+	if (!muted)
+	{
+		Mix_PlayChannel(-1, chunk, 0);
 	}
 }
