@@ -199,23 +199,30 @@ void SandboxApplication::DrawBlocks()
 	}
 }
 
-void SandboxApplication::Draw()
+void SandboxApplication::DrawWalls()
 {
-	DrawBackground();
-	DrawTail();
-	DrawBlocks();
-
 	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 255, 255);
 	SDL_Rect rc = { GameConstants::DEFAULT_X,GameConstants::DEFAULT_Y,GameConstants::CELL_WIDTH, GameConstants::WINDOW_HEIGHT };
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
 	rc.x = GameConstants::WINDOW_WIDTH - GameConstants::CELL_WIDTH;
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
+}
+
+void SandboxApplication::Draw()
+{
+	DrawBackground();
+	DrawTail();
+	DrawBlocks();
+	DrawWalls();
 
 	SDL_SetTextureColorMod(romfontTexture, 0, 255, 0);
-	rc.x = GameConstants::CELL_WIDTH;
-	rc.y = GameConstants::DEFAULT_Y;
-	rc.w = GameConstants::CELL_WIDTH;
-	rc.h = GameConstants::CELL_HEIGHT;
+	SDL_Rect rc =
+	{
+		GameConstants::CELL_WIDTH,
+		GameConstants::DEFAULT_Y,
+		GameConstants::CELL_WIDTH,
+		GameConstants::CELL_HEIGHT
+	};
 	int digits = 1;//there is always at least one score digit
 	int temp = score;
 	while (temp >= GameConstants::SCORE_RADIX)
@@ -224,13 +231,13 @@ void SandboxApplication::Draw()
 		temp /= GameConstants::SCORE_RADIX;
 		rc.x += GameConstants::CELL_WIDTH;
 	}
-	SDL_Rect rcSrc = 
-		{ 
-			GameConstants::DEFAULT_X, 
-			GameConstants::CELL_HEIGHT * GameConstants::ROMFONT_DIGITS_ROW, 
-			GameConstants::CELL_WIDTH, 
-			GameConstants::CELL_HEIGHT 
-		};
+	SDL_Rect rcSrc =
+	{
+		GameConstants::DEFAULT_X,
+		GameConstants::CELL_HEIGHT * GameConstants::ROMFONT_DIGITS_ROW,
+		GameConstants::CELL_WIDTH,
+		GameConstants::CELL_HEIGHT
+	};
 	temp = score;
 	while (digits)
 	{
@@ -290,20 +297,20 @@ void SandboxApplication::DrawCenteredText(int row, const std::string& text, Uint
 void SandboxApplication::DrawText(int column, int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
 {
 	SDL_SetTextureColorMod(romfontTexture, r, g, b);
-	SDL_Rect rcSrc = 
-		{ 
-			GameConstants::DEFAULT_X, 
-			GameConstants::DEFAULT_Y, 
-			GameConstants::CELL_WIDTH, 
-			GameConstants::CELL_HEIGHT 
-		};
-	SDL_Rect rcDst = 
-		{ 
-			column * GameConstants::CELL_WIDTH, 
-			row * GameConstants::CELL_HEIGHT, 
-			GameConstants::CELL_WIDTH, 
-			GameConstants::CELL_HEIGHT 
-		};
+	SDL_Rect rcSrc =
+	{
+		GameConstants::DEFAULT_X,
+		GameConstants::DEFAULT_Y,
+		GameConstants::CELL_WIDTH,
+		GameConstants::CELL_HEIGHT
+	};
+	SDL_Rect rcDst =
+	{
+		column * GameConstants::CELL_WIDTH,
+		row * GameConstants::CELL_HEIGHT,
+		GameConstants::CELL_WIDTH,
+		GameConstants::CELL_HEIGHT
+	};
 	for (auto ch : text)
 	{
 		rcSrc.x = (ch % GameConstants::ROMFONT_COLUMNS) * GameConstants::CELL_WIDTH;
