@@ -35,6 +35,8 @@ private:
 	void DrawWalls();
 	void DrawScore();
 	void DrawHints();
+	void DrawMuteHint();
+	void DrawStartHint();
 protected:
 	void Start();
 	void Finish();

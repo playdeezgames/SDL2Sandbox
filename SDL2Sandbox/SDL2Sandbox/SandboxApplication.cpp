@@ -245,19 +245,29 @@ void SandboxApplication::DrawScore()
 	}
 }
 
+void SandboxApplication::DrawMuteHint()
+{
+	if (muted)
+	{
+		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, "<M> to unmute", 128, 0, 128);
+	}
+	else
+	{
+		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, "<M> to mute", 128, 0, 128);
+	}
+}
+
+void SandboxApplication::DrawStartHint()
+{
+	DrawCenteredText(GameConstants::START_MESSAGE_ROW, "Press <SPACE> to Start!!", 128, 0, 128);
+}
+
 void SandboxApplication::DrawHints()
 {
 	if (gameOver)
 	{
-		if (muted)
-		{
-			DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, "<M> to unmute", 128, 0, 128);
-		}
-		else
-		{
-			DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, "<M> to mute", 128, 0, 128);
-		}
-		DrawCenteredText(GameConstants::START_MESSAGE_ROW, "Press <SPACE> to Start!!", 128, 0, 128);
+		DrawMuteHint();
+		DrawStartHint();
 	}
 }
 
