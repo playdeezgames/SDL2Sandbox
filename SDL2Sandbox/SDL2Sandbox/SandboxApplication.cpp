@@ -1,5 +1,10 @@
 #include "SandboxApplication.h"
 #include "SDL_image.h"
+typedef struct
+{
+	bool muted;
+} GameOptions;
+
 SandboxApplication SandboxApplication::sandboxApplication;
 
 SandboxApplication::SandboxApplication()
@@ -18,8 +23,45 @@ SandboxApplication::SandboxApplication()
 
 }
 
+void SandboxApplication::SaveOptions()
+{
+	remove(GameConstants::OPTIONS_FILE_NAME.c_str());
+	FILE* f = nullptr;
+	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), "wb");
+	if (f)
+	{
+		GameOptions options;
+		options.muted = muted;
+		fwrite(&options, sizeof(GameOptions), 1, f);
+		fclose(f);
+	}
+}
+
+void SandboxApplication::LoadOptions()
+{
+	FILE* f = nullptr;
+	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), "rb");
+	if (f)
+	{
+		GameOptions options;
+		fseek(f, 0, SEEK_END);
+		if (ftell(f) == sizeof(GameOptions))
+		{
+			fseek(f, 0, SEEK_SET);
+			fread(&options, sizeof(GameOptions), 1, f);
+			muted = options.muted;
+		}
+		fclose(f);
+	}
+	else
+	{
+		muted = false;
+	}
+}
+
 void SandboxApplication::Start()
 {
+	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), "romfont8x8.png");
 	turnSound = Mix_LoadWAV("jl2017turn.wav");
@@ -68,6 +110,7 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 			else if (evt.key.keysym.sym == SDLK_m)
 			{
 				muted = !muted;
+				SaveOptions();
 			}
 		}
 		return true;
@@ -186,7 +229,7 @@ void SandboxApplication::Draw()
 		{
 			DrawText((GameConstants::BOARD_COLUMNS - 11) / 2, GameConstants::BOARD_ROWS - 2, "<M> to mute", 128, 0, 128);
 		}
-		DrawText((GameConstants::BOARD_COLUMNS - 24)/2, GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
+		DrawText((GameConstants::BOARD_COLUMNS - 24) / 2, GameConstants::BOARD_ROWS - 1, "Press <SPACE> to Start!!", 128, 0, 128);
 	}
 }
 

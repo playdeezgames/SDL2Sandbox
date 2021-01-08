@@ -25,6 +25,8 @@ private:
 	void RestartGame();
 	void DrawText(int, int, const std::string&, Uint8, Uint8, Uint8);
 	void PlaySound(Mix_Chunk*);
+	void LoadOptions();
+	void SaveOptions();
 protected:
 	void Start();
 	void Finish();

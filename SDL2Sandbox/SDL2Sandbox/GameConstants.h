@@ -16,5 +16,6 @@ public:
 	static const int TAIL_LENGTH = 6;
 	static const int TAIL_INITIAL_COLUMN = BOARD_COLUMNS / 2;
 	static const std::string WINDOW_TITLE;
+	static const std::string OPTIONS_FILE_NAME;
 };
 
