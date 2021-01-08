@@ -9,7 +9,7 @@ SandboxApplication SandboxApplication::sandboxApplication;
 
 SandboxApplication::SandboxApplication()
 	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::WINDOW_TITLE)
-	, blocks(GameConstants::Board::ROWS)
+	, blocks(Constants::Board::ROWS)
 	, counter(GameConstants::INITIAL_COUNTER)
 	, direction(GameConstants::DIRECTION_RIGHT)
 	, gameOver(GameConstants::INITIAL_GAME_OVER)
@@ -224,7 +224,7 @@ void SandboxApplication::DrawBackground()
 
 void SandboxApplication::DrawTail()
 {
-	SDL_Rect rc = { 0,0,GameConstants::Cell::WIDTH, GameConstants::Cell::HEIGHT };
+	SDL_Rect rc = { 0,0,Constants::Cell::WIDTH, GameConstants::Cell::HEIGHT };
 	for (int row = 0; row < tail.size() - 1; ++row)
 	{
 		DrawCharacter(tail[row], row, '*', GameConstants::BROWN);
@@ -241,11 +241,11 @@ void SandboxApplication::DrawTail()
 
 void SandboxApplication::DrawBlocks()
 {
-	SDL_Rect rc = { 0,0,GameConstants::Cell::WIDTH, GameConstants::Cell::HEIGHT };
+	SDL_Rect rc = { 0,0,Constants::Cell::WIDTH, GameConstants::Cell::HEIGHT };
 	SDL_SetRenderDrawColor(GetMainRenderer(), 255, 255, 255, 255);
 	for (int row = 0; row < blocks.size(); ++row)
 	{
-		rc.x = blocks[row] * GameConstants::Cell::WIDTH;
+		rc.x = blocks[row] * Constants::Cell::WIDTH;
 		rc.y = row * GameConstants::Cell::HEIGHT;
 		SDL_RenderFillRect(GetMainRenderer(), &rc);
 	}
@@ -254,9 +254,9 @@ void SandboxApplication::DrawBlocks()
 void SandboxApplication::DrawWalls()
 {
 	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 255, 255);
-	SDL_Rect rc = { GameConstants::DEFAULT_X,GameConstants::DEFAULT_Y,GameConstants::Cell::WIDTH, GameConstants::WINDOW_HEIGHT };
+	SDL_Rect rc = { GameConstants::DEFAULT_X,GameConstants::DEFAULT_Y,Constants::Cell::WIDTH, GameConstants::WINDOW_HEIGHT };
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
-	rc.x = GameConstants::WINDOW_WIDTH - GameConstants::Cell::WIDTH;
+	rc.x = GameConstants::WINDOW_WIDTH - Constants::Cell::WIDTH;
 	SDL_RenderFillRect(GetMainRenderer(), &rc);
 }
 
@@ -265,9 +265,9 @@ void SandboxApplication::DrawScore()
 	SDL_SetTextureColorMod(romfontTexture, 0, 255, 0);
 	SDL_Rect rc =
 	{
-		GameConstants::Cell::WIDTH,
+		Constants::Cell::WIDTH,
 		GameConstants::DEFAULT_Y,
-		GameConstants::Cell::WIDTH,
+		Constants::Cell::WIDTH,
 		GameConstants::Cell::HEIGHT
 	};
 	int digits = 1;//there is always at least one score digit
@@ -276,7 +276,7 @@ void SandboxApplication::DrawScore()
 	{
 		digits++;
 		temp /= GameConstants::SCORE_RADIX;
-		rc.x += GameConstants::Cell::WIDTH;
+		rc.x += Constants::Cell::WIDTH;
 	}
 	temp = score;
 	while (digits)
@@ -285,7 +285,7 @@ void SandboxApplication::DrawScore()
 		temp /= GameConstants::SCORE_RADIX;
 		digits--;
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects['0' + digit]), &rc);
-		rc.x -= GameConstants::Cell::WIDTH;
+		rc.x -= Constants::Cell::WIDTH;
 	}
 }
 
@@ -329,7 +329,7 @@ void SandboxApplication::Draw()
 void SandboxApplication::ResetGame()
 {
 	blocks.clear();
-	while (blocks.size() < GameConstants::Board::ROWS)
+	while (blocks.size() < Constants::Board::ROWS)
 	{
 		blocks.push_back(GameConstants::BLOCK_INITIAL_COLUMN);
 	}
@@ -355,7 +355,7 @@ void SandboxApplication::RestartGame()
 void SandboxApplication::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
 {
 	//you center things by dividing by 2
-	DrawText((GameConstants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
+	DrawText((Constants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
 }
 
 void SandboxApplication::DrawCharacter(int column, int row, char character, const SDL_Color& color)
@@ -363,9 +363,9 @@ void SandboxApplication::DrawCharacter(int column, int row, char character, cons
 	SDL_SetTextureColorMod(romfontTexture, color.r, color.g, color.b);
 	SDL_Rect rcDst =
 	{
-		column * GameConstants::Cell::WIDTH,
+		column * Constants::Cell::WIDTH,
 		row * GameConstants::Cell::HEIGHT,
-		GameConstants::Cell::WIDTH,
+		Constants::Cell::WIDTH,
 		GameConstants::Cell::HEIGHT
 	};
 	SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
