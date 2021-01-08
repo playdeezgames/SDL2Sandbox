@@ -169,10 +169,15 @@ void SandboxApplication::Update(int milliseconds)
 	}
 }
 
-void SandboxApplication::Draw()
+void SandboxApplication::DrawBackground()
 {
 	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 0, 255);
 	SDL_RenderClear(GetMainRenderer());
+}
+
+void SandboxApplication::Draw()
+{
+	DrawBackground();
 
 	SDL_Rect rc = { 0,0,GameConstants::CELL_WIDTH, GameConstants::CELL_HEIGHT };
 	for (int row = 0; row < tail.size(); ++row)

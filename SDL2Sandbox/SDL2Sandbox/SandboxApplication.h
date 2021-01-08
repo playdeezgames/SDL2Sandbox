@@ -29,6 +29,7 @@ private:
 	void LoadOptions();
 	void SaveOptions();
 	void SetNextDirection(int);
+	void DrawBackground();
 protected:
 	void Start();
 	void Finish();
