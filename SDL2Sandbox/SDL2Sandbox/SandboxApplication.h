@@ -37,6 +37,7 @@ private:
 	void DrawHints();
 	void DrawMuteHint();
 	void DrawStartHint();
+	void UpdateBoard();
 protected:
 	void Start();
 	void Finish();

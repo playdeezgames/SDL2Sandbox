@@ -126,45 +126,52 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	}
 }
 
+void SandboxApplication::UpdateBoard()
+{
+	if (!gameOver)
+	{
+		//update tail
+		for (size_t row = 0; row < tail.size() - 1; ++row)
+		{
+			tail[row] = tail[row + 1];
+		}
+		tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
+
+		//update blocks
+		for (size_t row = 0; row < blocks.size() - 1; ++row)
+		{
+			blocks[row] = blocks[(size_t)(row + 1)];
+		}
+		blocks[blocks.size() - 1] =
+			rand() %
+			(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN -
+				GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN +
+				1) +
+			GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
+
+		//check for game over
+		gameOver =
+			blocks[tail.size() - 1] == tail[tail.size() - 1] ||
+			tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN ||
+			tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
+
+		if (gameOver)
+		{
+			PlaySound(deathSound);
+		}
+		else
+		{
+			runLength++;
+		}
+	}
+}
+
 void SandboxApplication::Update(int milliseconds)
 {
 	counter += milliseconds;
 	while (counter > GameConstants::FRAME_MILLISECONDS)
 	{
-		if (!gameOver)
-		{
-			for (size_t row = 0; row < tail.size() - 1; ++row)
-			{
-				tail[row] = tail[row + 1];
-			}
-			tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
-
-			for (size_t row = 0; row < blocks.size() - 1; ++row)
-			{
-				blocks[row] = blocks[(size_t)(row + 1)];
-			}
-			blocks[blocks.size() - 1] =
-				rand() %
-				(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN -
-					GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN +
-					1) +
-				GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
-
-			gameOver =
-				blocks[tail.size() - 1] == tail[tail.size() - 1] ||
-				tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN ||
-				tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
-
-			if (gameOver)
-			{
-				PlaySound(deathSound);
-			}
-			else
-			{
-				runLength++;
-			}
-		}
-
+		UpdateBoard();
 		counter -= GameConstants::FRAME_MILLISECONDS;
 	}
 }
@@ -309,6 +316,7 @@ void SandboxApplication::RestartGame()
 
 void SandboxApplication::DrawCenteredText(int row, const std::string& text, Uint8 r, Uint8 g, Uint8 b)
 {
+	//you center things by dividing by 2
 	DrawText((GameConstants::BOARD_COLUMNS - (int)text.size()) / 2, row, text, r, g, b);
 }
 
