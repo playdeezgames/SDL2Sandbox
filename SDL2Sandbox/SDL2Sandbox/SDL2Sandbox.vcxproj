@@ -145,13 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="..\..\..\CommonCpp\Application.cpp" />
+    <ClCompile Include="..\..\..\CommonCpp\main.cpp" />
     <ClCompile Include="GameConstants.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="SandboxApplication.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h" />
+    <ClInclude Include="..\..\..\CommonCpp\Application.h" />
     <ClInclude Include="GameConstants.h" />
     <ClInclude Include="SandboxApplication.h" />
   </ItemGroup>
