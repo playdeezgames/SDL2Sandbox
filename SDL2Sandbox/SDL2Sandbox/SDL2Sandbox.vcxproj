@@ -150,12 +150,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\CommonCpp\Application.cpp" />
     <ClCompile Include="..\..\..\CommonCpp\main.cpp" />
-    <ClCompile Include="SandboxApplication.cpp" />
+    <ClCompile Include="JetLag2021Application.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonCpp\Application.h" />
     <ClInclude Include="Constants.h" />
-    <ClInclude Include="SandboxApplication.h" />
+    <ClInclude Include="JetLag2021Application.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

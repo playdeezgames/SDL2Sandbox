@@ -1,13 +1,13 @@
-#include "SandboxApplication.h"
+#include "JetLag2021Application.h"
 #include "SDL_image.h"
 typedef struct
 {
 	bool muted;
 } GameOptions;
 
-SandboxApplication SandboxApplication::sandboxApplication;
+JetLag2021Application JetLag2021Application::sandboxApplication;
 
-SandboxApplication::SandboxApplication()
+JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, blocks(Constants::Board::ROWS)
 	, counter(Constants::Game::InitialValues::COUNTER)
@@ -24,7 +24,7 @@ SandboxApplication::SandboxApplication()
 {
 }
 
-void SandboxApplication::SaveOptions()
+void JetLag2021Application::SaveOptions()
 {
 	remove(Constants::Options::FILE_NAME.c_str());
 	FILE* f = nullptr;
@@ -38,7 +38,7 @@ void SandboxApplication::SaveOptions()
 	}
 }
 
-void SandboxApplication::LoadOptions()
+void JetLag2021Application::LoadOptions()
 {
 	FILE* f = nullptr;
 	fopen_s(&f, Constants::Options::FILE_NAME.c_str(), Constants::Options::READ_MODE.c_str());
@@ -56,7 +56,7 @@ void SandboxApplication::LoadOptions()
 	}
 }
 
-void SandboxApplication::Start()
+void JetLag2021Application::Start()
 {
 	for (int index = 0; index < Constants::RomFont::CELL_COUNT; ++index)
 	{
@@ -76,7 +76,7 @@ void SandboxApplication::Start()
 	ResetGame();
 }
 
-void SandboxApplication::Finish()
+void JetLag2021Application::Finish()
 {
 	Mix_FreeChunk(turnSound);
 	Mix_FreeChunk(deathSound);
@@ -91,7 +91,7 @@ static int CalculateScoreFromRunLength(int runLength)
 	return (runLength * (runLength + 1)) / 2;
 }
 
-void SandboxApplication::SetNextDirection(int nextDirection)
+void JetLag2021Application::SetNextDirection(int nextDirection)
 {
 	if (nextDirection != direction)
 	{
@@ -102,7 +102,7 @@ void SandboxApplication::SetNextDirection(int nextDirection)
 	}
 }
 
-bool SandboxApplication::HandleInPlayKeyDown(SDL_Keycode sym)
+bool JetLag2021Application::HandleInPlayKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_LEFT)
 	{
@@ -115,7 +115,7 @@ bool SandboxApplication::HandleInPlayKeyDown(SDL_Keycode sym)
 	return true;
 }
 
-bool SandboxApplication::HandleGameOverKeyDown(SDL_Keycode sym)
+bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_SPACE)
 	{
@@ -130,7 +130,7 @@ bool SandboxApplication::HandleGameOverKeyDown(SDL_Keycode sym)
 }
 
 
-bool SandboxApplication::HandleKeyDown(SDL_Keycode sym)
+bool JetLag2021Application::HandleKeyDown(SDL_Keycode sym)
 {
 	if (!gameOver)
 	{
@@ -142,7 +142,7 @@ bool SandboxApplication::HandleKeyDown(SDL_Keycode sym)
 	}
 }
 
-bool SandboxApplication::OnEvent(const SDL_Event& evt)
+bool JetLag2021Application::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)
 	{
@@ -155,7 +155,7 @@ bool SandboxApplication::OnEvent(const SDL_Event& evt)
 	}
 }
 
-void SandboxApplication::UpdateTail()
+void JetLag2021Application::UpdateTail()
 {
 	for (size_t row = 0; row < tail.size() - 1; ++row)
 	{
@@ -164,7 +164,7 @@ void SandboxApplication::UpdateTail()
 	tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
 }
 
-void SandboxApplication::UpdateBlocks()
+void JetLag2021Application::UpdateBlocks()
 {
 	for (size_t row = 0; row < blocks.size() - 1; ++row)
 	{
@@ -178,7 +178,7 @@ void SandboxApplication::UpdateBlocks()
 		Constants::Block::MINIMUM_RANDOM_COLUMN;
 }
 
-void SandboxApplication::CheckForGameOver()
+void JetLag2021Application::CheckForGameOver()
 {
 	gameOver =
 		blocks[tail.size() - 1] == tail[tail.size() - 1] ||
@@ -196,7 +196,7 @@ void SandboxApplication::CheckForGameOver()
 	}
 }
 
-void SandboxApplication::UpdateBoard()
+void JetLag2021Application::UpdateBoard()
 {
 	if (!gameOver)
 	{
@@ -206,7 +206,7 @@ void SandboxApplication::UpdateBoard()
 	}
 }
 
-void SandboxApplication::Update(int milliseconds)
+void JetLag2021Application::Update(int milliseconds)
 {
 	counter += milliseconds;
 	while (counter > Constants::Game::FRAME_MILLISECONDS)
@@ -216,13 +216,13 @@ void SandboxApplication::Update(int milliseconds)
 	}
 }
 
-void SandboxApplication::DrawBackground()
+void JetLag2021Application::DrawBackground()
 {
 	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 0, 255);
 	SDL_RenderClear(GetMainRenderer());
 }
 
-void SandboxApplication::DrawTail()
+void JetLag2021Application::DrawTail()
 {
 	for (int row = 0; row < tail.size() - 1; ++row)
 	{
@@ -238,7 +238,7 @@ void SandboxApplication::DrawTail()
 	}
 }
 
-void SandboxApplication::PlotCellRect(SDL_Rect& rc, int column, int row)
+void JetLag2021Application::PlotCellRect(SDL_Rect& rc, int column, int row)
 {
 	rc.x = column * Constants::Cell::WIDTH;
 	rc.y = row * Constants::Cell::HEIGHT;
@@ -246,7 +246,7 @@ void SandboxApplication::PlotCellRect(SDL_Rect& rc, int column, int row)
 	rc.h = Constants::Cell::HEIGHT;
 }
 
-void SandboxApplication::DrawBlocks()
+void JetLag2021Application::DrawBlocks()
 {
 	for (int row = 0; row < blocks.size(); ++row)
 	{
@@ -254,7 +254,7 @@ void SandboxApplication::DrawBlocks()
 	}
 }
 
-void SandboxApplication::DrawWalls()
+void JetLag2021Application::DrawWalls()
 {
 	for (int row = 0; row < blocks.size(); ++row)
 	{
@@ -263,7 +263,7 @@ void SandboxApplication::DrawWalls()
 	}
 }
 
-void SandboxApplication::DrawScore()
+void JetLag2021Application::DrawScore()
 {
 	SDL_SetTextureColorMod(romfontTexture, 0, 255, 0);
 	SDL_Rect rc =
@@ -292,7 +292,7 @@ void SandboxApplication::DrawScore()
 	}
 }
 
-void SandboxApplication::DrawMuteHint()
+void JetLag2021Application::DrawMuteHint()
 {
 	if (muted)
 	{
@@ -304,12 +304,12 @@ void SandboxApplication::DrawMuteHint()
 	}
 }
 
-void SandboxApplication::DrawStartHint()
+void JetLag2021Application::DrawStartHint()
 {
 	DrawCenteredText(Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
-void SandboxApplication::DrawHints()
+void JetLag2021Application::DrawHints()
 {
 	if (gameOver)
 	{
@@ -318,7 +318,7 @@ void SandboxApplication::DrawHints()
 	}
 }
 
-void SandboxApplication::Draw()
+void JetLag2021Application::Draw()
 {
 	DrawBackground();
 	DrawBlocks();
@@ -329,7 +329,7 @@ void SandboxApplication::Draw()
 }
 
 
-void SandboxApplication::ResetGame()
+void JetLag2021Application::ResetGame()
 {
 	blocks.clear();
 	while (blocks.size() < Constants::Board::ROWS)
@@ -349,19 +349,19 @@ void SandboxApplication::ResetGame()
 	dead = Constants::Game::InitialValues::DEAD;
 }
 
-void SandboxApplication::RestartGame()
+void JetLag2021Application::RestartGame()
 {
 	ResetGame();
 	gameOver = false;
 }
 
-void SandboxApplication::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
+void JetLag2021Application::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
 {
 	//you center things by dividing by 2
 	DrawText((Constants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
 }
 
-void SandboxApplication::DrawCharacter(int column, int row, char character, const SDL_Color& color)
+void JetLag2021Application::DrawCharacter(int column, int row, char character, const SDL_Color& color)
 {
 	SDL_SetTextureColorMod(romfontTexture, color.r, color.g, color.b);
 	SDL_Rect rcDst =
@@ -374,7 +374,7 @@ void SandboxApplication::DrawCharacter(int column, int row, char character, cons
 	SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
 }
 
-void SandboxApplication::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
+void JetLag2021Application::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
 {
 	for (auto ch : text)
 	{
@@ -382,7 +382,7 @@ void SandboxApplication::DrawText(int column, int row, const std::string& text, 
 		column++;
 	}
 }
-void SandboxApplication::PlaySound(Mix_Chunk* chunk)
+void JetLag2021Application::PlaySound(Mix_Chunk* chunk)
 {
 	if (!muted)
 	{

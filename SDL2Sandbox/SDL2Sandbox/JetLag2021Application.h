@@ -4,14 +4,14 @@
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
-class SandboxApplication: public tggd::common::Application
+class JetLag2021Application: public tggd::common::Application
 {
 private:
 	Mix_Chunk* turnSound;
 	Mix_Chunk* deathSound;
 	SDL_Texture* romfontTexture;
 
-	static SandboxApplication sandboxApplication;
+	static JetLag2021Application sandboxApplication;
 	std::vector<int> blocks;
 	std::vector<int> tail;
 	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
@@ -56,6 +56,6 @@ protected:
 	void Update(int);
 	void Draw();
 public:
-	SandboxApplication();
+	JetLag2021Application();
 };
 
