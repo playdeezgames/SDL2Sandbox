@@ -51,8 +51,8 @@ namespace Constants
 	}
 	namespace SoundFile
 	{
-		const std::string TURN = "jl2017turn.wav";
-		const std::string DEATH = "jl2017death.wav";
+		const std::string TURN = "turn.wav";
+		const std::string DEATH = "dead.wav";
 		const std::string CHOMP = "chomp.wav";
 	}
 	namespace Game
