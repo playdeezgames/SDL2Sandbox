@@ -26,14 +26,14 @@ SandboxApplication::SandboxApplication()
 
 void SandboxApplication::SaveOptions()
 {
-	remove(GameConstants::OPTIONS_FILE_NAME.c_str());
+	remove(Constants::Options::FILE_NAME.c_str());
 	FILE* f = nullptr;
-	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), GameConstants::OPTIONS_WRITE_MODE.c_str());
+	fopen_s(&f, Constants::Options::FILE_NAME.c_str(), Constants::Options::WRITE_MODE.c_str());
 	if (f)
 	{
 		GameOptions options = { 0 };
 		options.muted = muted;
-		fwrite(&options, sizeof(GameOptions), GameConstants::OPTIONS_RECORD_COUNT, f);
+		fwrite(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
 		fclose(f);
 	}
 }
@@ -41,7 +41,7 @@ void SandboxApplication::SaveOptions()
 void SandboxApplication::LoadOptions()
 {
 	FILE* f = nullptr;
-	fopen_s(&f, GameConstants::OPTIONS_FILE_NAME.c_str(), GameConstants::OPTIONS_READ_MODE.c_str());
+	fopen_s(&f, Constants::Options::FILE_NAME.c_str(), Constants::Options::READ_MODE.c_str());
 	if (f)
 	{
 		GameOptions options;
@@ -49,7 +49,7 @@ void SandboxApplication::LoadOptions()
 		if (ftell(f) == sizeof(GameOptions))
 		{
 			fseek(f, 0, SEEK_SET);//reset to start of file for reading
-			fread(&options, sizeof(GameOptions), GameConstants::OPTIONS_RECORD_COUNT, f);
+			fread(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
 			muted = options.muted;
 		}
 		fclose(f);
@@ -58,19 +58,19 @@ void SandboxApplication::LoadOptions()
 
 void SandboxApplication::Start()
 {
-	for (int index = 0; index < GameConstants::ROMFONT_CELL_COUNT; ++index)
+	for (int index = 0; index < Constants::RomFont::CELL_COUNT; ++index)
 	{
-		int column = index % GameConstants::ROMFONT_COLUMNS;
-		int row = index / GameConstants::ROMFONT_COLUMNS;
-		romfontSrcRects[index].x = column * GameConstants::ROMFONT_CELL_WIDTH;
-		romfontSrcRects[index].y = row * GameConstants::ROMFONT_CELL_HEIGHT;
-		romfontSrcRects[index].w = GameConstants::ROMFONT_CELL_WIDTH;
-		romfontSrcRects[index].h = GameConstants::ROMFONT_CELL_HEIGHT;
+		int column = index % Constants::RomFont::COLUMNS;
+		int row = index / Constants::RomFont::COLUMNS;
+		romfontSrcRects[index].x = column * Constants::RomFont::CELL_WIDTH;
+		romfontSrcRects[index].y = row * Constants::RomFont::CELL_HEIGHT;
+		romfontSrcRects[index].w = Constants::RomFont::CELL_WIDTH;
+		romfontSrcRects[index].h = Constants::RomFont::CELL_HEIGHT;
 	}
 
 	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
-	romfontTexture = IMG_LoadTexture(GetMainRenderer(), GameConstants::ROMFONT_IMAGE_FILE_NAME.c_str());
+	romfontTexture = IMG_LoadTexture(GetMainRenderer(), Constants::RomFont::IMAGE_FILE_NAME.c_str());
 	turnSound = Mix_LoadWAV(Constants::SoundFile::TURN.c_str());
 	deathSound = Mix_LoadWAV(Constants::SoundFile::DEATH.c_str());
 	ResetGame();
@@ -209,10 +209,10 @@ void SandboxApplication::UpdateBoard()
 void SandboxApplication::Update(int milliseconds)
 {
 	counter += milliseconds;
-	while (counter > GameConstants::FRAME_MILLISECONDS)
+	while (counter > Constants::Game::FRAME_MILLISECONDS)
 	{
 		UpdateBoard();
-		counter -= GameConstants::FRAME_MILLISECONDS;
+		counter -= Constants::Game::FRAME_MILLISECONDS;
 	}
 }
 
@@ -275,17 +275,17 @@ void SandboxApplication::DrawScore()
 	};
 	int digits = 1;//there is always at least one score digit
 	int temp = score;
-	while (temp >= GameConstants::SCORE_RADIX)
+	while (temp >= Constants::Game::SCORE_RADIX)
 	{
 		digits++;
-		temp /= GameConstants::SCORE_RADIX;
+		temp /= Constants::Game::SCORE_RADIX;
 		rc.x += Constants::Cell::WIDTH;
 	}
 	temp = score;
 	while (digits)
 	{
-		int digit = temp % GameConstants::SCORE_RADIX;
-		temp /= GameConstants::SCORE_RADIX;
+		int digit = temp % Constants::Game::SCORE_RADIX;
+		temp /= Constants::Game::SCORE_RADIX;
 		digits--;
 		SDL_RenderCopy(GetMainRenderer(), romfontTexture, &(romfontSrcRects['0' + digit]), &rc);
 		rc.x -= Constants::Cell::WIDTH;

@@ -14,7 +14,7 @@ private:
 	static SandboxApplication sandboxApplication;
 	std::vector<int> blocks;
 	std::vector<int> tail;
-	SDL_Rect romfontSrcRects[GameConstants::ROMFONT_CELL_COUNT];
+	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 	int counter;
 	int direction;
 	bool gameOver;

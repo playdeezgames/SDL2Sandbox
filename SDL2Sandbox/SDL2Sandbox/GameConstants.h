@@ -62,27 +62,29 @@ namespace Constants
 			const bool MUTED = false;
 			const bool DEAD = false;
 		}
+		const int FRAME_MILLISECONDS = 100;
+		const int SCORE_RADIX = 10;
+	}
+	namespace Options
+	{
+		const std::string FILE_NAME = "gameoptions.bin";
+		const std::string WRITE_MODE = "wb";
+		const std::string READ_MODE = "rb";
+		const int RECORD_COUNT = 1;
+	}
+	namespace RomFont
+	{
+		const std::string IMAGE_FILE_NAME = "romfont8x8.png";
+		const int COLUMNS = 16;
+		const int ROWS = 16;
+		const int CELL_COUNT = COLUMNS * ROWS;
+		const int CELL_WIDTH = Constants::Cell::WIDTH;
+		const int CELL_HEIGHT = Constants::Cell::HEIGHT;
 	}
 }
 class GameConstants
 {
 public:
-
-	static const std::string OPTIONS_FILE_NAME;
-	static const std::string OPTIONS_WRITE_MODE;
-	static const std::string OPTIONS_READ_MODE;
-	static const int OPTIONS_RECORD_COUNT = 1;
-
-	static const int FRAME_MILLISECONDS = 100;
-	static const int SCORE_RADIX = 10;
-
-	static const std::string ROMFONT_IMAGE_FILE_NAME;
-	static const int ROMFONT_COLUMNS = 16;
-	static const int ROMFONT_ROWS = 16;
-	static const int ROMFONT_CELL_COUNT = ROMFONT_COLUMNS * ROMFONT_ROWS;
-	static const int ROMFONT_CELL_WIDTH = Constants::Cell::WIDTH;
-	static const int ROMFONT_CELL_HEIGHT = Constants::Cell::HEIGHT;
-
 	static const int ANY_CHANNEL = -1;
 	static const int NO_LOOPS = 0;
 	static const int DEFAULT_X = 0;
