@@ -248,14 +248,9 @@ void SandboxApplication::PlotCellRect(SDL_Rect& rc, int column, int row)
 
 void SandboxApplication::DrawBlocks()
 {
-	SDL_Rect rc = { 0 };
-	SDL_SetRenderDrawColor(GetMainRenderer(), 255, 255, 255, 255);
 	for (int row = 0; row < blocks.size(); ++row)
 	{
-		PlotCellRect(rc, blocks[row], row);
-		rc.x = blocks[row] * Constants::Cell::WIDTH;
-		rc.y = row * Constants::Cell::HEIGHT;
-		SDL_RenderFillRect(GetMainRenderer(), &rc);
+		DrawCharacter(blocks[row], row, 0xdb, GameConstants::WHITE);
 	}
 }
 
