@@ -10,17 +10,17 @@ SandboxApplication SandboxApplication::sandboxApplication;
 SandboxApplication::SandboxApplication()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, blocks(Constants::Board::ROWS)
-	, counter(GameConstants::INITIAL_COUNTER)
+	, counter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
-	, gameOver(GameConstants::INITIAL_GAME_OVER)
+	, gameOver(Constants::Game::InitialValues::GAME_OVER)
 	, turnSound(nullptr)
 	, deathSound(nullptr)
 	, romfontTexture(nullptr)
-	, runLength(GameConstants::INITIAL_RUN_LENGTH)
-	, score(GameConstants::INITIAL_SCORE)
-	, muted(GameConstants::INITIAL_MUTED)
+	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
+	, score(Constants::Game::InitialValues::SCORE)
+	, muted(Constants::Game::InitialValues::MUTED)
 	, romfontSrcRects()
-	, dead(GameConstants::INITIAL_DEAD)
+	, dead(Constants::Game::InitialValues::DEAD)
 {
 }
 
@@ -96,7 +96,7 @@ void SandboxApplication::SetNextDirection(int nextDirection)
 	if (nextDirection != direction)
 	{
 		score += CalculateScoreFromRunLength(runLength);
-		runLength = GameConstants::INITIAL_RUN_LENGTH;
+		runLength = Constants::Game::InitialValues::RUN_LENGTH;
 		PlaySound(turnSound);
 		direction = nextDirection;
 	}
@@ -344,9 +344,9 @@ void SandboxApplication::ResetGame()
 	}
 
 	direction = Constants::Game::Direction::RIGHT;
-	score = GameConstants::INITIAL_SCORE;
-	runLength = GameConstants::INITIAL_RUN_LENGTH;
-	dead = GameConstants::INITIAL_DEAD;
+	score = Constants::Game::InitialValues::SCORE;
+	runLength = Constants::Game::InitialValues::RUN_LENGTH;
+	dead = Constants::Game::InitialValues::DEAD;
 }
 
 void SandboxApplication::RestartGame()

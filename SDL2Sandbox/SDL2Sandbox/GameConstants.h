@@ -53,6 +53,15 @@ namespace Constants
 			const int LEFT = -1;
 			const int RIGHT = 1;
 		}
+		namespace InitialValues
+		{
+			const int RUN_LENGTH = 0;
+			const int SCORE = 0;
+			const int COUNTER = 0;
+			const bool GAME_OVER = true;
+			const bool MUTED = false;
+			const bool DEAD = false;
+		}
 	}
 }
 class GameConstants
@@ -66,13 +75,6 @@ public:
 
 	static const int FRAME_MILLISECONDS = 100;
 	static const int SCORE_RADIX = 10;
-
-	static const int INITIAL_RUN_LENGTH = 0;
-	static const int INITIAL_SCORE = 0;
-	static const int INITIAL_COUNTER = 0;
-	static const bool INITIAL_GAME_OVER = true;
-	static const bool INITIAL_MUTED = false;
-	static const bool INITIAL_DEAD = false;
 
 	static const std::string ROMFONT_IMAGE_FILE_NAME;
 	static const int ROMFONT_COLUMNS = 16;
