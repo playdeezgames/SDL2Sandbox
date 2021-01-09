@@ -238,12 +238,21 @@ void SandboxApplication::DrawTail()
 	}
 }
 
+void SandboxApplication::PlotCellRect(SDL_Rect& rc, int column, int row)
+{
+	rc.x = column * Constants::Cell::WIDTH;
+	rc.y = row * Constants::Cell::HEIGHT;
+	rc.w = Constants::Cell::WIDTH;
+	rc.h = Constants::Cell::HEIGHT;
+}
+
 void SandboxApplication::DrawBlocks()
 {
-	SDL_Rect rc = { 0,0,Constants::Cell::WIDTH, Constants::Cell::HEIGHT };
+	SDL_Rect rc = { 0 };
 	SDL_SetRenderDrawColor(GetMainRenderer(), 255, 255, 255, 255);
 	for (int row = 0; row < blocks.size(); ++row)
 	{
+		PlotCellRect(rc, blocks[row], row);
 		rc.x = blocks[row] * Constants::Cell::WIDTH;
 		rc.y = row * Constants::Cell::HEIGHT;
 		SDL_RenderFillRect(GetMainRenderer(), &rc);

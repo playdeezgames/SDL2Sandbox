@@ -47,6 +47,8 @@ private:
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);
 	bool HandleGameOverKeyDown(SDL_Keycode);
+
+	static void PlotCellRect(SDL_Rect&, int, int);
 protected:
 	void Start();
 	void Finish();
