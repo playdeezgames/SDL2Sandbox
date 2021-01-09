@@ -256,11 +256,11 @@ void SandboxApplication::DrawBlocks()
 
 void SandboxApplication::DrawWalls()
 {
-	SDL_SetRenderDrawColor(GetMainRenderer(), 0, 0, 255, 255);
-	SDL_Rect rc = { GameConstants::DEFAULT_X,GameConstants::DEFAULT_Y,Constants::Cell::WIDTH, GameConstants::WINDOW_HEIGHT };
-	SDL_RenderFillRect(GetMainRenderer(), &rc);
-	rc.x = GameConstants::WINDOW_WIDTH - Constants::Cell::WIDTH;
-	SDL_RenderFillRect(GetMainRenderer(), &rc);
+	for (int row = 0; row < blocks.size(); ++row)
+	{
+		DrawCharacter(GameConstants::LEFT_WALL, row, 0xdb, GameConstants::BLUE);
+		DrawCharacter(GameConstants::RIGHT_WALL, row, 0xdb, GameConstants::BLUE);
+	}
 }
 
 void SandboxApplication::DrawScore()

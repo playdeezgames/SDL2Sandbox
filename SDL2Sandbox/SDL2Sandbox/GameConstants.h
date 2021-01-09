@@ -61,5 +61,8 @@ public:
 	static const SDL_Color BROWN;
 	static const SDL_Color WHITE;
 	static const SDL_Color RED;
+	static const SDL_Color BLUE;
+	static const int LEFT_WALL = 0;
+	static const int RIGHT_WALL = Constants::Board::COLUMNS - 1;
 };
 
