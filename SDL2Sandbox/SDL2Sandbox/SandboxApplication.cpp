@@ -338,9 +338,9 @@ void SandboxApplication::ResetGame()
 	}
 
 	tail.clear();
-	while (tail.size() < GameConstants::TAIL_LENGTH)
+	while (tail.size() < Constants::Tail::LENGTH)
 	{
-		tail.push_back(GameConstants::TAIL_INITIAL_COLUMN);
+		tail.push_back(Constants::Tail::INITIAL_COLUMN);
 	}
 
 	direction = GameConstants::DIRECTION_RIGHT;

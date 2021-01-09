@@ -16,6 +16,12 @@ namespace Constants
 		const int MINIMUM_RANDOM_COLUMN = 1;
 		const int MAXIMUM_RANDOM_COLUMN = Constants::Board::COLUMNS - 2;
 	}
+	namespace Tail
+	{
+		const int LENGTH = 6;
+		const int INITIAL_COLUMN = Constants::Board::COLUMNS / 2;
+
+	}
 	namespace Cell
 	{
 		const int WIDTH = 16;
@@ -40,9 +46,6 @@ class GameConstants
 {
 public:
 	static const int FRAME_MILLISECONDS = 100;
-
-	static const int TAIL_LENGTH = 6;
-	static const int TAIL_INITIAL_COLUMN = Constants::Board::COLUMNS / 2;
 
 	static const std::string OPTIONS_FILE_NAME;
 	static const std::string OPTIONS_WRITE_MODE;
