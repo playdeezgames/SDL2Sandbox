@@ -14,8 +14,7 @@ JetLag2021Application::JetLag2021Application()
 	, counter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
 	, gameOver(Constants::Game::InitialValues::GAME_OVER)
-	, turnSound(nullptr)
-	, deathSound(nullptr)
+	, sounds()
 	, romfontTexture(nullptr)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
@@ -72,17 +71,22 @@ void JetLag2021Application::Start()
 	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), Constants::RomFont::IMAGE_FILE_NAME.c_str());
-	turnSound = Mix_LoadWAV(Constants::SoundFile::TURN.c_str());
-	deathSound = Mix_LoadWAV(Constants::SoundFile::DEATH.c_str());
-	chompSound = Mix_LoadWAV(Constants::SoundFile::CHOMP.c_str());
+	sounds[Constants::Sound::CHOMP] = Mix_LoadWAV(Constants::Sound::CHOMP.c_str());
+	sounds[Constants::Sound::DEATH] = Mix_LoadWAV(Constants::Sound::DEATH.c_str());
+	sounds[Constants::Sound::TURN] = Mix_LoadWAV(Constants::Sound::TURN.c_str());
 	ResetGame();
 }
 
 void JetLag2021Application::Finish()
 {
-	Mix_FreeChunk(turnSound);
-	Mix_FreeChunk(deathSound);
-	Mix_FreeChunk(chompSound);
+	for (auto& entry : sounds)
+	{
+		if (entry.second)
+		{
+			Mix_FreeChunk(entry.second);
+			entry.second = nullptr;
+		}
+	}
 	SDL_DestroyTexture(romfontTexture);
 	IMG_Quit();
 }
@@ -100,7 +104,7 @@ void JetLag2021Application::SetNextDirection(int nextDirection)
 	{
 		score += CalculateScoreFromRunLength(runLength);
 		runLength = Constants::Game::InitialValues::RUN_LENGTH;
-		PlaySound(turnSound);
+		PlaySound(Constants::Sound::TURN);
 		direction = nextDirection;
 	}
 }
@@ -191,7 +195,7 @@ void JetLag2021Application::UpdateGameStatus()
 	if (gameOver)
 	{
 		dead = true;
-		PlaySound(deathSound);
+		PlaySound(Constants::Sound::DEATH);
 	}
 	else
 	{
@@ -199,7 +203,7 @@ void JetLag2021Application::UpdateGameStatus()
 		{
 			pickUps[tail.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
 			score += Constants::PickUp::SCORE_BONUS;
-			PlaySound(chompSound);
+			PlaySound(Constants::Sound::CHOMP);
 		}
 		runLength++;
 	}
@@ -399,11 +403,11 @@ void JetLag2021Application::DrawText(int column, int row, const std::string& tex
 		column++;
 	}
 }
-void JetLag2021Application::PlaySound(Mix_Chunk* chunk)
+void JetLag2021Application::PlaySound(const std::string& name)
 {
 	if (!muted)
 	{
-		Mix_PlayChannel(Constants::Utility::ANY_CHANNEL, chunk, Constants::Utility::NO_LOOPS);
+		Mix_PlayChannel(Constants::Utility::ANY_CHANNEL, sounds[name], Constants::Utility::NO_LOOPS);
 	}
 }
 

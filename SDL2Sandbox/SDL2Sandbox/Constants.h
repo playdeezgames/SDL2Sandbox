@@ -49,7 +49,7 @@ namespace Constants
 		const SDL_Color BLUE = { 0x00, 0x00, 0xAA, 0xFF };
 		const SDL_Color YELLOW = { 0xFF, 0xFF, 0x00, 0xFF };
 	}
-	namespace SoundFile
+	namespace Sound
 	{
 		const std::string TURN = "turn.wav";
 		const std::string DEATH = "dead.wav";
