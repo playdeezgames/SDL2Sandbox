@@ -29,10 +29,10 @@
     <ClInclude Include="SandboxApplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameConstants.h">
+    <ClInclude Include="..\..\..\CommonCpp\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\CommonCpp\Application.h">
+    <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

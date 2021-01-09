@@ -1,6 +1,6 @@
 #pragma once
 #include "..\..\..\CommonCpp\Application.h"
-#include "GameConstants.h"
+#include "Constants.h"
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
