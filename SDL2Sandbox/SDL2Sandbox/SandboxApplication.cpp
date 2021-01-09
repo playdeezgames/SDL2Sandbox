@@ -172,18 +172,18 @@ void SandboxApplication::UpdateBlocks()
 	}
 	blocks[blocks.size() - 1] =
 		rand() %
-		(GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN -
-			GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN +
+		(Constants::Block::MAXIMUM_RANDOM_COLUMN -
+			Constants::Block::MINIMUM_RANDOM_COLUMN +
 			1) +
-		GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN;
+		Constants::Block::MINIMUM_RANDOM_COLUMN;
 }
 
 void SandboxApplication::CheckForGameOver()
 {
 	gameOver =
 		blocks[tail.size() - 1] == tail[tail.size() - 1] ||
-		tail[tail.size() - 1] < GameConstants::BLOCK_MINIMUM_RANDOM_COLUMN ||
-		tail[tail.size() - 1] > GameConstants::BLOCK_MAXIMUM_RANDOM_COLUMN;
+		tail[tail.size() - 1] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
+		tail[tail.size() - 1] > Constants::Block::MAXIMUM_RANDOM_COLUMN;
 
 	if (gameOver)
 	{
@@ -334,7 +334,7 @@ void SandboxApplication::ResetGame()
 	blocks.clear();
 	while (blocks.size() < Constants::Board::ROWS)
 	{
-		blocks.push_back(GameConstants::BLOCK_INITIAL_COLUMN);
+		blocks.push_back(Constants::Block::INITIAL_COLUMN);
 	}
 
 	tail.clear();

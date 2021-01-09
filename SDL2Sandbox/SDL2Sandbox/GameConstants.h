@@ -10,6 +10,12 @@ namespace Constants
 		const int LEFT_WALL = 0;
 		const int RIGHT_WALL = Constants::Board::COLUMNS - 1;
 	}
+	namespace Block
+	{
+		const int INITIAL_COLUMN = 0;
+		const int MINIMUM_RANDOM_COLUMN = 1;
+		const int MAXIMUM_RANDOM_COLUMN = Constants::Board::COLUMNS - 2;
+	}
 	namespace Cell
 	{
 		const int WIDTH = 16;
@@ -33,10 +39,6 @@ namespace Constants
 class GameConstants
 {
 public:
-	static const int BLOCK_INITIAL_COLUMN = 0;
-	static const int BLOCK_MINIMUM_RANDOM_COLUMN = 1;
-	static const int BLOCK_MAXIMUM_RANDOM_COLUMN = Constants::Board::COLUMNS - 2;
-
 	static const int FRAME_MILLISECONDS = 100;
 
 	static const int TAIL_LENGTH = 6;
