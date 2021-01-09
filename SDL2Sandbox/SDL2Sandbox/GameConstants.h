@@ -81,15 +81,17 @@ namespace Constants
 		const int CELL_WIDTH = Constants::Cell::WIDTH;
 		const int CELL_HEIGHT = Constants::Cell::HEIGHT;
 	}
+	namespace Utility
+	{
+		const int ANY_CHANNEL = -1;
+		const int NO_LOOPS = 0;
+		const int DEFAULT_X = 0;
+		const int DEFAULT_Y = 0;
+	}
 }
 class GameConstants
 {
 public:
-	static const int ANY_CHANNEL = -1;
-	static const int NO_LOOPS = 0;
-	static const int DEFAULT_X = 0;
-	static const int DEFAULT_Y = 0;
-
 	static const int START_MESSAGE_ROW = Constants::Board::ROWS - 1;
 	static const int MUTE_MESSAGE_ROW = Constants::Board::ROWS - 2;
 	static const std::string MUTE_HINT_TEXT;

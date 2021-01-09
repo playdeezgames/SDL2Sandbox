@@ -269,7 +269,7 @@ void SandboxApplication::DrawScore()
 	SDL_Rect rc =
 	{
 		Constants::Cell::WIDTH,
-		GameConstants::DEFAULT_Y,
+		Constants::Utility::DEFAULT_Y,
 		Constants::Cell::WIDTH,
 		Constants::Cell::HEIGHT
 	};
@@ -386,6 +386,6 @@ void SandboxApplication::PlaySound(Mix_Chunk* chunk)
 {
 	if (!muted)
 	{
-		Mix_PlayChannel(GameConstants::ANY_CHANNEL, chunk, GameConstants::NO_LOOPS);
+		Mix_PlayChannel(Constants::Utility::ANY_CHANNEL, chunk, Constants::Utility::NO_LOOPS);
 	}
 }
