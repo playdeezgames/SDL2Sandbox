@@ -11,18 +11,14 @@ namespace Constants
 	namespace Cell
 	{
 		const int WIDTH = 16;
+		const int HEIGHT = 16;
 	}
 }
 class GameConstants
 {
 public:
-	class Cell
-	{
-	public:
-		static const int HEIGHT = 16;
-	};
 	static const int WINDOW_WIDTH = Constants::Board::COLUMNS * Constants::Cell::WIDTH;
-	static const int WINDOW_HEIGHT = Constants::Board::ROWS * Cell::HEIGHT;
+	static const int WINDOW_HEIGHT = Constants::Board::ROWS * Constants::Cell::HEIGHT;
 	static const int BLOCK_INITIAL_COLUMN = 0;
 	static const int BLOCK_MINIMUM_RANDOM_COLUMN = 1;
 	static const int BLOCK_MAXIMUM_RANDOM_COLUMN = Constants::Board::COLUMNS - 2;
@@ -45,7 +41,7 @@ public:
 	static const int ROMFONT_ROWS = 16;
 	static const int ROMFONT_CELL_COUNT = ROMFONT_COLUMNS * ROMFONT_ROWS;
 	static const int ROMFONT_CELL_WIDTH = Constants::Cell::WIDTH;
-	static const int ROMFONT_CELL_HEIGHT = Cell::HEIGHT;
+	static const int ROMFONT_CELL_HEIGHT = Constants::Cell::HEIGHT;
 	static const int ANY_CHANNEL = -1;
 	static const int NO_LOOPS = 0;
 	static const int DEFAULT_X = 0;
