@@ -8,7 +8,7 @@ typedef struct
 SandboxApplication SandboxApplication::sandboxApplication;
 
 SandboxApplication::SandboxApplication()
-	: Application(GameConstants::WINDOW_WIDTH, GameConstants::WINDOW_HEIGHT, GameConstants::WINDOW_TITLE)
+	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, GameConstants::WINDOW_TITLE)
 	, blocks(Constants::Board::ROWS)
 	, counter(GameConstants::INITIAL_COUNTER)
 	, direction(GameConstants::DIRECTION_RIGHT)
@@ -250,7 +250,7 @@ void SandboxApplication::DrawBlocks()
 {
 	for (int row = 0; row < blocks.size(); ++row)
 	{
-		DrawCharacter(blocks[row], row, 0xdb, GameConstants::WHITE);
+		DrawCharacter(blocks[row], row, (char)0xdb, GameConstants::WHITE);
 	}
 }
 
@@ -258,8 +258,8 @@ void SandboxApplication::DrawWalls()
 {
 	for (int row = 0; row < blocks.size(); ++row)
 	{
-		DrawCharacter(GameConstants::LEFT_WALL, row, 0xdb, GameConstants::BLUE);
-		DrawCharacter(GameConstants::RIGHT_WALL, row, 0xdb, GameConstants::BLUE);
+		DrawCharacter(GameConstants::LEFT_WALL, row, (char)0xdb, GameConstants::BLUE);
+		DrawCharacter(GameConstants::RIGHT_WALL, row, (char)0xdb, GameConstants::BLUE);
 	}
 }
 

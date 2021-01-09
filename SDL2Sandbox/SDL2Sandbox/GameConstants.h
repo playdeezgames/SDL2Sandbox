@@ -13,11 +13,15 @@ namespace Constants
 		const int WIDTH = 16;
 		const int HEIGHT = 16;
 	}
+	namespace Window
+	{
+		const int WIDTH = Constants::Board::COLUMNS * Constants::Cell::WIDTH;
+		const int HEIGHT = Constants::Board::ROWS * Constants::Cell::HEIGHT;
+	}
 }
 class GameConstants
 {
 public:
-	static const int WINDOW_WIDTH = Constants::Board::COLUMNS * Constants::Cell::WIDTH;
 	static const int WINDOW_HEIGHT = Constants::Board::ROWS * Constants::Cell::HEIGHT;
 	static const int BLOCK_INITIAL_COLUMN = 0;
 	static const int BLOCK_MINIMUM_RANDOM_COLUMN = 1;
