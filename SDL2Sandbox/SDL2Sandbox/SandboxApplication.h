@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
-class SandboxApplication: public Application
+class SandboxApplication: public tggd::common::Application
 {
 private:
 	Mix_Chunk* turnSound;
