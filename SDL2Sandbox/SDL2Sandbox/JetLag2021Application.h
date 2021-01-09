@@ -49,7 +49,7 @@ private:
 	void UpdateBoard();
 	void UpdateTail();
 	void UpdateBlocks();
-	void UpdateCheckForGameOver();
+	void UpdateGameStatus();
 	void UpdatePickUps();
 
 	bool HandleKeyDown(SDL_Keycode);

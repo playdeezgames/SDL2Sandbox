@@ -179,7 +179,7 @@ void JetLag2021Application::UpdateBlocks()
 		Constants::Block::MINIMUM_RANDOM_COLUMN;
 }
 
-void JetLag2021Application::UpdateCheckForGameOver()
+void JetLag2021Application::UpdateGameStatus()
 {
 	gameOver =
 		blocks[tail.size() - 1] == tail[tail.size() - 1] ||
@@ -193,6 +193,11 @@ void JetLag2021Application::UpdateCheckForGameOver()
 	}
 	else
 	{
+		if (pickUps[tail.size() - 1] == tail[tail.size() - 1])
+		{
+			pickUps[tail.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
+			score += Constants::PickUp::SCORE_BONUS;
+		}
 		runLength++;
 	}
 }
@@ -204,7 +209,7 @@ void JetLag2021Application::UpdateBoard()
 		UpdateTail();
 		UpdateBlocks();
 		UpdatePickUps();
-		UpdateCheckForGameOver();
+		UpdateGameStatus();
 	}
 }
 
