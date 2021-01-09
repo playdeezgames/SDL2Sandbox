@@ -24,6 +24,7 @@
     <ProjectGuid>{ee020f14-0298-4591-afa7-b418a93a5db1}</ProjectGuid>
     <RootNamespace>SDL2Sandbox</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>JetLag2021</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
