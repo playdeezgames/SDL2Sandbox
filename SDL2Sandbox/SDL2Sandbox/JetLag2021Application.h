@@ -13,6 +13,7 @@ private:
 
 	static JetLag2021Application sandboxApplication;
 	std::vector<int> blocks;
+	std::vector<int> pickUps;
 	std::vector<int> tail;
 	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 	int counter;
@@ -25,25 +26,31 @@ private:
 
 	void ResetGame();
 	void RestartGame();
+	void SetNextDirection(int);
+
 	void DrawCharacter(int, int, char, const SDL_Color&);
 	void DrawText(int, int, const std::string&, const SDL_Color&);
 	void DrawCenteredText(int, const std::string&, const SDL_Color&);
-	void PlaySound(Mix_Chunk*);
-	void LoadOptions();
-	void SaveOptions();
-	void SetNextDirection(int);
 	void DrawBackground();
 	void DrawTail();
 	void DrawBlocks();
+	void DrawPickUps();
 	void DrawWalls();
 	void DrawScore();
 	void DrawHints();
 	void DrawMuteHint();
 	void DrawStartHint();
+
+	void PlaySound(Mix_Chunk*);
+
+	void LoadOptions();
+	void SaveOptions();
+
 	void UpdateBoard();
 	void UpdateTail();
 	void UpdateBlocks();
-	void CheckForGameOver();
+	void UpdateCheckForGameOver();
+
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);
 	bool HandleGameOverKeyDown(SDL_Keycode);

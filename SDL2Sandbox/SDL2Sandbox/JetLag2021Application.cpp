@@ -10,6 +10,7 @@ JetLag2021Application JetLag2021Application::sandboxApplication;
 JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, blocks(Constants::Board::ROWS)
+	, pickUps(Constants::Board::ROWS)
 	, counter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
 	, gameOver(Constants::Game::InitialValues::GAME_OVER)
@@ -178,7 +179,7 @@ void JetLag2021Application::UpdateBlocks()
 		Constants::Block::MINIMUM_RANDOM_COLUMN;
 }
 
-void JetLag2021Application::CheckForGameOver()
+void JetLag2021Application::UpdateCheckForGameOver()
 {
 	gameOver =
 		blocks[tail.size() - 1] == tail[tail.size() - 1] ||
@@ -202,7 +203,7 @@ void JetLag2021Application::UpdateBoard()
 	{
 		UpdateTail();
 		UpdateBlocks();
-		CheckForGameOver();
+		UpdateCheckForGameOver();
 	}
 }
 
@@ -331,6 +332,12 @@ void JetLag2021Application::Draw()
 
 void JetLag2021Application::ResetGame()
 {
+	pickUps.clear();
+	while (pickUps.size() < Constants::Board::ROWS)
+	{
+		pickUps.push_back(Constants::PickUp::INITIAL_COLUMN);
+	}
+
 	blocks.clear();
 	while (blocks.size() < Constants::Board::ROWS)
 	{
@@ -388,4 +395,13 @@ void JetLag2021Application::PlaySound(Mix_Chunk* chunk)
 	{
 		Mix_PlayChannel(Constants::Utility::ANY_CHANNEL, chunk, Constants::Utility::NO_LOOPS);
 	}
+}
+
+void JetLag2021Application::DrawPickUps()
+{
+	for (int row = 0; row < pickUps.size(); ++row)
+	{
+		DrawCharacter(pickUps[row], row, (char)0x04, Constants::Color::YELLOW);
+	}
+
 }

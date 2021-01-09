@@ -16,6 +16,10 @@ namespace Constants
 		const int MINIMUM_RANDOM_COLUMN = 1;
 		const int MAXIMUM_RANDOM_COLUMN = Constants::Board::COLUMNS - 2;
 	}
+	namespace PickUp
+	{
+		const int INITIAL_COLUMN = -1;
+	}
 	namespace Tail
 	{
 		const int LENGTH = 6;
@@ -40,6 +44,7 @@ namespace Constants
 		const SDL_Color WHITE = { 0xFF, 0xFF, 0xFF, 0xFF };
 		const SDL_Color RED = { 0xAA, 0x00, 0x00, 0xFF };
 		const SDL_Color BLUE = { 0x00, 0x00, 0xAA, 0xFF };
+		const SDL_Color YELLOW = { 0xFF, 0xFF, 0x00, 0xFF };
 	}
 	namespace SoundFile
 	{
