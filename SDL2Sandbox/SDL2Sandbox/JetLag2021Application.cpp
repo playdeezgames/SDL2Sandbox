@@ -203,6 +203,7 @@ void JetLag2021Application::UpdateBoard()
 	{
 		UpdateTail();
 		UpdateBlocks();
+		UpdatePickUps();
 		UpdateCheckForGameOver();
 	}
 }
@@ -322,6 +323,7 @@ void JetLag2021Application::DrawHints()
 void JetLag2021Application::Draw()
 {
 	DrawBackground();
+	DrawPickUps();
 	DrawBlocks();
 	DrawWalls();
 	DrawTail();
@@ -403,5 +405,20 @@ void JetLag2021Application::DrawPickUps()
 	{
 		DrawCharacter(pickUps[row], row, (char)0x04, Constants::Color::YELLOW);
 	}
+
+}
+
+void JetLag2021Application::UpdatePickUps()
+{
+	for (size_t row = 0; row < pickUps.size() - 1; ++row)
+	{
+		pickUps[row] = pickUps[(size_t)(row + 1)];
+	}
+	pickUps[pickUps.size() - 1] =
+		rand() %
+		(Constants::PickUp::MAXIMUM_RANDOM_COLUMN -
+			Constants::PickUp::MINIMUM_RANDOM_COLUMN +
+			1) +
+		Constants::PickUp::MINIMUM_RANDOM_COLUMN;
 
 }

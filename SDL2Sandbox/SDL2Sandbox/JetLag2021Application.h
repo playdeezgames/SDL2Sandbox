@@ -50,6 +50,7 @@ private:
 	void UpdateTail();
 	void UpdateBlocks();
 	void UpdateCheckForGameOver();
+	void UpdatePickUps();
 
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);

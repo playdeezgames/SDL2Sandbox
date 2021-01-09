@@ -19,6 +19,8 @@ namespace Constants
 	namespace PickUp
 	{
 		const int INITIAL_COLUMN = -1;
+		const int MINIMUM_RANDOM_COLUMN = 1;
+		const int MAXIMUM_RANDOM_COLUMN = Constants::Board::COLUMNS - 2;
 	}
 	namespace Tail
 	{
