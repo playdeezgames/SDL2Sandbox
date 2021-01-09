@@ -71,8 +71,8 @@ void SandboxApplication::Start()
 	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), GameConstants::ROMFONT_IMAGE_FILE_NAME.c_str());
-	turnSound = Mix_LoadWAV(GameConstants::TURN_SOUND_FILE_NAME.c_str());
-	deathSound = Mix_LoadWAV(GameConstants::DEATH_SOUND_FILE_NAME.c_str());
+	turnSound = Mix_LoadWAV(Constants::SoundFile::TURN.c_str());
+	deathSound = Mix_LoadWAV(Constants::SoundFile::DEATH.c_str());
 	ResetGame();
 }
 

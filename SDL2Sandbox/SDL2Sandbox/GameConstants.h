@@ -41,6 +41,11 @@ namespace Constants
 		const SDL_Color RED = { 0xAA, 0x00, 0x00, 0xFF };
 		const SDL_Color BLUE = { 0x00, 0x00, 0xAA, 0xFF };
 	}
+	namespace SoundFile
+	{
+		const std::string TURN = "jl2017turn.wav";
+		const std::string DEATH = "jl2017death.wav";
+	}
 }
 class GameConstants
 {
@@ -51,9 +56,6 @@ public:
 	static const std::string OPTIONS_WRITE_MODE;
 	static const std::string OPTIONS_READ_MODE;
 	static const int OPTIONS_RECORD_COUNT = 1;
-
-	static const std::string TURN_SOUND_FILE_NAME;
-	static const std::string DEATH_SOUND_FILE_NAME;
 
 	static const int DIRECTION_LEFT = -1;
 	static const int DIRECTION_RIGHT = 1;
