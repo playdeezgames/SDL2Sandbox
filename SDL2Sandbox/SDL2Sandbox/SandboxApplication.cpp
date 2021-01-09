@@ -296,17 +296,17 @@ void SandboxApplication::DrawMuteHint()
 {
 	if (muted)
 	{
-		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
+		DrawCenteredText(Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
 	else
 	{
-		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
+		DrawCenteredText(Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
 }
 
 void SandboxApplication::DrawStartHint()
 {
-	DrawCenteredText(GameConstants::START_MESSAGE_ROW, GameConstants::START_HINT_TEXT, Constants::Color::MAGENTA);
+	DrawCenteredText(Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
 void SandboxApplication::DrawHints()
