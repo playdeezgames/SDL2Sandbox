@@ -9,6 +9,7 @@ class JetLag2021Application: public tggd::common::Application
 private:
 	Mix_Chunk* turnSound;
 	Mix_Chunk* deathSound;
+	Mix_Chunk* chompSound;
 	SDL_Texture* romfontTexture;
 
 	static JetLag2021Application sandboxApplication;

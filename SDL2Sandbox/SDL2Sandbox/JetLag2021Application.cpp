@@ -74,6 +74,7 @@ void JetLag2021Application::Start()
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), Constants::RomFont::IMAGE_FILE_NAME.c_str());
 	turnSound = Mix_LoadWAV(Constants::SoundFile::TURN.c_str());
 	deathSound = Mix_LoadWAV(Constants::SoundFile::DEATH.c_str());
+	chompSound = Mix_LoadWAV(Constants::SoundFile::CHOMP.c_str());
 	ResetGame();
 }
 
@@ -81,6 +82,7 @@ void JetLag2021Application::Finish()
 {
 	Mix_FreeChunk(turnSound);
 	Mix_FreeChunk(deathSound);
+	Mix_FreeChunk(chompSound);
 	SDL_DestroyTexture(romfontTexture);
 	IMG_Quit();
 }
@@ -197,6 +199,7 @@ void JetLag2021Application::UpdateGameStatus()
 		{
 			pickUps[tail.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
 			score += Constants::PickUp::SCORE_BONUS;
+			PlaySound(chompSound);
 		}
 		runLength++;
 	}

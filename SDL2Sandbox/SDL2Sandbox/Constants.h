@@ -53,6 +53,7 @@ namespace Constants
 	{
 		const std::string TURN = "jl2017turn.wav";
 		const std::string DEATH = "jl2017death.wav";
+		const std::string CHOMP = "chomp.wav";
 	}
 	namespace Game
 	{
