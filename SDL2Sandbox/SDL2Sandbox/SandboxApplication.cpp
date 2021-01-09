@@ -11,7 +11,7 @@ SandboxApplication::SandboxApplication()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, blocks(Constants::Board::ROWS)
 	, counter(GameConstants::INITIAL_COUNTER)
-	, direction(GameConstants::DIRECTION_RIGHT)
+	, direction(Constants::Game::Direction::RIGHT)
 	, gameOver(GameConstants::INITIAL_GAME_OVER)
 	, turnSound(nullptr)
 	, deathSound(nullptr)
@@ -106,11 +106,11 @@ bool SandboxApplication::HandleInPlayKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_LEFT)
 	{
-		SetNextDirection(GameConstants::DIRECTION_LEFT);
+		SetNextDirection(Constants::Game::Direction::LEFT);
 	}
 	else if (sym == SDLK_RIGHT)
 	{
-		SetNextDirection(GameConstants::DIRECTION_RIGHT);
+		SetNextDirection(Constants::Game::Direction::RIGHT);
 	}
 	return true;
 }
@@ -343,7 +343,7 @@ void SandboxApplication::ResetGame()
 		tail.push_back(Constants::Tail::INITIAL_COLUMN);
 	}
 
-	direction = GameConstants::DIRECTION_RIGHT;
+	direction = Constants::Game::Direction::RIGHT;
 	score = GameConstants::INITIAL_SCORE;
 	runLength = GameConstants::INITIAL_RUN_LENGTH;
 	dead = GameConstants::INITIAL_DEAD;

@@ -46,19 +46,26 @@ namespace Constants
 		const std::string TURN = "jl2017turn.wav";
 		const std::string DEATH = "jl2017death.wav";
 	}
+	namespace Game
+	{
+		namespace Direction
+		{
+			const int LEFT = -1;
+			const int RIGHT = 1;
+		}
+	}
 }
 class GameConstants
 {
 public:
-	static const int FRAME_MILLISECONDS = 100;
 
 	static const std::string OPTIONS_FILE_NAME;
 	static const std::string OPTIONS_WRITE_MODE;
 	static const std::string OPTIONS_READ_MODE;
 	static const int OPTIONS_RECORD_COUNT = 1;
 
-	static const int DIRECTION_LEFT = -1;
-	static const int DIRECTION_RIGHT = 1;
+	static const int FRAME_MILLISECONDS = 100;
+	static const int SCORE_RADIX = 10;
 
 	static const int INITIAL_RUN_LENGTH = 0;
 	static const int INITIAL_SCORE = 0;
@@ -78,7 +85,7 @@ public:
 	static const int NO_LOOPS = 0;
 	static const int DEFAULT_X = 0;
 	static const int DEFAULT_Y = 0;
-	static const int SCORE_RADIX = 10;
+
 	static const int START_MESSAGE_ROW = Constants::Board::ROWS - 1;
 	static const int MUTE_MESSAGE_ROW = Constants::Board::ROWS - 2;
 	static const std::string MUTE_HINT_TEXT;
