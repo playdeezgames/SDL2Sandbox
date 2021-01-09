@@ -226,15 +226,15 @@ void SandboxApplication::DrawTail()
 {
 	for (int row = 0; row < tail.size() - 1; ++row)
 	{
-		DrawCharacter(tail[row], row, '*', GameConstants::BROWN);
+		DrawCharacter(tail[row], row, '*', Constants::Color::BROWN);
 	}
 	if (dead)
 	{
-		DrawCharacter(tail[(int)tail.size() - 1], (int)tail.size() - 1, '\x0F', GameConstants::RED);
+		DrawCharacter(tail[(int)tail.size() - 1], (int)tail.size() - 1, '\x0F', Constants::Color::RED);
 	}
 	else
 	{
-		DrawCharacter(tail[(int)tail.size() - 1], (int)tail.size() - 1, '\x02', GameConstants::WHITE);
+		DrawCharacter(tail[(int)tail.size() - 1], (int)tail.size() - 1, '\x02', Constants::Color::WHITE);
 	}
 }
 
@@ -250,7 +250,7 @@ void SandboxApplication::DrawBlocks()
 {
 	for (int row = 0; row < blocks.size(); ++row)
 	{
-		DrawCharacter(blocks[row], row, (char)0xdb, GameConstants::WHITE);
+		DrawCharacter(blocks[row], row, (char)0xdb, Constants::Color::WHITE);
 	}
 }
 
@@ -258,8 +258,8 @@ void SandboxApplication::DrawWalls()
 {
 	for (int row = 0; row < blocks.size(); ++row)
 	{
-		DrawCharacter(Constants::Board::LEFT_WALL, row, (char)0xdb, GameConstants::BLUE);
-		DrawCharacter(Constants::Board::RIGHT_WALL, row, (char)0xdb, GameConstants::BLUE);
+		DrawCharacter(Constants::Board::LEFT_WALL, row, (char)0xdb, Constants::Color::BLUE);
+		DrawCharacter(Constants::Board::RIGHT_WALL, row, (char)0xdb, Constants::Color::BLUE);
 	}
 }
 
@@ -296,17 +296,17 @@ void SandboxApplication::DrawMuteHint()
 {
 	if (muted)
 	{
-		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::UNMUTE_HINT_TEXT, GameConstants::DARK_MAGENTA);
+		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
 	else
 	{
-		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::MUTE_HINT_TEXT, GameConstants::DARK_MAGENTA);
+		DrawCenteredText(GameConstants::MUTE_MESSAGE_ROW, GameConstants::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
 }
 
 void SandboxApplication::DrawStartHint()
 {
-	DrawCenteredText(GameConstants::START_MESSAGE_ROW, GameConstants::START_HINT_TEXT, GameConstants::DARK_MAGENTA);
+	DrawCenteredText(GameConstants::START_MESSAGE_ROW, GameConstants::START_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
 void SandboxApplication::DrawHints()
