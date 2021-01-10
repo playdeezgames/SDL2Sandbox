@@ -10,6 +10,7 @@ class JetLag2021Application: public tggd::common::Application
 private:
 	std::map<std::string, Mix_Chunk*> sounds;
 	SDL_Texture* romfontTexture;
+	SDL_Joystick* joystick;
 
 	static JetLag2021Application sandboxApplication;
 	std::vector<int> blocks;
@@ -55,6 +56,12 @@ private:
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);
 	bool HandleGameOverKeyDown(SDL_Keycode);
+	bool HandleInPlayJoyButtonDown(SDL_JoystickID, Uint8);
+	bool HandleGameOverJoyButtonDown(SDL_JoystickID, Uint8);
+	bool HandleJoyButtonDown(SDL_JoystickID, Uint8);
+	bool HandleJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
+	bool HandleInPlayJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
+	bool HandleGameOverJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 
 	static void PlotCellRect(SDL_Rect&, int, int);
 protected:

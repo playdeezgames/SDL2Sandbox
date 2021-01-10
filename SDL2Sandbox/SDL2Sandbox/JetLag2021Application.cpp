@@ -21,6 +21,7 @@ JetLag2021Application::JetLag2021Application()
 	, muted(Constants::Game::InitialValues::MUTED)
 	, romfontSrcRects()
 	, dead(Constants::Game::InitialValues::DEAD)
+	, joystick(nullptr)
 {
 }
 
@@ -75,6 +76,10 @@ void JetLag2021Application::Start()
 	sounds[Constants::Sound::DEATH] = Mix_LoadWAV(Constants::Sound::DEATH.c_str());
 	sounds[Constants::Sound::TURN] = Mix_LoadWAV(Constants::Sound::TURN.c_str());
 	ResetGame();
+	if (SDL_NumJoysticks() > 0)
+	{
+		joystick = SDL_JoystickOpen(0);
+	}
 }
 
 void JetLag2021Application::Finish()
@@ -88,6 +93,11 @@ void JetLag2021Application::Finish()
 		}
 	}
 	SDL_DestroyTexture(romfontTexture);
+	if (joystick)
+	{
+		SDL_JoystickClose(joystick);
+		joystick = nullptr;
+	}
 	IMG_Quit();
 }
 
@@ -149,6 +159,64 @@ bool JetLag2021Application::HandleKeyDown(SDL_Keycode sym)
 	}
 }
 
+bool JetLag2021Application::HandleInPlayJoyButtonDown(SDL_JoystickID which, Uint8 button)
+{
+	return true;
+}
+
+bool JetLag2021Application::HandleGameOverJoyButtonDown(SDL_JoystickID, Uint8)
+{
+	RestartGame();
+	return true;
+}
+
+
+bool JetLag2021Application::HandleJoyButtonDown(SDL_JoystickID which, Uint8 button)
+{
+	if (!gameOver)
+	{
+		return HandleInPlayJoyButtonDown(which, button);
+	}
+	else
+	{
+		return HandleGameOverJoyButtonDown(which, button);
+	}
+}
+
+bool JetLag2021Application::HandleInPlayJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
+{
+	if (axis == 0)
+	{
+		if (value <= -16384)
+		{
+			SetNextDirection(Constants::Game::Direction::LEFT);
+		}
+		else if (value >= 16384)
+		{
+			SetNextDirection(Constants::Game::Direction::RIGHT);
+		}
+	}
+	return true;
+}
+
+bool JetLag2021Application::HandleGameOverJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
+{
+	return true;
+}
+
+
+bool JetLag2021Application::HandleJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
+{
+	if (!gameOver)
+	{
+		return HandleInPlayJoyAxisMotion(which, axis, value);
+	}
+	else
+	{
+		return HandleGameOverJoyAxisMotion(which, axis, value);
+	}
+}
+
 bool JetLag2021Application::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)
@@ -157,6 +225,10 @@ bool JetLag2021Application::OnEvent(const SDL_Event& evt)
 		return false;
 	case SDL_KEYDOWN:
 		return HandleKeyDown(evt.key.keysym.sym);
+	case SDL_JOYBUTTONDOWN:
+		return HandleJoyButtonDown(evt.jbutton.which, evt.jbutton.button);
+	case SDL_JOYAXISMOTION:
+		return HandleJoyAxisMotion(evt.jaxis.which, evt.jaxis.axis, evt.jaxis.value);
 	default:
 		return true;
 	}
