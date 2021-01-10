@@ -1,10 +1,10 @@
 #pragma once
 #include "..\..\..\CommonCpp\Application.h"
+#include "..\..\..\CommonCpp\SoundManager.h"
 #include "Constants.h"
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
-#include "SoundManager.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
