@@ -14,21 +14,9 @@ private:
 	SDL_Joystick* joystick;
 	static JetLag2021Application sandboxApplication;
 
-	std::vector<int> blocks;
-	std::vector<int> pickUps;
-	std::vector<int> tail;
-	int counter;
-	int direction;
-	bool gameOver;
-	int score;
-	int runLength;
-	bool dead;
-
 	GameData gameData;
 	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 
-	void ResetGame();
-	void RestartGame();
 	void SetNextDirection(int);
 
 	void DrawCharacter(int, int, char, const SDL_Color&);
@@ -47,11 +35,6 @@ private:
 	void LoadOptions();
 	void SaveOptions();
 
-	void UpdateBoard();
-	void UpdateTail();
-	void UpdateBlocks();
-	void UpdateGameStatus();
-	void UpdatePickUps();
 
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);

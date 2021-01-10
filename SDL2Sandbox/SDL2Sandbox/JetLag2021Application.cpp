@@ -13,16 +13,8 @@ JetLag2021Application::JetLag2021Application()
 	, soundManager()
 	, gameData()
 
-	, blocks(Constants::Board::ROWS)
-	, pickUps(Constants::Board::ROWS)
-	, counter(Constants::Game::InitialValues::COUNTER)
-	, direction(Constants::Game::Direction::RIGHT)
-	, gameOver(Constants::Game::InitialValues::GAME_OVER)
 	, romfontTexture(nullptr)
-	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
-	, score(Constants::Game::InitialValues::SCORE)
 	, romfontSrcRects()
-	, dead(Constants::Game::InitialValues::DEAD)
 	, joystick(nullptr)
 {
 }
@@ -77,7 +69,7 @@ void JetLag2021Application::Start()
 	soundManager.Add(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
 	soundManager.Add(Constants::Sound::DEATH, Constants::Sound::DEATH);
 	soundManager.Add(Constants::Sound::TURN, Constants::Sound::TURN);
-	ResetGame();
+	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)
 	{
 		joystick = SDL_JoystickOpen(0);
@@ -96,21 +88,11 @@ void JetLag2021Application::Finish()
 	IMG_Quit();
 }
 
-static int CalculateScoreFromRunLength(int runLength)
-{
-	//"triangular number"
-	//incentivizes risk by keeping going in a particular direction without turning
-	return (runLength * (runLength + 1)) / 2;
-}
-
 void JetLag2021Application::SetNextDirection(int nextDirection)
 {
-	if (nextDirection != direction)
+	if (gameData.SetNextDirection(nextDirection))
 	{
-		score += CalculateScoreFromRunLength(runLength);
-		runLength = Constants::Game::InitialValues::RUN_LENGTH;
 		soundManager.Play(Constants::Sound::TURN);
-		direction = nextDirection;
 	}
 }
 
@@ -131,7 +113,7 @@ bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_SPACE)
 	{
-		RestartGame();
+		gameData.RestartGame();
 	}
 	else if (sym == SDLK_m)
 	{
@@ -144,7 +126,7 @@ bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 
 bool JetLag2021Application::HandleKeyDown(SDL_Keycode sym)
 {
-	if (!gameOver)
+	if (!gameData.IsGameOver())
 	{
 		return HandleInPlayKeyDown(sym);
 	}
@@ -161,14 +143,14 @@ bool JetLag2021Application::HandleInPlayJoyButtonDown(SDL_JoystickID which, Uint
 
 bool JetLag2021Application::HandleGameOverJoyButtonDown(SDL_JoystickID, Uint8)
 {
-	RestartGame();
+	gameData.RestartGame();
 	return true;
 }
 
 
 bool JetLag2021Application::HandleJoyButtonDown(SDL_JoystickID which, Uint8 button)
 {
-	if (!gameOver)
+	if (!gameData.IsGameOver())
 	{
 		return HandleInPlayJoyButtonDown(which, button);
 	}
@@ -202,7 +184,7 @@ bool JetLag2021Application::HandleGameOverJoyAxisMotion(SDL_JoystickID which, Ui
 
 bool JetLag2021Application::HandleJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	if (!gameOver)
+	if (!gameData.IsGameOver())
 	{
 		return HandleInPlayJoyAxisMotion(which, axis, value);
 	}
@@ -229,72 +211,9 @@ bool JetLag2021Application::OnEvent(const SDL_Event& evt)
 	}
 }
 
-void JetLag2021Application::UpdateTail()
-{
-	for (size_t row = 0; row < tail.size() - 1; ++row)
-	{
-		tail[row] = tail[row + 1];
-	}
-	tail[tail.size() - 1] = tail[tail.size() - 1] + direction;
-}
-
-void JetLag2021Application::UpdateBlocks()
-{
-	for (size_t row = 0; row < blocks.size() - 1; ++row)
-	{
-		blocks[row] = blocks[(size_t)(row + 1)];
-	}
-	blocks[blocks.size() - 1] =
-		Utility::GenerateRandomFromRange
-		(
-			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
-			Constants::PickUp::MAXIMUM_RANDOM_COLUMN
-		);
-}
-
-void JetLag2021Application::UpdateGameStatus()
-{
-	gameOver =
-		blocks[tail.size() - 1] == tail[tail.size() - 1] ||
-		tail[tail.size() - 1] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
-		tail[tail.size() - 1] > Constants::Block::MAXIMUM_RANDOM_COLUMN;
-
-	if (gameOver)
-	{
-		dead = true;
-		soundManager.Play(Constants::Sound::DEATH);
-	}
-	else
-	{
-		if (pickUps[tail.size() - 1] == tail[tail.size() - 1])
-		{
-			pickUps[tail.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
-			score += Constants::PickUp::SCORE_BONUS;
-			soundManager.Play(Constants::Sound::CHOMP);
-		}
-		runLength++;
-	}
-}
-
-void JetLag2021Application::UpdateBoard()
-{
-	if (!gameOver)
-	{
-		UpdateTail();
-		UpdateBlocks();
-		UpdatePickUps();
-		UpdateGameStatus();
-	}
-}
-
 void JetLag2021Application::Update(int milliseconds)
 {
-	counter += milliseconds;
-	while (counter > Constants::Game::FRAME_MILLISECONDS)
-	{
-		UpdateBoard();
-		counter -= Constants::Game::FRAME_MILLISECONDS;
-	}
+	gameData.Update(milliseconds);
 }
 
 void JetLag2021Application::DrawBackground()
@@ -305,17 +224,17 @@ void JetLag2021Application::DrawBackground()
 
 void JetLag2021Application::DrawTail()
 {
-	for (int row = 0; row < tail.size() - 1; ++row)
+	for (int row = 0; row < gameData.GetTailLength() - 1; ++row)
 	{
-		DrawCharacter(tail[row], row, '*', Constants::Color::BROWN);
+		DrawCharacter(gameData.GetTailPosition(row), row, '*', Constants::Color::BROWN);
 	}
-	if (dead)
+	if (gameData.IsDead())
 	{
-		DrawCharacter(tail[(int)tail.size() - 1], (int)tail.size() - 1, '\x0F', Constants::Color::RED);
+		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x0F', Constants::Color::RED);
 	}
 	else
 	{
-		DrawCharacter(tail[(int)tail.size() - 1], (int)tail.size() - 1, '\x02', Constants::Color::WHITE);
+		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::WHITE);
 	}
 }
 
@@ -329,15 +248,15 @@ void JetLag2021Application::PlotCellRect(SDL_Rect& rc, int column, int row)
 
 void JetLag2021Application::DrawBlocks()
 {
-	for (int row = 0; row < blocks.size(); ++row)
+	for (int row = 0; row < gameData.GetBlockCount(); ++row)
 	{
-		DrawCharacter(blocks[row], row, (char)0xdb, Constants::Color::WHITE);
+		DrawCharacter(gameData.GetBlockPosition(row), row, (char)0xdb, Constants::Color::WHITE);
 	}
 }
 
 void JetLag2021Application::DrawWalls()
 {
-	for (int row = 0; row < blocks.size(); ++row)
+	for (int row = 0; row < Constants::Board::ROWS; ++row)
 	{
 		DrawCharacter(Constants::Board::LEFT_WALL, row, (char)0xdb, Constants::Color::BLUE);
 		DrawCharacter(Constants::Board::RIGHT_WALL, row, (char)0xdb, Constants::Color::BLUE);
@@ -355,14 +274,14 @@ void JetLag2021Application::DrawScore()
 		Constants::Cell::HEIGHT
 	};
 	int digits = 1;//there is always at least one score digit
-	int temp = score;
+	int temp = gameData.GetScore();
 	while (temp >= Constants::Game::SCORE_RADIX)
 	{
 		digits++;
 		temp /= Constants::Game::SCORE_RADIX;
 		rc.x += Constants::Cell::WIDTH;
 	}
-	temp = score;
+	temp = gameData.GetScore();
 	while (digits)
 	{
 		int digit = temp % Constants::Game::SCORE_RADIX;
@@ -392,7 +311,7 @@ void JetLag2021Application::DrawStartHint()
 
 void JetLag2021Application::DrawHints()
 {
-	if (gameOver)
+	if (gameData.IsGameOver())
 	{
 		DrawMuteHint();
 		DrawStartHint();
@@ -410,38 +329,6 @@ void JetLag2021Application::Draw()
 	DrawHints();
 }
 
-
-void JetLag2021Application::ResetGame()
-{
-	pickUps.clear();
-	while (pickUps.size() < Constants::Board::ROWS)
-	{
-		pickUps.push_back(Constants::PickUp::INITIAL_COLUMN);
-	}
-
-	blocks.clear();
-	while (blocks.size() < Constants::Board::ROWS)
-	{
-		blocks.push_back(Constants::Block::INITIAL_COLUMN);
-	}
-
-	tail.clear();
-	while (tail.size() < Constants::Tail::LENGTH)
-	{
-		tail.push_back(Constants::Tail::INITIAL_COLUMN);
-	}
-
-	direction = Constants::Game::Direction::RIGHT;
-	score = Constants::Game::InitialValues::SCORE;
-	runLength = Constants::Game::InitialValues::RUN_LENGTH;
-	dead = Constants::Game::InitialValues::DEAD;
-}
-
-void JetLag2021Application::RestartGame()
-{
-	ResetGame();
-	gameOver = false;
-}
 
 void JetLag2021Application::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
 {
@@ -473,23 +360,10 @@ void JetLag2021Application::DrawText(int column, int row, const std::string& tex
 
 void JetLag2021Application::DrawPickUps()
 {
-	for (int row = 0; row < pickUps.size(); ++row)
+	for (int row = 0; row < gameData.GetPickUpCount(); ++row)
 	{
-		DrawCharacter(pickUps[row], row, (char)0x04, Constants::Color::YELLOW);
+		DrawCharacter(gameData.GetPickUpPosition(row), row, (char)0x04, Constants::Color::YELLOW);
 	}
 
 }
 
-void JetLag2021Application::UpdatePickUps()
-{
-	for (size_t row = 0; row < pickUps.size() - 1; ++row)
-	{
-		pickUps[row] = pickUps[(size_t)(row + 1)];
-	}
-	pickUps[pickUps.size() - 1] =
-		Utility::GenerateRandomFromRange
-		(
-			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
-			Constants::PickUp::MAXIMUM_RANDOM_COLUMN
-		);
-}
