@@ -151,11 +151,13 @@
     <ClCompile Include="..\..\..\CommonCpp\Application.cpp" />
     <ClCompile Include="..\..\..\CommonCpp\main.cpp" />
     <ClCompile Include="JetLag2021Application.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonCpp\Application.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="JetLag2021Application.h" />
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
