@@ -1,5 +1,6 @@
 #include "JetLag2021Application.h"
 #include "SDL_image.h"
+#include "Utility.h"
 typedef struct
 {
 	bool muted;
@@ -242,11 +243,11 @@ void JetLag2021Application::UpdateBlocks()
 		blocks[row] = blocks[(size_t)(row + 1)];
 	}
 	blocks[blocks.size() - 1] =
-		rand() %
-		(Constants::Block::MAXIMUM_RANDOM_COLUMN -
-			Constants::Block::MINIMUM_RANDOM_COLUMN +
-			1) +
-		Constants::Block::MINIMUM_RANDOM_COLUMN;
+		Utility::GenerateRandomFromRange
+		(
+			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
+			Constants::PickUp::MAXIMUM_RANDOM_COLUMN
+		);
 }
 
 void JetLag2021Application::UpdateGameStatus()
@@ -484,10 +485,9 @@ void JetLag2021Application::UpdatePickUps()
 		pickUps[row] = pickUps[(size_t)(row + 1)];
 	}
 	pickUps[pickUps.size() - 1] =
-		rand() %
-		(Constants::PickUp::MAXIMUM_RANDOM_COLUMN -
-			Constants::PickUp::MINIMUM_RANDOM_COLUMN +
-			1) +
-		Constants::PickUp::MINIMUM_RANDOM_COLUMN;
-
+		Utility::GenerateRandomFromRange
+		(
+			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
+			Constants::PickUp::MAXIMUM_RANDOM_COLUMN
+		);
 }
