@@ -11,6 +11,8 @@ JetLag2021Application JetLag2021Application::sandboxApplication;
 JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, soundManager()
+	, gameData()
+
 	, blocks(Constants::Board::ROWS)
 	, pickUps(Constants::Board::ROWS)
 	, counter(Constants::Game::InitialValues::COUNTER)

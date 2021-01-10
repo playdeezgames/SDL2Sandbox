@@ -151,6 +151,7 @@
     <ClCompile Include="..\..\..\CommonCpp\Application.cpp" />
     <ClCompile Include="..\..\..\CommonCpp\main.cpp" />
     <ClCompile Include="..\..\..\CommonCpp\SoundManager.cpp" />
+    <ClCompile Include="GameData.cpp" />
     <ClCompile Include="JetLag2021Application.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="..\..\..\CommonCpp\Application.h" />
     <ClInclude Include="..\..\..\CommonCpp\SoundManager.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="GameData.h" />
     <ClInclude Include="JetLag2021Application.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

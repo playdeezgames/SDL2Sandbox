@@ -5,24 +5,27 @@
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
+#include "GameData.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
 	tggd::common::SoundManager soundManager;
 	SDL_Texture* romfontTexture;
 	SDL_Joystick* joystick;
-
 	static JetLag2021Application sandboxApplication;
+
 	std::vector<int> blocks;
 	std::vector<int> pickUps;
 	std::vector<int> tail;
-	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 	int counter;
 	int direction;
 	bool gameOver;
 	int score;
 	int runLength;
 	bool dead;
+
+	GameData gameData;
+	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 
 	void ResetGame();
 	void RestartGame();
