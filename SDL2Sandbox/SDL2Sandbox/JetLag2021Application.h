@@ -3,12 +3,12 @@
 #include "Constants.h"
 #include <vector>
 #include <string>
-#include <map>
 #include "SDL_Mixer.h"
+#include "SoundManager.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
-	std::map<std::string, Mix_Chunk*> sounds;
+	tggd::common::SoundManager soundManager;
 	SDL_Texture* romfontTexture;
 	SDL_Joystick* joystick;
 

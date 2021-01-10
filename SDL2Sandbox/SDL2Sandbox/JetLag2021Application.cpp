@@ -9,12 +9,12 @@ JetLag2021Application JetLag2021Application::sandboxApplication;
 
 JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
+	, soundManager()
 	, blocks(Constants::Board::ROWS)
 	, pickUps(Constants::Board::ROWS)
 	, counter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
 	, gameOver(Constants::Game::InitialValues::GAME_OVER)
-	, sounds()
 	, romfontTexture(nullptr)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
@@ -72,9 +72,9 @@ void JetLag2021Application::Start()
 	LoadOptions();
 	IMG_Init(IMG_INIT_PNG);
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), Constants::RomFont::IMAGE_FILE_NAME.c_str());
-	sounds[Constants::Sound::CHOMP] = Mix_LoadWAV(Constants::Sound::CHOMP.c_str());
-	sounds[Constants::Sound::DEATH] = Mix_LoadWAV(Constants::Sound::DEATH.c_str());
-	sounds[Constants::Sound::TURN] = Mix_LoadWAV(Constants::Sound::TURN.c_str());
+	soundManager.Add(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
+	soundManager.Add(Constants::Sound::DEATH, Constants::Sound::DEATH);
+	soundManager.Add(Constants::Sound::TURN, Constants::Sound::TURN);
 	ResetGame();
 	if (SDL_NumJoysticks() > 0)
 	{
@@ -84,14 +84,7 @@ void JetLag2021Application::Start()
 
 void JetLag2021Application::Finish()
 {
-	for (auto& entry : sounds)
-	{
-		if (entry.second)
-		{
-			Mix_FreeChunk(entry.second);
-			entry.second = nullptr;
-		}
-	}
+	soundManager.Finish();
 	SDL_DestroyTexture(romfontTexture);
 	if (joystick)
 	{
@@ -479,7 +472,7 @@ void JetLag2021Application::PlaySound(const std::string& name)
 {
 	if (!muted)
 	{
-		Mix_PlayChannel(Constants::Utility::ANY_CHANNEL, sounds[name], Constants::Utility::NO_LOOPS);
+		soundManager.Play(name);
 	}
 }
 
