@@ -22,7 +22,20 @@ namespace tggd::common
 
 	void SoundManager::Play(const std::string& name)
 	{
-		Mix_PlayChannel(-1/*Constants::Utility::ANY_CHANNEL*/, sounds[name], 0/*Constants::Utility::NO_LOOPS*/);
+		if (!muted)
+		{
+			Mix_PlayChannel(-1/*Constants::Utility::ANY_CHANNEL*/, sounds[name], 0/*Constants::Utility::NO_LOOPS*/);
+		}
+	}
+
+	void SoundManager::SetMuted(bool newValue)
+	{
+		muted = newValue;
+	}
+
+	bool SoundManager::IsMuted() const
+	{
+		return muted;
 	}
 
 }

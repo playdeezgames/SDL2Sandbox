@@ -18,7 +18,6 @@ JetLag2021Application::JetLag2021Application()
 	, romfontTexture(nullptr)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
-	, muted(Constants::Game::InitialValues::MUTED)
 	, romfontSrcRects()
 	, dead(Constants::Game::InitialValues::DEAD)
 	, joystick(nullptr)
@@ -33,7 +32,7 @@ void JetLag2021Application::SaveOptions()
 	if (f)
 	{
 		GameOptions options = { 0 };
-		options.muted = muted;
+		options.muted = soundManager.IsMuted();
 		fwrite(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
 		fclose(f);
 	}
@@ -51,7 +50,7 @@ void JetLag2021Application::LoadOptions()
 		{
 			fseek(f, 0, SEEK_SET);//reset to start of file for reading
 			fread(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
-			muted = options.muted;
+			soundManager.SetMuted(options.muted);
 		}
 		fclose(f);
 	}
@@ -107,7 +106,7 @@ void JetLag2021Application::SetNextDirection(int nextDirection)
 	{
 		score += CalculateScoreFromRunLength(runLength);
 		runLength = Constants::Game::InitialValues::RUN_LENGTH;
-		PlaySound(Constants::Sound::TURN);
+		soundManager.Play(Constants::Sound::TURN);
 		direction = nextDirection;
 	}
 }
@@ -133,7 +132,7 @@ bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 	}
 	else if (sym == SDLK_m)
 	{
-		muted = !muted;
+		soundManager.SetMuted(!soundManager.IsMuted());
 		SaveOptions();
 	}
 	return true;
@@ -260,7 +259,7 @@ void JetLag2021Application::UpdateGameStatus()
 	if (gameOver)
 	{
 		dead = true;
-		PlaySound(Constants::Sound::DEATH);
+		soundManager.Play(Constants::Sound::DEATH);
 	}
 	else
 	{
@@ -268,7 +267,7 @@ void JetLag2021Application::UpdateGameStatus()
 		{
 			pickUps[tail.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
 			score += Constants::PickUp::SCORE_BONUS;
-			PlaySound(Constants::Sound::CHOMP);
+			soundManager.Play(Constants::Sound::CHOMP);
 		}
 		runLength++;
 	}
@@ -373,7 +372,7 @@ void JetLag2021Application::DrawScore()
 
 void JetLag2021Application::DrawMuteHint()
 {
-	if (muted)
+	if (soundManager.IsMuted())
 	{
 		DrawCenteredText(Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
@@ -466,13 +465,6 @@ void JetLag2021Application::DrawText(int column, int row, const std::string& tex
 	{
 		DrawCharacter(column, row, ch, color);
 		column++;
-	}
-}
-void JetLag2021Application::PlaySound(const std::string& name)
-{
-	if (!muted)
-	{
-		soundManager.Play(name);
 	}
 }
 

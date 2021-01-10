@@ -22,7 +22,6 @@ private:
 	bool gameOver;
 	int score;
 	int runLength;
-	bool muted;
 	bool dead;
 
 	void ResetGame();
@@ -41,8 +40,6 @@ private:
 	void DrawHints();
 	void DrawMuteHint();
 	void DrawStartHint();
-
-	void PlaySound(const std::string&);
 
 	void LoadOptions();
 	void SaveOptions();
