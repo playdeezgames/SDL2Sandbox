@@ -68,7 +68,6 @@ namespace Constants
 			const int SCORE = 0;
 			const int COUNTER = 0;
 			const bool GAME_OVER = true;
-			const bool MUTED = false;
 			const bool DEAD = false;
 		}
 		const int FRAME_MILLISECONDS = 100;
