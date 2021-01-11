@@ -156,11 +156,11 @@ bool JetLag2021Application::HandleInPlayJoyAxisMotion(SDL_JoystickID which, Uint
 {
 	if (axis == 0)
 	{
-		if (value <= -16384)
+		if (value <= -8192)
 		{
 			gameData.SetNextDirection(Constants::Game::Direction::LEFT);
 		}
-		else if (value >= 16384)
+		else if (value >= 8192)
 		{
 			gameData.SetNextDirection(Constants::Game::Direction::RIGHT);
 		}
@@ -352,9 +352,9 @@ void JetLag2021Application::DrawText(int column, int row, const std::string& tex
 
 void JetLag2021Application::DrawPickUps()
 {
-	for (int row = 0; row < gameData.GetPickUpCount(); ++row)
+	for (int row = 0; row < gameData.GetPowerUpCount(); ++row)
 	{
-		DrawCharacter(gameData.GetPickUpPosition(row), row, (char)0x04, Constants::Color::YELLOW);
+		DrawCharacter(gameData.GetPowerUpPosition(row), row, (char)0x04, Constants::Color::YELLOW);
 	}
 
 }

@@ -181,12 +181,12 @@ void GameData::RestartGame()
 	gameOver = false;
 }
 
-int GameData::GetPickUpCount() const
+int GameData::GetPowerUpCount() const
 {
 	return (int)powerUpPositions.size();
 }
 
-int GameData::GetPickUpPosition(int row) const
+int GameData::GetPowerUpPosition(int row) const
 {
 	return powerUpPositions[row];
 }

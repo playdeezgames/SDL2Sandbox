@@ -24,8 +24,8 @@ public:
 	int GetBlockCount() const;
 	int GetBlockPosition(int) const;
 
-	int GetPickUpCount() const;
-	int GetPickUpPosition(int) const;
+	int GetPowerUpCount() const;
+	int GetPowerUpPosition(int) const;
 
 	int GetScore() const;
 
