@@ -13,6 +13,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, dead(Constants::Game::InitialValues::DEAD)
 	, powerUpCounter(Constants::Game::InitialValues::POWERUP_COUNTER)
 	, invincibility(Constants::Game::InitialValues::INVINCIBILITY)
+	, keysReversed(Constants::Game::InitialValues::KEYS_REVERSED)
 {
 
 }
@@ -25,6 +26,10 @@ static int CalculateScoreFromRunLength(int runLength)
 
 void GameData::SetNextDirection(int nextDirection)
 {
+	if (keysReversed)
+	{
+		nextDirection = -nextDirection;
+	}
 	if (nextDirection != direction)
 	{
 		score += CalculateScoreFromRunLength(runLength);
@@ -119,6 +124,10 @@ void GameData::UpdateGameStatus()
 			case PowerUpType::YEN:
 				score += Constants::PickUp::YEN_BONUS;
 				soundManager.Play(Constants::Sound::TING);
+				break;
+			case PowerUpType::REVERSE_KEYS:
+				keysReversed = !keysReversed;
+				soundManager.Play(Constants::Sound::WHOOPS);
 				break;
 			case PowerUpType::INVINCIBLE:
 				invincibility = Constants::Game::Counters::INVINCIBILITY;
@@ -266,6 +275,7 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::YEN] = 1;
 		powerUpGenerator[PowerUpType::DIAMOND] = 1;
 		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
+		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
 	}
 	int tally = 0;
 	for (const auto& entry : powerUpGenerator)

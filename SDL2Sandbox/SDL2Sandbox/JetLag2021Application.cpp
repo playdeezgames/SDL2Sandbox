@@ -71,6 +71,7 @@ void JetLag2021Application::Start()
 	soundManager.Add(Constants::Sound::TURN, Constants::Sound::TURN);
 	soundManager.Add(Constants::Sound::TING, Constants::Sound::TING);
 	soundManager.Add(Constants::Sound::CHARGE, Constants::Sound::CHARGE);
+	soundManager.Add(Constants::Sound::WHOOPS, Constants::Sound::WHOOPS);
 	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)
 	{
@@ -368,13 +369,17 @@ void JetLag2021Application::DrawPickUps()
 		SDL_Color color = Constants::Color::BLACK;
 		switch (gameData.GetPowerUp(row))
 		{
+		case PowerUpType::REVERSE_KEYS:
+			color = Constants::Color::DARK_GRAY;
+			ch = '?';
+			break;
 		case PowerUpType::DIAMOND:
 			color = Constants::Color::YELLOW;
 			ch = 0x04;
 			break;
 		case PowerUpType::PENNY:
 			color = Constants::Color::YELLOW;
-			ch = 0x9b;
+			ch = (char)0x9b;
 			break;
 		case PowerUpType::DOLLAR:
 			color = Constants::Color::YELLOW;
@@ -382,11 +387,11 @@ void JetLag2021Application::DrawPickUps()
 			break;
 		case PowerUpType::POUND:
 			color = Constants::Color::YELLOW;
-			ch = 0x9c;
+			ch = (char)0x9c;
 			break;
 		case PowerUpType::YEN:
 			color = Constants::Color::YELLOW;
-			ch = 0x9d;
+			ch = (char)0x9d;
 			break;
 		case PowerUpType::INVINCIBLE:
 			color = Constants::Color::RED;

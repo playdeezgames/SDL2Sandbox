@@ -56,6 +56,7 @@ namespace Constants
 		const SDL_Color YELLOW = { 0xFF, 0xFF, 0x00, 0xFF };
 		const SDL_Color BLACK = { 0x00, 0x00, 0x00, 0xFF };
 		const SDL_Color LIGHT_RED = { 0xFF, 0x55, 0x55, 0xFF };
+		const SDL_Color DARK_GRAY = { 0x55, 0x55, 0x55, 0xFF };
 	}
 	namespace Sound
 	{
@@ -64,6 +65,7 @@ namespace Constants
 		const std::string CHOMP = "chomp.wav";
 		const std::string TING = "ting.wav";
 		const std::string CHARGE = "charge.wav";
+		const std::string WHOOPS = "whoops.wav";
 	}
 	namespace Game
 	{
@@ -81,6 +83,7 @@ namespace Constants
 			const bool DEAD = false;
 			const int INVINCIBILITY = 0;
 			const int POWERUP_COUNTER = 0;
+			const bool KEYS_REVERSED = false;
 		}
 		namespace Counters
 		{

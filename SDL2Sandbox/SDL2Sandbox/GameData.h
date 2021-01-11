@@ -10,7 +10,8 @@ enum class PowerUpType
 	DOLLAR,
 	POUND,
 	YEN,
-	INVINCIBLE
+	INVINCIBLE,
+	REVERSE_KEYS
 };
 enum class PlayerState
 {
@@ -39,6 +40,7 @@ private:
 	int runLength;
 	bool dead;
 	int invincibility;
+	bool keysReversed;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();

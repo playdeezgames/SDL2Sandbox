@@ -3,21 +3,23 @@ Sounds:
     ✔ turn @done(21-01-11 05:08)
     ✔ invincible @done(21-01-11 05:19)
 Power Ups:
-    ☐ cent (+1) (0x9b)
-    ☐ dollar (+100) (0x24)
-    ☐ yen (+1000) (0x9d)
+    ✔ cent (+1) (0x9b) @done(21-01-11 05:36)
+    ✔ dollar (+100) (0x24) @done(21-01-11 05:36)
+    ✔ yen (+1000) (0x9d) @done(21-01-11 05:36)
     ✔ diamond (+500) @done(21-01-11 05:22)
-    ☐ pound (+250) (0x9c)
+    ✔ pound (+250) (0x9c) @done(21-01-11 05:36)
     ☐ multiplier x 1/4
     ☐ multiplier x 1/2
     ☐ multiplier x 1
     ☐ multiplier x 2
     ☐ multiplier x 4
     ☐ bomb
+    ☐ instant bomb
     ☐ shield
     ☐ extra life
     ☐ speed up
     ☐ slow down
+    ✔ reverse keys @done(21-01-11 05:45)
 Features:
     ☐ score multiplier
     ☐ bombs
