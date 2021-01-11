@@ -101,7 +101,7 @@ void GameData::UpdateGameStatus()
 			switch (powerUpPositions[row].type)
 			{
 			case PowerUpType::DIAMOND:
-				score += Constants::PickUp::SCORE_BONUS;
+				score += Constants::PickUp::DIAMOND_BONUS;
 				soundManager.Play(Constants::Sound::TING);
 				break;
 			case PowerUpType::INVINCIBLE:
