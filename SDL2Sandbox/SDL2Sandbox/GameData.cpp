@@ -106,7 +106,7 @@ void GameData::UpdateGameStatus()
 				break;
 			case PowerUpType::INVINCIBLE:
 				invincibility = Constants::Game::Counters::INVINCIBILITY;
-				//TODO: play sound!
+				soundManager.Play(Constants::Sound::CHARGE);
 				break;
 			}
 			powerUpPositions[row].position = Constants::PickUp::INITIAL_COLUMN;

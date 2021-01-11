@@ -59,6 +59,7 @@ namespace Constants
 		const std::string DEATH = "dead.wav";
 		const std::string CHOMP = "chomp.wav";
 		const std::string TING = "ting.wav";
+		const std::string CHARGE = "charge.wav";
 	}
 	namespace Game
 	{
