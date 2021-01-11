@@ -27,6 +27,7 @@ private:
 	int score;
 	int runLength;
 	bool dead;
+	int invincibility;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();
@@ -56,6 +57,8 @@ public:
 
 	bool IsGameOver() const;
 	bool IsDead() const;
+	bool IsInvincible() const;
+
 	void ResetGame();
 	void RestartGame();
 

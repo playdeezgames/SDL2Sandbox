@@ -46,6 +46,7 @@ namespace Constants
 		const SDL_Color MAGENTA = { 0xAA, 0x00, 0xAA, 0xFF };
 		const SDL_Color BROWN = { 0xAA, 0x55, 0x00, 0xFF };
 		const SDL_Color WHITE = { 0xFF, 0xFF, 0xFF, 0xFF };
+		const SDL_Color CYAN = { 0x00, 0xAA, 0xAA, 0xFF };
 		const SDL_Color RED = { 0xAA, 0x00, 0x00, 0xFF };
 		const SDL_Color BLUE = { 0x00, 0x00, 0xAA, 0xFF };
 		const SDL_Color YELLOW = { 0xFF, 0xFF, 0x00, 0xFF };
@@ -71,8 +72,14 @@ namespace Constants
 			const int COUNTER = 0;
 			const bool GAME_OVER = true;
 			const bool DEAD = false;
+			const int INVINCIBILITY = 0;
+			const int POWERUP_COUNTER = 0;
 		}
-		const int FRAME_MILLISECONDS = 100;
+		namespace Counters
+		{
+			const int SCROLL = 100;
+			const int INVINCIBILITY = 64;
+		}
 		const int SCORE_RADIX = 10;
 	}
 	namespace Options

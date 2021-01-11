@@ -11,7 +11,8 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
 	, dead(Constants::Game::InitialValues::DEAD)
-	, powerUpCounter(0)
+	, powerUpCounter(Constants::Game::InitialValues::POWERUP_COUNTER)
+	, invincibility(Constants::Game::InitialValues::INVINCIBILITY)
 {
 
 }
@@ -84,10 +85,18 @@ void GameData::UpdateGameStatus()
 				score += Constants::PickUp::SCORE_BONUS;
 				soundManager.Play(Constants::Sound::CHOMP);
 				break;
+			case PowerUpType::INVINCIBLE:
+				invincibility = Constants::Game::Counters::INVINCIBILITY;
+				//TODO: play sound!
+				break;
 			}
 			powerUpPositions[row].position = Constants::PickUp::INITIAL_COLUMN;
 		}
 		runLength++;
+		if (invincibility > Constants::Game::InitialValues::INVINCIBILITY)
+		{
+			invincibility--;
+		}
 	}
 }
 
@@ -105,10 +114,10 @@ void GameData::UpdateBoard()
 void GameData::Update(int milliseconds)
 {
 	scrollCounter += milliseconds;
-	while (scrollCounter > Constants::Game::FRAME_MILLISECONDS)
+	while (scrollCounter > Constants::Game::Counters::SCROLL)
 	{
 		UpdateBoard();
-		scrollCounter -= Constants::Game::FRAME_MILLISECONDS;
+		scrollCounter -= Constants::Game::Counters::SCROLL;
 	}
 }
 
@@ -192,6 +201,7 @@ void GameData::ResetGame()
 	score = Constants::Game::InitialValues::SCORE;
 	runLength = Constants::Game::InitialValues::RUN_LENGTH;
 	dead = Constants::Game::InitialValues::DEAD;
+	invincibility = Constants::Game::InitialValues::INVINCIBILITY;
 }
 
 void GameData::RestartGame()
@@ -246,4 +256,9 @@ PowerUpType GameData::GeneratePowerUp()
 PowerUpType GameData::GetPowerUp(int row) const
 {
 	return powerUpPositions[row].type;
+}
+
+bool GameData::IsInvincible() const
+{
+	return invincibility > 0;
 }

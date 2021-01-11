@@ -224,6 +224,10 @@ void JetLag2021Application::DrawTail()
 	{
 		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x0F', Constants::Color::RED);
 	}
+	else if (gameData.IsInvincible())
+	{
+		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::CYAN);
+	}
 	else
 	{
 		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::WHITE);
