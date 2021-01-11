@@ -111,12 +111,21 @@ void GameData::UpdatePowerUps()
 	{
 		powerUpPositions[row] = powerUpPositions[(size_t)(row + 1)];
 	}
-	powerUpPositions[powerUpPositions.size() - 1].position =
-		Utility::GenerateRandomFromRange
-		(
-			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
-			Constants::PickUp::MAXIMUM_RANDOM_COLUMN
-		);
+	powerUpCounter--;
+	if (powerUpCounter <= 0)
+	{
+		powerUpCounter = GeneratePowerUpCounter();
+		powerUpPositions[powerUpPositions.size() - 1].position =
+			Utility::GenerateRandomFromRange
+			(
+				Constants::PickUp::MINIMUM_RANDOM_COLUMN,
+				Constants::PickUp::MAXIMUM_RANDOM_COLUMN
+			);
+	}
+	else
+	{
+		powerUpPositions[powerUpPositions.size() - 1].position = Constants::PickUp::INITIAL_COLUMN;
+	}
 }
 
 int GameData::GetTailLength() const
@@ -190,4 +199,9 @@ int GameData::GetPowerUpCount() const
 int GameData::GetPowerUpPosition(int row) const
 {
 	return powerUpPositions[row].position;
+}
+
+int GameData::GeneratePowerUpCounter()
+{
+	return Utility::GenerateRandomFromRange(1, 6) + Utility::GenerateRandomFromRange(1, 6);
 }

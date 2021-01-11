@@ -17,6 +17,7 @@ private:
 	const tggd::common::SoundManager& soundManager;
 	std::vector<int> blockPositions;
 	std::vector<PowerUp> powerUpPositions;
+	int powerUpCounter;
 	std::vector<int> tailPositions;
 	int scrollCounter;
 	int direction;
@@ -24,6 +25,8 @@ private:
 	int score;
 	int runLength;
 	bool dead;
+
+	static int GeneratePowerUpCounter();
 public:
 	GameData(tggd::common::SoundManager&);
 
@@ -50,5 +53,6 @@ public:
 	bool IsDead() const;
 	void ResetGame();
 	void RestartGame();
+
 };
 
