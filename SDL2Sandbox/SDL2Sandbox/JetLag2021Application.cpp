@@ -220,17 +220,21 @@ void JetLag2021Application::DrawTail()
 	{
 		DrawCharacter(gameData.GetTailPosition(row), row, '*', Constants::Color::BROWN);
 	}
-	if (gameData.IsDead())
+	switch (gameData.GetState())
 	{
+	case PlayerState::DEAD:
 		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x0F', Constants::Color::RED);
-	}
-	else if (gameData.IsInvincible())
-	{
+		break;
+	case PlayerState::INVINCIBILITY_WEARING_OFF:
+		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::LIGHT_RED);
+		break;
+	case PlayerState::INVINCIBLE:
 		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::CYAN);
-	}
-	else
-	{
+		break;
+	case PlayerState::NORMAL:
 		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::WHITE);
+		break;
+
 	}
 }
 
@@ -317,8 +321,8 @@ void JetLag2021Application::DrawHints()
 void JetLag2021Application::Draw()
 {
 	DrawBackground();
-	DrawPickUps();
 	DrawBlocks();
+	DrawPickUps();
 	DrawWalls();
 	DrawTail();
 	DrawScore();

@@ -8,6 +8,13 @@ enum class PowerUpType
 	DIAMOND,
 	INVINCIBLE
 };
+enum class PlayerState
+{
+	NORMAL,
+	INVINCIBLE,
+	INVINCIBILITY_WEARING_OFF,
+	DEAD
+};
 struct PowerUp
 {
 	PowerUpType type;
@@ -56,8 +63,7 @@ public:
 	void Update(int);
 
 	bool IsGameOver() const;
-	bool IsDead() const;
-	bool IsInvincible() const;
+	PlayerState GetState() const;
 
 	void ResetGame();
 	void RestartGame();

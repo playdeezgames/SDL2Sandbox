@@ -74,16 +74,18 @@ void GameData::UpdateGameStatus()
 	{
 		if (blockPositions[row] == tailPositions[row])
 		{
-			if (IsInvincible())
+			switch (GetState())
 			{
+			case PlayerState::INVINCIBLE:
+			case PlayerState::INVINCIBILITY_WEARING_OFF:
 				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
 				//TODO: eat block
 				//give score
 				//play sound
-			}
-			else
-			{
+				break;
+			default:
 				gameOver = true;
+				break;
 			}
 		}
 	}
@@ -172,11 +174,6 @@ int GameData::GetTailLength() const
 int GameData::GetTailPosition(int row) const
 {
 	return tailPositions[row];
-}
-
-bool GameData::IsDead() const
-{
-	return dead;
 }
 
 int GameData::GetBlockCount() const
@@ -276,7 +273,22 @@ PowerUpType GameData::GetPowerUp(int row) const
 	return powerUpPositions[row].type;
 }
 
-bool GameData::IsInvincible() const
+PlayerState GameData::GetState() const
 {
-	return invincibility > 0;
+	if (dead)
+	{
+		return PlayerState::DEAD;
+	}
+	else if(invincibility>Constants::Game::Counters::INVINCIBILITY_WEAR_OFF)
+	{ 
+		return PlayerState::INVINCIBLE;
+	}
+	else if (invincibility > 0)
+	{
+		return PlayerState::INVINCIBILITY_WEARING_OFF;
+	}
+	else
+	{
+		return PlayerState::NORMAL;
+	}
 }

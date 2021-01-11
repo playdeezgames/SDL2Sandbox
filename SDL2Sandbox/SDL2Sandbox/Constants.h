@@ -51,6 +51,7 @@ namespace Constants
 		const SDL_Color BLUE = { 0x00, 0x00, 0xAA, 0xFF };
 		const SDL_Color YELLOW = { 0xFF, 0xFF, 0x00, 0xFF };
 		const SDL_Color BLACK = { 0x00, 0x00, 0x00, 0xFF };
+		const SDL_Color LIGHT_RED = { 0xFF, 0x55, 0x55, 0xFF };
 	}
 	namespace Sound
 	{
@@ -79,6 +80,7 @@ namespace Constants
 		{
 			const int SCROLL = 100;
 			const int INVINCIBILITY = 64;
+			const int INVINCIBILITY_WEAR_OFF = 8;
 		}
 		const int SCORE_RADIX = 10;
 	}
