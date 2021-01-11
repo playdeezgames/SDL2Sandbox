@@ -11,6 +11,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
 	, dead(Constants::Game::InitialValues::DEAD)
+	, powerUpCounter(0)
 {
 
 }
@@ -62,10 +63,11 @@ void GameData::UpdateBlocks()
 
 void GameData::UpdateGameStatus()
 {
+	size_t row = tailPositions.size() - 1;
 	gameOver =
-		blockPositions[tailPositions.size() - 1] == tailPositions[tailPositions.size() - 1] ||
-		tailPositions[tailPositions.size() - 1] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
-		tailPositions[tailPositions.size() - 1] > Constants::Block::MAXIMUM_RANDOM_COLUMN;
+		blockPositions[row] == tailPositions[row] ||
+		tailPositions[row] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
+		tailPositions[row] > Constants::Block::MAXIMUM_RANDOM_COLUMN;
 
 	if (gameOver)
 	{
@@ -74,11 +76,16 @@ void GameData::UpdateGameStatus()
 	}
 	else
 	{
-		if (powerUpPositions[tailPositions.size() - 1].position == tailPositions[tailPositions.size() - 1])
+		if (powerUpPositions[row].position == tailPositions[row])
 		{
-			powerUpPositions[tailPositions.size() - 1].position = Constants::PickUp::INITIAL_COLUMN;
-			score += Constants::PickUp::SCORE_BONUS;
-			soundManager.Play(Constants::Sound::CHOMP);
+			switch (powerUpPositions[row].type)
+			{
+			case PowerUpType::DIAMOND:
+				score += Constants::PickUp::SCORE_BONUS;
+				soundManager.Play(Constants::Sound::CHOMP);
+				break;
+			}
+			powerUpPositions[row].position = Constants::PickUp::INITIAL_COLUMN;
 		}
 		runLength++;
 	}
@@ -107,7 +114,8 @@ void GameData::Update(int milliseconds)
 
 void GameData::UpdatePowerUps()
 {
-	for (size_t row = 0; row < powerUpPositions.size() - 1; ++row)
+	size_t lastRow = powerUpPositions.size() - 1;
+	for (size_t row = 0; row < lastRow; ++row)
 	{
 		powerUpPositions[row] = powerUpPositions[(size_t)(row + 1)];
 	}
@@ -115,16 +123,17 @@ void GameData::UpdatePowerUps()
 	if (powerUpCounter <= 0)
 	{
 		powerUpCounter = GeneratePowerUpCounter();
-		powerUpPositions[powerUpPositions.size() - 1].position =
+		powerUpPositions[lastRow].position =
 			Utility::GenerateRandomFromRange
 			(
 				Constants::PickUp::MINIMUM_RANDOM_COLUMN,
 				Constants::PickUp::MAXIMUM_RANDOM_COLUMN
 			);
+		powerUpPositions[lastRow].type = GeneratePowerUp();
 	}
 	else
 	{
-		powerUpPositions[powerUpPositions.size() - 1].position = Constants::PickUp::INITIAL_COLUMN;
+		powerUpPositions[lastRow].position = Constants::PickUp::INITIAL_COLUMN;
 	}
 }
 
