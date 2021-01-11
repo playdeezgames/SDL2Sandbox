@@ -163,7 +163,7 @@ void GameData::ResetGame()
 	powerUpPositions.clear();
 	while (powerUpPositions.size() < Constants::Board::ROWS)
 	{
-		PowerUp powerUp = { POWERUP_NONE, Constants::PickUp::INITIAL_COLUMN };
+		PowerUp powerUp = { PowerUpType::NONE, Constants::PickUp::INITIAL_COLUMN };
 		powerUpPositions.push_back(powerUp);
 	}
 
@@ -204,4 +204,31 @@ int GameData::GetPowerUpPosition(int row) const
 int GameData::GeneratePowerUpCounter()
 {
 	return Utility::GenerateRandomFromRange(1, 6) + Utility::GenerateRandomFromRange(1, 6);
+}
+
+std::map<PowerUpType, int> GameData::powerUpGenerator;
+PowerUpType GameData::GeneratePowerUp()
+{
+	if (powerUpGenerator.empty())
+	{
+		powerUpGenerator[PowerUpType::DIAMOND] = 1;
+	}
+	int tally = 0;
+	for (const auto& entry : powerUpGenerator)
+	{
+		tally += entry.second;
+	}
+	int generated = Utility::GenerateRandomFromRange(0, tally - 1);
+	for (const auto& entry : powerUpGenerator)
+	{
+		if (generated < entry.second)
+		{
+			return entry.first;
+		}
+		else
+		{
+			generated -= entry.second;
+		}
+	}
+	return PowerUpType::NONE;
 }

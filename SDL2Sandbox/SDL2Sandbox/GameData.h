@@ -1,14 +1,15 @@
 #pragma once
 #include <vector>
+#include <map>
 #include "..\..\..\CommonCpp\SoundManager.h"
-enum PowerUpType
+enum class PowerUpType
 {
-	POWERUP_NONE,
-	POWERUP_DIAMOND
+	NONE,
+	DIAMOND
 };
 struct PowerUp
 {
-	int type;
+	PowerUpType type;
 	int position;
 };
 class GameData
@@ -26,6 +27,8 @@ private:
 	int runLength;
 	bool dead;
 
+	static std::map<PowerUpType, int> powerUpGenerator;
+	static PowerUpType GeneratePowerUp();
 	static int GeneratePowerUpCounter();
 public:
 	GameData(tggd::common::SoundManager&);
