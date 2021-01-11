@@ -65,10 +65,28 @@ void GameData::UpdateBlocks()
 void GameData::UpdateGameStatus()
 {
 	size_t row = tailPositions.size() - 1;
-	gameOver =
-		blockPositions[row] == tailPositions[row] ||
-		tailPositions[row] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
-		tailPositions[row] > Constants::Block::MAXIMUM_RANDOM_COLUMN;
+	if (tailPositions[row] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
+		tailPositions[row] > Constants::Block::MAXIMUM_RANDOM_COLUMN)
+	{
+		gameOver = true;
+	}
+	else
+	{
+		if (blockPositions[row] == tailPositions[row])
+		{
+			if (IsInvincible())
+			{
+				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
+				//TODO: eat block
+				//give score
+				//play sound
+			}
+			else
+			{
+				gameOver = true;
+			}
+		}
+	}
 
 	if (gameOver)
 	{
