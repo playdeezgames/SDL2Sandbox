@@ -74,9 +74,9 @@ void GameData::UpdateGameStatus()
 	}
 	else
 	{
-		if (powerUpPositions[tailPositions.size() - 1] == tailPositions[tailPositions.size() - 1])
+		if (powerUpPositions[tailPositions.size() - 1].position == tailPositions[tailPositions.size() - 1])
 		{
-			powerUpPositions[tailPositions.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
+			powerUpPositions[tailPositions.size() - 1].position = Constants::PickUp::INITIAL_COLUMN;
 			score += Constants::PickUp::SCORE_BONUS;
 			soundManager.Play(Constants::Sound::CHOMP);
 		}
@@ -90,7 +90,7 @@ void GameData::UpdateBoard()
 	{
 		UpdateTail();
 		UpdateBlocks();
-		UpdatePickUps();
+		UpdatePowerUps();
 		UpdateGameStatus();
 	}
 }
@@ -105,13 +105,13 @@ void GameData::Update(int milliseconds)
 	}
 }
 
-void GameData::UpdatePickUps()
+void GameData::UpdatePowerUps()
 {
 	for (size_t row = 0; row < powerUpPositions.size() - 1; ++row)
 	{
 		powerUpPositions[row] = powerUpPositions[(size_t)(row + 1)];
 	}
-	powerUpPositions[powerUpPositions.size() - 1] =
+	powerUpPositions[powerUpPositions.size() - 1].position =
 		Utility::GenerateRandomFromRange
 		(
 			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
@@ -154,7 +154,8 @@ void GameData::ResetGame()
 	powerUpPositions.clear();
 	while (powerUpPositions.size() < Constants::Board::ROWS)
 	{
-		powerUpPositions.push_back(Constants::PickUp::INITIAL_COLUMN);
+		PowerUp powerUp = { POWERUP_NONE, Constants::PickUp::INITIAL_COLUMN };
+		powerUpPositions.push_back(powerUp);
 	}
 
 	blockPositions.clear();
@@ -188,5 +189,5 @@ int GameData::GetPowerUpCount() const
 
 int GameData::GetPowerUpPosition(int row) const
 {
-	return powerUpPositions[row];
+	return powerUpPositions[row].position;
 }

@@ -1,12 +1,22 @@
 #pragma once
 #include <vector>
 #include "..\..\..\CommonCpp\SoundManager.h"
+enum PowerUpType
+{
+	POWERUP_NONE,
+	POWERUP_DIAMOND
+};
+struct PowerUp
+{
+	int type;
+	int position;
+};
 class GameData
 {
 private:
 	const tggd::common::SoundManager& soundManager;
 	std::vector<int> blockPositions;
-	std::vector<int> powerUpPositions;
+	std::vector<PowerUp> powerUpPositions;
 	std::vector<int> tailPositions;
 	int scrollCounter;
 	int direction;
@@ -33,7 +43,7 @@ public:
 	void UpdateBoard();
 	void UpdateBlocks();
 	void UpdateGameStatus();
-	void UpdatePickUps();
+	void UpdatePowerUps();
 	void Update(int);
 
 	bool IsGameOver() const;
