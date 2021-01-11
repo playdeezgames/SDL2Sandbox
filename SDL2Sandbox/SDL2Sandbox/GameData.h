@@ -5,7 +5,8 @@
 enum class PowerUpType
 {
 	NONE,
-	DIAMOND
+	DIAMOND,
+	INVINCIBLE
 };
 struct PowerUp
 {
@@ -42,6 +43,7 @@ public:
 
 	int GetPowerUpCount() const;
 	int GetPowerUpPosition(int) const;
+	PowerUpType GetPowerUp(int) const;
 
 	int GetScore() const;
 

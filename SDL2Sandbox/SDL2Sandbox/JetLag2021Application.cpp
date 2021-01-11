@@ -354,7 +354,19 @@ void JetLag2021Application::DrawPickUps()
 {
 	for (int row = 0; row < gameData.GetPowerUpCount(); ++row)
 	{
-		DrawCharacter(gameData.GetPowerUpPosition(row), row, (char)0x04, Constants::Color::YELLOW);
+		char ch = 0;
+		SDL_Color color = Constants::Color::BLACK;
+		switch (gameData.GetPowerUp(row))
+		{
+		case PowerUpType::DIAMOND:
+			color = Constants::Color::YELLOW;
+			ch = 0x04;
+			break;
+		case PowerUpType::INVINCIBLE:
+			color = Constants::Color::RED;
+			ch = 0x03;
+		}
+		DrawCharacter(gameData.GetPowerUpPosition(row), row, ch, color);
 	}
 
 }

@@ -221,6 +221,7 @@ PowerUpType GameData::GeneratePowerUp()
 	if (powerUpGenerator.empty())
 	{
 		powerUpGenerator[PowerUpType::DIAMOND] = 1;
+		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
 	}
 	int tally = 0;
 	for (const auto& entry : powerUpGenerator)
@@ -240,4 +241,9 @@ PowerUpType GameData::GeneratePowerUp()
 		}
 	}
 	return PowerUpType::NONE;
+}
+
+PowerUpType GameData::GetPowerUp(int row) const
+{
+	return powerUpPositions[row].type;
 }
