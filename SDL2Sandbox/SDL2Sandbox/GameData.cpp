@@ -104,6 +104,22 @@ void GameData::UpdateGameStatus()
 				score += Constants::PickUp::DIAMOND_BONUS;
 				soundManager.Play(Constants::Sound::TING);
 				break;
+			case PowerUpType::PENNY:
+				score += Constants::PickUp::PENNY_BONUS;
+				soundManager.Play(Constants::Sound::TING);
+				break;
+			case PowerUpType::DOLLAR:
+				score += Constants::PickUp::DOLLAR_BONUS;
+				soundManager.Play(Constants::Sound::TING);
+				break;
+			case PowerUpType::POUND:
+				score += Constants::PickUp::POUND_BONUS;
+				soundManager.Play(Constants::Sound::TING);
+				break;
+			case PowerUpType::YEN:
+				score += Constants::PickUp::YEN_BONUS;
+				soundManager.Play(Constants::Sound::TING);
+				break;
 			case PowerUpType::INVINCIBLE:
 				invincibility = Constants::Game::Counters::INVINCIBILITY;
 				soundManager.Play(Constants::Sound::CHARGE);
@@ -244,6 +260,10 @@ PowerUpType GameData::GeneratePowerUp()
 {
 	if (powerUpGenerator.empty())
 	{
+		powerUpGenerator[PowerUpType::PENNY] = 1;
+		powerUpGenerator[PowerUpType::DOLLAR] = 1;
+		powerUpGenerator[PowerUpType::POUND] = 1;
+		powerUpGenerator[PowerUpType::YEN] = 1;
 		powerUpGenerator[PowerUpType::DIAMOND] = 1;
 		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
 	}

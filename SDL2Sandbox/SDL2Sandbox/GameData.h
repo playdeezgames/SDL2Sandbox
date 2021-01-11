@@ -6,6 +6,10 @@ enum class PowerUpType
 {
 	NONE,
 	DIAMOND,
+	PENNY,
+	DOLLAR,
+	POUND,
+	YEN,
 	INVINCIBLE
 };
 enum class PlayerState

@@ -372,6 +372,22 @@ void JetLag2021Application::DrawPickUps()
 			color = Constants::Color::YELLOW;
 			ch = 0x04;
 			break;
+		case PowerUpType::PENNY:
+			color = Constants::Color::YELLOW;
+			ch = 0x9b;
+			break;
+		case PowerUpType::DOLLAR:
+			color = Constants::Color::YELLOW;
+			ch = 0x24;
+			break;
+		case PowerUpType::POUND:
+			color = Constants::Color::YELLOW;
+			ch = 0x9c;
+			break;
+		case PowerUpType::YEN:
+			color = Constants::Color::YELLOW;
+			ch = 0x9d;
+			break;
 		case PowerUpType::INVINCIBLE:
 			color = Constants::Color::RED;
 			ch = 0x03;
