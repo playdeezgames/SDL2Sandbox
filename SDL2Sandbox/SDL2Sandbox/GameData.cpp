@@ -79,9 +79,8 @@ void GameData::UpdateGameStatus()
 			case PlayerState::INVINCIBLE:
 			case PlayerState::INVINCIBILITY_WEARING_OFF:
 				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
-				//TODO: eat block
-				//give score
-				//play sound
+				soundManager.Play(Constants::Sound::CHOMP);
+				score += Constants::Game::BLOCK_EAT_SCORE;
 				break;
 			default:
 				gameOver = true;
@@ -103,7 +102,7 @@ void GameData::UpdateGameStatus()
 			{
 			case PowerUpType::DIAMOND:
 				score += Constants::PickUp::SCORE_BONUS;
-				soundManager.Play(Constants::Sound::CHOMP);
+				soundManager.Play(Constants::Sound::TING);
 				break;
 			case PowerUpType::INVINCIBLE:
 				invincibility = Constants::Game::Counters::INVINCIBILITY;

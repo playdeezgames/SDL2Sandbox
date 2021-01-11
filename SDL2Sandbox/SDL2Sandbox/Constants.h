@@ -58,6 +58,7 @@ namespace Constants
 		const std::string TURN = "turn.wav";
 		const std::string DEATH = "dead.wav";
 		const std::string CHOMP = "chomp.wav";
+		const std::string TING = "ting.wav";
 	}
 	namespace Game
 	{
@@ -82,6 +83,7 @@ namespace Constants
 			const int INVINCIBILITY = 64;
 			const int INVINCIBILITY_WEAR_OFF = 8;
 		}
+		const int BLOCK_EAT_SCORE = 10;
 		const int SCORE_RADIX = 10;
 	}
 	namespace Options
