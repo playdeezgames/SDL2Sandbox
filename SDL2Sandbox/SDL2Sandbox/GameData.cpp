@@ -1,8 +1,9 @@
 #include "GameData.h"
 #include "Constants.h"
 #include "Utility.h"
-GameData::GameData()
-	: blocks(Constants::Board::ROWS)
+GameData::GameData(tggd::common::SoundManager& sndMan)
+	: soundManager(sndMan)
+	, blocks(Constants::Board::ROWS)
 	, pickUps(Constants::Board::ROWS)
 	, counter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
@@ -20,16 +21,15 @@ static int CalculateScoreFromRunLength(int runLength)
 	return (runLength * (runLength + 1)) / 2;
 }
 
-bool GameData::SetNextDirection(int nextDirection)
+void GameData::SetNextDirection(int nextDirection)
 {
 	if (nextDirection != direction)
 	{
 		score += CalculateScoreFromRunLength(runLength);
 		runLength = Constants::Game::InitialValues::RUN_LENGTH;
 		direction = nextDirection;
-		return true;
+		soundManager.Play(Constants::Sound::TURN);
 	}
-	return false;
 }
 
 bool GameData::IsGameOver() const
@@ -70,7 +70,7 @@ void GameData::UpdateGameStatus()
 	if (gameOver)
 	{
 		dead = true;
-		//TODO: soundManager.Play(Constants::Sound::DEATH);
+		soundManager.Play(Constants::Sound::DEATH);
 	}
 	else
 	{
@@ -78,7 +78,7 @@ void GameData::UpdateGameStatus()
 		{
 			pickUps[tail.size() - 1] = Constants::PickUp::INITIAL_COLUMN;
 			score += Constants::PickUp::SCORE_BONUS;
-			//TODO: soundManager.Play(Constants::Sound::CHOMP);
+			soundManager.Play(Constants::Sound::CHOMP);
 		}
 		runLength++;
 	}

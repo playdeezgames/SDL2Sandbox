@@ -17,8 +17,6 @@ private:
 	GameData gameData;
 	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 
-	void SetNextDirection(int);
-
 	void DrawCharacter(int, int, char, const SDL_Color&);
 	void DrawText(int, int, const std::string&, const SDL_Color&);
 	void DrawCenteredText(int, const std::string&, const SDL_Color&);

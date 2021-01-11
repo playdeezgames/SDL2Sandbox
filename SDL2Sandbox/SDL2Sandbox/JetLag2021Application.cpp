@@ -11,7 +11,7 @@ JetLag2021Application JetLag2021Application::sandboxApplication;
 JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, soundManager()
-	, gameData()
+	, gameData(soundManager)
 
 	, romfontTexture(nullptr)
 	, romfontSrcRects()
@@ -88,23 +88,15 @@ void JetLag2021Application::Finish()
 	IMG_Quit();
 }
 
-void JetLag2021Application::SetNextDirection(int nextDirection)
-{
-	if (gameData.SetNextDirection(nextDirection))
-	{
-		soundManager.Play(Constants::Sound::TURN);
-	}
-}
-
 bool JetLag2021Application::HandleInPlayKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_LEFT)
 	{
-		SetNextDirection(Constants::Game::Direction::LEFT);
+		gameData.SetNextDirection(Constants::Game::Direction::LEFT);
 	}
 	else if (sym == SDLK_RIGHT)
 	{
-		SetNextDirection(Constants::Game::Direction::RIGHT);
+		gameData.SetNextDirection(Constants::Game::Direction::RIGHT);
 	}
 	return true;
 }
@@ -166,11 +158,11 @@ bool JetLag2021Application::HandleInPlayJoyAxisMotion(SDL_JoystickID which, Uint
 	{
 		if (value <= -16384)
 		{
-			SetNextDirection(Constants::Game::Direction::LEFT);
+			gameData.SetNextDirection(Constants::Game::Direction::LEFT);
 		}
 		else if (value >= 16384)
 		{
-			SetNextDirection(Constants::Game::Direction::RIGHT);
+			gameData.SetNextDirection(Constants::Game::Direction::RIGHT);
 		}
 	}
 	return true;

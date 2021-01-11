@@ -1,8 +1,10 @@
 #pragma once
 #include <vector>
+#include "..\..\..\CommonCpp\SoundManager.h"
 class GameData
 {
 private:
+	const tggd::common::SoundManager& soundManager;
 	std::vector<int> blocks;
 	std::vector<int> pickUps;
 	std::vector<int> tail;
@@ -13,8 +15,8 @@ private:
 	int runLength;
 	bool dead;
 public:
-	GameData();
-	bool SetNextDirection(int);
+	GameData(tggd::common::SoundManager&);
+	void SetNextDirection(int);
 	bool IsGameOver() const;
 	int GetTailLength() const;
 	int GetTailPosition(int) const;
