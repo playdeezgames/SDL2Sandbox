@@ -9,14 +9,14 @@
 class JetLag2021Application: public tggd::common::Application
 {
 private:
-	tggd::common::SoundManager soundManager;
-	SDL_Texture* romfontTexture;
-	SDL_Joystick* joystick;
 	static JetLag2021Application sandboxApplication;
+	tggd::common::SoundManager soundManager;
 
 	GameData gameData;
-	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 
+	SDL_Texture* romfontTexture;
+	SDL_Joystick* joystick;
+	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
 	void DrawCharacter(int, int, char, const SDL_Color&);
 	void DrawText(int, int, const std::string&, const SDL_Color&);
 	void DrawCenteredText(int, const std::string&, const SDL_Color&);
@@ -29,10 +29,10 @@ private:
 	void DrawHints();
 	void DrawMuteHint();
 	void DrawStartHint();
+	static void PlotCellRect(SDL_Rect&, int, int);
 
 	void LoadOptions();
 	void SaveOptions();
-
 
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);
@@ -44,7 +44,6 @@ private:
 	bool HandleInPlayJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 	bool HandleGameOverJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 
-	static void PlotCellRect(SDL_Rect&, int, int);
 protected:
 	void Start();
 	void Finish();
