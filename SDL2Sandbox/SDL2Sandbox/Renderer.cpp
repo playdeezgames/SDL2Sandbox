@@ -41,6 +41,7 @@ void Renderer::Draw()
 	DrawPickUps();
 	DrawWalls();
 	DrawTail();
+	DrawStatusBar();
 	DrawScore();
 	DrawBombs();
 	DrawHints();
@@ -103,10 +104,11 @@ void Renderer::DrawWalls()
 
 void Renderer::DrawBombs()
 {
-	SDL_SetTextureColorMod(romfontTexture, 0x55, 0x55, 0x55);
+	DrawCharacter(Constants::Board::COLUMNS - 3, 0, 15, Constants::Color::BLACK);
+	SDL_SetTextureColorMod(romfontTexture, 0, 0, 0);
 	SDL_Rect rc =
 	{
-		Constants::Window::WIDTH - Constants::Cell::WIDTH * 2,
+		Constants::Window::WIDTH - Constants::Cell::WIDTH,
 		Constants::Utility::DEFAULT_Y,
 		Constants::Cell::WIDTH,
 		Constants::Cell::HEIGHT
@@ -119,6 +121,7 @@ void Renderer::DrawBombs()
 		temp /= Constants::Game::SCORE_RADIX;
 		rc.x += Constants::Cell::WIDTH;
 	}
+
 	temp = gameData.GetBombs();
 	while (digits)
 	{
@@ -133,10 +136,10 @@ void Renderer::DrawBombs()
 
 void Renderer::DrawScore()
 {
-	SDL_SetTextureColorMod(romfontTexture, 0, 255, 0);
+	SDL_SetTextureColorMod(romfontTexture, 0, 0, 0);
 	SDL_Rect rc =
 	{
-		Constants::Cell::WIDTH,
+		0,
 		Constants::Utility::DEFAULT_Y,
 		Constants::Cell::WIDTH,
 		Constants::Cell::HEIGHT
@@ -258,3 +261,10 @@ void Renderer::DrawPickUps()
 	}
 }
 
+void Renderer::DrawStatusBar()
+{
+	for (int column = 0; column < Constants::Board::COLUMNS; ++column)
+	{
+		DrawCharacter(column, 0, 0xdb, Constants::Color::BROWN);
+	}
+}

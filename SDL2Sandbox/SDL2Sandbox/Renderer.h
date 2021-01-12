@@ -24,6 +24,7 @@ private:
 	void DrawHints();
 	void DrawMuteHint();
 	void DrawStartHint();
+	void DrawStatusBar();
 	static void PlotCellRect(SDL_Rect&, int, int);
 public:
 	Renderer(const GameData&, const tggd::common::SoundManager&);

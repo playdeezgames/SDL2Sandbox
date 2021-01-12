@@ -107,7 +107,10 @@ void GameData::UpdateGameStatus()
 			switch (powerUpPositions[row].type)
 			{
 			case PowerUpType::BOMB:
-				bombs++;
+				if (bombs < 99)
+				{
+					bombs++;
+				}
 				soundManager.Play(Constants::Sound::YOINK);
 				break;
 			case PowerUpType::DIAMOND:
