@@ -247,6 +247,7 @@ void GameData::ResetGame()
 	dead = Constants::Game::InitialValues::DEAD;
 	invincibility = Constants::Game::InitialValues::INVINCIBILITY;
 	bombs = Constants::Game::InitialValues::BOMBS;
+	keysReversed = Constants::Game::InitialValues::KEYS_REVERSED;
 }
 
 void GameData::RestartGame()
