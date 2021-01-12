@@ -13,7 +13,7 @@ Power Ups:
     ☐ multiplier x 1
     ☐ multiplier x 2
     ☐ multiplier x 4
-    ☐ bomb
+    ✔ bomb @done(21-01-12 05:30)
     ☐ instant bomb
     ☐ shield
     ☐ extra life
@@ -22,7 +22,8 @@ Power Ups:
     ✔ reverse keys @done(21-01-11 05:45)
 Features:
     ☐ score multiplier
-    ☐ bombs
+    ✔ bombs @done(21-01-12 05:30)
     ☐ shield
     ☐ lives
     ☐ changing speed
+    ☐ status bar at top of screen for score lives etc
