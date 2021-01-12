@@ -6,11 +6,13 @@
 #include <string>
 #include "SDL_Mixer.h"
 #include "GameData.h"
+#include "OptionManager.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
 	static JetLag2021Application sandboxApplication;
 	tggd::common::SoundManager soundManager;
+	OptionManager optionManager;
 
 	GameData gameData;
 
@@ -30,9 +32,6 @@ private:
 	void DrawMuteHint();
 	void DrawStartHint();
 	static void PlotCellRect(SDL_Rect&, int, int);
-
-	void LoadOptions();
-	void SaveOptions();
 
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);

@@ -1,54 +1,18 @@
 #include "JetLag2021Application.h"
 #include "SDL_image.h"
 #include "Utility.h"
-typedef struct
-{
-	bool muted;
-} GameOptions;
-
 JetLag2021Application JetLag2021Application::sandboxApplication;
 
 JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, soundManager()
+	, optionManager(soundManager)
 	, gameData(soundManager)
 
 	, romfontTexture(nullptr)
 	, romfontSrcRects()
 	, joystick(nullptr)
 {
-}
-
-void JetLag2021Application::SaveOptions()
-{
-	remove(Constants::Options::FILE_NAME.c_str());
-	FILE* f = nullptr;
-	fopen_s(&f, Constants::Options::FILE_NAME.c_str(), Constants::Options::WRITE_MODE.c_str());
-	if (f)
-	{
-		GameOptions options = { 0 };
-		options.muted = soundManager.IsMuted();
-		fwrite(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
-		fclose(f);
-	}
-}
-
-void JetLag2021Application::LoadOptions()
-{
-	FILE* f = nullptr;
-	fopen_s(&f, Constants::Options::FILE_NAME.c_str(), Constants::Options::READ_MODE.c_str());
-	if (f)
-	{
-		GameOptions options;
-		fseek(f, 0, SEEK_END);//seek to end of file to determine position
-		if (ftell(f) == sizeof(GameOptions))
-		{
-			fseek(f, 0, SEEK_SET);//reset to start of file for reading
-			fread(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
-			soundManager.SetMuted(options.muted);
-		}
-		fclose(f);
-	}
 }
 
 void JetLag2021Application::Start()
@@ -63,7 +27,7 @@ void JetLag2021Application::Start()
 		romfontSrcRects[index].h = Constants::RomFont::CELL_HEIGHT;
 	}
 
-	LoadOptions();
+	optionManager.Load();
 	IMG_Init(IMG_INIT_PNG);
 	romfontTexture = IMG_LoadTexture(GetMainRenderer(), Constants::RomFont::IMAGE_FILE_NAME.c_str());
 	soundManager.Add(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
@@ -113,7 +77,7 @@ bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 	else if (sym == SDLK_m)
 	{
 		soundManager.SetMuted(!soundManager.IsMuted());
-		SaveOptions();
+		optionManager.Save();
 	}
 	return true;
 }
