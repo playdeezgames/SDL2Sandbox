@@ -26,6 +26,7 @@ void JetLag2021Application::Start()
 	soundManager.Add(Constants::Sound::TING, Constants::Sound::TING);
 	soundManager.Add(Constants::Sound::CHARGE, Constants::Sound::CHARGE);
 	soundManager.Add(Constants::Sound::WHOOPS, Constants::Sound::WHOOPS);
+	soundManager.Add(Constants::Sound::BOOM, Constants::Sound::BOOM);
 
 	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)

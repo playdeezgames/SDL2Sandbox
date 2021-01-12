@@ -337,6 +337,6 @@ void GameData::UseBomb()
 		{
 			block = Constants::Block::INITIAL_COLUMN;
 		}
-		//TODO: play sound
+		soundManager.Play(Constants::Sound::BOOM);
 	}
 }
