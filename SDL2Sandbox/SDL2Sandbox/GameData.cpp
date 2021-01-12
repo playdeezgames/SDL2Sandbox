@@ -108,6 +108,7 @@ void GameData::UpdateGameStatus()
 			{
 			case PowerUpType::BOMB:
 				bombs++;
+				soundManager.Play(Constants::Sound::YOINK);
 				break;
 			case PowerUpType::DIAMOND:
 				score += Constants::PickUp::DIAMOND_BONUS;
@@ -339,4 +340,9 @@ void GameData::UseBomb()
 		}
 		soundManager.Play(Constants::Sound::BOOM);
 	}
+}
+
+int GameData::GetBombs() const
+{
+	return bombs;
 }

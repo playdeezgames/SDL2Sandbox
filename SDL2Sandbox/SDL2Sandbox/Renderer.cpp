@@ -42,6 +42,7 @@ void Renderer::Draw()
 	DrawWalls();
 	DrawTail();
 	DrawScore();
+	DrawBombs();
 	DrawHints();
 }
 
@@ -98,6 +99,36 @@ void Renderer::DrawWalls()
 		DrawCharacter(Constants::Board::LEFT_WALL, row, (char)0xdb, Constants::Color::BLUE);
 		DrawCharacter(Constants::Board::RIGHT_WALL, row, (char)0xdb, Constants::Color::BLUE);
 	}
+}
+
+void Renderer::DrawBombs()
+{
+	SDL_SetTextureColorMod(romfontTexture, 0x55, 0x55, 0x55);
+	SDL_Rect rc =
+	{
+		Constants::Window::WIDTH - Constants::Cell::WIDTH * 2,
+		Constants::Utility::DEFAULT_Y,
+		Constants::Cell::WIDTH,
+		Constants::Cell::HEIGHT
+	};
+	int digits = 1;//there is always at least one score digit
+	int temp = gameData.GetBombs();
+	while (temp >= Constants::Game::SCORE_RADIX)
+	{
+		digits++;
+		temp /= Constants::Game::SCORE_RADIX;
+		rc.x += Constants::Cell::WIDTH;
+	}
+	temp = gameData.GetBombs();
+	while (digits)
+	{
+		int digit = temp % Constants::Game::SCORE_RADIX;
+		temp /= Constants::Game::SCORE_RADIX;
+		digits--;
+		SDL_RenderCopy(renderer, romfontTexture, &(romfontSrcRects['0' + digit]), &rc);
+		rc.x -= Constants::Cell::WIDTH;
+	}
+
 }
 
 void Renderer::DrawScore()

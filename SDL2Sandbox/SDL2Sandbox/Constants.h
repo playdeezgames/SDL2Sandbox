@@ -67,6 +67,7 @@ namespace Constants
 		const std::string CHARGE = "charge.wav";
 		const std::string WHOOPS = "whoops.wav";
 		const std::string BOOM = "boom.wav";
+		const std::string YOINK = "yoink.wav";
 	}
 	namespace Game
 	{

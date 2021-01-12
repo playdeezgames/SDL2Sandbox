@@ -71,5 +71,6 @@ public:
 	PlayerState GetState() const;
 	void Update(int);
 	void UseBomb();
+	int GetBombs() const;
 };
 

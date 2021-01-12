@@ -20,6 +20,7 @@ private:
 	void DrawPickUps();
 	void DrawWalls();
 	void DrawScore();
+	void DrawBombs();
 	void DrawHints();
 	void DrawMuteHint();
 	void DrawStartHint();
