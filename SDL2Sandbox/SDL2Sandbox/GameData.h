@@ -11,7 +11,8 @@ enum class PowerUpType
 	POUND,
 	YEN,
 	INVINCIBLE,
-	REVERSE_KEYS
+	REVERSE_KEYS,
+	BOMB
 };
 enum class PlayerState
 {
@@ -41,16 +42,27 @@ private:
 	bool dead;
 	int invincibility;
 	bool keysReversed;
+	int bombs;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();
 	static int GeneratePowerUpCounter();
+
+
+	void UpdateTail();
+	void UpdateBoard();
+	void UpdateBlocks();
+	void UpdateGameStatus();
+	void UpdatePowerUps();
+
+
 public:
 	GameData(tggd::common::SoundManager&);
-
+	void ResetGame();
+	void RestartGame();
+	void SetNextDirection(int);
 	int GetTailLength() const;
 	int GetTailPosition(int) const;
-	void SetNextDirection(int);
 
 	int GetBlockCount() const;
 	int GetBlockPosition(int) const;
@@ -61,18 +73,8 @@ public:
 
 	int GetScore() const;
 
-	void UpdateTail();
-	void UpdateBoard();
-	void UpdateBlocks();
-	void UpdateGameStatus();
-	void UpdatePowerUps();
-	void Update(int);
-
 	bool IsGameOver() const;
 	PlayerState GetState() const;
-
-	void ResetGame();
-	void RestartGame();
-
+	void Update(int);
 };
 

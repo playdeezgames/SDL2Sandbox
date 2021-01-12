@@ -84,6 +84,7 @@ namespace Constants
 			const int INVINCIBILITY = 0;
 			const int POWERUP_COUNTER = 0;
 			const bool KEYS_REVERSED = false;
+			const int BOMBS = 3;
 		}
 		namespace Counters
 		{

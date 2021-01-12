@@ -195,6 +195,10 @@ void Renderer::DrawPickUps()
 			color = Constants::Color::DARK_GRAY;
 			ch = '?';
 			break;
+		case PowerUpType::BOMB:
+			color = Constants::Color::DARK_GRAY;
+			ch = 15;
+			break;
 		case PowerUpType::DIAMOND:
 			color = Constants::Color::YELLOW;
 			ch = 0x04;

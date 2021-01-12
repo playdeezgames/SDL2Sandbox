@@ -14,6 +14,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, powerUpCounter(Constants::Game::InitialValues::POWERUP_COUNTER)
 	, invincibility(Constants::Game::InitialValues::INVINCIBILITY)
 	, keysReversed(Constants::Game::InitialValues::KEYS_REVERSED)
+	, bombs(Constants::Game::InitialValues::BOMBS)
 {
 
 }
@@ -105,6 +106,9 @@ void GameData::UpdateGameStatus()
 		{
 			switch (powerUpPositions[row].type)
 			{
+			case PowerUpType::BOMB:
+				bombs++;
+				break;
 			case PowerUpType::DIAMOND:
 				score += Constants::PickUp::DIAMOND_BONUS;
 				soundManager.Play(Constants::Sound::TING);
@@ -241,6 +245,7 @@ void GameData::ResetGame()
 	runLength = Constants::Game::InitialValues::RUN_LENGTH;
 	dead = Constants::Game::InitialValues::DEAD;
 	invincibility = Constants::Game::InitialValues::INVINCIBILITY;
+	bombs = Constants::Game::InitialValues::BOMBS;
 }
 
 void GameData::RestartGame()
@@ -276,6 +281,7 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::DIAMOND] = 1;
 		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
 		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
+		powerUpGenerator[PowerUpType::BOMB] = 1;
 	}
 	int tally = 0;
 	for (const auto& entry : powerUpGenerator)
@@ -308,8 +314,8 @@ PlayerState GameData::GetState() const
 	{
 		return PlayerState::DEAD;
 	}
-	else if(invincibility>Constants::Game::Counters::INVINCIBILITY_WEAR_OFF)
-	{ 
+	else if (invincibility > Constants::Game::Counters::INVINCIBILITY_WEAR_OFF)
+	{
 		return PlayerState::INVINCIBLE;
 	}
 	else if (invincibility > 0)
