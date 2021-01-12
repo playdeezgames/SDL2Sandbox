@@ -7,31 +7,17 @@
 #include "SDL_Mixer.h"
 #include "GameData.h"
 #include "OptionManager.h"
+#include "Renderer.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
 	static JetLag2021Application sandboxApplication;
 	tggd::common::SoundManager soundManager;
+	Renderer renderer;
 	OptionManager optionManager;
+	SDL_Joystick* joystick;
 
 	GameData gameData;
-
-	SDL_Texture* romfontTexture;
-	SDL_Joystick* joystick;
-	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
-	void DrawCharacter(int, int, char, const SDL_Color&);
-	void DrawText(int, int, const std::string&, const SDL_Color&);
-	void DrawCenteredText(int, const std::string&, const SDL_Color&);
-	void DrawBackground();
-	void DrawTail();
-	void DrawBlocks();
-	void DrawPickUps();
-	void DrawWalls();
-	void DrawScore();
-	void DrawHints();
-	void DrawMuteHint();
-	void DrawStartHint();
-	static void PlotCellRect(SDL_Rect&, int, int);
 
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);
