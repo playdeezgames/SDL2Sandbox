@@ -1,5 +1,6 @@
 #include "Renderer.h"
 #include <SDL_image.h>
+#include <sstream>
 Renderer::Renderer
 	(
 		const GameData& data, 
@@ -104,63 +105,16 @@ void Renderer::DrawWalls()
 
 void Renderer::DrawBombs()
 {
-	DrawCharacter(Constants::Board::COLUMNS - 3, 0, 15, Constants::Color::BLACK);
-	SDL_SetTextureColorMod(romfontTexture, 0, 0, 0);
-	SDL_Rect rc =
-	{
-		Constants::Window::WIDTH - Constants::Cell::WIDTH,
-		Constants::Utility::DEFAULT_Y,
-		Constants::Cell::WIDTH,
-		Constants::Cell::HEIGHT
-	};
-	int digits = 1;//there is always at least one score digit
-	int temp = gameData.GetBombs();
-	while (temp >= Constants::Game::SCORE_RADIX)
-	{
-		digits++;
-		temp /= Constants::Game::SCORE_RADIX;
-		rc.x += Constants::Cell::WIDTH;
-	}
-
-	temp = gameData.GetBombs();
-	while (digits)
-	{
-		int digit = temp % Constants::Game::SCORE_RADIX;
-		temp /= Constants::Game::SCORE_RADIX;
-		digits--;
-		SDL_RenderCopy(renderer, romfontTexture, &(romfontSrcRects['0' + digit]), &rc);
-		rc.x -= Constants::Cell::WIDTH;
-	}
-
+	std::stringstream ss;
+	ss << '\x0f' << (char)('0' + (gameData.GetBombs() / Constants::Game::SCORE_RADIX)) << (char)('0' + (gameData.GetBombs() % Constants::Game::SCORE_RADIX));
+	DrawText(Constants::Board::COLUMNS - 3, 0, ss.str(), Constants::Color::BLACK);
 }
 
 void Renderer::DrawScore()
 {
-	SDL_SetTextureColorMod(romfontTexture, 0, 0, 0);
-	SDL_Rect rc =
-	{
-		0,
-		Constants::Utility::DEFAULT_Y,
-		Constants::Cell::WIDTH,
-		Constants::Cell::HEIGHT
-	};
-	int digits = 1;//there is always at least one score digit
-	int temp = gameData.GetScore();
-	while (temp >= Constants::Game::SCORE_RADIX)
-	{
-		digits++;
-		temp /= Constants::Game::SCORE_RADIX;
-		rc.x += Constants::Cell::WIDTH;
-	}
-	temp = gameData.GetScore();
-	while (digits)
-	{
-		int digit = temp % Constants::Game::SCORE_RADIX;
-		temp /= Constants::Game::SCORE_RADIX;
-		digits--;
-		SDL_RenderCopy(renderer, romfontTexture, &(romfontSrcRects['0' + digit]), &rc);
-		rc.x -= Constants::Cell::WIDTH;
-	}
+	std::stringstream ss;
+	ss << gameData.GetScore();
+	DrawText(0, 0, ss.str(), Constants::Color::BLACK);
 }
 
 void Renderer::DrawMuteHint()
