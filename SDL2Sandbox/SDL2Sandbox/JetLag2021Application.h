@@ -7,13 +7,13 @@
 #include "SDL_Mixer.h"
 #include "GameData.h"
 #include "OptionManager.h"
-#include "Renderer.h"
+#include "JetLag2021Renderer.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
 	static JetLag2021Application sandboxApplication;
 	tggd::common::SoundManager soundManager;
-	Renderer renderer;
+	JetLag2021Renderer renderer;
 	OptionManager optionManager;
 	SDL_Joystick* joystick;
 

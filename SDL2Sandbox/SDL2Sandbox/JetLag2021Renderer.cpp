@@ -1,7 +1,7 @@
-#include "Renderer.h"
+#include "JetLag2021Renderer.h"
 #include <SDL_image.h>
 #include <sstream>
-Renderer::Renderer
+JetLag2021Renderer::JetLag2021Renderer
 	(
 		const GameData& data, 
 		const tggd::common::SoundManager& sndMan
@@ -14,7 +14,7 @@ Renderer::Renderer
 {
 }
 
-void Renderer::Start(SDL_Renderer* renderer)
+void JetLag2021Renderer::Start(SDL_Renderer* renderer)
 {
 	this->renderer = renderer;
 	for (int index = 0; index < Constants::RomFont::CELL_COUNT; ++index)
@@ -29,13 +29,13 @@ void Renderer::Start(SDL_Renderer* renderer)
 	romfontTexture = IMG_LoadTexture(renderer, Constants::RomFont::IMAGE_FILE_NAME.c_str());
 }
 
-void Renderer::Finish()
+void JetLag2021Renderer::Finish()
 {
 	SDL_DestroyTexture(romfontTexture);
 	renderer = nullptr;
 }
 
-void Renderer::Draw() 
+void JetLag2021Renderer::Draw()
 {
 	DrawBackground();
 	DrawBlocks();
@@ -48,13 +48,13 @@ void Renderer::Draw()
 	DrawHints();
 }
 
-void Renderer::DrawBackground()
+void JetLag2021Renderer::DrawBackground()
 {
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);
 }
 
-void Renderer::DrawTail()
+void JetLag2021Renderer::DrawTail()
 {
 	for (int row = 0; row < gameData.GetTailLength() - 1; ++row)
 	{
@@ -78,7 +78,7 @@ void Renderer::DrawTail()
 	}
 }
 
-void Renderer::PlotCellRect(SDL_Rect& rc, int column, int row)
+void JetLag2021Renderer::PlotCellRect(SDL_Rect& rc, int column, int row)
 {
 	rc.x = column * Constants::Cell::WIDTH;
 	rc.y = row * Constants::Cell::HEIGHT;
@@ -86,7 +86,7 @@ void Renderer::PlotCellRect(SDL_Rect& rc, int column, int row)
 	rc.h = Constants::Cell::HEIGHT;
 }
 
-void Renderer::DrawBlocks()
+void JetLag2021Renderer::DrawBlocks()
 {
 	for (int row = 0; row < gameData.GetBlockCount(); ++row)
 	{
@@ -94,7 +94,7 @@ void Renderer::DrawBlocks()
 	}
 }
 
-void Renderer::DrawWalls()
+void JetLag2021Renderer::DrawWalls()
 {
 	for (int row = 0; row < Constants::Board::ROWS; ++row)
 	{
@@ -103,21 +103,21 @@ void Renderer::DrawWalls()
 	}
 }
 
-void Renderer::DrawBombs()
+void JetLag2021Renderer::DrawBombs()
 {
 	std::stringstream ss;
 	ss << '\x0f' << (char)('0' + (gameData.GetBombs() / Constants::Game::SCORE_RADIX)) << (char)('0' + (gameData.GetBombs() % Constants::Game::SCORE_RADIX));
 	DrawText(Constants::Board::COLUMNS - 3, 0, ss.str(), Constants::Color::BLACK);
 }
 
-void Renderer::DrawScore()
+void JetLag2021Renderer::DrawScore()
 {
 	std::stringstream ss;
 	ss << gameData.GetScore();
 	DrawText(0, 0, ss.str(), Constants::Color::BLACK);
 }
 
-void Renderer::DrawMuteHint()
+void JetLag2021Renderer::DrawMuteHint()
 {
 	if (soundManager.IsMuted())
 	{
@@ -129,12 +129,12 @@ void Renderer::DrawMuteHint()
 	}
 }
 
-void Renderer::DrawStartHint()
+void JetLag2021Renderer::DrawStartHint()
 {
 	DrawCenteredText(Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
-void Renderer::DrawHints()
+void JetLag2021Renderer::DrawHints()
 {
 	if (gameData.IsGameOver())
 	{
@@ -143,13 +143,13 @@ void Renderer::DrawHints()
 	}
 }
 
-void Renderer::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
+void JetLag2021Renderer::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
 {
 	//you center things by dividing by 2
 	DrawText((Constants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
 }
 
-void Renderer::DrawCharacter(int column, int row, char character, const SDL_Color& color)
+void JetLag2021Renderer::DrawCharacter(int column, int row, char character, const SDL_Color& color)
 {
 	SDL_SetTextureColorMod(romfontTexture, color.r, color.g, color.b);
 	SDL_Rect rcDst =
@@ -162,7 +162,7 @@ void Renderer::DrawCharacter(int column, int row, char character, const SDL_Colo
 	SDL_RenderCopy(renderer, romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
 }
 
-void Renderer::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
+void JetLag2021Renderer::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
 {
 	for (auto ch : text)
 	{
@@ -171,7 +171,7 @@ void Renderer::DrawText(int column, int row, const std::string& text, const SDL_
 	}
 }
 
-void Renderer::DrawPickUps()
+void JetLag2021Renderer::DrawPickUps()
 {
 	for (int row = 0; row < gameData.GetPowerUpCount(); ++row)
 	{
@@ -215,10 +215,10 @@ void Renderer::DrawPickUps()
 	}
 }
 
-void Renderer::DrawStatusBar()
+void JetLag2021Renderer::DrawStatusBar()
 {
 	for (int column = 0; column < Constants::Board::COLUMNS; ++column)
 	{
-		DrawCharacter(column, 0, 0xdb, Constants::Color::BROWN);
+		DrawCharacter(column, 0, (char)0xdb, Constants::Color::BROWN);
 	}
 }

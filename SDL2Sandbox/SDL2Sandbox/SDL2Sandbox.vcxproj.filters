@@ -36,7 +36,7 @@
     <ClCompile Include="OptionManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer.cpp">
+    <ClCompile Include="JetLag2021Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,7 +62,7 @@
     <ClInclude Include="OptionManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
+    <ClInclude Include="JetLag2021Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

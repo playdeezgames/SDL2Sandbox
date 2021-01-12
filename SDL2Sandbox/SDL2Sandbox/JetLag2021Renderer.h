@@ -3,7 +3,7 @@
 #include "Constants.h"
 #include "GameData.h"
 #include "..\..\..\CommonCpp\SoundManager.h"
-class Renderer
+class JetLag2021Renderer
 {
 private:
 	const GameData& gameData;
@@ -27,7 +27,7 @@ private:
 	void DrawStatusBar();
 	static void PlotCellRect(SDL_Rect&, int, int);
 public:
-	Renderer(const GameData&, const tggd::common::SoundManager&);
+	JetLag2021Renderer(const GameData&, const tggd::common::SoundManager&);
 	void Start(SDL_Renderer*);
 	void Finish();
 	void Draw();
