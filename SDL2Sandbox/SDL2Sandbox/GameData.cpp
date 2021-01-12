@@ -327,3 +327,16 @@ PlayerState GameData::GetState() const
 		return PlayerState::NORMAL;
 	}
 }
+
+void GameData::UseBomb()
+{
+	if (!gameOver && bombs > 0)
+	{
+		bombs--;
+		for (auto& block : blockPositions)
+		{
+			block = Constants::Block::INITIAL_COLUMN;
+		}
+		//TODO: play sound
+	}
+}

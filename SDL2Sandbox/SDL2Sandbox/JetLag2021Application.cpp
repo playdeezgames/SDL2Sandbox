@@ -56,6 +56,10 @@ bool JetLag2021Application::HandleInPlayKeyDown(SDL_Keycode sym)
 	{
 		gameData.SetNextDirection(Constants::Game::Direction::RIGHT);
 	}
+	else if (sym == SDLK_SPACE)
+	{
+		gameData.UseBomb();
+	}
 	return true;
 }
 
@@ -88,6 +92,7 @@ bool JetLag2021Application::HandleKeyDown(SDL_Keycode sym)
 
 bool JetLag2021Application::HandleInPlayJoyButtonDown(SDL_JoystickID which, Uint8 button)
 {
+	gameData.UseBomb();
 	return true;
 }
 

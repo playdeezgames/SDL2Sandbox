@@ -54,8 +54,6 @@ private:
 	void UpdateBlocks();
 	void UpdateGameStatus();
 	void UpdatePowerUps();
-
-
 public:
 	GameData(tggd::common::SoundManager&);
 	void ResetGame();
@@ -63,18 +61,15 @@ public:
 	void SetNextDirection(int);
 	int GetTailLength() const;
 	int GetTailPosition(int) const;
-
 	int GetBlockCount() const;
 	int GetBlockPosition(int) const;
-
 	int GetPowerUpCount() const;
 	int GetPowerUpPosition(int) const;
 	PowerUpType GetPowerUp(int) const;
-
 	int GetScore() const;
-
 	bool IsGameOver() const;
 	PlayerState GetState() const;
 	void Update(int);
+	void UseBomb();
 };
 
