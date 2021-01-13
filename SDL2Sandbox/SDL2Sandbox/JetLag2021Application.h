@@ -18,6 +18,7 @@ private:
 	JetLag2021Renderer renderer;
 	OptionManager optionManager;
 	SDL_Joystick* joystick;
+	SDL_GameController* controller;
 
 	GameData gameData;
 

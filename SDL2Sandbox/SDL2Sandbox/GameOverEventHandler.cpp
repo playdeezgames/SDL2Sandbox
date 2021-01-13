@@ -23,7 +23,7 @@ bool GameOverEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 
 bool GameOverEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
 {
-	return false;
+	return true;
 }
 
 GameOverEventHandler::GameOverEventHandler(GameData& data, tggd::common::SoundManager& sndMan, OptionManager& optMan)

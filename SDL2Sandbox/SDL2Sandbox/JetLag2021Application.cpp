@@ -39,9 +39,12 @@ void JetLag2021Application::Start()
 	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)
 	{
-		joystick = SDL_JoystickOpen(0);
+		controller = SDL_GameControllerOpen(0);
+		if (!controller)
+		{
+			joystick = SDL_JoystickOpen(0);
+		}
 	}
-
 }
 
 void JetLag2021Application::Finish()
@@ -63,12 +66,22 @@ void JetLag2021Application::Finish()
 		SDL_JoystickClose(joystick);
 		joystick = nullptr;
 	}
+	if (controller)
+	{
+		SDL_GameControllerClose(controller);
+		controller = nullptr;
+	}
 	IMG_Quit();
 }
 
 bool JetLag2021Application::OnEvent(const SDL_Event& evt)
 {
-	return eventHandlers[gameData.GetGameState()]->OnEvent(evt);
+	bool result = eventHandlers[gameData.GetGameState()]->OnEvent(evt);
+	if (!result)
+	{
+		SDL_Log("wat");
+	}
+	return result;
 }
 
 void JetLag2021Application::Update(int milliseconds)
