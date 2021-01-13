@@ -4,15 +4,14 @@
 #include "GameData.h"
 #include "..\..\..\CommonCpp\SoundManager.h"
 #include "..\..\..\CommonCpp\Application.h"
+#include "RomFontManager.h"
 class JetLag2021Renderer : public tggd::common::Renderer
 {
 private:
 	const GameData& gameData;
 	const tggd::common::SoundManager& soundManager;
+	const RomFontManager& romFontManager;
 	SDL_Renderer* renderer;
-	SDL_Texture* romfontTexture;
-	SDL_Rect romfontSrcRects[Constants::RomFont::CELL_COUNT];
-	void DrawCharacter(int, int, char, const SDL_Color&);
 	void DrawText(int, int, const std::string&, const SDL_Color&);
 	void DrawCenteredText(int, const std::string&, const SDL_Color&);
 	void DrawBackground();
@@ -30,7 +29,7 @@ private:
 protected:
 	SDL_Renderer* GetMainRenderer() const;
 public:
-	JetLag2021Renderer(const GameData&, const tggd::common::SoundManager&);
+	JetLag2021Renderer(const GameData&, const tggd::common::SoundManager&, const RomFontManager&);
 	void Start(SDL_Renderer*);
 	void Finish();
 	void Draw();

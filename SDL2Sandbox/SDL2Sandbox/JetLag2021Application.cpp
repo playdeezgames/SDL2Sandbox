@@ -10,9 +10,11 @@ JetLag2021Application::JetLag2021Application()
 	, soundManager()
 	, optionManager(soundManager)
 	, gameData(soundManager)
-	, renderer(gameData, soundManager)
+	, romFontManager()
+	, renderer(gameData, soundManager, romFontManager)
 	, joystick(nullptr)
 	, eventHandlers()
+	, controller(nullptr)
 {
 }
 
@@ -22,6 +24,7 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
 
 	IMG_Init(IMG_INIT_PNG);
+	romFontManager.Start(GetMainRenderer());
 	renderer.Start(GetMainRenderer());
 
 	soundManager.AddSound(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
@@ -61,6 +64,7 @@ void JetLag2021Application::Finish()
 
 	soundManager.Finish();
 	renderer.Finish();
+	romFontManager.Finish();
 	if (joystick)
 	{
 		SDL_JoystickClose(joystick);

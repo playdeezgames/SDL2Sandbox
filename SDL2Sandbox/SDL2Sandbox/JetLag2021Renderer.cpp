@@ -4,34 +4,23 @@
 JetLag2021Renderer::JetLag2021Renderer
 	(
 		const GameData& data, 
-		const tggd::common::SoundManager& sndMan
+		const tggd::common::SoundManager& sndMan, 
+		const RomFontManager& romFont
 	)
 	: renderer(nullptr)
 	, gameData(data)
 	, soundManager(sndMan)
-	, romfontTexture(nullptr)
-	, romfontSrcRects()
+	, romFontManager(romFont)
 {
 }
 
 void JetLag2021Renderer::Start(SDL_Renderer* renderer)
 {
 	this->renderer = renderer;
-	for (int index = 0; index < Constants::RomFont::CELL_COUNT; ++index)
-	{
-		int column = index % Constants::RomFont::COLUMNS;
-		int row = index / Constants::RomFont::COLUMNS;
-		romfontSrcRects[index].x = column * Constants::RomFont::CELL_WIDTH;
-		romfontSrcRects[index].y = row * Constants::RomFont::CELL_HEIGHT;
-		romfontSrcRects[index].w = Constants::RomFont::CELL_WIDTH;
-		romfontSrcRects[index].h = Constants::RomFont::CELL_HEIGHT;
-	}
-	romfontTexture = IMG_LoadTexture(renderer, Constants::RomFont::IMAGE_FILE_NAME.c_str());
 }
 
 void JetLag2021Renderer::Finish()
 {
-	SDL_DestroyTexture(romfontTexture);
 	renderer = nullptr;
 }
 
@@ -58,21 +47,21 @@ void JetLag2021Renderer::DrawTail()
 {
 	for (int row = 0; row < gameData.GetTailLength() - 1; ++row)
 	{
-		DrawCharacter(gameData.GetTailPosition(row), row, '*', Constants::Color::BROWN);
+		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(row), row, '*', Constants::Color::BROWN);
 	}
 	switch (gameData.GetState())
 	{
 	case PlayerState::DEAD:
-		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x0F', Constants::Color::RED);
+		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x0F', Constants::Color::RED);
 		break;
 	case PlayerState::INVINCIBILITY_WEARING_OFF:
-		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::LIGHT_RED);
+		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::LIGHT_RED);
 		break;
 	case PlayerState::INVINCIBLE:
-		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::CYAN);
+		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::CYAN);
 		break;
 	case PlayerState::NORMAL:
-		DrawCharacter(gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::WHITE);
+		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::WHITE);
 		break;
 
 	}
@@ -90,7 +79,7 @@ void JetLag2021Renderer::DrawBlocks()
 {
 	for (int row = 0; row < gameData.GetBlockCount(); ++row)
 	{
-		DrawCharacter(gameData.GetBlockPosition(row), row, (char)0xdb, Constants::Color::WHITE);
+		romFontManager.DrawCharacter(renderer, gameData.GetBlockPosition(row), row, (char)0xdb, Constants::Color::WHITE);
 	}
 }
 
@@ -98,8 +87,8 @@ void JetLag2021Renderer::DrawWalls()
 {
 	for (int row = 0; row < Constants::Board::ROWS; ++row)
 	{
-		DrawCharacter(Constants::Board::LEFT_WALL, row, (char)0xdb, Constants::Color::BLUE);
-		DrawCharacter(Constants::Board::RIGHT_WALL, row, (char)0xdb, Constants::Color::BLUE);
+		romFontManager.DrawCharacter(renderer, Constants::Board::LEFT_WALL, row, (char)0xdb, Constants::Color::BLUE);
+		romFontManager.DrawCharacter(renderer, Constants::Board::RIGHT_WALL, row, (char)0xdb, Constants::Color::BLUE);
 	}
 }
 
@@ -149,24 +138,11 @@ void JetLag2021Renderer::DrawCenteredText(int row, const std::string& text, cons
 	DrawText((Constants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
 }
 
-void JetLag2021Renderer::DrawCharacter(int column, int row, char character, const SDL_Color& color)
-{
-	SDL_SetTextureColorMod(romfontTexture, color.r, color.g, color.b);
-	SDL_Rect rcDst =
-	{
-		column * Constants::Cell::WIDTH,
-		row * Constants::Cell::HEIGHT,
-		Constants::Cell::WIDTH,
-		Constants::Cell::HEIGHT
-	};
-	SDL_RenderCopy(renderer, romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
-}
-
 void JetLag2021Renderer::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
 {
 	for (auto ch : text)
 	{
-		DrawCharacter(column, row, ch, color);
+		romFontManager.DrawCharacter(renderer, column, row, ch, color);
 		column++;
 	}
 }
@@ -211,7 +187,7 @@ void JetLag2021Renderer::DrawPickUps()
 			color = Constants::Color::RED;
 			ch = 0x03;
 		}
-		DrawCharacter(gameData.GetPowerUpPosition(row), row, ch, color);
+		romFontManager.DrawCharacter(renderer, gameData.GetPowerUpPosition(row), row, ch, color);
 	}
 }
 
@@ -219,7 +195,7 @@ void JetLag2021Renderer::DrawStatusBar()
 {
 	for (int column = 0; column < Constants::Board::COLUMNS; ++column)
 	{
-		DrawCharacter(column, 0, (char)0xdb, Constants::Color::BROWN);
+		romFontManager.DrawCharacter(renderer, column, 0, (char)0xdb, Constants::Color::BROWN);
 	}
 }
 

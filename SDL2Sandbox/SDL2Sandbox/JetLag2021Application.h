@@ -8,6 +8,7 @@
 #include "GameData.h"
 #include "OptionManager.h"
 #include "JetLag2021Renderer.h"
+#include "RomFontManager.h"
 #include <map>
 class JetLag2021Application: public tggd::common::Application
 {
@@ -16,6 +17,7 @@ private:
 	static JetLag2021Application sandboxApplication;
 	tggd::common::SoundManager soundManager;
 	JetLag2021Renderer renderer;
+	RomFontManager romFontManager;
 	OptionManager optionManager;
 	SDL_Joystick* joystick;
 	SDL_GameController* controller;
