@@ -27,6 +27,7 @@ void OptionManager::Load()
 		}
 		fclose(f);
 	}
+	StartMusicWhenAppropriate();
 }
 
 void OptionManager::Save()
@@ -41,5 +42,17 @@ void OptionManager::Save()
 		fwrite(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
 		fclose(f);
 	}
+	StartMusicWhenAppropriate();
 }
 
+void OptionManager::StartMusicWhenAppropriate()
+{
+	if (!soundManager.IsMuted())
+	{
+		soundManager.PlayMusic(Constants::Sound::SONG);
+	}
+	else
+	{
+		Mix_HaltMusic();
+	}
+}

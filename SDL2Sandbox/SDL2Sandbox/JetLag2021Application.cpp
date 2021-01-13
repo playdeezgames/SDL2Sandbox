@@ -22,7 +22,6 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
 
 	IMG_Init(IMG_INIT_PNG);
-	optionManager.Load();
 	renderer.Start(GetMainRenderer());
 
 	soundManager.AddSound(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
@@ -34,7 +33,8 @@ void JetLag2021Application::Start()
 	soundManager.AddSound(Constants::Sound::BOOM, Constants::Sound::BOOM);
 	soundManager.AddSound(Constants::Sound::YOINK, Constants::Sound::YOINK);
 	soundManager.AddMusic(Constants::Sound::SONG, Constants::Sound::SONG);
-	StartMusicWhenAppropriate();
+
+	optionManager.Load();//timing! must happen after sounds are loaded
 
 	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)
@@ -81,10 +81,3 @@ void JetLag2021Application::Draw()
 	renderer.Draw();
 }
 
-void JetLag2021Application::StartMusicWhenAppropriate()
-{
-	if (!soundManager.IsMuted())
-	{
-		soundManager.PlayMusic(Constants::Sound::SONG);
-	}
-}

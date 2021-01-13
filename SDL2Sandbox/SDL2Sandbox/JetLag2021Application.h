@@ -21,7 +21,6 @@ private:
 
 	GameData gameData;
 
-	void StartMusicWhenAppropriate();//TODO: move me to option manager
 protected:
 	void Start();
 	void Finish();

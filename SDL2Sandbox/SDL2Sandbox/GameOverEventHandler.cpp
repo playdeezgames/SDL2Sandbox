@@ -10,11 +10,6 @@ bool GameOverEventHandler::OnKeyDown(SDL_Keycode sym)
 	{
 		soundManager.SetMuted(!soundManager.IsMuted());
 		optionManager.Save();
-		if (!soundManager.IsMuted())
-		{
-			soundManager.PlayMusic(Constants::Sound::SONG);
-		}
-
 	}
 	return true;
 
