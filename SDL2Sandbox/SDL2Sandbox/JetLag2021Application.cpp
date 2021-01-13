@@ -1,6 +1,8 @@
 #include "JetLag2021Application.h"
 #include "SDL_image.h"
 #include "Utility.h"
+#include "GameOverEventHandler.h"
+#include "InPlayEventHandler.h"
 JetLag2021Application JetLag2021Application::sandboxApplication;
 
 JetLag2021Application::JetLag2021Application()
@@ -16,6 +18,8 @@ JetLag2021Application::JetLag2021Application()
 
 void JetLag2021Application::Start()
 {
+	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler();
+	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler();
 
 	IMG_Init(IMG_INIT_PNG);
 	optionManager.Load();
