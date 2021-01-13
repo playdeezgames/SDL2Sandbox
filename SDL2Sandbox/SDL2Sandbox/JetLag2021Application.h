@@ -19,6 +19,8 @@ private:
 
 	GameData gameData;
 
+	void StartMusicWhenAppropriate();
+
 	bool HandleKeyDown(SDL_Keycode);
 	bool HandleInPlayKeyDown(SDL_Keycode);
 	bool HandleGameOverKeyDown(SDL_Keycode);

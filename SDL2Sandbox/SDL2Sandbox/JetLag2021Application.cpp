@@ -20,14 +20,16 @@ void JetLag2021Application::Start()
 	optionManager.Load();
 	renderer.Start(GetMainRenderer());
 
-	soundManager.Add(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
-	soundManager.Add(Constants::Sound::DEATH, Constants::Sound::DEATH);
-	soundManager.Add(Constants::Sound::TURN, Constants::Sound::TURN);
-	soundManager.Add(Constants::Sound::TING, Constants::Sound::TING);
-	soundManager.Add(Constants::Sound::CHARGE, Constants::Sound::CHARGE);
-	soundManager.Add(Constants::Sound::WHOOPS, Constants::Sound::WHOOPS);
-	soundManager.Add(Constants::Sound::BOOM, Constants::Sound::BOOM);
-	soundManager.Add(Constants::Sound::YOINK, Constants::Sound::YOINK);
+	soundManager.AddSound(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
+	soundManager.AddSound(Constants::Sound::DEATH, Constants::Sound::DEATH);
+	soundManager.AddSound(Constants::Sound::TURN, Constants::Sound::TURN);
+	soundManager.AddSound(Constants::Sound::TING, Constants::Sound::TING);
+	soundManager.AddSound(Constants::Sound::CHARGE, Constants::Sound::CHARGE);
+	soundManager.AddSound(Constants::Sound::WHOOPS, Constants::Sound::WHOOPS);
+	soundManager.AddSound(Constants::Sound::BOOM, Constants::Sound::BOOM);
+	soundManager.AddSound(Constants::Sound::YOINK, Constants::Sound::YOINK);
+	soundManager.AddMusic(Constants::Sound::SONG, Constants::Sound::SONG);
+	StartMusicWhenAppropriate();
 
 	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)
@@ -75,6 +77,7 @@ bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 	{
 		soundManager.SetMuted(!soundManager.IsMuted());
 		optionManager.Save();
+		StartMusicWhenAppropriate();
 	}
 	return true;
 }
@@ -177,4 +180,12 @@ void JetLag2021Application::Update(int milliseconds)
 void JetLag2021Application::Draw()
 {
 	renderer.Draw();
+}
+
+void JetLag2021Application::StartMusicWhenAppropriate()
+{
+	if (!soundManager.IsMuted())
+	{
+		soundManager.PlayMusic(Constants::Sound::SONG);
+	}
 }
