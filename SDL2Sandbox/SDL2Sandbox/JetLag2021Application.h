@@ -21,19 +21,7 @@ private:
 
 	GameData gameData;
 
-	void StartMusicWhenAppropriate();
-
-	bool HandleKeyDown(SDL_Keycode);
-	bool HandleInPlayKeyDown(SDL_Keycode);
-	bool HandleGameOverKeyDown(SDL_Keycode);
-
-	bool HandleJoyButtonDown(SDL_JoystickID, Uint8);
-	bool HandleInPlayJoyButtonDown(SDL_JoystickID, Uint8);
-	bool HandleGameOverJoyButtonDown(SDL_JoystickID, Uint8);
-
-	bool HandleJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
-	bool HandleInPlayJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
-	bool HandleGameOverJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
+	void StartMusicWhenAppropriate();//TODO: move me to option manager
 protected:
 	void Start();
 	void Finish();

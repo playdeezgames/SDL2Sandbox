@@ -15,3 +15,14 @@ bool JetLag2021EventHandler::OnEvent(const SDL_Event& evt)
 		return true;
 	}
 }
+
+JetLag2021EventHandler::JetLag2021EventHandler(GameData& data)
+	: gameData(data)
+{
+
+}
+
+GameData& JetLag2021EventHandler::GetGameData() const
+{
+	return gameData;
+}
