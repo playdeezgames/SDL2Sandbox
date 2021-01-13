@@ -136,7 +136,7 @@ void JetLag2021Renderer::DrawStartHint()
 
 void JetLag2021Renderer::DrawHints()
 {
-	if (gameData.IsGameOver())
+	if (gameData.GetGameState() == GameState::GAME_OVER)
 	{
 		DrawMuteHint();
 		DrawStartHint();

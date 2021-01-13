@@ -40,9 +40,9 @@ void GameData::SetNextDirection(int nextDirection)
 	}
 }
 
-bool GameData::IsGameOver() const
+GameState GameData::GetGameState() const
 {
-	return gameState!=GameState::IN_PLAY;
+	return gameState;
 }
 
 void GameData::UpdateTail()

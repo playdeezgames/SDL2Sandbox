@@ -10,6 +10,7 @@ JetLag2021Application::JetLag2021Application()
 	, gameData(soundManager)
 	, renderer(gameData, soundManager)
 	, joystick(nullptr)
+	, eventHandlers()
 {
 }
 
@@ -36,6 +37,16 @@ void JetLag2021Application::Start()
 	{
 		joystick = SDL_JoystickOpen(0);
 	}
+
+	for (auto& entry : eventHandlers)
+	{
+		if (entry.second)
+		{
+			delete entry.second;
+			entry.second = nullptr;
+		}
+	}
+	eventHandlers.clear();
 }
 
 void JetLag2021Application::Finish()
@@ -85,7 +96,7 @@ bool JetLag2021Application::HandleGameOverKeyDown(SDL_Keycode sym)
 
 bool JetLag2021Application::HandleKeyDown(SDL_Keycode sym)
 {
-	if (!gameData.IsGameOver())
+	if (gameData.GetGameState()==GameState::IN_PLAY)
 	{
 		return HandleInPlayKeyDown(sym);
 	}
@@ -110,7 +121,7 @@ bool JetLag2021Application::HandleGameOverJoyButtonDown(SDL_JoystickID, Uint8)
 
 bool JetLag2021Application::HandleJoyButtonDown(SDL_JoystickID which, Uint8 button)
 {
-	if (!gameData.IsGameOver())
+	if (gameData.GetGameState() == GameState::IN_PLAY)
 	{
 		return HandleInPlayJoyButtonDown(which, button);
 	}
@@ -144,7 +155,7 @@ bool JetLag2021Application::HandleGameOverJoyAxisMotion(SDL_JoystickID which, Ui
 
 bool JetLag2021Application::HandleJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	if (!gameData.IsGameOver())
+	if (gameData.GetGameState() == GameState::IN_PLAY)
 	{
 		return HandleInPlayJoyAxisMotion(which, axis, value);
 	}

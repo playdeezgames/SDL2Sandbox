@@ -72,7 +72,7 @@ public:
 	int GetPowerUpPosition(int) const;
 	PowerUpType GetPowerUp(int) const;
 	int GetScore() const;
-	bool IsGameOver() const;
+	GameState GetGameState() const;
 	PlayerState GetState() const;
 	void Update(int);
 	void UseBomb();

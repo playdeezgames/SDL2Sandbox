@@ -39,6 +39,9 @@
     <ClCompile Include="JetLag2021Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InPlayEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\CommonCpp\Application.h">
@@ -63,6 +66,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="JetLag2021Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InPlayEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

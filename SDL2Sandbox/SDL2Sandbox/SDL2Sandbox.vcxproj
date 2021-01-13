@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\..\CommonCpp\main.cpp" />
     <ClCompile Include="..\..\..\CommonCpp\SoundManager.cpp" />
     <ClCompile Include="GameData.cpp" />
+    <ClCompile Include="InPlayEventHandler.cpp" />
     <ClCompile Include="JetLag2021Application.cpp" />
     <ClCompile Include="OptionManager.cpp" />
     <ClCompile Include="JetLag2021Renderer.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="..\..\..\CommonCpp\SoundManager.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="GameData.h" />
+    <ClInclude Include="InPlayEventHandler.h" />
     <ClInclude Include="JetLag2021Application.h" />
     <ClInclude Include="OptionManager.h" />
     <ClInclude Include="JetLag2021Renderer.h" />
