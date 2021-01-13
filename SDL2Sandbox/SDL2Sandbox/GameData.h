@@ -21,6 +21,11 @@ enum class PlayerState
 	INVINCIBILITY_WEARING_OFF,
 	DEAD
 };
+enum class GameState
+{
+	GAME_OVER,
+	IN_PLAY
+};
 struct PowerUp
 {
 	PowerUpType type;
@@ -36,7 +41,7 @@ private:
 	std::vector<int> tailPositions;
 	int scrollCounter;
 	int direction;
-	bool gameOver;
+	GameState gameState;
 	int score;
 	int runLength;
 	bool dead;

@@ -7,7 +7,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, powerUpPositions(Constants::Board::ROWS)
 	, scrollCounter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
-	, gameOver(Constants::Game::InitialValues::GAME_OVER)
+	, gameState(GameState::GAME_OVER)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
 	, dead(Constants::Game::InitialValues::DEAD)
@@ -42,7 +42,7 @@ void GameData::SetNextDirection(int nextDirection)
 
 bool GameData::IsGameOver() const
 {
-	return gameOver;
+	return gameState!=GameState::IN_PLAY;
 }
 
 void GameData::UpdateTail()
@@ -74,7 +74,7 @@ void GameData::UpdateGameStatus()
 	if (tailPositions[row] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
 		tailPositions[row] > Constants::Block::MAXIMUM_RANDOM_COLUMN)
 	{
-		gameOver = true;
+		gameState = GameState::GAME_OVER;
 	}
 	else
 	{
@@ -89,13 +89,13 @@ void GameData::UpdateGameStatus()
 				score += Constants::Game::BLOCK_EAT_SCORE;
 				break;
 			default:
-				gameOver = true;
+				gameState = GameState::GAME_OVER;
 				break;
 			}
 		}
 	}
 
-	if (gameOver)
+	if (gameState == GameState::GAME_OVER)
 	{
 		dead = true;
 		soundManager.PlaySound(Constants::Sound::DEATH);
@@ -154,7 +154,7 @@ void GameData::UpdateGameStatus()
 
 void GameData::UpdateBoard()
 {
-	if (!gameOver)
+	if (gameState==GameState::IN_PLAY)
 	{
 		UpdateTail();
 		UpdateBlocks();
@@ -256,7 +256,7 @@ void GameData::ResetGame()
 void GameData::RestartGame()
 {
 	ResetGame();
-	gameOver = false;
+	gameState = GameState::IN_PLAY;
 }
 
 int GameData::GetPowerUpCount() const
@@ -335,7 +335,7 @@ PlayerState GameData::GetState() const
 
 void GameData::UseBomb()
 {
-	if (!gameOver && bombs > 0)
+	if (gameState==GameState::IN_PLAY && bombs > 0)
 	{
 		bombs--;
 		for (auto& block : blockPositions)
