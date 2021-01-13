@@ -222,3 +222,8 @@ void JetLag2021Renderer::DrawStatusBar()
 		DrawCharacter(column, 0, (char)0xdb, Constants::Color::BROWN);
 	}
 }
+
+SDL_Renderer* JetLag2021Renderer::GetMainRenderer() const
+{
+	return renderer;
+}

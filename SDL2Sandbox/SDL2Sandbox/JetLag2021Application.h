@@ -26,8 +26,8 @@ protected:
 	void Start();
 	void Finish();
 	void Update(int);
-	void Draw();
 public:
+	void Draw();
 	bool OnEvent(const SDL_Event&);
 	JetLag2021Application();
 };
