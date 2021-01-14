@@ -7,7 +7,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, powerUpPositions(Constants::Board::ROWS)
 	, scrollCounter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
-	, gameState(GameState::GAME_OVER)
+	, gameState(GameState::TITLE_SCREEN)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
 	, dead(Constants::Game::InitialValues::DEAD)
@@ -15,6 +15,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, invincibility(Constants::Game::InitialValues::INVINCIBILITY)
 	, keysReversed(Constants::Game::InitialValues::KEYS_REVERSED)
 	, bombs(Constants::Game::InitialValues::BOMBS)
+	, currentMainMenuItem(MainMenuItem::PLAY)
 {
 
 }
@@ -349,4 +350,53 @@ void GameData::UseBomb()
 int GameData::GetBombs() const
 {
 	return bombs;
+}
+
+MainMenuItem GameData::GetMainMenuItem() const
+{
+	return currentMainMenuItem;
+}
+
+void GameData::NextMainMenuItem()
+{
+	switch (currentMainMenuItem)
+	{
+	case MainMenuItem::PLAY:
+		currentMainMenuItem = MainMenuItem::INSTRUCTIONS;
+		break;
+	case MainMenuItem::INSTRUCTIONS:
+		currentMainMenuItem = MainMenuItem::ABOUT;
+		break;
+	case MainMenuItem::ABOUT:
+		currentMainMenuItem = MainMenuItem::OPTIONS;
+		break;
+	case MainMenuItem::OPTIONS:
+		currentMainMenuItem = MainMenuItem::QUIT;
+		break;
+	case MainMenuItem::QUIT:
+		currentMainMenuItem = MainMenuItem::PLAY;
+		break;
+	}
+}
+
+void GameData::PreviousMainMenuItem()
+{
+	switch (currentMainMenuItem)
+	{
+	case MainMenuItem::PLAY:
+		currentMainMenuItem = MainMenuItem::QUIT;
+		break;
+	case MainMenuItem::INSTRUCTIONS:
+		currentMainMenuItem = MainMenuItem::PLAY;
+		break;
+	case MainMenuItem::ABOUT:
+		currentMainMenuItem = MainMenuItem::INSTRUCTIONS;
+		break;
+	case MainMenuItem::OPTIONS:
+		currentMainMenuItem = MainMenuItem::ABOUT;
+		break;
+	case MainMenuItem::QUIT:
+		currentMainMenuItem = MainMenuItem::OPTIONS;
+		break;
+	}
 }

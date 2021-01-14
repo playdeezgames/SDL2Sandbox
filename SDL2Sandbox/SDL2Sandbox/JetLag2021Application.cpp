@@ -29,7 +29,7 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
-	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer());
+	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
 
 	IMG_Init(IMG_INIT_PNG);
 	romFontManager.Start(GetMainRenderer());
