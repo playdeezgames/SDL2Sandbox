@@ -1,5 +1,6 @@
 #include "RomFontManager.h"
 #include <SDL_image.h>
+#include "Constants\Board.h"
 void RomFontManager::Start(SDL_Renderer* renderer)
 {
 	for (int index = 0; index < Constants::RomFont::CELL_COUNT; ++index)

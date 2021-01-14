@@ -1,9 +1,8 @@
 #pragma once
 #include <SDL.h>
-#include "Constants.h"
-#include "GameData.h"
-#include "..\..\..\CommonCpp\SoundManager.h"
-#include "..\..\..\CommonCpp\Application.h"
+#include "Game/GameData.h"
+#include "Common\SoundManager.h"
+#include "Common\Application.h"
 #include "RomFontManager.h"
 class JetLag2021Renderer : public tggd::common::Renderer
 {

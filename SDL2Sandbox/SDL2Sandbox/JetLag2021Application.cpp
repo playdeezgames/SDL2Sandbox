@@ -6,6 +6,8 @@
 #include "GameOverRenderer.h"
 #include "TitleScreenEventHandler.h"
 #include "TitleScreenRenderer.h"
+#include "Constants\Window.h"
+#include "Constants\Sound.h"
 JetLag2021Application JetLag2021Application::sandboxApplication;
 
 JetLag2021Application::JetLag2021Application()

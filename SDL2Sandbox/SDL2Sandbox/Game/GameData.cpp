@@ -1,6 +1,11 @@
 #include "GameData.h"
-#include "Constants.h"
-#include "Utility.h"
+#include "..\Constants\Board.h"
+#include "..\Constants\Game.h"
+#include "..\Constants\Sound.h"
+#include "..\Utility.h"
+#include "..\Constants\PickUp.h"
+#include "..\Constants\Block.h"
+#include "..\Constants\Tail.h"
 GameData::GameData(tggd::common::SoundManager& sndMan)
 	: soundManager(sndMan)
 	, blockPositions(Constants::Board::ROWS)

@@ -1,6 +1,6 @@
 #pragma once
-#include "..\..\..\CommonCpp\Application.h"
-#include "GameData.h"
+#include "Common\Application.h"
+#include "Game/GameData.h"
 class JetLag2021EventHandler : public tggd::common::EventHandler
 {
 private:

@@ -1,8 +1,8 @@
 #pragma once
-#include "..\..\..\CommonCpp\Application.h"
-#include "..\..\..\CommonCpp\SoundManager.h"
+#include "Common\Application.h"
+#include "Common\SoundManager.h"
 #include "RomFontManager.h"
-#include "GameData.h"
+#include "Game\GameData.h"
 class TitleScreenRenderer : public tggd::common::Renderer
 {
 private:

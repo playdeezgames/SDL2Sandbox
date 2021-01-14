@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <map>
-#include "..\..\..\CommonCpp\SoundManager.h"
+#include "..\Common\SoundManager.h"
 enum class PowerUpType
 {
 	NONE,

@@ -1,5 +1,6 @@
 #include "OptionManager.h"
-#include "Constants.h"
+#include "Constants\Options.h"
+#include "Constants\Sound.h"
 typedef struct
 {
 	bool muted;

@@ -1,11 +1,10 @@
 #pragma once
-#include "..\..\..\CommonCpp\Application.h"
-#include "..\..\..\CommonCpp\SoundManager.h"
-#include "Constants.h"
+#include "Common\Application.h"
+#include "Common\SoundManager.h"
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
-#include "GameData.h"
+#include "Game/GameData.h"
 #include "OptionManager.h"
 #include "JetLag2021Renderer.h"
 #include "RomFontManager.h"

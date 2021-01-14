@@ -1,4 +1,6 @@
 #include "TitleScreenRenderer.h"
+#include "Constants\Board.h"
+#include "Constants\Color.h"
 SDL_Renderer* TitleScreenRenderer::GetMainRenderer() const
 {
 	return renderer;
