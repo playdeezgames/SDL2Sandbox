@@ -24,7 +24,8 @@ enum class PlayerState
 enum class GameState
 {
 	GAME_OVER,
-	IN_PLAY
+	IN_PLAY,
+	TITLE_SCREEN
 };
 struct PowerUp
 {

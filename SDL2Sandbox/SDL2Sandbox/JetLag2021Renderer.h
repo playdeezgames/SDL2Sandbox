@@ -12,8 +12,6 @@ private:
 	const tggd::common::SoundManager& soundManager;
 	const RomFontManager& romFontManager;
 	SDL_Renderer* renderer;
-	void DrawText(int, int, const std::string&, const SDL_Color&);
-	void DrawCenteredText(int, const std::string&, const SDL_Color&);
 	void DrawBackground();
 	void DrawTail();
 	void DrawBlocks();
@@ -21,9 +19,6 @@ private:
 	void DrawWalls();
 	void DrawScore();
 	void DrawBombs();
-	void DrawHints();
-	void DrawMuteHint();
-	void DrawStartHint();
 	void DrawStatusBar();
 	static void PlotCellRect(SDL_Rect&, int, int);
 protected:

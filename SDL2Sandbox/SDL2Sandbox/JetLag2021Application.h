@@ -14,6 +14,7 @@ class JetLag2021Application: public tggd::common::Application
 {
 private:
 	std::map<GameState, tggd::common::EventHandler*> eventHandlers;
+	std::map<GameState, tggd::common::Renderer*> renderers;
 	static JetLag2021Application sandboxApplication;
 	tggd::common::SoundManager soundManager;
 	JetLag2021Renderer renderer;

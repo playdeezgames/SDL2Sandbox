@@ -34,7 +34,6 @@ void JetLag2021Renderer::Draw()
 	DrawStatusBar();
 	DrawScore();
 	DrawBombs();
-	DrawHints();
 }
 
 void JetLag2021Renderer::DrawBackground()
@@ -96,55 +95,14 @@ void JetLag2021Renderer::DrawBombs()
 {
 	std::stringstream ss;
 	ss << '\x0f' << (char)('0' + (gameData.GetBombs() / Constants::Game::SCORE_RADIX)) << (char)('0' + (gameData.GetBombs() % Constants::Game::SCORE_RADIX));
-	DrawText(Constants::Board::COLUMNS - 3, 0, ss.str(), Constants::Color::BLACK);
+	romFontManager.DrawText(GetMainRenderer(), Constants::Board::COLUMNS - 3, 0, ss.str(), Constants::Color::BLACK);
 }
 
 void JetLag2021Renderer::DrawScore()
 {
 	std::stringstream ss;
 	ss << gameData.GetScore();
-	DrawText(0, 0, ss.str(), Constants::Color::BLACK);
-}
-
-void JetLag2021Renderer::DrawMuteHint()
-{
-	if (soundManager.IsMuted())
-	{
-		DrawCenteredText(Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
-	}
-	else
-	{
-		DrawCenteredText(Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
-	}
-}
-
-void JetLag2021Renderer::DrawStartHint()
-{
-	DrawCenteredText(Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
-}
-
-void JetLag2021Renderer::DrawHints()
-{
-	if (gameData.GetGameState() == GameState::GAME_OVER)
-	{
-		DrawMuteHint();
-		DrawStartHint();
-	}
-}
-
-void JetLag2021Renderer::DrawCenteredText(int row, const std::string& text, const SDL_Color& color)
-{
-	//you center things by dividing by 2
-	DrawText((Constants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
-}
-
-void JetLag2021Renderer::DrawText(int column, int row, const std::string& text, const SDL_Color& color)
-{
-	for (auto ch : text)
-	{
-		romFontManager.DrawCharacter(renderer, column, row, ch, color);
-		column++;
-	}
+	romFontManager.DrawText(GetMainRenderer(), 0, 0, ss.str(), Constants::Color::BLACK);
 }
 
 void JetLag2021Renderer::DrawPickUps()

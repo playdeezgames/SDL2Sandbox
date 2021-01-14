@@ -36,4 +36,18 @@ void RomFontManager::DrawCharacter(SDL_Renderer* renderer, int column, int row, 
 	SDL_RenderCopy(renderer, romfontTexture, &(romfontSrcRects[(unsigned char)character]), &rcDst);
 }
 
+void RomFontManager::DrawCenteredText(SDL_Renderer* renderer, int row, const std::string& text, const SDL_Color& color) const
+{
+	//you center things by dividing by 2
+	DrawText(renderer, (Constants::Board::COLUMNS - (int)text.size()) / 2, row, text, color);
+}
+
+void RomFontManager::DrawText(SDL_Renderer* renderer, int column, int row, const std::string& text, const SDL_Color& color) const
+{
+	for (auto ch : text)
+	{
+		DrawCharacter(renderer, column, row, ch, color);
+		column++;
+	}
+}
 

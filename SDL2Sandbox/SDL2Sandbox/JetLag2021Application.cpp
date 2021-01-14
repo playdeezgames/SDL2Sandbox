@@ -3,6 +3,7 @@
 #include "Utility.h"
 #include "GameOverEventHandler.h"
 #include "InPlayEventHandler.h"
+#include "GameOverRenderer.h"
 JetLag2021Application JetLag2021Application::sandboxApplication;
 
 JetLag2021Application::JetLag2021Application()
@@ -15,6 +16,7 @@ JetLag2021Application::JetLag2021Application()
 	, joystick(nullptr)
 	, eventHandlers()
 	, controller(nullptr)
+	, renderers()
 {
 }
 
@@ -22,6 +24,8 @@ void JetLag2021Application::Start()
 {
 	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameData, soundManager, optionManager);
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
+
+	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
 
 	IMG_Init(IMG_INIT_PNG);
 	romFontManager.Start(GetMainRenderer());
@@ -61,6 +65,15 @@ void JetLag2021Application::Finish()
 		}
 	}
 	eventHandlers.clear();
+	for (auto& entry : renderers)
+	{
+		if (entry.second)
+		{
+			delete entry.second;
+			entry.second = nullptr;
+		}
+	}
+	renderers.clear();
 
 	soundManager.Finish();
 	renderer.Finish();
@@ -96,5 +109,11 @@ void JetLag2021Application::Update(int milliseconds)
 void JetLag2021Application::Draw()
 {
 	renderer.Draw();
+	auto stateRenderer = renderers.find(gameData.GetGameState());
+	if (stateRenderer != renderers.end())
+	{
+		stateRenderer->second->Draw();
+	}
+
 }
 
