@@ -49,7 +49,7 @@ void OptionManager::StartMusicWhenAppropriate()
 {
 	if (!soundManager.IsMuted())
 	{
-		soundManager.PlayMusic(Constants::Sound::SONG);
+		soundManager.PlayMusic(Constants::Sound::Name::SONG);
 	}
 	else
 	{

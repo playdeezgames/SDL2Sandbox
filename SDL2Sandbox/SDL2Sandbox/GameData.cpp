@@ -36,7 +36,7 @@ void GameData::SetNextDirection(int nextDirection)
 		score += CalculateScoreFromRunLength(runLength);
 		runLength = Constants::Game::InitialValues::RUN_LENGTH;
 		direction = nextDirection;
-		soundManager.PlaySound(Constants::Sound::TURN);
+		soundManager.PlaySound(Constants::Sound::Name::TURN);
 	}
 }
 
@@ -85,7 +85,7 @@ void GameData::UpdateGameStatus()
 			case PlayerState::INVINCIBLE:
 			case PlayerState::INVINCIBILITY_WEARING_OFF:
 				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
-				soundManager.PlaySound(Constants::Sound::CHOMP);
+				soundManager.PlaySound(Constants::Sound::Name::CHOMP);
 				score += Constants::Game::BLOCK_EAT_SCORE;
 				break;
 			default:
@@ -98,7 +98,7 @@ void GameData::UpdateGameStatus()
 	if (gameState == GameState::GAME_OVER)
 	{
 		dead = true;
-		soundManager.PlaySound(Constants::Sound::DEATH);
+		soundManager.PlaySound(Constants::Sound::Name::DEATH);
 	}
 	else
 	{
@@ -111,35 +111,35 @@ void GameData::UpdateGameStatus()
 				{
 					bombs++;
 				}
-				soundManager.PlaySound(Constants::Sound::YOINK);
+				soundManager.PlaySound(Constants::Sound::Name::YOINK);
 				break;
 			case PowerUpType::DIAMOND:
 				score += Constants::PickUp::DIAMOND_BONUS;
-				soundManager.PlaySound(Constants::Sound::TING);
+				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::PENNY:
 				score += Constants::PickUp::PENNY_BONUS;
-				soundManager.PlaySound(Constants::Sound::TING);
+				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::DOLLAR:
 				score += Constants::PickUp::DOLLAR_BONUS;
-				soundManager.PlaySound(Constants::Sound::TING);
+				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::POUND:
 				score += Constants::PickUp::POUND_BONUS;
-				soundManager.PlaySound(Constants::Sound::TING);
+				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::YEN:
 				score += Constants::PickUp::YEN_BONUS;
-				soundManager.PlaySound(Constants::Sound::TING);
+				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::REVERSE_KEYS:
 				keysReversed = !keysReversed;
-				soundManager.PlaySound(Constants::Sound::WHOOPS);
+				soundManager.PlaySound(Constants::Sound::Name::WHOOPS);
 				break;
 			case PowerUpType::INVINCIBLE:
 				invincibility = Constants::Game::Counters::INVINCIBILITY;
-				soundManager.PlaySound(Constants::Sound::CHARGE);
+				soundManager.PlaySound(Constants::Sound::Name::CHARGE);
 				break;
 			}
 			powerUpPositions[row].position = Constants::PickUp::INITIAL_COLUMN;
@@ -342,7 +342,7 @@ void GameData::UseBomb()
 		{
 			block = Constants::Block::INITIAL_COLUMN;
 		}
-		soundManager.PlaySound(Constants::Sound::BOOM);
+		soundManager.PlaySound(Constants::Sound::Name::BOOM);
 	}
 }
 

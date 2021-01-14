@@ -27,17 +27,17 @@ void JetLag2021Application::Start()
 	romFontManager.Start(GetMainRenderer());
 	renderer.Start(GetMainRenderer());
 
-	soundManager.AddSound(Constants::Sound::CHOMP, Constants::Sound::CHOMP);
-	soundManager.AddSound(Constants::Sound::DEATH, Constants::Sound::DEATH);
-	soundManager.AddSound(Constants::Sound::TURN, Constants::Sound::TURN);
-	soundManager.AddSound(Constants::Sound::TING, Constants::Sound::TING);
-	soundManager.AddSound(Constants::Sound::CHARGE, Constants::Sound::CHARGE);
-	soundManager.AddSound(Constants::Sound::WHOOPS, Constants::Sound::WHOOPS);
-	soundManager.AddSound(Constants::Sound::BOOM, Constants::Sound::BOOM);
-	soundManager.AddSound(Constants::Sound::YOINK, Constants::Sound::YOINK);
-	soundManager.AddMusic(Constants::Sound::SONG, Constants::Sound::SONG);
+	soundManager.AddSound(Constants::Sound::Name::CHOMP, Constants::Sound::FileName::CHOMP);
+	soundManager.AddSound(Constants::Sound::Name::DEATH, Constants::Sound::FileName::DEATH);
+	soundManager.AddSound(Constants::Sound::Name::TURN, Constants::Sound::FileName::TURN);
+	soundManager.AddSound(Constants::Sound::Name::TING, Constants::Sound::FileName::TING);
+	soundManager.AddSound(Constants::Sound::Name::CHARGE, Constants::Sound::FileName::CHARGE);
+	soundManager.AddSound(Constants::Sound::Name::WHOOPS, Constants::Sound::FileName::WHOOPS);
+	soundManager.AddSound(Constants::Sound::Name::BOOM, Constants::Sound::FileName::BOOM);
+	soundManager.AddSound(Constants::Sound::Name::YOINK, Constants::Sound::FileName::YOINK);
+	soundManager.AddMusic(Constants::Sound::Name::SONG, Constants::Sound::FileName::SONG);
 
-	optionManager.Load();//timing! must happen after sounds are loaded
+	optionManager.Load();//timing! must happen after sounds are loaded, because it plays music
 
 	gameData.ResetGame();
 	if (SDL_NumJoysticks() > 0)
