@@ -70,10 +70,12 @@ namespace Constants
 			const std::string WHOOPS = "whoops";
 			const std::string BOOM = "boom";
 			const std::string YOINK = "yoink";
-			const std::string SONG = "IDidAThing";
+			const std::string SONG = "song";
+			const std::string NOPE = "nope";
 		}
 		namespace FileName
 		{
+			const std::string NOPE = "assets/sounds/nope.wav";
 			const std::string TURN = "assets/sounds/turn.wav";
 			const std::string DEATH = "assets/sounds/dead.wav";
 			const std::string CHOMP = "assets/sounds/chomp.wav";

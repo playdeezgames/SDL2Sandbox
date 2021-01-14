@@ -43,6 +43,8 @@ void JetLag2021Application::Start()
 	soundManager.AddSound(Constants::Sound::Name::WHOOPS, Constants::Sound::FileName::WHOOPS);
 	soundManager.AddSound(Constants::Sound::Name::BOOM, Constants::Sound::FileName::BOOM);
 	soundManager.AddSound(Constants::Sound::Name::YOINK, Constants::Sound::FileName::YOINK);
+	soundManager.AddSound(Constants::Sound::Name::NOPE, Constants::Sound::FileName::NOPE);
+
 	soundManager.AddMusic(Constants::Sound::Name::SONG, Constants::Sound::FileName::SONG);
 
 	optionManager.Load();//timing! must happen after sounds are loaded, because it plays music

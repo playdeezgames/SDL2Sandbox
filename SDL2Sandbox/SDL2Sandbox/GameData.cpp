@@ -345,6 +345,10 @@ void GameData::UseBomb()
 		}
 		soundManager.PlaySound(Constants::Sound::Name::BOOM);
 	}
+	else
+	{
+		soundManager.PlaySound(Constants::Sound::Name::NOPE);
+	}
 }
 
 int GameData::GetBombs() const

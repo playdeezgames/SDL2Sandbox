@@ -20,7 +20,7 @@ Power Ups:
     ☐ speed up
     ☐ slow down
     ✔ reverse keys @done(21-01-11 05:45)
-    ☐ no bombs left
+    ✔ no bombs left sound @done(21-01-14 05:50)
     ☐ out of lives
 Features:
     ☐ score multiplier
@@ -28,5 +28,32 @@ Features:
     ☐ shield
     ☐ lives
     ☐ changing speed
-    ☐ status bar at top of screen for score lives etc
+    ✔ status bar at top of screen for score lives etc @done(21-01-14 05:42)
     ☐ high score/games played/average score
+Game States:
+    ☐ Title Screen
+        ☐ ->in play
+        ☐ ->about
+        ☐ ->options
+        ☐ ->instructions
+        ☐ ->confirm quit
+    ☐ In Play
+        ☐ ->end run
+        ☐ ->game over
+    ☐ End Run
+        ☐ ->in play
+    ☐ Game Over
+        ☐ ->in play
+        ☐ ->title screen
+    ☐ About
+        ☐ ->title screen
+    ☐ Options
+        ☐ mute/unmute
+        ☐ sound volume
+        ☐ music volume
+        ☐ ->title screen
+    ☐ Confirm Quit
+        ☐ ->title screen
+        ☐ ->(exit game)
+    ☐ Instructions
+        ☐ ->title screen
