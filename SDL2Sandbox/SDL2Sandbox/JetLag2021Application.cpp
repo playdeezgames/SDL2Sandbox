@@ -4,6 +4,8 @@
 #include "GameOverEventHandler.h"
 #include "InPlayEventHandler.h"
 #include "GameOverRenderer.h"
+#include "TitleScreenEventHandler.h"
+#include "TitleScreenRenderer.h"
 JetLag2021Application JetLag2021Application::sandboxApplication;
 
 JetLag2021Application::JetLag2021Application()
@@ -24,8 +26,10 @@ void JetLag2021Application::Start()
 {
 	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameData, soundManager, optionManager);
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
+	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
+	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer());
 
 	IMG_Init(IMG_INIT_PNG);
 	romFontManager.Start(GetMainRenderer());
