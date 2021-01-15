@@ -5,9 +5,9 @@
 #include <string>
 #include "SDL_Mixer.h"
 #include "Game\GameData.h"
-#include "OptionManager.h"
+#include "Managers\OptionManager.h"
 #include "Renderers\JetLag2021Renderer.h"
-#include "RomFontManager.h"
+#include "Managers\RomFontManager.h"
 #include <map>
 class JetLag2021Application: public tggd::common::Application
 {

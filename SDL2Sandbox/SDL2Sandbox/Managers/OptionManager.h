@@ -1,5 +1,5 @@
 #pragma once
-#include "Common\SoundManager.h"
+#include "..\Common\SoundManager.h"
 class OptionManager
 {
 private:

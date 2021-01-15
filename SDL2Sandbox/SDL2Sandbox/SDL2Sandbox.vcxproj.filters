@@ -21,12 +21,6 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OptionManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RomFontManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,18 +54,18 @@
     <ClCompile Include="Renderers\TitleScreenRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Managers\OptionManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Managers\RomFontManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JetLag2021Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RomFontManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\Application.h">
@@ -141,6 +135,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderers\TitleScreenRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\OptionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Managers\RomFontManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
