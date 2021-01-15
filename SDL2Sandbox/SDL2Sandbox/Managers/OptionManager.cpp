@@ -4,6 +4,8 @@
 typedef struct
 {
 	bool muted;
+	int sfxVolume;
+	int muxVolume;
 } GameOptions;
 
 OptionManager::OptionManager(tggd::common::SoundManager& sndMan)

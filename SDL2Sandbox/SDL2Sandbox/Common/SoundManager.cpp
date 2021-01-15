@@ -67,4 +67,14 @@ namespace tggd::common
 		return muted;
 	}
 
+	void SoundManager::SetSfxVolume(int volume)
+	{
+		//TODO
+	}
+
+	void SoundManager::SetMuxVolume(int volume)
+	{
+		//TODO
+	}
 }
+

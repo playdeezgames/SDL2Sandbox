@@ -11,7 +11,7 @@ OptionsRenderer::OptionsRenderer(SDL_Renderer* renderer, const RomFontManager& r
 void OptionsRenderer::Draw()
 {
 	int row = Constants::Board::ROWS / 2;
-	GetRomFont().DrawCenteredText(GetMainRenderer(), row + 0, "Options", Constants::Color::MAGENTA);
+	GetRomFont().DrawCenteredText(GetMainRenderer(), row + -1, "Options", Constants::Color::MAGENTA);
 
 	RenderItem(row + 1, "Go Back", OptionsState::BACK);
 	RenderItem(row + 2, "Mute", OptionsState::TOGGLE_MUTE);

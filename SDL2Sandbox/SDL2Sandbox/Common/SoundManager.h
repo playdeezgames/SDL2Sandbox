@@ -18,5 +18,7 @@ namespace tggd::common
 		void PlayMusic(const std::string&) const;
 		void SetMuted(bool);
 		bool IsMuted() const;
+		void SetSfxVolume(int);
+		void SetMuxVolume(int);
 	};
 }
