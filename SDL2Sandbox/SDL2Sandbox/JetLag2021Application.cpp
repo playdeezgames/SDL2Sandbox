@@ -1,11 +1,11 @@
 #include "JetLag2021Application.h"
-#include "SDL_image.h"
+#include <SDL_image.h>
 #include "Utility.h"
 #include "EventHandlers\GameOverEventHandler.h"
 #include "EventHandlers\InPlayEventHandler.h"
-#include "GameOverRenderer.h"
+#include "Renderers\GameOverRenderer.h"
 #include "EventHandlers\TitleScreenEventHandler.h"
-#include "TitleScreenRenderer.h"
+#include "Renderers\TitleScreenRenderer.h"
 #include "Constants\Window.h"
 #include "Constants\Sound.h"
 JetLag2021Application JetLag2021Application::sandboxApplication;

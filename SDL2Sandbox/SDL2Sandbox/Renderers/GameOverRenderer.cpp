@@ -1,6 +1,6 @@
 #include "GameOverRenderer.h"
-#include "Constants\UI.h"
-#include "Constants\Color.h"
+#include "..\Constants\UI.h"
+#include "..\Constants\Color.h"
 SDL_Renderer* GameOverRenderer::GetMainRenderer() const
 {
 	return renderer;

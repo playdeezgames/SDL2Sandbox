@@ -4,9 +4,9 @@
 #include <vector>
 #include <string>
 #include "SDL_Mixer.h"
-#include "Game/GameData.h"
+#include "Game\GameData.h"
 #include "OptionManager.h"
-#include "JetLag2021Renderer.h"
+#include "Renderers\JetLag2021Renderer.h"
 #include "RomFontManager.h"
 #include <map>
 class JetLag2021Application: public tggd::common::Application

@@ -1,9 +1,9 @@
 #include "JetLag2021Renderer.h"
 #include <SDL_image.h>
 #include <sstream>
-#include "Constants\Color.h"
-#include "Constants\Board.h"
-#include "Constants\Game.h"
+#include "..\Constants\Color.h"
+#include "..\Constants\Board.h"
+#include "..\Constants\Game.h"
 JetLag2021Renderer::JetLag2021Renderer
 	(
 		const GameData& data, 

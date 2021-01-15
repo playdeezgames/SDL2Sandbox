@@ -1,8 +1,8 @@
 #pragma once
-#include "Common\Application.h"
-#include "Common\SoundManager.h"
-#include "RomFontManager.h"
-#include "Game/GameData.h"
+#include "..\Common\Application.h"
+#include "..\Common\SoundManager.h"
+#include "..\RomFontManager.h"
+#include "..\Game\GameData.h"
 class GameOverRenderer: public tggd::common::Renderer
 {
 private:
