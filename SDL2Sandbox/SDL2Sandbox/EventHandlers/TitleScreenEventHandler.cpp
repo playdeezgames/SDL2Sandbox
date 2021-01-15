@@ -20,31 +20,22 @@ bool TitleScreenEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 	return DoCurrentMainMenuItem();
 }
 
-bool TitleScreenEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
+bool TitleScreenEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	if (axis == 1)
+	JetLag2021EventHandler::OnJoyAxisMotion(which, axis, value);
+	if (IsVerticalDown())
 	{
-		if (value < -8192 && previousAxisState!=-1)
-		{
-			previousAxisState = -1;
-			GetGameData().PreviousMainMenuItem();
-		}
-		else if(value>8192 && previousAxisState!=1)
-		{
-			previousAxisState = 1;
-			GetGameData().NextMainMenuItem();
-		}
-		else if(value<8192 && value>-8192 && previousAxisState!=0)
-		{
-			previousAxisState = 0;
-		}
+		GetGameData().NextMainMenuItem();
+	}
+	if (IsVerticalUp())
+	{
+		GetGameData().PreviousMainMenuItem();
 	}
 	return true;
 }
 
 TitleScreenEventHandler::TitleScreenEventHandler(GameData& data)
 	: JetLag2021EventHandler(data)
-	, previousAxisState(0)
 {
 
 }

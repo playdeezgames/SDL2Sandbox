@@ -3,7 +3,6 @@
 class TitleScreenEventHandler : public JetLag2021EventHandler
 {
 private:
-	int previousAxisState;
 	bool DoCurrentMainMenuItem();
 protected:
 	bool OnKeyDown(SDL_Keycode);

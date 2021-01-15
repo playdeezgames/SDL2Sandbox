@@ -27,24 +27,12 @@ bool ConfirmQuitEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 	return DoConfirmation();
 }
 
-bool ConfirmQuitEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
+bool ConfirmQuitEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	if (axis == 1)
+	JetLag2021EventHandler::OnJoyAxisMotion(which, axis, value);
+	if (IsVerticalDown() || IsVerticalUp())
 	{
-		if (value < -8192 && previousAxisState != -1)
-		{
-			previousAxisState = -1;
-			confirm = !confirm;
-		}
-		else if (value > 8192 && previousAxisState != 1)
-		{
-			previousAxisState = 1;
-			confirm = !confirm;
-		}
-		else if (value<8192 && value>-8192 && previousAxisState != 0)
-		{
-			previousAxisState = 0;
-		}
+		confirm = !confirm;
 	}
 	return true;
 }
