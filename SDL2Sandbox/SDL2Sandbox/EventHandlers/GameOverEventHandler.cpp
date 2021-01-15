@@ -1,5 +1,4 @@
 #include "GameOverEventHandler.h"
-#include "Constants.h"
 bool GameOverEventHandler::OnKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_SPACE)

@@ -1,7 +1,7 @@
 #pragma once
 #include "JetLag2021EventHandler.h"
-#include "Common\SoundManager.h"
-#include "OptionManager.h"
+#include "..\Common\SoundManager.h"
+#include "..\OptionManager.h"
 class GameOverEventHandler : public JetLag2021EventHandler
 {
 private:

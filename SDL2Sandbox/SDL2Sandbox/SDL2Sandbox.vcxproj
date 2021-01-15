@@ -152,15 +152,15 @@
     <ClCompile Include="Common\main.cpp" />
     <ClCompile Include="Common\SoundManager.cpp" />
     <ClCompile Include="Game\GameData.cpp" />
-    <ClCompile Include="GameOverEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\GameOverEventHandler.cpp" />
     <ClCompile Include="GameOverRenderer.cpp" />
-    <ClCompile Include="InPlayEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\InPlayEventHandler.cpp" />
     <ClCompile Include="JetLag2021Application.cpp" />
-    <ClCompile Include="JetLag2021EventHandler.cpp" />
+    <ClCompile Include="EventHandlers\JetLag2021EventHandler.cpp" />
     <ClCompile Include="OptionManager.cpp" />
     <ClCompile Include="JetLag2021Renderer.cpp" />
     <ClCompile Include="RomFontManager.cpp" />
-    <ClCompile Include="TitleScreenEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\TitleScreenEventHandler.cpp" />
     <ClCompile Include="TitleScreenRenderer.cpp" />
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
@@ -181,15 +181,15 @@
     <ClInclude Include="Constants\Utility.h" />
     <ClInclude Include="Constants\Window.h" />
     <ClInclude Include="Game\GameData.h" />
-    <ClInclude Include="GameOverEventHandler.h" />
+    <ClInclude Include="EventHandlers\GameOverEventHandler.h" />
     <ClInclude Include="GameOverRenderer.h" />
-    <ClInclude Include="InPlayEventHandler.h" />
+    <ClInclude Include="EventHandlers\InPlayEventHandler.h" />
     <ClInclude Include="JetLag2021Application.h" />
-    <ClInclude Include="JetLag2021EventHandler.h" />
+    <ClInclude Include="EventHandlers\JetLag2021EventHandler.h" />
     <ClInclude Include="OptionManager.h" />
     <ClInclude Include="JetLag2021Renderer.h" />
     <ClInclude Include="RomFontManager.h" />
-    <ClInclude Include="TitleScreenEventHandler.h" />
+    <ClInclude Include="EventHandlers\TitleScreenEventHandler.h" />
     <ClInclude Include="TitleScreenRenderer.h" />
     <ClInclude Include="Utility.h" />
   </ItemGroup>

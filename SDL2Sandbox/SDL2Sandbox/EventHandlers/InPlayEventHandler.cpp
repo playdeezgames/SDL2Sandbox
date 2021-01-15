@@ -1,5 +1,5 @@
 #include "InPlayEventHandler.h"
-#include "Constants\Game.h"
+#include "..\Constants\Game.h"
 bool InPlayEventHandler::OnKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_LEFT)
