@@ -197,5 +197,8 @@
     <ClInclude Include="Renderers\BaseRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\OptionsState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

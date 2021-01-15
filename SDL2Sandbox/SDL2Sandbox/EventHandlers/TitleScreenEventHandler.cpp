@@ -44,6 +44,9 @@ bool TitleScreenEventHandler::DoCurrentMainMenuItem()
 {
 	switch (GetGameData().GetMainMenuItem())
 	{
+	case MainMenuItem::OPTIONS:
+		GetGameData().SetGameState(GameState::OPTIONS);
+		return true;
 	case MainMenuItem::QUIT:
 		GetGameData().SetGameState(GameState::CONFIRM_QUIT);
 		return true;

@@ -8,6 +8,7 @@
 #include "Managers\OptionManager.h"
 #include "Renderers\JetLag2021Renderer.h"
 #include "Managers\RomFontManager.h"
+#include "Game\OptionsState.h"
 #include <map>
 class JetLag2021Application: public tggd::common::Application
 {
@@ -22,6 +23,7 @@ private:
 	SDL_Joystick* joystick;
 	SDL_GameController* controller;
 	bool confirmQuit;
+	OptionsState optionsState;
 
 	GameData gameData;
 
