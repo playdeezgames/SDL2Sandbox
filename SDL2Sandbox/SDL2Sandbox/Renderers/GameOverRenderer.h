@@ -7,7 +7,6 @@ class GameOverRenderer: public BaseRenderer
 {
 private:
 	const tggd::common::SoundManager& soundManager;
-	const RomFontManager& romFontManager;
 	const GameData& gameData;
 protected:
 	void DrawHints();

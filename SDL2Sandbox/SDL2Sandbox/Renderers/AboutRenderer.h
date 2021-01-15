@@ -3,7 +3,7 @@
 class AboutRenderer : public BaseRenderer
 {
 public:
-	AboutRenderer(SDL_Renderer*);
+	AboutRenderer(SDL_Renderer*, const RomFontManager&);
 	void Draw();
 };
 

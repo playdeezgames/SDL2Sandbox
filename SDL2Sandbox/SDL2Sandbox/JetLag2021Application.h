@@ -21,6 +21,7 @@ private:
 	OptionManager optionManager;
 	SDL_Joystick* joystick;
 	SDL_GameController* controller;
+	bool confirmQuit;
 
 	GameData gameData;
 

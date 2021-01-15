@@ -13,9 +13,8 @@ GameOverRenderer::GameOverRenderer
 		const RomFontManager& romFont, 
 		const GameData& data
 	)
-	: BaseRenderer(rend)
+	: BaseRenderer(rend, romFont)
 	, soundManager(sndMan)
-	, romFontManager(romFont)
 	, gameData(data)
 {
 }
@@ -24,17 +23,17 @@ void GameOverRenderer::DrawMuteHint()
 {
 	if (soundManager.IsMuted())
 	{
-		romFontManager.DrawCenteredText(GetMainRenderer(), Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
+		GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
 	else
 	{
-		romFontManager.DrawCenteredText(GetMainRenderer(), Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
+		GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
 	}
 }
 
 void GameOverRenderer::DrawStartHint()
 {
-	romFontManager.DrawCenteredText(GetMainRenderer(), Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
+	GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
 void GameOverRenderer::DrawHints()

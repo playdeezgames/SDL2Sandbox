@@ -3,7 +3,7 @@
 class OptionsRenderer : public BaseRenderer
 {
 public:
-	OptionsRenderer(SDL_Renderer*);
+	OptionsRenderer(SDL_Renderer*, const RomFontManager&);
 	void Draw();
 };
 

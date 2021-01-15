@@ -33,6 +33,7 @@ JetLag2021Application::JetLag2021Application()
 	, eventHandlers()
 	, controller(nullptr)
 	, renderers()
+	, confirmQuit(false)
 {
 }
 
@@ -42,16 +43,16 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
 	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameData);
 	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameData);
-	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameData);
+	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameData, confirmQuit);
 	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameData);
 	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
 	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
-	renderers[GameState::CONFIRM_QUIT] = new ConfirmQuitRenderer(GetMainRenderer());
-	renderers[GameState::ABOUT] = new AboutRenderer(GetMainRenderer());
-	renderers[GameState::INSTRUCTIONS] = new InstructionsRenderer(GetMainRenderer());
-	renderers[GameState::OPTIONS] = new OptionsRenderer(GetMainRenderer());
+	renderers[GameState::CONFIRM_QUIT] = new ConfirmQuitRenderer(GetMainRenderer(), romFontManager, confirmQuit);
+	renderers[GameState::ABOUT] = new AboutRenderer(GetMainRenderer(), romFontManager);
+	renderers[GameState::INSTRUCTIONS] = new InstructionsRenderer(GetMainRenderer(), romFontManager);
+	renderers[GameState::OPTIONS] = new OptionsRenderer(GetMainRenderer(), romFontManager);
 
 	IMG_Init(IMG_INIT_PNG);
 	romFontManager.Start(GetMainRenderer());

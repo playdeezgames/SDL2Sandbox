@@ -1,6 +1,7 @@
 #include "ConfirmQuitEventHandler.h"
-ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameData& data)
+ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameData& data, bool& conf)
 	: JetLag2021EventHandler(data)
+	, confirm(conf)
 {
 
 }

@@ -3,7 +3,7 @@
 class InstructionsRenderer : public BaseRenderer
 {
 public:
-	InstructionsRenderer(SDL_Renderer*);
+	InstructionsRenderer(SDL_Renderer*, const RomFontManager&);
 	void Draw();
 };
 

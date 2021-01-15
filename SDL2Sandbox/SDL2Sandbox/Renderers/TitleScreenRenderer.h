@@ -7,7 +7,6 @@ class TitleScreenRenderer : public BaseRenderer
 {
 private:
 	const tggd::common::SoundManager& soundManager;
-	const RomFontManager& romFontManager;
 	const GameData& gameData;
 	void DrawMenuItem(int, const std::string&, const MainMenuItem&) const;
 public:

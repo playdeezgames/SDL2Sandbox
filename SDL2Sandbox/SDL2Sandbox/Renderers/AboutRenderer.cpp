@@ -1,6 +1,6 @@
 #include "AboutRenderer.h"
-AboutRenderer::AboutRenderer(SDL_Renderer* rend)
-	: BaseRenderer(rend)
+AboutRenderer::AboutRenderer(SDL_Renderer* rend, const RomFontManager& romFont)
+	: BaseRenderer(rend, romFont)
 {
 
 }

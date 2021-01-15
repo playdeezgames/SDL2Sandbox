@@ -1,6 +1,7 @@
 #include "ConfirmQuitRenderer.h"
-ConfirmQuitRenderer::ConfirmQuitRenderer(SDL_Renderer* rend)
-	: BaseRenderer(rend)
+ConfirmQuitRenderer::ConfirmQuitRenderer(SDL_Renderer* rend, const RomFontManager& romFont, const bool& conf)
+	: BaseRenderer(rend, romFont)
+	, confirm(conf)
 {
 
 }

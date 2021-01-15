@@ -8,9 +8,8 @@ TitleScreenRenderer::TitleScreenRenderer
 	const RomFontManager& romFont,
 	const GameData& data
 )
-	: BaseRenderer(rend)
+	: BaseRenderer(rend, romFont)
 	, soundManager(sndMan)
-	, romFontManager(romFont)
 	, gameData(data)
 {
 
@@ -27,5 +26,5 @@ void TitleScreenRenderer::Draw()
 
 void TitleScreenRenderer::DrawMenuItem(int row, const std::string& text, const MainMenuItem& item) const
 {
-	romFontManager.DrawCenteredText(GetMainRenderer(), row, text, (gameData.GetMainMenuItem() == item) ? (Constants::Color::CYAN) : (Constants::Color::BROWN));
+	GetRomFont().DrawCenteredText(GetMainRenderer(), row, text, (gameData.GetMainMenuItem() == item) ? (Constants::Color::CYAN) : (Constants::Color::BROWN));
 }
