@@ -409,3 +409,8 @@ void GameData::PreviousMainMenuItem()
 		break;
 	}
 }
+
+void GameData::SetGameState(const GameState& state)
+{
+	gameState = state;
+}

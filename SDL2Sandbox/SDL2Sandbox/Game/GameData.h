@@ -94,5 +94,6 @@ public:
 	MainMenuItem GetMainMenuItem() const;
 	void NextMainMenuItem();
 	void PreviousMainMenuItem();
+	void SetGameState(const GameState&);
 };
 

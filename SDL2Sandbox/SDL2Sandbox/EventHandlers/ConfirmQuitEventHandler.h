@@ -4,7 +4,9 @@
 class ConfirmQuitEventHandler : public JetLag2021EventHandler
 {
 private:
+	int previousAxisState;
 	bool& confirm;
+	bool DoConfirmation();
 protected:
 	bool OnKeyDown(SDL_Keycode);
 	bool OnJoyButtonDown(SDL_JoystickID, Uint8);
