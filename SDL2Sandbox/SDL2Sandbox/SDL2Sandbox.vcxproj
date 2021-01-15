@@ -148,11 +148,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Renderers\BaseRenderer.cpp" />
+    <ClCompile Include="Renderers\AboutRenderer.cpp" />
+    <ClCompile Include="Renderers\ConfirmQuitRenderer.cpp" />
+    <ClCompile Include="EventHandlers\AboutEventHandler.cpp" />
     <ClCompile Include="Common\Application.cpp" />
     <ClCompile Include="Common\main.cpp" />
     <ClCompile Include="Common\SoundManager.cpp" />
+    <ClCompile Include="EventHandlers\ConfirmQuitEventHandler.cpp" />
     <ClCompile Include="Game\GameData.cpp" />
     <ClCompile Include="EventHandlers\GameOverEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\InstructionsEventHandler.cpp" />
+    <ClCompile Include="EventHandlers\OptionsEventHandler.cpp" />
+    <ClCompile Include="Renderers\OptionsRenderer.cpp" />
+    <ClCompile Include="Renderers\InstructionsRenderer.cpp" />
     <ClCompile Include="Renderers\GameOverRenderer.cpp" />
     <ClCompile Include="EventHandlers\InPlayEventHandler.cpp" />
     <ClCompile Include="JetLag2021Application.cpp" />
@@ -165,8 +174,13 @@
     <ClCompile Include="Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Renderers\BaseRenderer.h" />
+    <ClInclude Include="Renderers\AboutRenderer.h" />
+    <ClInclude Include="Renderers\ConfirmQuitRenderer.h" />
+    <ClInclude Include="EventHandlers\AboutEventHandler.h" />
     <ClInclude Include="Common\Application.h" />
     <ClInclude Include="Common\SoundManager.h" />
+    <ClInclude Include="EventHandlers\ConfirmQuitEventHandler.h" />
     <ClInclude Include="Constants\Block.h" />
     <ClInclude Include="Constants\Board.h" />
     <ClInclude Include="Constants\Cell.h" />
@@ -182,6 +196,10 @@
     <ClInclude Include="Constants\Window.h" />
     <ClInclude Include="Game\GameData.h" />
     <ClInclude Include="EventHandlers\GameOverEventHandler.h" />
+    <ClInclude Include="EventHandlers\InstructionsEventHandler.h" />
+    <ClInclude Include="EventHandlers\OptionsEventHandler.h" />
+    <ClInclude Include="Renderers\OptionsRenderer.h" />
+    <ClInclude Include="Renderers\InstructionsRenderer.h" />
     <ClInclude Include="Renderers\GameOverRenderer.h" />
     <ClInclude Include="EventHandlers\InPlayEventHandler.h" />
     <ClInclude Include="JetLag2021Application.h" />

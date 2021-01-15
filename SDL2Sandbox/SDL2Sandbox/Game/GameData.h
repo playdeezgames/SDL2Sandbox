@@ -25,7 +25,11 @@ enum class GameState
 {
 	GAME_OVER,
 	IN_PLAY,
-	TITLE_SCREEN
+	TITLE_SCREEN,
+	INSTRUCTIONS,
+	ABOUT,
+	OPTIONS,
+	CONFIRM_QUIT
 };
 struct PowerUp
 {

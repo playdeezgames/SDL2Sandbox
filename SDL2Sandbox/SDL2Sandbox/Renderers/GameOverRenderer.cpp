@@ -1,11 +1,6 @@
 #include "GameOverRenderer.h"
 #include "..\Constants\UI.h"
 #include "..\Constants\Color.h"
-SDL_Renderer* GameOverRenderer::GetMainRenderer() const
-{
-	return renderer;
-}
-
 void GameOverRenderer::Draw()
 {
 	DrawHints();
@@ -18,7 +13,7 @@ GameOverRenderer::GameOverRenderer
 		const RomFontManager& romFont, 
 		const GameData& data
 	)
-	: renderer(rend)
+	: BaseRenderer(rend)
 	, soundManager(sndMan)
 	, romFontManager(romFont)
 	, gameData(data)

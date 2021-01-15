@@ -1,18 +1,15 @@
 #pragma once
-#include "..\Common\Application.h"
+#include "BaseRenderer.h"
 #include "..\Common\SoundManager.h"
 #include "..\Managers\RomFontManager.h"
 #include "..\Game\GameData.h"
-class TitleScreenRenderer : public tggd::common::Renderer
+class TitleScreenRenderer : public BaseRenderer
 {
 private:
-	SDL_Renderer* renderer;
 	const tggd::common::SoundManager& soundManager;
 	const RomFontManager& romFontManager;
 	const GameData& gameData;
 	void DrawMenuItem(int, const std::string&, const MainMenuItem&) const;
-protected:
-	SDL_Renderer* GetMainRenderer() const;
 public:
 	TitleScreenRenderer
 	(

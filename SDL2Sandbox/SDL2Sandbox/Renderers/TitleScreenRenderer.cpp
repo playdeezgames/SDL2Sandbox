@@ -1,11 +1,6 @@
 #include "TitleScreenRenderer.h"
 #include "..\Constants\Board.h"
 #include "..\Constants\Color.h"
-SDL_Renderer* TitleScreenRenderer::GetMainRenderer() const
-{
-	return renderer;
-}
-
 TitleScreenRenderer::TitleScreenRenderer
 (
 	SDL_Renderer* rend,
@@ -13,7 +8,7 @@ TitleScreenRenderer::TitleScreenRenderer
 	const RomFontManager& romFont,
 	const GameData& data
 )
-	: renderer(rend)
+	: BaseRenderer(rend)
 	, soundManager(sndMan)
 	, romFontManager(romFont)
 	, gameData(data)

@@ -1,15 +1,27 @@
 #include "JetLag2021Application.h"
 #include <SDL_image.h>
-#include "Utility.h"
+
+#include "Constants\Sound.h"
+#include "Constants\Window.h"
+
+#include "EventHandlers\AboutEventHandler.h"
+#include "EventHandlers\ConfirmQuitEventHandler.h"
 #include "EventHandlers\GameOverEventHandler.h"
 #include "EventHandlers\InPlayEventHandler.h"
-#include "Renderers\GameOverRenderer.h"
+#include "EventHandlers\InstructionsEventHandler.h"
+#include "EventHandlers\OptionsEventHandler.h"
 #include "EventHandlers\TitleScreenEventHandler.h"
-#include "Renderers\TitleScreenRenderer.h"
-#include "Constants\Window.h"
-#include "Constants\Sound.h"
-JetLag2021Application JetLag2021Application::sandboxApplication;
 
+#include "Renderers\AboutRenderer.h"
+#include "Renderers\ConfirmQuitRenderer.h"
+#include "Renderers\GameOverRenderer.h"
+#include "Renderers\InstructionsRenderer.h"
+#include "Renderers\OptionsRenderer.h"
+#include "Renderers\TitleScreenRenderer.h"
+
+#include "Utility.h"
+
+JetLag2021Application JetLag2021Application::sandboxApplication;
 JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, soundManager()
@@ -29,9 +41,17 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameData, soundManager, optionManager);
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
 	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameData);
+	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameData);
+	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameData);
+	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameData);
+	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
 	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
+	renderers[GameState::CONFIRM_QUIT] = new ConfirmQuitRenderer(GetMainRenderer());
+	renderers[GameState::ABOUT] = new AboutRenderer(GetMainRenderer());
+	renderers[GameState::INSTRUCTIONS] = new InstructionsRenderer(GetMainRenderer());
+	renderers[GameState::OPTIONS] = new OptionsRenderer(GetMainRenderer());
 
 	IMG_Init(IMG_INIT_PNG);
 	romFontManager.Start(GetMainRenderer());
