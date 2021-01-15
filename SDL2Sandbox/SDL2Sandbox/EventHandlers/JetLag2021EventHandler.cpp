@@ -20,6 +20,8 @@ JetLag2021EventHandler::JetLag2021EventHandler(GameData& data)
 	: gameData(data)
 	, lastVertical(0)
 	, vertical(0)
+	, lastHorizontal(0)
+	, horizontal(0)
 {
 
 }
@@ -31,18 +33,34 @@ GameData& JetLag2021EventHandler::GetGameData() const
 
 bool JetLag2021EventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
 {
+	if (axis == 0)
+	{
+		lastHorizontal = horizontal;
+		if (value < -8192)
+		{
+			horizontal = -1;
+		}
+		else if (value > 8192)
+		{
+			horizontal = 1;
+		}
+		else if (value<8192 && value>-8192)
+		{
+			horizontal = 0;
+		}
+	}
 	if (axis == 1)
 	{
 		lastVertical = vertical;
-		if (value < -8192 && vertical != -1)
+		if (value < -8192)
 		{
 			vertical = -1;
 		}
-		else if (value > 8192 && vertical != 1)
+		else if (value > 8192)
 		{
 			vertical = 1;
 		}
-		else if (value<8192 && value>-8192 && vertical != 0)
+		else if (value<8192 && value>-8192)
 		{
 			vertical = 0;
 		}
@@ -58,4 +76,14 @@ bool JetLag2021EventHandler::IsVerticalUp() const
 bool JetLag2021EventHandler::IsVerticalDown() const
 {
 	return vertical == 1 && lastVertical != 1;
+}
+
+bool JetLag2021EventHandler::IsHorizontalLeft() const
+{
+	return horizontal == -1 && lastHorizontal != -1;
+}
+
+bool JetLag2021EventHandler::IsHorizontalRight() const
+{
+	return horizontal == 1 && lastHorizontal != 1;
 }
