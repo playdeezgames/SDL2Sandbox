@@ -53,7 +53,7 @@ void JetLag2021Application::Start()
 	renderers[GameState::CONFIRM_QUIT] = new ConfirmQuitRenderer(GetMainRenderer(), romFontManager, confirmQuit);
 	renderers[GameState::ABOUT] = new AboutRenderer(GetMainRenderer(), romFontManager);
 	renderers[GameState::INSTRUCTIONS] = new InstructionsRenderer(GetMainRenderer(), romFontManager);
-	renderers[GameState::OPTIONS] = new OptionsRenderer(GetMainRenderer(), romFontManager, optionsState);
+	renderers[GameState::OPTIONS] = new OptionsRenderer(GetMainRenderer(), romFontManager, optionsState, soundManager);
 
 	IMG_Init(IMG_INIT_PNG);
 	romFontManager.Start(GetMainRenderer());

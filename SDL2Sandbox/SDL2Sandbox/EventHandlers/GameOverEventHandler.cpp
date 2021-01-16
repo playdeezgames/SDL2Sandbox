@@ -5,10 +5,9 @@ bool GameOverEventHandler::OnKeyDown(SDL_Keycode sym)
 	{
 		GetGameData().RestartGame();
 	}
-	else if (sym == SDLK_m)
+	else if (sym == SDLK_ESCAPE)
 	{
-		soundManager.SetMuted(!soundManager.IsMuted());
-		optionManager.Save();
+		GetGameData().SetGameState(GameState::TITLE_SCREEN);
 	}
 	return true;
 

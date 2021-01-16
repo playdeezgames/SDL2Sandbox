@@ -1,6 +1,10 @@
 #include "SoundManager.h"
 namespace tggd::common
 {
+	const int ANY_CHANNEL = -1;
+	const int NO_LOOPS = 0;
+	const int LOOP_FOREVER = 1;
+	const int INITIAL_VOLUME = 128;
 	void SoundManager::Finish()
 	{
 		Mix_HaltMusic();
@@ -40,7 +44,7 @@ namespace tggd::common
 		if (!muted)
 		{
 			const auto& item = sounds.find(name);
-			Mix_PlayChannel(-1/*Constants::Utility::ANY_CHANNEL*/, item->second , 0/*Constants::Utility::NO_LOOPS*/);
+			Mix_PlayChannel(ANY_CHANNEL, item->second , NO_LOOPS);
 		}
 	}
 
@@ -49,7 +53,7 @@ namespace tggd::common
 		if (!muted)
 		{
 			const auto& item = music.find(name);
-			Mix_PlayMusic(item->second, -1);//loop forever
+			Mix_PlayMusic(item->second, LOOP_FOREVER);
 		}
 	}
 
@@ -69,12 +73,35 @@ namespace tggd::common
 
 	void SoundManager::SetSfxVolume(int volume)
 	{
-		//TODO
+		sfxVolume = volume;
+		for (auto& entry : sounds)
+		{
+			Mix_VolumeChunk(entry.second, sfxVolume);
+		}
 	}
 
 	void SoundManager::SetMuxVolume(int volume)
 	{
-		//TODO
+		muxVolume = volume;
+		Mix_VolumeMusic(muxVolume);
+	}
+
+	int SoundManager::GetSfxVolume() const
+	{
+		return sfxVolume;
+	}
+
+	int SoundManager::GetMuxVolume() const
+	{
+		return muxVolume;
+	}
+
+	SoundManager::SoundManager()
+		: muted(false)
+		, sfxVolume(128)
+		, muxVolume(128)
+	{
+
 	}
 }
 

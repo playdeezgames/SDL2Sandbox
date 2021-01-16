@@ -27,6 +27,8 @@ void OptionManager::Load()
 			fseek(f, 0, SEEK_SET);//reset to start of file for reading
 			fread(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
 			soundManager.SetMuted(options.muted);
+			soundManager.SetMuxVolume(options.muxVolume);
+			soundManager.SetSfxVolume(options.sfxVolume);
 		}
 		fclose(f);
 	}
@@ -42,6 +44,8 @@ void OptionManager::Save()
 	{
 		GameOptions options = { 0 };
 		options.muted = soundManager.IsMuted();
+		options.sfxVolume = soundManager.GetSfxVolume();
+		options.muxVolume = soundManager.GetMuxVolume();
 		fwrite(&options, sizeof(GameOptions), Constants::Options::RECORD_COUNT, f);
 		fclose(f);
 	}
