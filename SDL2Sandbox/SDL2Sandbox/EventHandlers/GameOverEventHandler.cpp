@@ -13,9 +13,16 @@ bool GameOverEventHandler::OnKeyDown(SDL_Keycode sym)
 
 }
 
-bool GameOverEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
+bool GameOverEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8 button)
 {
-	GetGameData().RestartGame();
+	if (button > 0)
+	{
+		GetGameData().SetGameState(GameState::TITLE_SCREEN);
+	}
+	else
+	{
+		GetGameData().RestartGame();
+	}
 	return true;
 }
 
