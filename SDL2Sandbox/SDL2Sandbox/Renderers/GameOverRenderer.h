@@ -10,7 +10,7 @@ private:
 	const GameData& gameData;
 protected:
 	void DrawHints();
-	void DrawMuteHint();
+	void DrawMenuHint();
 	void DrawStartHint();
 public:
 	GameOverRenderer

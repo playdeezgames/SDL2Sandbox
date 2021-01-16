@@ -19,28 +19,18 @@ GameOverRenderer::GameOverRenderer
 {
 }
 
-void GameOverRenderer::DrawMuteHint()
+void GameOverRenderer::DrawMenuHint()
 {
-	if (soundManager.IsMuted())
-	{
-		GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::UNMUTE_HINT_TEXT, Constants::Color::MAGENTA);
-	}
-	else
-	{
-		GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::MUTE_MESSAGE_ROW, Constants::UI::MUTE_HINT_TEXT, Constants::Color::MAGENTA);
-	}
+	GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::MENU_MESSAGE_ROW, Constants::UI::MENU_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
 void GameOverRenderer::DrawStartHint()
 {
-	GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::START_MESSAGE_ROW, Constants::UI::START_HINT_TEXT, Constants::Color::MAGENTA);
+	GetRomFont().DrawCenteredText(GetMainRenderer(), Constants::UI::RESTART_MESSAGE_ROW, Constants::UI::RESTART_HINT_TEXT, Constants::Color::MAGENTA);
 }
 
 void GameOverRenderer::DrawHints()
 {
-	if (gameData.GetGameState() == GameState::GAME_OVER)
-	{
-		DrawMuteHint();
-		DrawStartHint();
-	}
+	DrawMenuHint();
+	DrawStartHint();
 }
