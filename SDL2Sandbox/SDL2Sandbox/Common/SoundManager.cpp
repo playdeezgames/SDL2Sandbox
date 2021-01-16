@@ -3,7 +3,7 @@ namespace tggd::common
 {
 	const int ANY_CHANNEL = -1;
 	const int NO_LOOPS = 0;
-	const int LOOP_FOREVER = 1;
+	const int LOOP_FOREVER = -1;
 	const int INITIAL_VOLUME = 128;
 	void SoundManager::Finish()
 	{
