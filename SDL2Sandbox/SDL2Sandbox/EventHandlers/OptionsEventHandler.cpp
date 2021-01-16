@@ -25,6 +25,10 @@ bool OptionsEventHandler::DoOption()
 		return true;
 	case OptionsState::TOGGLE_MUTE:
 		soundManager.SetMuted(!soundManager.IsMuted());
+		if (!soundManager.IsMuted())
+		{
+			soundManager.PlayMusic(Constants::Sound::Name::SONG);
+		}
 		return true;
 	default:
 		return true;
@@ -162,5 +166,5 @@ void OptionsEventHandler::ChangeMuxVolume(int delta)
 void OptionsEventHandler::ChangeSfxVolume(int delta)
 {
 	soundManager.SetSfxVolume(ClampVolume(soundManager.GetSfxVolume() + delta));
-	soundManager.PlaySound(Constants::Sound::Name::TING);
+	soundManager.PlaySound(Constants::Sound::Name::TURN);
 }
