@@ -6,11 +6,13 @@ AboutEventHandler::AboutEventHandler(GameData& data)
 }
 bool AboutEventHandler::OnKeyDown(SDL_Keycode)
 {
+	GetGameData().SetGameState(GameState::TITLE_SCREEN);
 	return true;
 }
 
 bool AboutEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 {
+	GetGameData().SetGameState(GameState::TITLE_SCREEN);
 	return true;
 }
 

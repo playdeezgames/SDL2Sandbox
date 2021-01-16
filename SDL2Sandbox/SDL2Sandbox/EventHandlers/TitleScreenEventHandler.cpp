@@ -53,6 +53,12 @@ bool TitleScreenEventHandler::DoCurrentMainMenuItem()
 	case MainMenuItem::PLAY:
 		GetGameData().RestartGame();
 		return true;
+	case MainMenuItem::INSTRUCTIONS:
+		GetGameData().SetGameState(GameState::INSTRUCTIONS);
+		return true;
+	case MainMenuItem::ABOUT:
+		GetGameData().SetGameState(GameState::ABOUT);
+		return true;
 	default:
 		return true;
 	}
