@@ -11,12 +11,21 @@ namespace tggd::common
 	class Application : public Thingie, public Renderer, public Updater, public EventHandler
 	{
 	private:
-		static Application* s_application;
+		Application() = delete;
+		Application(const Application&) = delete;
+		Application(Application&&) = delete;
+
 		SDL_Window* window;
-		SDL_Renderer* renderer;
+		std::string windowTitle;
 		int windowWidth;
 		int windowHeight;
-		std::string windowTitle;
+		
+		SDL_Renderer* renderer;
+
+		static Application* s_application;
+		static void Start();
+		static void Pump();
+		static void Finish();
 	protected:
 		SDL_Renderer* GetMainRenderer() const { return renderer; }
 	public:

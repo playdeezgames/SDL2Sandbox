@@ -5,18 +5,10 @@ namespace tggd::common
 	const int NO_LOOPS = 0;
 	const int LOOP_FOREVER = -1;
 	const int INITIAL_VOLUME = 128;
-	void SoundManager::Finish()
+
+	void SoundManager::FinishMusic()
 	{
 		Mix_HaltMusic();
-		for (auto& entry : sounds)
-		{
-			if (entry.second)
-			{
-				Mix_FreeChunk(entry.second);
-				entry.second = nullptr;
-			}
-		}
-		sounds.clear();
 		for (auto& entry : music)
 		{
 			if (entry.second)
@@ -26,7 +18,25 @@ namespace tggd::common
 			}
 		}
 		music.clear();
+	}
 
+	void SoundManager::FinishSound()
+	{
+		for (auto& entry : sounds)
+		{
+			if (entry.second)
+			{
+				Mix_FreeChunk(entry.second);
+				entry.second = nullptr;
+			}
+		}
+		sounds.clear();
+	}
+
+	void SoundManager::Finish()
+	{
+		FinishMusic();
+		FinishSound();
 	}
 
 	void SoundManager::AddSound(const std::string& name, const std::string& filename)

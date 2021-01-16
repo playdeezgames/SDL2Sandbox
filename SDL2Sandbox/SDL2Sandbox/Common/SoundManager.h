@@ -12,6 +12,8 @@ namespace tggd::common
 		bool muted;
 		int muxVolume;
 		int sfxVolume;
+		void FinishMusic();
+		void FinishSound();
 	public:
 		SoundManager();
 		void Finish();
