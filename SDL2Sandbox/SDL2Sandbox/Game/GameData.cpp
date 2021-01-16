@@ -21,6 +21,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan)
 	, keysReversed(Constants::Game::InitialValues::KEYS_REVERSED)
 	, bombs(Constants::Game::InitialValues::BOMBS)
 	, currentMainMenuItem(MainMenuItem::PLAY)
+	, lives(Constants::Game::InitialValues::LIVES)
 {
 
 }
@@ -80,7 +81,7 @@ void GameData::UpdateGameStatus()
 	if (tailPositions[row] < Constants::Block::MINIMUM_RANDOM_COLUMN ||
 		tailPositions[row] > Constants::Block::MAXIMUM_RANDOM_COLUMN)
 	{
-		gameState = GameState::GAME_OVER;
+		LoseLife();
 	}
 	else
 	{
@@ -95,13 +96,13 @@ void GameData::UpdateGameStatus()
 				score += Constants::Game::BLOCK_EAT_SCORE;
 				break;
 			default:
-				gameState = GameState::GAME_OVER;
+				LoseLife();
 				break;
 			}
 		}
 	}
 
-	if (gameState == GameState::GAME_OVER)
+	if (gameState == GameState::GAME_OVER || gameState == GameState::END_RUN)
 	{
 		dead = true;
 		soundManager.PlaySound(Constants::Sound::Name::DEATH);
@@ -146,6 +147,17 @@ void GameData::UpdateGameStatus()
 			case PowerUpType::INVINCIBLE:
 				invincibility = Constants::Game::Counters::INVINCIBILITY;
 				soundManager.PlaySound(Constants::Sound::Name::CHARGE);
+				break;
+			case PowerUpType::EXTRA_LIFE:
+				if (lives < 99)
+				{
+					lives++;
+					soundManager.PlaySound(Constants::Sound::Name::WOOHOO);
+				}
+				else
+				{
+					soundManager.PlaySound(Constants::Sound::Name::NOPE);
+				}
 				break;
 			}
 			powerUpPositions[row].position = Constants::PickUp::INITIAL_COLUMN;
@@ -229,7 +241,7 @@ int GameData::GetScore() const
 	return score;
 }
 
-void GameData::ResetGame()
+void GameData::ResetRun()
 {
 	powerUpPositions.clear();
 	while (powerUpPositions.size() < Constants::Board::ROWS)
@@ -251,12 +263,25 @@ void GameData::ResetGame()
 	}
 
 	direction = Constants::Game::Direction::RIGHT;
-	score = Constants::Game::InitialValues::SCORE;
 	runLength = Constants::Game::InitialValues::RUN_LENGTH;
 	dead = Constants::Game::InitialValues::DEAD;
 	invincibility = Constants::Game::InitialValues::INVINCIBILITY;
 	bombs = Constants::Game::InitialValues::BOMBS;
 	keysReversed = Constants::Game::InitialValues::KEYS_REVERSED;
+}
+
+void GameData::ResetGame()
+{
+	ResetRun();
+
+	score = Constants::Game::InitialValues::SCORE;
+	lives = Constants::Game::InitialValues::LIVES;
+}
+
+void GameData::NextRun()
+{
+	ResetRun();
+	gameState = GameState::IN_PLAY;
 }
 
 void GameData::RestartGame()
@@ -288,11 +313,12 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::PENNY] = 1;
 		powerUpGenerator[PowerUpType::DOLLAR] = 1;
 		powerUpGenerator[PowerUpType::POUND] = 1;
-		powerUpGenerator[PowerUpType::YEN] = 1;
 		powerUpGenerator[PowerUpType::DIAMOND] = 1;
+		powerUpGenerator[PowerUpType::YEN] = 1;
 		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
 		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
 		powerUpGenerator[PowerUpType::BOMB] = 1;
+		powerUpGenerator[PowerUpType::EXTRA_LIFE] = 1;
 	}
 	int tally = 0;
 	for (const auto& entry : powerUpGenerator)
@@ -413,4 +439,25 @@ void GameData::PreviousMainMenuItem()
 void GameData::SetGameState(const GameState& state)
 {
 	gameState = state;
+}
+
+void GameData::LoseLife()
+{
+	if (lives > 0)
+	{
+		lives--;
+		if (lives > 0)
+		{
+			SetGameState(GameState::END_RUN);
+		}
+		else
+		{
+			SetGameState(GameState::GAME_OVER);
+		}
+	}
+}
+
+int GameData::GetLives() const
+{
+	return lives;
 }

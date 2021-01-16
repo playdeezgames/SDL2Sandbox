@@ -37,6 +37,7 @@ void JetLag2021Renderer::Draw()
 	DrawStatusBar();
 	DrawScore();
 	DrawBombs();
+	DrawLives();
 }
 
 void JetLag2021Renderer::DrawBackground()
@@ -101,6 +102,13 @@ void JetLag2021Renderer::DrawBombs()
 	romFontManager.DrawText(GetMainRenderer(), Constants::Board::COLUMNS - 3, 0, ss.str(), Constants::Color::BLACK);
 }
 
+void JetLag2021Renderer::DrawLives()
+{
+	std::stringstream ss;
+	ss << '\x01' << (char)('0' + (gameData.GetLives() / Constants::Game::SCORE_RADIX)) << (char)('0' + (gameData.GetLives() % Constants::Game::SCORE_RADIX));
+	romFontManager.DrawText(GetMainRenderer(), Constants::Board::COLUMNS - 7, 0, ss.str(), Constants::Color::BLACK);
+}
+
 void JetLag2021Renderer::DrawScore()
 {
 	std::stringstream ss;
@@ -116,6 +124,10 @@ void JetLag2021Renderer::DrawPickUps()
 		SDL_Color color = Constants::Color::BLACK;
 		switch (gameData.GetPowerUp(row))
 		{
+		case PowerUpType::EXTRA_LIFE:
+			color = Constants::Color::WHITE;
+			ch = '\x01';
+			break;
 		case PowerUpType::REVERSE_KEYS:
 			color = Constants::Color::DARK_GRAY;
 			ch = '?';

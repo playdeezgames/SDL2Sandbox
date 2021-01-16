@@ -6,6 +6,7 @@
 
 #include "EventHandlers\AboutEventHandler.h"
 #include "EventHandlers\ConfirmQuitEventHandler.h"
+#include "EventHandlers\EndRunEventHandler.h"
 #include "EventHandlers\GameOverEventHandler.h"
 #include "EventHandlers\InPlayEventHandler.h"
 #include "EventHandlers\InstructionsEventHandler.h"
@@ -47,6 +48,7 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameData, confirmQuit);
 	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameData);
 	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameData, optionsState, soundManager, optionManager);
+	eventHandlers[GameState::END_RUN] = new EndRunEventHandler(gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
 	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
@@ -68,6 +70,7 @@ void JetLag2021Application::Start()
 	soundManager.AddSound(Constants::Sound::Name::BOOM, Constants::Sound::FileName::BOOM);
 	soundManager.AddSound(Constants::Sound::Name::YOINK, Constants::Sound::FileName::YOINK);
 	soundManager.AddSound(Constants::Sound::Name::NOPE, Constants::Sound::FileName::NOPE);
+	soundManager.AddSound(Constants::Sound::Name::WOOHOO, Constants::Sound::FileName::WOOHOO);
 
 	soundManager.AddMusic(Constants::Sound::Name::SONG, Constants::Sound::FileName::SONG);
 

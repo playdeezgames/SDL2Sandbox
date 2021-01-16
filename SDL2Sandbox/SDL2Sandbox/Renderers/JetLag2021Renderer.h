@@ -19,6 +19,7 @@ private:
 	void DrawScore();
 	void DrawBombs();
 	void DrawStatusBar();
+	void DrawLives();
 	static void PlotCellRect(SDL_Rect&, int, int);
 protected:
 	SDL_Renderer* GetMainRenderer() const;

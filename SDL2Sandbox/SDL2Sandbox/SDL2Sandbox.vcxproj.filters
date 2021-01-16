@@ -90,6 +90,9 @@
     <ClCompile Include="Common\Thingie.h">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EventHandlers\EndRunEventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JetLag2021Application.h">
@@ -210,6 +213,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Common\EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventHandlers\EndRunEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

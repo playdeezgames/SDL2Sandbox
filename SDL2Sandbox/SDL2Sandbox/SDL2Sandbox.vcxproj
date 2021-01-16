@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Common\Thingie.h" />
+    <ClCompile Include="EventHandlers\EndRunEventHandler.cpp" />
     <ClCompile Include="Renderers\BaseRenderer.cpp" />
     <ClCompile Include="Renderers\AboutRenderer.cpp" />
     <ClCompile Include="Renderers\ConfirmQuitRenderer.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Common\EventHandler.h" />
     <ClInclude Include="Common\Renderer.h" />
     <ClInclude Include="Common\Updater.h" />
+    <ClInclude Include="EventHandlers\EndRunEventHandler.h" />
     <ClInclude Include="Game\OptionsState.h" />
     <ClInclude Include="Renderers\BaseRenderer.h" />
     <ClInclude Include="Renderers\AboutRenderer.h" />

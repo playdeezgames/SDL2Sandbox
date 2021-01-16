@@ -21,6 +21,7 @@ namespace Constants
 			const int POWERUP_COUNTER = 0;
 			const bool KEYS_REVERSED = false;
 			const int BOMBS = 3;
+			const int LIVES = 3;
 		}
 		namespace Counters
 		{

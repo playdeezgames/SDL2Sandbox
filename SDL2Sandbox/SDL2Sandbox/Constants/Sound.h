@@ -14,10 +14,12 @@ namespace Constants::Sound
 		const std::string YOINK = "yoink";
 		const std::string SONG = "song";
 		const std::string NOPE = "nope";
+		const std::string WOOHOO = "woohoo";
 	}
 	namespace FileName
 	{
 		const std::string NOPE = "assets/sounds/nope.wav";
+		const std::string WOOHOO = "assets/sounds/woohoo.wav";
 		const std::string TURN = "assets/sounds/turn.wav";
 		const std::string DEATH = "assets/sounds/dead.wav";
 		const std::string CHOMP = "assets/sounds/chomp.wav";

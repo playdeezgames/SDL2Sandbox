@@ -31,29 +31,29 @@ Features:
     ✔ status bar at top of screen for score lives etc @done(21-01-14 05:42)
     ☐ high score/games played/average score
 Game States:
-    ☐ Title Screen
-        ☐ ->in play
-        ☐ ->about
-        ☐ ->options
-        ☐ ->instructions
-        ☐ ->confirm quit
+    ✔ Title Screen @done(21-01-16 05:34)
+        ✔ ->in play @done(21-01-16 05:33)
+        ✔ ->about @done(21-01-16 05:33)
+        ✔ ->options @done(21-01-16 05:33)
+        ✔ ->instructions @done(21-01-16 05:33)
+        ✔ ->confirm quit @done(21-01-16 05:33)
     ☐ In Play
         ☐ ->end run
         ☐ ->game over
     ☐ End Run
         ☐ ->in play
-    ☐ Game Over
-        ☐ ->in play
-        ☐ ->title screen
-    ☐ About
-        ☐ ->title screen
-    ☐ Options
-        ☐ mute/unmute
-        ☐ sound volume
-        ☐ music volume
-        ☐ ->title screen
-    ☐ Confirm Quit
-        ☐ ->title screen
-        ☐ ->(exit game)
-    ☐ Instructions
-        ☐ ->title screen
+    ✔ Game Over @done(21-01-16 05:34)
+        ✔ ->in play @done(21-01-16 05:34)
+        ✔ ->title screen @done(21-01-16 05:34)
+    ✔ About @done(21-01-16 05:34)
+        ✔ ->title screen @done(21-01-16 05:34)
+    ✔ Options @done(21-01-16 05:34)
+        ✔ mute/unmute @done(21-01-16 05:34)
+        ✔ sound volume @done(21-01-16 05:34)
+        ✔ music volume @done(21-01-16 05:34)
+        ✔ ->title screen @done(21-01-16 05:34)
+    ✔ Confirm Quit @done(21-01-16 05:34)
+        ✔ ->title screen @done(21-01-16 05:34)
+        ✔ ->(exit game) @done(21-01-16 05:34)
+    ✔ Instructions @done(21-01-16 05:34)
+        ✔ ->title screen @done(21-01-16 05:34)

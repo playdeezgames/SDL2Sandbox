@@ -12,7 +12,8 @@ enum class PowerUpType
 	YEN,
 	INVINCIBLE,
 	REVERSE_KEYS,
-	BOMB
+	BOMB,
+	EXTRA_LIFE
 };
 enum class PlayerState
 {
@@ -29,7 +30,8 @@ enum class GameState
 	INSTRUCTIONS,
 	ABOUT,
 	OPTIONS,
-	CONFIRM_QUIT
+	CONFIRM_QUIT,
+	END_RUN
 };
 struct PowerUp
 {
@@ -62,6 +64,7 @@ private:
 	int invincibility;
 	bool keysReversed;
 	int bombs;
+	int lives;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();
@@ -73,10 +76,12 @@ private:
 	void UpdateBlocks();
 	void UpdateGameStatus();
 	void UpdatePowerUps();
+	void ResetRun();
 public:
 	GameData(tggd::common::SoundManager&);
 	void ResetGame();
 	void RestartGame();
+	void NextRun();
 	void SetNextDirection(int);
 	int GetTailLength() const;
 	int GetTailPosition(int) const;
@@ -91,6 +96,8 @@ public:
 	void Update(int);
 	void UseBomb();
 	int GetBombs() const;
+	void LoseLife();
+	int GetLives() const;
 	MainMenuItem GetMainMenuItem() const;
 	void NextMainMenuItem();
 	void PreviousMainMenuItem();
