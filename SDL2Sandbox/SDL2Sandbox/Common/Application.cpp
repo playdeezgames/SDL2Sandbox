@@ -18,7 +18,7 @@ namespace tggd::common
 		}
 	}
 
-	void Application::Start()
+	void Application::DoStart()
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		Mix_Init(MIX_INIT_OGG);
@@ -33,7 +33,7 @@ namespace tggd::common
 		s_application->Start();
 	}
 
-	void Application::Pump()
+	void Application::DoPump()
 	{
 		int oldCounter = SDL_GetTicks();
 		int frameCounter;
@@ -56,7 +56,7 @@ namespace tggd::common
 
 	}
 
-	void Application::Finish()
+	void Application::DoFinish()
 	{
 		s_application->Finish();
 		if (s_application->renderer)
@@ -79,9 +79,9 @@ namespace tggd::common
 	{
 		if (s_application)
 		{
-			Start();
-			Pump();
-			Finish();
+			DoStart();
+			DoPump();
+			DoFinish();
 		}
 		return 0;
 	}

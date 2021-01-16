@@ -23,9 +23,9 @@ namespace tggd::common
 		SDL_Renderer* renderer;
 
 		static Application* s_application;
-		static void Start();
-		static void Pump();
-		static void Finish();
+		static void DoStart();
+		static void DoPump();
+		static void DoFinish();
 	protected:
 		SDL_Renderer* GetMainRenderer() const { return renderer; }
 	public:
