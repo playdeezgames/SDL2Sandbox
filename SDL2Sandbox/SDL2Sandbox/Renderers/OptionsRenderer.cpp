@@ -1,12 +1,13 @@
 #include "OptionsRenderer.h"
 #include "..\Constants\Color.h"
 #include "..\Constants\Board.h"
+#include <sstream>
 OptionsRenderer::OptionsRenderer
 	(
 		SDL_Renderer* renderer, 
 		const RomFontManager& romFontManager, 
 		const OptionsState& state,
-		tggd::common::SoundManager& soundManager
+		const tggd::common::SoundManager& soundManager
 	)
 	: BaseRenderer(renderer, romFontManager)
 	, state(state)
@@ -29,8 +30,12 @@ void OptionsRenderer::Draw()
 	{
 		RenderItem(row + 2, "Mute", OptionsState::TOGGLE_MUTE);
 	}
-	RenderItem(row + 3, "SFX", OptionsState::SFX_VOLUME);
-	RenderItem(row + 4, "MUX", OptionsState::MUX_VOLUME);
+	std::stringstream ss;
+	ss << "SFX: " << soundManager.GetSfxVolume();
+	RenderItem(row + 3, ss.str(), OptionsState::SFX_VOLUME);
+	ss.str("");
+	ss << "MUX: " << soundManager.GetMuxVolume();
+	RenderItem(row + 4, ss.str(), OptionsState::MUX_VOLUME);
 }
 
 void OptionsRenderer::RenderItem(int row, const std::string& text, const OptionsState& optionsState)

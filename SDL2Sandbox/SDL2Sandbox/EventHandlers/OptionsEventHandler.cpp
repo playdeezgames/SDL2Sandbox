@@ -1,24 +1,46 @@
 #include "OptionsEventHandler.h"
-OptionsEventHandler::OptionsEventHandler(GameData& data, OptionsState& opt)
-	: JetLag2021EventHandler(data)
-	, state(opt)
+#include "..\Constants\Sound.h"
+OptionsEventHandler::OptionsEventHandler
+	(
+		GameData& gameData, 
+		OptionsState& optionsState, 
+		tggd::common::SoundManager& soundManager,
+		OptionManager& optionManager
+	)
+	: JetLag2021EventHandler(gameData)
+	, state(optionsState)
+	, soundManager(soundManager)
+	, optionManager(optionManager)
 {
 
 }
 
 bool OptionsEventHandler::DoOption()
 {
-	if (state == OptionsState::BACK)
+	switch(state)
 	{
+	case OptionsState::BACK:
+		optionManager.Save();
 		GetGameData().SetGameState(GameState::TITLE_SCREEN);
+		return true;
+	case OptionsState::TOGGLE_MUTE:
+		soundManager.SetMuted(!soundManager.IsMuted());
+		return true;
+	default:
+		return true;
 	}
-	return true;
 }
 
 bool OptionsEventHandler::OnKeyDown(SDL_Keycode sym)
 {
 	switch (sym)
 	{
+	case SDLK_LEFT:
+		DecreaseOption();
+		return true;
+	case SDLK_RIGHT:
+		IncreaseOption();
+		return true;
 	case SDLK_UP:
 		PreviousOption();
 		return true;
@@ -34,17 +56,26 @@ bool OptionsEventHandler::OnKeyDown(SDL_Keycode sym)
 
 bool OptionsEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 {
+	DoOption();
 	return true;
 }
 
 bool OptionsEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
 	JetLag2021EventHandler::OnJoyAxisMotion(which, axis, value);
-	if (IsVerticalDown())
+	if (IsHorizontalLeft())
+	{
+		DecreaseOption();
+	}
+	else if (IsHorizontalRight())
+	{
+		IncreaseOption();
+	}
+	else if (IsVerticalDown())
 	{
 		NextOption();
 	}
-	if (IsVerticalUp())
+	else if (IsVerticalUp())
 	{
 		PreviousOption();
 	}
@@ -87,4 +118,49 @@ void OptionsEventHandler::PreviousOption()
 		state = OptionsState::SFX_VOLUME;
 		break;
 	}
+}
+
+void OptionsEventHandler::IncreaseOption()
+{
+	switch (state)
+	{
+	case OptionsState::MUX_VOLUME:
+		ChangeMuxVolume(8);
+		break;
+	case OptionsState::SFX_VOLUME:
+		ChangeSfxVolume(8);
+		break;
+	}
+}
+
+void OptionsEventHandler::DecreaseOption()
+{
+	switch (state)
+	{
+	case OptionsState::MUX_VOLUME:
+		ChangeMuxVolume(-8);
+		break;
+	case OptionsState::SFX_VOLUME:
+		ChangeSfxVolume(-8);
+		break;
+	}
+}
+
+static int ClampVolume(int volume)
+{
+	return 		
+		(volume < 0) ? (0) :
+		(volume > 128) ? (128) :
+		volume;
+}
+
+void OptionsEventHandler::ChangeMuxVolume(int delta)
+{
+	soundManager.SetMuxVolume(ClampVolume(soundManager.GetMuxVolume() + delta));
+}
+
+void OptionsEventHandler::ChangeSfxVolume(int delta)
+{
+	soundManager.SetSfxVolume(ClampVolume(soundManager.GetSfxVolume() + delta));
+	soundManager.PlaySound(Constants::Sound::Name::TING);
 }
