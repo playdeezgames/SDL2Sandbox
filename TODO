@@ -2,6 +2,7 @@ Sounds:
     ✔ diamond @done(21-01-11 05:08)
     ✔ turn @done(21-01-11 05:08)
     ✔ invincible @done(21-01-11 05:19)
+    ☐ out of lives
 Power Ups:
     ✔ cent (+1) (0x9b) @done(21-01-11 05:36)
     ✔ dollar (+100) (0x24) @done(21-01-11 05:36)
@@ -21,7 +22,6 @@ Power Ups:
     ☐ slow down
     ✔ reverse keys @done(21-01-11 05:45)
     ✔ no bombs left sound @done(21-01-14 05:50)
-    ☐ out of lives
 Features:
     ☐ score multiplier
     ✔ bombs @done(21-01-12 05:30)
@@ -37,11 +37,11 @@ Game States:
         ✔ ->options @done(21-01-16 05:33)
         ✔ ->instructions @done(21-01-16 05:33)
         ✔ ->confirm quit @done(21-01-16 05:33)
-    ☐ In Play
-        ☐ ->end run
-        ☐ ->game over
-    ☐ End Run
-        ☐ ->in play
+    ✔ In Play @done(21-01-16 06:07)
+        ✔ ->end run @done(21-01-16 06:07)
+        ✔ ->game over @done(21-01-16 06:07)
+    ✔ End Run @done(21-01-16 06:07)
+        ✔ ->in play @done(21-01-16 06:07)
     ✔ Game Over @done(21-01-16 05:34)
         ✔ ->in play @done(21-01-16 05:34)
         ✔ ->title screen @done(21-01-16 05:34)
