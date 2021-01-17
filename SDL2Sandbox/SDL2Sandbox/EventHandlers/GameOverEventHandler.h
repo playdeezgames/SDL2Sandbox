@@ -1,5 +1,5 @@
 #pragma once
-#include "JetLag2021EventHandler.h"
+#include "BaseEventHandler.h"
 #include "..\Common\SoundManager.h"
 #include "..\Managers\OptionManager.h"
 class GameOverEventHandler : public BaseEventHandler

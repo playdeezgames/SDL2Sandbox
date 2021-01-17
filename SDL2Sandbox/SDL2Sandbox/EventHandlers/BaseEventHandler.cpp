@@ -1,4 +1,4 @@
-#include "JetLag2021EventHandler.h"
+#include "BaseEventHandler.h"
 bool BaseEventHandler::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)

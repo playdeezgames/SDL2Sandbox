@@ -166,7 +166,7 @@
     <ClCompile Include="Renderers\GameOverRenderer.cpp" />
     <ClCompile Include="EventHandlers\InPlayEventHandler.cpp" />
     <ClCompile Include="JetLag2021Application.cpp" />
-    <ClCompile Include="EventHandlers\JetLag2021EventHandler.cpp" />
+    <ClCompile Include="EventHandlers\BaseEventHandler.cpp" />
     <ClCompile Include="Managers\OptionManager.cpp" />
     <ClCompile Include="Renderers\JetLag2021Renderer.cpp" />
     <ClCompile Include="Managers\RomFontManager.cpp" />
@@ -211,7 +211,7 @@
     <ClInclude Include="Renderers\GameOverRenderer.h" />
     <ClInclude Include="EventHandlers\InPlayEventHandler.h" />
     <ClInclude Include="JetLag2021Application.h" />
-    <ClInclude Include="EventHandlers\JetLag2021EventHandler.h" />
+    <ClInclude Include="EventHandlers\BaseEventHandler.h" />
     <ClInclude Include="Managers\OptionManager.h" />
     <ClInclude Include="Renderers\JetLag2021Renderer.h" />
     <ClInclude Include="Managers\RomFontManager.h" />
