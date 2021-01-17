@@ -3,7 +3,7 @@
 #include "..\Constants\Game.h"
 #include "..\Constants\Sound.h"
 #include "..\Utility.h"
-#include "..\Constants\PickUp.h"
+#include "..\Constants\PowerUp.h"
 #include "..\Constants\Block.h"
 #include "..\Constants\Tail.h"
 GameData::GameData(tggd::common::SoundManager& sndMan)
@@ -70,8 +70,8 @@ void GameData::UpdateBlocks()
 	blockPositions[blockPositions.size() - 1] =
 		Utility::GenerateRandomFromRange
 		(
-			Constants::PickUp::MINIMUM_RANDOM_COLUMN,
-			Constants::PickUp::MAXIMUM_RANDOM_COLUMN
+			Constants::PowerUp::MINIMUM_RANDOM_COLUMN,
+			Constants::PowerUp::MAXIMUM_RANDOM_COLUMN
 		);
 }
 
@@ -121,23 +121,23 @@ void GameData::UpdateGameStatus()
 				soundManager.PlaySound(Constants::Sound::Name::YOINK);
 				break;
 			case PowerUpType::DIAMOND:
-				score += Constants::PickUp::DIAMOND_BONUS;
+				score += Constants::PowerUp::DIAMOND_BONUS;
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::PENNY:
-				score += Constants::PickUp::PENNY_BONUS;
+				score += Constants::PowerUp::PENNY_BONUS;
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::DOLLAR:
-				score += Constants::PickUp::DOLLAR_BONUS;
+				score += Constants::PowerUp::DOLLAR_BONUS;
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::POUND:
-				score += Constants::PickUp::POUND_BONUS;
+				score += Constants::PowerUp::POUND_BONUS;
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::YEN:
-				score += Constants::PickUp::YEN_BONUS;
+				score += Constants::PowerUp::YEN_BONUS;
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::REVERSE_KEYS:
@@ -160,7 +160,7 @@ void GameData::UpdateGameStatus()
 				}
 				break;
 			}
-			powerUpPositions[row].position = Constants::PickUp::INITIAL_COLUMN;
+			powerUpPositions[row].position = Constants::PowerUp::INITIAL_COLUMN;
 		}
 		runLength++;
 		if (invincibility > Constants::Game::InitialValues::INVINCIBILITY)
@@ -205,14 +205,14 @@ void GameData::UpdatePowerUps()
 		powerUpPositions[lastRow].position =
 			Utility::GenerateRandomFromRange
 			(
-				Constants::PickUp::MINIMUM_RANDOM_COLUMN,
-				Constants::PickUp::MAXIMUM_RANDOM_COLUMN
+				Constants::PowerUp::MINIMUM_RANDOM_COLUMN,
+				Constants::PowerUp::MAXIMUM_RANDOM_COLUMN
 			);
 		powerUpPositions[lastRow].type = GeneratePowerUp();
 	}
 	else
 	{
-		powerUpPositions[lastRow].position = Constants::PickUp::INITIAL_COLUMN;
+		powerUpPositions[lastRow].position = Constants::PowerUp::INITIAL_COLUMN;
 	}
 }
 
@@ -246,7 +246,7 @@ void GameData::ResetRun()
 	powerUpPositions.clear();
 	while (powerUpPositions.size() < Constants::Board::ROWS)
 	{
-		PowerUp powerUp = { PowerUpType::NONE, Constants::PickUp::INITIAL_COLUMN };
+		PowerUp powerUp = { PowerUpType::NONE, Constants::PowerUp::INITIAL_COLUMN };
 		powerUpPositions.push_back(powerUp);
 	}
 

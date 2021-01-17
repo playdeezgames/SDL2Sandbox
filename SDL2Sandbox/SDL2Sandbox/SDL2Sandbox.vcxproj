@@ -193,7 +193,7 @@
     <ClInclude Include="Constants\Color.h" />
     <ClInclude Include="Constants\Game.h" />
     <ClInclude Include="Constants\Options.h" />
-    <ClInclude Include="Constants\PickUp.h" />
+    <ClInclude Include="Constants\PowerUp.h" />
     <ClInclude Include="Constants\RomFont.h" />
     <ClInclude Include="Constants\Sound.h" />
     <ClInclude Include="Constants\Tail.h" />

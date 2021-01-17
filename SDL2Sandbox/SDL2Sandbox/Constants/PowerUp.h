@@ -1,6 +1,6 @@
 #pragma once
 #include "Board.h"
-namespace Constants::PickUp
+namespace Constants::PowerUp
 {
 	const int INITIAL_COLUMN = -1;
 	const int MINIMUM_RANDOM_COLUMN = 1;

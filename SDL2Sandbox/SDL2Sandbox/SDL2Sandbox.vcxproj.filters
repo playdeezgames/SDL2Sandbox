@@ -113,9 +113,6 @@
     <ClInclude Include="Constants\Block.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Constants\PickUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Constants\Tail.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -213,6 +210,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventHandlers\EndRunEventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants\PowerUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
