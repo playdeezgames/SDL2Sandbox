@@ -2,12 +2,12 @@
 #include "BaseRenderer.h"
 #include "..\Common\SoundManager.h"
 #include "..\Managers\RomFontManager.h"
-#include "..\Game\GameData.h"
+#include "..\Game\MainMenuItem.h"
 class TitleScreenRenderer : public BaseRenderer
 {
 private:
 	const tggd::common::SoundManager& soundManager;
-	const GameData& gameData;
+	const MainMenuItem& mainMenuItem;
 	void DrawMenuItem(int, const std::string&, const MainMenuItem&) const;
 public:
 	TitleScreenRenderer
@@ -15,7 +15,7 @@ public:
 		SDL_Renderer*,
 		const tggd::common::SoundManager&,
 		const RomFontManager&,
-		const GameData&
+		const MainMenuItem&
 	);
 	void Draw();
 };

@@ -10,6 +10,7 @@
 #include "Managers\RomFontManager.h"
 #include "Game\OptionsState.h"
 #include <map>
+#include "Game\MainMenuItem.h"
 class JetLag2021Application: public tggd::common::Application
 {
 private:
@@ -24,6 +25,7 @@ private:
 	SDL_GameController* controller;
 	bool confirmQuit;
 	OptionsState optionsState;
+	MainMenuItem mainMenuItem;
 
 	GameData gameData;
 

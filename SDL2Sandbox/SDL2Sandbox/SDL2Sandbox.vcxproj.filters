@@ -218,5 +218,8 @@
     <ClInclude Include="Constants\Joystick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\MainMenuItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

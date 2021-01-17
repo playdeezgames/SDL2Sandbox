@@ -38,18 +38,9 @@ struct PowerUp
 	PowerUpType type;
 	int position;
 };
-enum class MainMenuItem
-{
-	PLAY,
-	INSTRUCTIONS,
-	ABOUT,
-	OPTIONS,
-	QUIT
-};
 class GameData
 {
 private:
-	MainMenuItem currentMainMenuItem;
 	const tggd::common::SoundManager& soundManager;
 	std::vector<int> blockPositions;
 	std::vector<PowerUp> powerUpPositions;
@@ -98,9 +89,6 @@ public:
 	int GetBombs() const;
 	void LoseLife();
 	int GetLives() const;
-	MainMenuItem GetMainMenuItem() const;
-	void NextMainMenuItem();
-	void PreviousMainMenuItem();
 	void SetGameState(const GameState&);
 };
 

@@ -6,11 +6,11 @@ TitleScreenRenderer::TitleScreenRenderer
 	SDL_Renderer* rend,
 	const tggd::common::SoundManager& sndMan,
 	const RomFontManager& romFont,
-	const GameData& data
+	const MainMenuItem& mainMenuItem
 )
 	: BaseRenderer(rend, romFont)
 	, soundManager(sndMan)
-	, gameData(data)
+	, mainMenuItem(mainMenuItem)
 {
 
 }
@@ -26,5 +26,5 @@ void TitleScreenRenderer::Draw()
 
 void TitleScreenRenderer::DrawMenuItem(int row, const std::string& text, const MainMenuItem& item) const
 {
-	GetRomFont().DrawCenteredText(GetMainRenderer(), row, text, (gameData.GetMainMenuItem() == item) ? (Constants::Color::CYAN) : (Constants::Color::BROWN));
+	GetRomFont().DrawCenteredText(GetMainRenderer(), row, text, (mainMenuItem == item) ? (Constants::Color::CYAN) : (Constants::Color::BROWN));
 }
