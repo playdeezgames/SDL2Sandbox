@@ -35,10 +35,8 @@ bool GameOverEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
 	return true;
 }
 
-GameOverEventHandler::GameOverEventHandler(GameData& data, tggd::common::SoundManager& sndMan, OptionManager& optMan)
-	: BaseEventHandler(data)
-	, soundManager(sndMan)
-	, optionManager(optMan)
+GameOverEventHandler::GameOverEventHandler(GameData& gameData)
+	: BaseEventHandler(gameData)
 {
 
 }

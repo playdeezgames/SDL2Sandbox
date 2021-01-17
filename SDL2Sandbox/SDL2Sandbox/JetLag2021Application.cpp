@@ -42,7 +42,7 @@ JetLag2021Application::JetLag2021Application()
 
 void JetLag2021Application::Start()
 {
-	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameData, soundManager, optionManager);
+	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameData);
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
 	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameData, mainMenuItem);
 	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameData);
