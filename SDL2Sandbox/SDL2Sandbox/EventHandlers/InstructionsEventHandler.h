@@ -1,6 +1,6 @@
 #pragma once
 #include "JetLag2021EventHandler.h"
-class InstructionsEventHandler : public JetLag2021EventHandler
+class InstructionsEventHandler : public BaseEventHandler
 {
 protected:
 	bool OnKeyDown(SDL_Keycode);

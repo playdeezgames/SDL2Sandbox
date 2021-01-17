@@ -1,20 +1,22 @@
 #include "InPlayEventHandler.h"
 #include "..\Constants\Game.h"
+#include "..\Constants\Joystick.h"
 bool InPlayEventHandler::OnKeyDown(SDL_Keycode sym)
 {
-	if (sym == SDLK_LEFT)
+	switch (sym)
 	{
+	case SDLK_LEFT:
 		GetGameData().SetNextDirection(Constants::Game::Direction::LEFT);
-	}
-	else if (sym == SDLK_RIGHT)
-	{
+		return true;
+	case SDLK_RIGHT:
 		GetGameData().SetNextDirection(Constants::Game::Direction::RIGHT);
-	}
-	else if (sym == SDLK_SPACE)
-	{
+		return true;
+	case SDLK_SPACE:
 		GetGameData().UseBomb();
+		return true;
+	default:
+		return true;
 	}
-	return true;
 }
 
 bool InPlayEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
@@ -25,13 +27,13 @@ bool InPlayEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 
 bool InPlayEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
 {
-	if (axis == 0)
+	if (axis == Constants::JoyStick::X_AXIS)
 	{
-		if (value <= -8192)
+		if (value <= Constants::JoyStick::LOW_THRESHOLD)
 		{
 			GetGameData().SetNextDirection(Constants::Game::Direction::LEFT);
 		}
-		else if (value >= 8192)
+		else if (value >= Constants::JoyStick::HIGH_THRESHOLD)
 		{
 			GetGameData().SetNextDirection(Constants::Game::Direction::RIGHT);
 		}
@@ -39,10 +41,9 @@ bool InPlayEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 valu
 	return true;
 }
 
-InPlayEventHandler::InPlayEventHandler(GameData& data)
-	: JetLag2021EventHandler(data)
+InPlayEventHandler::InPlayEventHandler(GameData& gameData)
+	: BaseEventHandler(gameData)
 {
-
 }
 
 

@@ -1,6 +1,6 @@
 #include "AboutEventHandler.h"
-AboutEventHandler::AboutEventHandler(GameData& data)
-	: JetLag2021EventHandler(data)
+AboutEventHandler::AboutEventHandler(GameData& gameData)
+	: BaseEventHandler(gameData)
 {
 
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include "..\Common\Application.h"
 #include "..\Game\GameData.h"
-class JetLag2021EventHandler : public tggd::common::EventHandler
+class BaseEventHandler : public tggd::common::EventHandler
 {
 private:
 	int vertical;
@@ -19,7 +19,7 @@ protected:
 	virtual bool OnJoyButtonDown(SDL_JoystickID, Uint8) = 0;
 	virtual bool OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 public:
-	JetLag2021EventHandler(GameData&);
+	BaseEventHandler(GameData&);
 	bool OnEvent(const SDL_Event&);
 };
 

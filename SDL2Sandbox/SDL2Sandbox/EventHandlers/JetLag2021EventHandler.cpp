@@ -1,5 +1,5 @@
 #include "JetLag2021EventHandler.h"
-bool JetLag2021EventHandler::OnEvent(const SDL_Event& evt)
+bool BaseEventHandler::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)
 	{
@@ -16,7 +16,7 @@ bool JetLag2021EventHandler::OnEvent(const SDL_Event& evt)
 	}
 }
 
-JetLag2021EventHandler::JetLag2021EventHandler(GameData& data)
+BaseEventHandler::BaseEventHandler(GameData& data)
 	: gameData(data)
 	, lastVertical(0)
 	, vertical(0)
@@ -26,12 +26,12 @@ JetLag2021EventHandler::JetLag2021EventHandler(GameData& data)
 
 }
 
-GameData& JetLag2021EventHandler::GetGameData() const
+GameData& BaseEventHandler::GetGameData() const
 {
 	return gameData;
 }
 
-bool JetLag2021EventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
+bool BaseEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
 {
 	if (axis == 0)
 	{
@@ -68,22 +68,22 @@ bool JetLag2021EventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 
 	return true;
 }
 
-bool JetLag2021EventHandler::IsVerticalUp() const
+bool BaseEventHandler::IsVerticalUp() const
 {
 	return vertical == -1 && lastVertical != -1;
 }
 
-bool JetLag2021EventHandler::IsVerticalDown() const
+bool BaseEventHandler::IsVerticalDown() const
 {
 	return vertical == 1 && lastVertical != 1;
 }
 
-bool JetLag2021EventHandler::IsHorizontalLeft() const
+bool BaseEventHandler::IsHorizontalLeft() const
 {
 	return horizontal == -1 && lastHorizontal != -1;
 }
 
-bool JetLag2021EventHandler::IsHorizontalRight() const
+bool BaseEventHandler::IsHorizontalRight() const
 {
 	return horizontal == 1 && lastHorizontal != 1;
 }

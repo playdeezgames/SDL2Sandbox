@@ -21,7 +21,7 @@ bool EndRunEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
 }
 
 EndRunEventHandler::EndRunEventHandler(GameData& gameData)
-	: JetLag2021EventHandler(gameData)
+	: BaseEventHandler(gameData)
 {
 
 }

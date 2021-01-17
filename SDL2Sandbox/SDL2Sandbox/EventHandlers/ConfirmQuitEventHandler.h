@@ -1,7 +1,7 @@
 #pragma once
 #include "JetLag2021EventHandler.h"
 
-class ConfirmQuitEventHandler : public JetLag2021EventHandler
+class ConfirmQuitEventHandler : public BaseEventHandler
 {
 private:
 	int previousAxisState;

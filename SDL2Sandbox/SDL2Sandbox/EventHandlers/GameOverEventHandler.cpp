@@ -1,29 +1,33 @@
 #include "GameOverEventHandler.h"
+
+const int FIRST_BUTTON = 0;
+
 bool GameOverEventHandler::OnKeyDown(SDL_Keycode sym)
 {
-	if (sym == SDLK_SPACE)
+	switch (sym)
 	{
+	case SDLK_SPACE:
 		GetGameData().RestartGame();
-	}
-	else if (sym == SDLK_ESCAPE)
-	{
+		return true;
+	case SDLK_ESCAPE:
 		GetGameData().SetGameState(GameState::TITLE_SCREEN);
+		return true;
+	default:
+		return true;
 	}
-	return true;
-
 }
 
 bool GameOverEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8 button)
 {
-	if (button > 0)
+	switch (button)
 	{
-		GetGameData().SetGameState(GameState::TITLE_SCREEN);
-	}
-	else
-	{
+	case FIRST_BUTTON:
 		GetGameData().RestartGame();
+		return true;
+	default:
+		GetGameData().SetGameState(GameState::TITLE_SCREEN);
+		return true;
 	}
-	return true;
 }
 
 bool GameOverEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
@@ -32,7 +36,7 @@ bool GameOverEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
 }
 
 GameOverEventHandler::GameOverEventHandler(GameData& data, tggd::common::SoundManager& sndMan, OptionManager& optMan)
-	: JetLag2021EventHandler(data)
+	: BaseEventHandler(data)
 	, soundManager(sndMan)
 	, optionManager(optMan)
 {

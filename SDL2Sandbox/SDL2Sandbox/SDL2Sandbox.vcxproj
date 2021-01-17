@@ -178,6 +178,7 @@
     <ClInclude Include="Common\EventHandler.h" />
     <ClInclude Include="Common\Renderer.h" />
     <ClInclude Include="Common\Updater.h" />
+    <ClInclude Include="Constants\Joystick.h" />
     <ClInclude Include="EventHandlers\EndRunEventHandler.h" />
     <ClInclude Include="Game\OptionsState.h" />
     <ClInclude Include="Renderers\BaseRenderer.h" />

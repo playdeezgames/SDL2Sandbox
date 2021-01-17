@@ -1,5 +1,9 @@
 #include "OptionsEventHandler.h"
 #include "..\Constants\Sound.h"
+const int VOLUME_DELTA = 8;
+const int MINIMUM_VOLUME = 0;
+const int MAXIMUM_VOLUME = 128;
+
 OptionsEventHandler::OptionsEventHandler
 	(
 		GameData& gameData, 
@@ -7,7 +11,7 @@ OptionsEventHandler::OptionsEventHandler
 		tggd::common::SoundManager& soundManager,
 		OptionManager& optionManager
 	)
-	: JetLag2021EventHandler(gameData)
+	: BaseEventHandler(gameData)
 	, state(optionsState)
 	, soundManager(soundManager)
 	, optionManager(optionManager)
@@ -66,7 +70,7 @@ bool OptionsEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 
 bool OptionsEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	JetLag2021EventHandler::OnJoyAxisMotion(which, axis, value);
+	BaseEventHandler::OnJoyAxisMotion(which, axis, value);
 	if (IsHorizontalLeft())
 	{
 		DecreaseOption();
@@ -129,10 +133,10 @@ void OptionsEventHandler::IncreaseOption()
 	switch (state)
 	{
 	case OptionsState::MUX_VOLUME:
-		ChangeMuxVolume(8);
+		ChangeMuxVolume(VOLUME_DELTA);
 		break;
 	case OptionsState::SFX_VOLUME:
-		ChangeSfxVolume(8);
+		ChangeSfxVolume(VOLUME_DELTA);
 		break;
 	}
 }
@@ -142,10 +146,10 @@ void OptionsEventHandler::DecreaseOption()
 	switch (state)
 	{
 	case OptionsState::MUX_VOLUME:
-		ChangeMuxVolume(-8);
+		ChangeMuxVolume(-VOLUME_DELTA);
 		break;
 	case OptionsState::SFX_VOLUME:
-		ChangeSfxVolume(-8);
+		ChangeSfxVolume(-VOLUME_DELTA);
 		break;
 	}
 }
@@ -153,8 +157,8 @@ void OptionsEventHandler::DecreaseOption()
 static int ClampVolume(int volume)
 {
 	return 		
-		(volume < 0) ? (0) :
-		(volume > 128) ? (128) :
+		(volume < MINIMUM_VOLUME) ? (MINIMUM_VOLUME) :
+		(volume > MAXIMUM_VOLUME) ? (MAXIMUM_VOLUME) :
 		volume;
 }
 

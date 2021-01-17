@@ -3,7 +3,7 @@
 #include "..\Game\OptionsState.h"
 #include "..\Common\SoundManager.h"
 #include "..\Managers\OptionManager.h"
-class OptionsEventHandler : public JetLag2021EventHandler
+class OptionsEventHandler : public BaseEventHandler
 {
 private:
 	tggd::common::SoundManager& soundManager;

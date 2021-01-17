@@ -2,7 +2,7 @@
 #include "JetLag2021EventHandler.h"
 #include "..\Common\SoundManager.h"
 #include "..\Managers\OptionManager.h"
-class GameOverEventHandler : public JetLag2021EventHandler
+class GameOverEventHandler : public BaseEventHandler
 {
 private:
 	tggd::common::SoundManager& soundManager;

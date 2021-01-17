@@ -1,7 +1,7 @@
 #include "ConfirmQuitEventHandler.h"
-ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameData& data, bool& conf)
-	: JetLag2021EventHandler(data)
-	, confirm(conf)
+ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameData& gameData, bool& confirm)
+	: BaseEventHandler(gameData)
+	, confirm(confirm)
 	, previousAxisState(0)
 {
 
@@ -29,7 +29,7 @@ bool ConfirmQuitEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 
 bool ConfirmQuitEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	JetLag2021EventHandler::OnJoyAxisMotion(which, axis, value);
+	BaseEventHandler::OnJoyAxisMotion(which, axis, value);
 	if (IsVerticalDown() || IsVerticalUp())
 	{
 		confirm = !confirm;

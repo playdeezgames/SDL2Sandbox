@@ -3,16 +3,17 @@ bool TitleScreenEventHandler::OnKeyDown(SDL_Keycode sym)
 {
 	switch (sym)
 	{
-		case SDLK_UP:
-			GetGameData().PreviousMainMenuItem();
-			break;
-		case SDLK_DOWN:
-			GetGameData().NextMainMenuItem();
-			break;
-		case SDLK_SPACE:
-			return DoCurrentMainMenuItem();
+	case SDLK_UP:
+		GetGameData().PreviousMainMenuItem();
+		return true;
+	case SDLK_DOWN:
+		GetGameData().NextMainMenuItem();
+		return true;
+	case SDLK_SPACE:
+		return DoCurrentMainMenuItem();
+	default:
+		return true;
 	}
-	return true;
 }
 
 bool TitleScreenEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
@@ -22,12 +23,12 @@ bool TitleScreenEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 
 bool TitleScreenEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, Sint16 value)
 {
-	JetLag2021EventHandler::OnJoyAxisMotion(which, axis, value);
+	BaseEventHandler::OnJoyAxisMotion(which, axis, value);
 	if (IsVerticalDown())
 	{
 		GetGameData().NextMainMenuItem();
 	}
-	if (IsVerticalUp())
+	else if (IsVerticalUp())
 	{
 		GetGameData().PreviousMainMenuItem();
 	}
@@ -35,7 +36,7 @@ bool TitleScreenEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, 
 }
 
 TitleScreenEventHandler::TitleScreenEventHandler(GameData& data)
-	: JetLag2021EventHandler(data)
+	: BaseEventHandler(data)
 {
 
 }
