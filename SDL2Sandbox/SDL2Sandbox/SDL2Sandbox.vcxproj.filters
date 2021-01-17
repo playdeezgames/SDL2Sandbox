@@ -87,9 +87,6 @@
     <ClCompile Include="Renderers\BaseRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Common\Thingie.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EventHandlers\EndRunEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -2,13 +2,12 @@
 #include <SDL.h>
 #include <string>
 #include <vector>
-#include "Thingie.h"
 #include "Renderer.h"
 #include "Updater.h"
 #include "EventHandler.h"
 namespace tggd::common
 {
-	class Application : public Thingie, public Renderer, public Updater, public EventHandler
+	class Application : public Renderer, public Updater, public EventHandler
 	{
 	private:
 		Application() = delete;
@@ -28,6 +27,8 @@ namespace tggd::common
 		static void DoFinish();
 	protected:
 		SDL_Renderer* GetMainRenderer() const { return renderer; }
+		virtual void Start() = 0;
+		virtual void Finish() = 0;
 	public:
 		Application(int, int, const std::string&);
 		static int Run(const std::vector<std::string>&);

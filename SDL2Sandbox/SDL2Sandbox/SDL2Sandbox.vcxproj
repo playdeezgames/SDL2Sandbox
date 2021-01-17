@@ -148,7 +148,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Common\Thingie.h" />
     <ClCompile Include="EventHandlers\EndRunEventHandler.cpp" />
     <ClCompile Include="Renderers\BaseRenderer.cpp" />
     <ClCompile Include="Renderers\AboutRenderer.cpp" />

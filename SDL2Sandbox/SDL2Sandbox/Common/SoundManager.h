@@ -8,24 +8,31 @@ namespace tggd::common
 	{
 	private:
 		std::map<std::string, Mix_Chunk*> sounds;
-		std::map<std::string, Mix_Music*> music;
-		bool muted;
-		int muxVolume;
 		int sfxVolume;
-		void FinishMusic();
+
+		std::map<std::string, Mix_Music*> music;
+		int muxVolume;
+
+		bool muted;
+
 		void FinishSound();
+		void FinishMusic();
 	public:
 		SoundManager();
+
 		void Finish();
+
 		void AddSound(const std::string&, const std::string&);
-		void AddMusic(const std::string&, const std::string&);
 		void PlaySound(const std::string&) const;
-		void PlayMusic(const std::string&) const;
-		void SetMuted(bool);
-		bool IsMuted() const;
 		void SetSfxVolume(int);
 		int GetSfxVolume() const;
+
+		void AddMusic(const std::string&, const std::string&);
+		void PlayMusic(const std::string&) const;
 		void SetMuxVolume(int);
 		int GetMuxVolume() const;
+
+		void SetMuted(bool);
+		bool IsMuted() const;
 	};
 }

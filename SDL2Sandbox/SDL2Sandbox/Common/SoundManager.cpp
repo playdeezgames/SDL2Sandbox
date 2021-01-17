@@ -4,7 +4,6 @@ namespace tggd::common
 	const int ANY_CHANNEL = -1;
 	const int NO_LOOPS = 0;
 	const int LOOP_FOREVER = -1;
-	const int INITIAL_VOLUME = 128;
 
 	void SoundManager::FinishMusic()
 	{
@@ -72,7 +71,11 @@ namespace tggd::common
 		muted = newValue;
 		if (muted)
 		{
-			Mix_HaltMusic();
+			Mix_PauseMusic();
+		}
+		else
+		{
+			Mix_ResumeMusic();
 		}
 	}
 
@@ -108,10 +111,9 @@ namespace tggd::common
 
 	SoundManager::SoundManager()
 		: muted(false)
-		, sfxVolume(128)
-		, muxVolume(128)
+		, sfxVolume(MIX_MAX_VOLUME)
+		, muxVolume(MIX_MAX_VOLUME)
 	{
-
 	}
 }
 
