@@ -1,4 +1,5 @@
 #include "BaseEventHandler.h"
+#include "..\Constants\Joystick.h"
 bool BaseEventHandler::OnEvent(const SDL_Event& evt)
 {
 	switch (evt.type)
@@ -34,34 +35,34 @@ GameData& BaseEventHandler::GetGameData() const
 
 bool BaseEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)
 {
-	if (axis == 0)
+	if (axis == Constants::JoyStick::X_AXIS)
 	{
 		lastHorizontal = horizontal;
-		if (value < -8192)
+		if (value <= Constants::JoyStick::LOW_THRESHOLD)
 		{
 			horizontal = -1;
 		}
-		else if (value > 8192)
+		else if (value >= Constants::JoyStick::HIGH_THRESHOLD)
 		{
 			horizontal = 1;
 		}
-		else if (value<8192 && value>-8192)
+		else if (value<Constants::JoyStick::HIGH_THRESHOLD && value>Constants::JoyStick::LOW_THRESHOLD)
 		{
 			horizontal = 0;
 		}
 	}
-	if (axis == 1)
+	if (axis == Constants::JoyStick::Y_AXIS)
 	{
 		lastVertical = vertical;
-		if (value < -8192)
+		if (value <= Constants::JoyStick::LOW_THRESHOLD)
 		{
 			vertical = -1;
 		}
-		else if (value > 8192)
+		else if (value >= Constants::JoyStick::HIGH_THRESHOLD)
 		{
 			vertical = 1;
 		}
-		else if (value<8192 && value>-8192)
+		else if (value<Constants::JoyStick::HIGH_THRESHOLD && value>Constants::JoyStick::LOW_THRESHOLD)
 		{
 			vertical = 0;
 		}
