@@ -16,8 +16,9 @@ bool BaseEventHandler::OnEvent(const SDL_Event& evt)
 	}
 }
 
-BaseEventHandler::BaseEventHandler(GameData& data)
-	: gameData(data)
+BaseEventHandler::BaseEventHandler(GameState& gameState, GameData& data)
+	: gameState(gameState)
+	, gameData(data)
 	, lastVertical(0)
 	, vertical(0)
 	, lastHorizontal(0)
@@ -86,4 +87,9 @@ bool BaseEventHandler::IsHorizontalLeft() const
 bool BaseEventHandler::IsHorizontalRight() const
 {
 	return horizontal == 1 && lastHorizontal != 1;
+}
+
+void BaseEventHandler::SetGameState(const GameState& newState)
+{
+	gameState = newState;
 }

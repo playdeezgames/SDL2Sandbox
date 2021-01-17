@@ -1,6 +1,6 @@
 #include "ConfirmQuitEventHandler.h"
-ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameData& gameData, bool& confirm)
-	: BaseEventHandler(gameData)
+ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameState& gameState, GameData& gameData, bool& confirm)
+	: BaseEventHandler(gameState, gameData)
 	, confirm(confirm)
 	, previousAxisState(0)
 {

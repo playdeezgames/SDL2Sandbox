@@ -35,8 +35,8 @@ bool TitleScreenEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, 
 	return true;
 }
 
-TitleScreenEventHandler::TitleScreenEventHandler(GameData& gameData, MainMenuItem& mainMenuItem)
-	: BaseEventHandler(gameData)
+TitleScreenEventHandler::TitleScreenEventHandler(GameState& gameState, GameData& gameData, MainMenuItem& mainMenuItem)
+	: BaseEventHandler(gameState, gameData)
 	, mainMenuItem(mainMenuItem)
 {
 

@@ -1,6 +1,6 @@
 #include "InstructionsEventHandler.h"
-InstructionsEventHandler::InstructionsEventHandler(GameData& gameData)
-	: BaseEventHandler(gameData)
+InstructionsEventHandler::InstructionsEventHandler(GameState& gameState, GameData& gameData)
+	: BaseEventHandler(gameState, gameData)
 {
 
 }

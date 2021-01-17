@@ -7,6 +7,6 @@ protected:
 	bool OnJoyButtonDown(SDL_JoystickID, Uint8);
 	bool OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 public:
-	InstructionsEventHandler(GameData&);
+	InstructionsEventHandler(GameState&, GameData&);
 };
 

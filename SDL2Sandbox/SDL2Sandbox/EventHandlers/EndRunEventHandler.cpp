@@ -20,8 +20,8 @@ bool EndRunEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
 	return true;
 }
 
-EndRunEventHandler::EndRunEventHandler(GameData& gameData)
-	: BaseEventHandler(gameData)
+EndRunEventHandler::EndRunEventHandler(GameState& gameState, GameData& gameData)
+	: BaseEventHandler(gameState, gameData)
 {
 
 }

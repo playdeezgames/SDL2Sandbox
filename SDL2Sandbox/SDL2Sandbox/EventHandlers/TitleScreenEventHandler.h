@@ -13,6 +13,6 @@ protected:
 	void NextMainMenuItem();
 	void PreviousMainMenuItem();
 public:
-	TitleScreenEventHandler(GameData&, MainMenuItem&);
+	TitleScreenEventHandler(GameState&, GameData&, MainMenuItem&);
 };
 

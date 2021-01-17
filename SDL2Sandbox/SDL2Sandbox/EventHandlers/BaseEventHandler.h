@@ -9,7 +9,9 @@ private:
 	int horizontal;
 	int lastHorizontal;
 	GameData& gameData;
+	GameState& gameState;
 protected:
+	void SetGameState(const GameState&);
 	bool IsVerticalUp() const;
 	bool IsVerticalDown() const;
 	bool IsHorizontalLeft() const;
@@ -19,7 +21,7 @@ protected:
 	virtual bool OnJoyButtonDown(SDL_JoystickID, Uint8) = 0;
 	virtual bool OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 public:
-	BaseEventHandler(GameData&);
+	BaseEventHandler(GameState&, GameData&);
 	bool OnEvent(const SDL_Event&);
 };
 

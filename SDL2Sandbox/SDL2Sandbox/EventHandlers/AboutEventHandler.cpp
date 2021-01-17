@@ -1,6 +1,6 @@
 #include "AboutEventHandler.h"
-AboutEventHandler::AboutEventHandler(GameData& gameData)
-	: BaseEventHandler(gameData)
+AboutEventHandler::AboutEventHandler(GameState& gameState, GameData& gameData)
+	: BaseEventHandler(gameState, gameData)
 {
 
 }

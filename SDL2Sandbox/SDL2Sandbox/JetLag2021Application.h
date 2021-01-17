@@ -26,6 +26,7 @@ private:
 	bool confirmQuit;
 	OptionsState optionsState;
 	MainMenuItem mainMenuItem;
+	GameState gameState;
 
 	GameData gameData;
 

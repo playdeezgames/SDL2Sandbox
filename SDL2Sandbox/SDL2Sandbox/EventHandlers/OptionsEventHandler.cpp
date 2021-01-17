@@ -6,12 +6,13 @@ const int MAXIMUM_VOLUME = 128;
 
 OptionsEventHandler::OptionsEventHandler
 	(
+		GameState& gameState,
 		GameData& gameData, 
 		OptionsState& optionsState, 
 		tggd::common::SoundManager& soundManager,
 		OptionManager& optionManager
 	)
-	: BaseEventHandler(gameData)
+	: BaseEventHandler(gameState, gameData)
 	, state(optionsState)
 	, soundManager(soundManager)
 	, optionManager(optionManager)

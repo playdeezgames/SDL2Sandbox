@@ -37,19 +37,20 @@ JetLag2021Application::JetLag2021Application()
 	, confirmQuit(false)
 	, optionsState(OptionsState::BACK)
 	, mainMenuItem(MainMenuItem::PLAY)
+	, gameState(GameState::TITLE_SCREEN)
 {
 }
 
 void JetLag2021Application::Start()
 {
-	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameData);
-	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameData);
-	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameData, mainMenuItem);
-	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameData);
-	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameData, confirmQuit);
-	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameData);
-	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameData, optionsState, soundManager, optionManager);
-	eventHandlers[GameState::END_RUN] = new EndRunEventHandler(gameData);
+	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameState, gameData);
+	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameState, gameData);
+	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameState, gameData, mainMenuItem);
+	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameState, gameData);
+	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameState, gameData, confirmQuit);
+	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameState, gameData);
+	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameState, gameData, optionsState, soundManager, optionManager);
+	eventHandlers[GameState::END_RUN] = new EndRunEventHandler(gameState, gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), romFontManager);
 	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer(), soundManager, romFontManager, mainMenuItem);

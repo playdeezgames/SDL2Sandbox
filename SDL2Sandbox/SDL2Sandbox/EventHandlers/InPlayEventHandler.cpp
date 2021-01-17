@@ -41,8 +41,8 @@ bool InPlayEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 valu
 	return true;
 }
 
-InPlayEventHandler::InPlayEventHandler(GameData& gameData)
-	: BaseEventHandler(gameData)
+InPlayEventHandler::InPlayEventHandler(GameState& gameState, GameData& gameData)
+	: BaseEventHandler(gameState, gameData)
 {
 }
 
