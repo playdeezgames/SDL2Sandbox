@@ -5,9 +5,6 @@
 #include "..\Game\GameData.h"
 class GameOverRenderer: public BaseRenderer
 {
-private:
-	const tggd::common::SoundManager& soundManager;
-	const GameData& gameData;
 protected:
 	void DrawHints();
 	void DrawMenuHint();
@@ -16,9 +13,7 @@ public:
 	GameOverRenderer
 		(
 			SDL_Renderer*, 
-			const tggd::common::SoundManager&, 
-			const RomFontManager&, 
-			const GameData&
+			const RomFontManager&
 		);
 	void Draw();
 };

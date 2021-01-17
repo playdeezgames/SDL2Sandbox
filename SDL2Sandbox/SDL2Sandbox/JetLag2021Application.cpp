@@ -51,7 +51,7 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameData, optionsState, soundManager, optionManager);
 	eventHandlers[GameState::END_RUN] = new EndRunEventHandler(gameData);
 
-	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), soundManager, romFontManager, gameData);
+	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), romFontManager);
 	renderers[GameState::TITLE_SCREEN] = new TitleScreenRenderer(GetMainRenderer(), soundManager, romFontManager, mainMenuItem);
 	renderers[GameState::CONFIRM_QUIT] = new ConfirmQuitRenderer(GetMainRenderer(), romFontManager, confirmQuit);
 	renderers[GameState::ABOUT] = new AboutRenderer(GetMainRenderer(), romFontManager);

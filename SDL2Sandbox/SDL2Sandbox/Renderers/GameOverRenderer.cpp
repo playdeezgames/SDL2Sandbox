@@ -9,13 +9,9 @@ void GameOverRenderer::Draw()
 GameOverRenderer::GameOverRenderer
 	(
 		SDL_Renderer* rend, 
-		const tggd::common::SoundManager& sndMan, 
-		const RomFontManager& romFont, 
-		const GameData& data
+		const RomFontManager& romFont
 	)
 	: BaseRenderer(rend, romFont)
-	, soundManager(sndMan)
-	, gameData(data)
 {
 }
 
