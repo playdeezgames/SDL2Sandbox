@@ -2,6 +2,8 @@
 #include "BaseEventHandler.h"
 class InPlayEventHandler : public BaseEventHandler
 {
+private:
+	GameData& gameData;
 protected:
 	bool OnKeyDown(SDL_Keycode);
 	bool OnJoyButtonDown(SDL_JoystickID, Uint8);

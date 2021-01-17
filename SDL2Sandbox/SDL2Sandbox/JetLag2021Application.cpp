@@ -27,7 +27,8 @@ JetLag2021Application::JetLag2021Application()
 	: Application(Constants::Window::WIDTH, Constants::Window::HEIGHT, Constants::Window::TITLE)
 	, soundManager()
 	, optionManager(soundManager)
-	, gameData(soundManager)
+	, gameState(GameState::TITLE_SCREEN)
+	, gameData(soundManager, gameState)
 	, romFontManager()
 	, renderer(gameData, soundManager, romFontManager)
 	, joystick(nullptr)
@@ -37,7 +38,6 @@ JetLag2021Application::JetLag2021Application()
 	, confirmQuit(false)
 	, optionsState(OptionsState::BACK)
 	, mainMenuItem(MainMenuItem::PLAY)
-	, gameState(GameState::TITLE_SCREEN)
 {
 }
 
@@ -46,10 +46,10 @@ void JetLag2021Application::Start()
 	eventHandlers[GameState::GAME_OVER] = new GameOverEventHandler(gameState, gameData);
 	eventHandlers[GameState::IN_PLAY] = new InPlayEventHandler(gameState, gameData);
 	eventHandlers[GameState::TITLE_SCREEN] = new TitleScreenEventHandler(gameState, gameData, mainMenuItem);
-	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameState, gameData);
-	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameState, gameData, confirmQuit);
-	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameState, gameData);
-	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameState, gameData, optionsState, soundManager, optionManager);
+	eventHandlers[GameState::INSTRUCTIONS] = new InstructionsEventHandler(gameState);
+	eventHandlers[GameState::CONFIRM_QUIT] = new ConfirmQuitEventHandler(gameState, confirmQuit);
+	eventHandlers[GameState::ABOUT] = new AboutEventHandler(gameState);
+	eventHandlers[GameState::OPTIONS] = new OptionsEventHandler(gameState, optionsState, soundManager, optionManager);
 	eventHandlers[GameState::END_RUN] = new EndRunEventHandler(gameState, gameData);
 
 	renderers[GameState::GAME_OVER] = new GameOverRenderer(GetMainRenderer(), romFontManager);

@@ -36,8 +36,9 @@ bool TitleScreenEventHandler::OnJoyAxisMotion(SDL_JoystickID which, Uint8 axis, 
 }
 
 TitleScreenEventHandler::TitleScreenEventHandler(GameState& gameState, GameData& gameData, MainMenuItem& mainMenuItem)
-	: BaseEventHandler(gameState, gameData)
+	: BaseEventHandler(gameState)
 	, mainMenuItem(mainMenuItem)
+	, gameData(gameData)
 {
 
 }
@@ -47,19 +48,19 @@ bool TitleScreenEventHandler::DoCurrentMainMenuItem()
 	switch (mainMenuItem)
 	{
 	case MainMenuItem::OPTIONS:
-		GetGameData().SetGameState(GameState::OPTIONS);
+		SetGameState(GameState::OPTIONS);
 		return true;
 	case MainMenuItem::QUIT:
-		GetGameData().SetGameState(GameState::CONFIRM_QUIT);
+		SetGameState(GameState::CONFIRM_QUIT);
 		return true;
 	case MainMenuItem::PLAY:
-		GetGameData().RestartGame();
+		gameData.RestartGame();
 		return true;
 	case MainMenuItem::INSTRUCTIONS:
-		GetGameData().SetGameState(GameState::INSTRUCTIONS);
+		SetGameState(GameState::INSTRUCTIONS);
 		return true;
 	case MainMenuItem::ABOUT:
-		GetGameData().SetGameState(GameState::ABOUT);
+		SetGameState(GameState::ABOUT);
 		return true;
 	default:
 		return true;

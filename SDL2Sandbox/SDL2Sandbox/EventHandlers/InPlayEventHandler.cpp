@@ -6,13 +6,13 @@ bool InPlayEventHandler::OnKeyDown(SDL_Keycode sym)
 	switch (sym)
 	{
 	case SDLK_LEFT:
-		GetGameData().SetNextDirection(Constants::Game::Direction::LEFT);
+		gameData.SetNextDirection(Constants::Game::Direction::LEFT);
 		return true;
 	case SDLK_RIGHT:
-		GetGameData().SetNextDirection(Constants::Game::Direction::RIGHT);
+		gameData.SetNextDirection(Constants::Game::Direction::RIGHT);
 		return true;
 	case SDLK_SPACE:
-		GetGameData().UseBomb();
+		gameData.UseBomb();
 		return true;
 	default:
 		return true;
@@ -21,7 +21,7 @@ bool InPlayEventHandler::OnKeyDown(SDL_Keycode sym)
 
 bool InPlayEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 {
-	GetGameData().UseBomb();
+	gameData.UseBomb();
 	return true;
 }
 
@@ -31,18 +31,19 @@ bool InPlayEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 valu
 	{
 		if (value <= Constants::JoyStick::LOW_THRESHOLD)
 		{
-			GetGameData().SetNextDirection(Constants::Game::Direction::LEFT);
+			gameData.SetNextDirection(Constants::Game::Direction::LEFT);
 		}
 		else if (value >= Constants::JoyStick::HIGH_THRESHOLD)
 		{
-			GetGameData().SetNextDirection(Constants::Game::Direction::RIGHT);
+			gameData.SetNextDirection(Constants::Game::Direction::RIGHT);
 		}
 	}
 	return true;
 }
 
 InPlayEventHandler::InPlayEventHandler(GameState& gameState, GameData& gameData)
-	: BaseEventHandler(gameState, gameData)
+	: BaseEventHandler(gameState)
+	, gameData(gameData)
 {
 }
 

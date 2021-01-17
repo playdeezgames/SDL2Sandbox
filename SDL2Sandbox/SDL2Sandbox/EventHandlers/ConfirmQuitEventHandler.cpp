@@ -1,8 +1,7 @@
 #include "ConfirmQuitEventHandler.h"
-ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameState& gameState, GameData& gameData, bool& confirm)
-	: BaseEventHandler(gameState, gameData)
+ConfirmQuitEventHandler::ConfirmQuitEventHandler(GameState& gameState, bool& confirm)
+	: BaseEventHandler(gameState)
 	, confirm(confirm)
-	, previousAxisState(0)
 {
 
 }
@@ -45,7 +44,7 @@ bool ConfirmQuitEventHandler::DoConfirmation()
 	}
 	else
 	{
-		GetGameData().SetGameState(GameState::TITLE_SCREEN);
+		SetGameState(GameState::TITLE_SCREEN);
 		return true;
 	}
 }

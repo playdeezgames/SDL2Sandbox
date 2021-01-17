@@ -48,7 +48,7 @@ private:
 	std::vector<int> tailPositions;
 	int scrollCounter;
 	int direction;
-	GameState gameState;
+	GameState& gameState;
 	int score;
 	int runLength;
 	bool dead;
@@ -69,7 +69,7 @@ private:
 	void UpdatePowerUps();
 	void ResetRun();
 public:
-	GameData(tggd::common::SoundManager&);
+	GameData(tggd::common::SoundManager&, GameState&);
 	void ResetGame();
 	void RestartGame();
 	void NextRun();

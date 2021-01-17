@@ -6,13 +6,13 @@
 #include "..\Constants\PowerUp.h"
 #include "..\Constants\Block.h"
 #include "..\Constants\Tail.h"
-GameData::GameData(tggd::common::SoundManager& sndMan)
+GameData::GameData(tggd::common::SoundManager& sndMan, GameState& gameState)
 	: soundManager(sndMan)
 	, blockPositions(Constants::Board::ROWS)
 	, powerUpPositions(Constants::Board::ROWS)
 	, scrollCounter(Constants::Game::InitialValues::COUNTER)
 	, direction(Constants::Game::Direction::RIGHT)
-	, gameState(GameState::TITLE_SCREEN)
+	, gameState(gameState)
 	, runLength(Constants::Game::InitialValues::RUN_LENGTH)
 	, score(Constants::Game::InitialValues::SCORE)
 	, dead(Constants::Game::InitialValues::DEAD)

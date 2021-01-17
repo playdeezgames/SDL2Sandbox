@@ -4,14 +4,14 @@ bool EndRunEventHandler::OnKeyDown(SDL_Keycode sym)
 {
 	if (sym == SDLK_SPACE)
 	{
-		GetGameData().NextRun();
+		gameData.NextRun();
 	}
 	return true;
 }
 
 bool EndRunEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 {
-	GetGameData().NextRun();
+	gameData.NextRun();
 	return true;
 }
 
@@ -21,7 +21,8 @@ bool EndRunEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16)
 }
 
 EndRunEventHandler::EndRunEventHandler(GameState& gameState, GameData& gameData)
-	: BaseEventHandler(gameState, gameData)
+	: BaseEventHandler(gameState)
+	, gameData(gameData)
 {
 
 }

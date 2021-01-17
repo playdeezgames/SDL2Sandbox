@@ -7,12 +7,11 @@ const int MAXIMUM_VOLUME = 128;
 OptionsEventHandler::OptionsEventHandler
 	(
 		GameState& gameState,
-		GameData& gameData, 
 		OptionsState& optionsState, 
 		tggd::common::SoundManager& soundManager,
 		OptionManager& optionManager
 	)
-	: BaseEventHandler(gameState, gameData)
+	: BaseEventHandler(gameState)
 	, state(optionsState)
 	, soundManager(soundManager)
 	, optionManager(optionManager)
@@ -26,7 +25,7 @@ bool OptionsEventHandler::DoOption()
 	{
 	case OptionsState::BACK:
 		optionManager.Save();
-		GetGameData().SetGameState(GameState::TITLE_SCREEN);
+		SetGameState(GameState::TITLE_SCREEN);
 		return true;
 	case OptionsState::TOGGLE_MUTE:
 		soundManager.SetMuted(!soundManager.IsMuted());

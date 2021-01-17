@@ -17,20 +17,14 @@ bool BaseEventHandler::OnEvent(const SDL_Event& evt)
 	}
 }
 
-BaseEventHandler::BaseEventHandler(GameState& gameState, GameData& data)
+BaseEventHandler::BaseEventHandler(GameState& gameState)
 	: gameState(gameState)
-	, gameData(data)
 	, lastVertical(0)
 	, vertical(0)
 	, lastHorizontal(0)
 	, horizontal(0)
 {
 
-}
-
-GameData& BaseEventHandler::GetGameData() const
-{
-	return gameData;
 }
 
 bool BaseEventHandler::OnJoyAxisMotion(SDL_JoystickID, Uint8 axis, Sint16 value)

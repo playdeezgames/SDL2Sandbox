@@ -21,6 +21,6 @@ protected:
 	bool OnJoyButtonDown(SDL_JoystickID, Uint8);
 	bool OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 public:
-	OptionsEventHandler(GameState&, GameData&, OptionsState&, tggd::common::SoundManager&, OptionManager&);
+	OptionsEventHandler(GameState&, OptionsState&, tggd::common::SoundManager&, OptionManager&);
 };
 

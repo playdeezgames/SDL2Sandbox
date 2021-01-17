@@ -4,6 +4,7 @@
 class TitleScreenEventHandler : public BaseEventHandler
 {
 private:
+	GameData& gameData;
 	MainMenuItem& mainMenuItem;
 	bool DoCurrentMainMenuItem();
 protected:

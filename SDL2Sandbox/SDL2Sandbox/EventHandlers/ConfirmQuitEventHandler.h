@@ -4,7 +4,6 @@
 class ConfirmQuitEventHandler : public BaseEventHandler
 {
 private:
-	int previousAxisState;
 	bool& confirm;
 	bool DoConfirmation();
 protected:
@@ -12,6 +11,6 @@ protected:
 	bool OnJoyButtonDown(SDL_JoystickID, Uint8);
 	bool OnJoyAxisMotion(SDL_JoystickID, Uint8, Sint16);
 public:
-	ConfirmQuitEventHandler(GameState&, GameData&, bool&);
+	ConfirmQuitEventHandler(GameState&, bool&);
 };
 

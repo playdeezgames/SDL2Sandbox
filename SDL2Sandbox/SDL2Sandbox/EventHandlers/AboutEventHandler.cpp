@@ -1,18 +1,18 @@
 #include "AboutEventHandler.h"
-AboutEventHandler::AboutEventHandler(GameState& gameState, GameData& gameData)
-	: BaseEventHandler(gameState, gameData)
+AboutEventHandler::AboutEventHandler(GameState& gameState)
+	: BaseEventHandler(gameState)
 {
 
 }
 bool AboutEventHandler::OnKeyDown(SDL_Keycode)
 {
-	GetGameData().SetGameState(GameState::TITLE_SCREEN);
+	SetGameState(GameState::TITLE_SCREEN);
 	return true;
 }
 
 bool AboutEventHandler::OnJoyButtonDown(SDL_JoystickID, Uint8)
 {
-	GetGameData().SetGameState(GameState::TITLE_SCREEN);
+	SetGameState(GameState::TITLE_SCREEN);
 	return true;
 }
 
