@@ -33,6 +33,11 @@ static int CalculateScoreFromRunLength(int runLength)
 	return (runLength * (runLength + 1)) / 2;
 }
 
+void GameData::AddScore(int amount)
+{
+	score += amount * scoreMultiplier / scoreDivisor;
+}
+
 void GameData::SetNextDirection(int nextDirection)
 {
 	if (keysReversed)
@@ -41,7 +46,7 @@ void GameData::SetNextDirection(int nextDirection)
 	}
 	if (nextDirection != direction)
 	{
-		score += CalculateScoreFromRunLength(runLength);
+		AddScore(CalculateScoreFromRunLength(runLength));
 		runLength = Constants::Game::InitialValues::RUN_LENGTH;
 		direction = nextDirection;
 		soundManager.PlaySound(Constants::Sound::Name::TURN);
@@ -94,7 +99,7 @@ void GameData::UpdateGameStatus()
 			case PlayerState::INVINCIBILITY_WEARING_OFF:
 				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
 				soundManager.PlaySound(Constants::Sound::Name::CHOMP);
-				score += Constants::Game::BLOCK_EAT_SCORE;
+				AddScore(Constants::Game::BLOCK_EAT_SCORE);
 				break;
 			default:
 				LoseLife();
@@ -114,6 +119,31 @@ void GameData::UpdateGameStatus()
 		{
 			switch (powerUpPositions[row].type)
 			{
+			case PowerUpType::SCORE_DOUBLE:
+				scoreMultiplier = 2;
+				scoreDivisor = 1;
+				//TODO: sound
+				break;
+			case PowerUpType::SCORE_HALF:
+				scoreMultiplier = 1;
+				scoreDivisor = 2;
+				//TODO: sound
+				break;
+			case PowerUpType::SCORE_NORMAL:
+				scoreMultiplier = 1;
+				scoreDivisor = 1;
+				//TODO: sound
+				break;
+			case PowerUpType::SCORE_QUADRUPAL:
+				scoreMultiplier = 4;
+				scoreDivisor = 1;
+				//TODO: sound
+				break;
+			case PowerUpType::SCORE_QUARTER:
+				scoreMultiplier = 1;
+				scoreDivisor = 4;
+				//TODO: sound
+				break;
 			case PowerUpType::BOMB:
 				if (bombs < 99)
 				{
@@ -122,23 +152,23 @@ void GameData::UpdateGameStatus()
 				soundManager.PlaySound(Constants::Sound::Name::YOINK);
 				break;
 			case PowerUpType::DIAMOND:
-				score += Constants::PowerUp::DIAMOND_BONUS;
+				AddScore(Constants::PowerUp::DIAMOND_BONUS);
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::PENNY:
-				score += Constants::PowerUp::PENNY_BONUS;
+				AddScore(Constants::PowerUp::PENNY_BONUS);
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::DOLLAR:
-				score += Constants::PowerUp::DOLLAR_BONUS;
+				AddScore(Constants::PowerUp::DOLLAR_BONUS);
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::POUND:
-				score += Constants::PowerUp::POUND_BONUS;
+				AddScore(Constants::PowerUp::POUND_BONUS);
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::YEN:
-				score += Constants::PowerUp::YEN_BONUS;
+				AddScore(Constants::PowerUp::YEN_BONUS);
 				soundManager.PlaySound(Constants::Sound::Name::TING);
 				break;
 			case PowerUpType::REVERSE_KEYS:

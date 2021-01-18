@@ -75,6 +75,7 @@ private:
 	void UpdateGameStatus();
 	void UpdatePowerUps();
 	void ResetRun();
+	void AddScore(int);
 public:
 	GameData(tggd::common::SoundManager&, GameState&);
 	void ResetGame();
