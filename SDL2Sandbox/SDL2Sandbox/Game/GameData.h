@@ -22,13 +22,15 @@ enum class PowerUpType
 	SPEED_UP,
 	SLOW_DOWN,
 	SPEED_NORMAL,
-	INSTANT_BOMB
+	INSTANT_BOMB,
+	SHIELD //e9
 };
 enum class PlayerState
 {
 	NORMAL,
 	INVINCIBLE,
 	INVINCIBILITY_WEARING_OFF,
+	SHIELDED,
 	DEAD
 };
 enum class GameState
@@ -68,6 +70,7 @@ private:
 	int scoreMultiplier;
 	int scoreDivisor;
 	int scrollCounterMaximum;
+	int shield;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();

@@ -22,6 +22,7 @@ namespace Constants::Game
 		const int LIVES = 3;
 		const int SCORE_MULTIPLIER = 1;
 		const int SCORE_DIVISOR = 1;
+		const int SHIELD = 0;
 	}
 	namespace Counters
 	{

@@ -24,6 +24,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan, GameState& gameState)
 	, scoreMultiplier(Constants::Game::InitialValues::SCORE_MULTIPLIER)
 	, scoreDivisor(Constants::Game::InitialValues::SCORE_DIVISOR)
 	, scrollCounterMaximum(Constants::Game::Counters::SCROLL)
+	, shield(Constants::Game::InitialValues::SHIELD)
 {
 
 }
@@ -319,6 +320,7 @@ void GameData::ResetRun()
 	scoreDivisor = Constants::Game::InitialValues::SCORE_DIVISOR;
 	keysReversed = Constants::Game::InitialValues::KEYS_REVERSED;
 	scrollCounterMaximum = Constants::Game::Counters::SCROLL;
+	shield = Constants::Game::InitialValues::SHIELD;
 }
 
 void GameData::ResetGame()
@@ -379,6 +381,7 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::SLOW_DOWN] = 1;
 		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 1;
 		powerUpGenerator[PowerUpType::INSTANT_BOMB] = 1;
+		powerUpGenerator[PowerUpType::SHIELD] = 1;
 
 	}
 	int tally = 0;
