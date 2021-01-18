@@ -151,6 +151,10 @@ void JetLag2021Renderer::DrawPickUps()
 			color = Constants::Color::MAGENTA;
 			ch = '\x19';
 			break;
+		case PowerUpType::SPEED_NORMAL:
+			color = Constants::Color::MAGENTA;
+			ch = '\x12';
+			break;
 		case PowerUpType::SCORE_DOUBLE:
 			color = Constants::Color::GREEN;
 			ch = '2';

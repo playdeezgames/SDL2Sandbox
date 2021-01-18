@@ -19,8 +19,9 @@ enum class PowerUpType
 	SCORE_QUADRUPAL,
 	SCORE_HALF,
 	SCORE_QUARTER,
-	SPEED_UP, //18
-	SLOW_DOWN //19
+	SPEED_UP,
+	SLOW_DOWN,
+	SPEED_NORMAL
 };
 enum class PlayerState
 {
