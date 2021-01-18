@@ -143,6 +143,26 @@ void JetLag2021Renderer::DrawPickUps()
 		SDL_Color color = Constants::Color::BLACK;
 		switch (gameData.GetPowerUp(row))
 		{
+		case PowerUpType::SCORE_DOUBLE:
+			color = Constants::Color::GREEN;
+			ch = '2';
+			break;
+		case PowerUpType::SCORE_HALF:
+			color = Constants::Color::GREEN;
+			ch = '\xab';
+			break;
+		case PowerUpType::SCORE_NORMAL:
+			color = Constants::Color::GREEN;
+			ch = '1';
+			break;
+		case PowerUpType::SCORE_QUADRUPAL:
+			color = Constants::Color::GREEN;
+			ch = '4';
+			break;
+		case PowerUpType::SCORE_QUARTER:
+			color = Constants::Color::GREEN;
+			ch = '\xac';
+			break;
 		case PowerUpType::EXTRA_LIFE:
 			color = Constants::Color::WHITE;
 			ch = '\x01';

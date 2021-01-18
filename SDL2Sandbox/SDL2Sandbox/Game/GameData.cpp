@@ -268,6 +268,8 @@ void GameData::ResetRun()
 	dead = Constants::Game::InitialValues::DEAD;
 	invincibility = Constants::Game::InitialValues::INVINCIBILITY;
 	bombs = Constants::Game::InitialValues::BOMBS;
+	scoreMultiplier = Constants::Game::InitialValues::SCORE_MULTIPLIER;
+	scoreDivisor = Constants::Game::InitialValues::SCORE_DIVISOR;
 	keysReversed = Constants::Game::InitialValues::KEYS_REVERSED;
 }
 
@@ -320,6 +322,12 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
 		powerUpGenerator[PowerUpType::BOMB] = 1;
 		powerUpGenerator[PowerUpType::EXTRA_LIFE] = 1;
+		powerUpGenerator[PowerUpType::SCORE_NORMAL] = 1;
+		powerUpGenerator[PowerUpType::SCORE_DOUBLE] = 1;
+		powerUpGenerator[PowerUpType::SCORE_QUADRUPAL] = 1;
+		powerUpGenerator[PowerUpType::SCORE_HALF] = 1;
+		powerUpGenerator[PowerUpType::SCORE_QUARTER] = 1;
+
 	}
 	int tally = 0;
 	for (const auto& entry : powerUpGenerator)
