@@ -23,7 +23,8 @@ enum class PowerUpType
 	SLOW_DOWN,
 	SPEED_NORMAL,
 	INSTANT_BOMB,
-	SHIELD
+	SHIELD,
+	CHANGE_DIRECTION //1d
 };
 enum class PlayerState
 {

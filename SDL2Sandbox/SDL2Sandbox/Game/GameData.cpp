@@ -405,6 +405,7 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 1;
 		powerUpGenerator[PowerUpType::INSTANT_BOMB] = 1;
 		powerUpGenerator[PowerUpType::SHIELD] = 1;
+		powerUpGenerator[PowerUpType::CHANGE_DIRECTION] = 1;
 
 	}
 	int tally = 0;
