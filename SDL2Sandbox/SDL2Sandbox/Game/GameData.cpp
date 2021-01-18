@@ -387,29 +387,29 @@ PowerUpType GameData::GeneratePowerUp()
 {
 	if (powerUpGenerator.empty())
 	{
-		powerUpGenerator[PowerUpType::PENNY] = 1;
-		powerUpGenerator[PowerUpType::DOLLAR] = 1;
-		powerUpGenerator[PowerUpType::DIAMOND] = 1;
-		powerUpGenerator[PowerUpType::POUND] = 1;
-		powerUpGenerator[PowerUpType::YEN] = 1;
-
-		powerUpGenerator[PowerUpType::SCORE_NORMAL] = 1;
-		powerUpGenerator[PowerUpType::SCORE_DOUBLE] = 1;
 		powerUpGenerator[PowerUpType::SCORE_QUADRUPAL] = 1;
-		powerUpGenerator[PowerUpType::SCORE_HALF] = 1;
+		powerUpGenerator[PowerUpType::SCORE_DOUBLE] = 2;
+		powerUpGenerator[PowerUpType::SCORE_NORMAL] = 3;
+		powerUpGenerator[PowerUpType::SCORE_HALF] = 2;
 		powerUpGenerator[PowerUpType::SCORE_QUARTER] = 1;
 
-		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
-		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
-		powerUpGenerator[PowerUpType::BOMB] = 1;
-		powerUpGenerator[PowerUpType::EXTRA_LIFE] = 1;
+		powerUpGenerator[PowerUpType::EXTRA_LIFE] = 2;
+		powerUpGenerator[PowerUpType::SPEED_UP] = 4;
+		powerUpGenerator[PowerUpType::SHIELD] = 6;
+		powerUpGenerator[PowerUpType::SLOW_DOWN] = 4;
+		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 2;
 
-		powerUpGenerator[PowerUpType::SPEED_UP] = 1;
-		powerUpGenerator[PowerUpType::SLOW_DOWN] = 1;
-		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 1;
-		powerUpGenerator[PowerUpType::INSTANT_BOMB] = 1;
-		powerUpGenerator[PowerUpType::SHIELD] = 1;
-		powerUpGenerator[PowerUpType::CHANGE_DIRECTION] = 100;
+		powerUpGenerator[PowerUpType::INVINCIBLE] = 3;
+		powerUpGenerator[PowerUpType::BOMB] = 6;
+		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 9;
+		powerUpGenerator[PowerUpType::INSTANT_BOMB] = 6;
+		powerUpGenerator[PowerUpType::CHANGE_DIRECTION] = 3;
+
+		powerUpGenerator[PowerUpType::PENNY] = 4;
+		powerUpGenerator[PowerUpType::DOLLAR] = 8;
+		powerUpGenerator[PowerUpType::DIAMOND] = 12;
+		powerUpGenerator[PowerUpType::POUND] = 8;
+		powerUpGenerator[PowerUpType::YEN] = 4;
 
 	}
 	int tally = 0;
