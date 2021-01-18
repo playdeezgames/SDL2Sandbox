@@ -23,6 +23,7 @@ GameData::GameData(tggd::common::SoundManager& sndMan, GameState& gameState)
 	, lives(Constants::Game::InitialValues::LIVES)
 	, scoreMultiplier(Constants::Game::InitialValues::SCORE_MULTIPLIER)
 	, scoreDivisor(Constants::Game::InitialValues::SCORE_DIVISOR)
+	, scrollCounterMaximum(Constants::Game::Counters::SCROLL)
 {
 
 }
@@ -215,10 +216,10 @@ void GameData::UpdateBoard()
 void GameData::Update(int milliseconds)
 {
 	scrollCounter += milliseconds;
-	while (scrollCounter > Constants::Game::Counters::SCROLL)
+	while (scrollCounter > scrollCounterMaximum)
 	{
 		UpdateBoard();
-		scrollCounter -= Constants::Game::Counters::SCROLL;
+		scrollCounter -= scrollCounterMaximum;
 	}
 }
 
@@ -301,6 +302,7 @@ void GameData::ResetRun()
 	scoreMultiplier = Constants::Game::InitialValues::SCORE_MULTIPLIER;
 	scoreDivisor = Constants::Game::InitialValues::SCORE_DIVISOR;
 	keysReversed = Constants::Game::InitialValues::KEYS_REVERSED;
+	scrollCounterMaximum = Constants::Game::Counters::SCROLL;
 }
 
 void GameData::ResetGame()

@@ -63,6 +63,7 @@ private:
 	int lives;
 	int scoreMultiplier;
 	int scoreDivisor;
+	int scrollCounterMaximum;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();
