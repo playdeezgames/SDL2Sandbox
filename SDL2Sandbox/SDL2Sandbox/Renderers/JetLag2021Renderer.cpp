@@ -39,6 +39,14 @@ void JetLag2021Renderer::Draw()
 	DrawBombs();
 	DrawLives();
 	DrawScoreMultiplier();
+	DrawShield();
+}
+
+void JetLag2021Renderer::DrawShield()
+{
+	std::stringstream ss;
+	ss << '\xe9' << (char)('0' + (gameData.GetShield() / Constants::Game::SCORE_RADIX)) << (char)('0' + (gameData.GetShield() % Constants::Game::SCORE_RADIX));
+	romFontManager.DrawText(GetMainRenderer(), Constants::Board::COLUMNS - 14, 0, ss.str(), Constants::Color::BLACK);
 }
 
 void JetLag2021Renderer::DrawScoreMultiplier()
@@ -81,6 +89,9 @@ void JetLag2021Renderer::DrawTail()
 		break;
 	case PlayerState::INVINCIBLE:
 		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::CYAN);
+		break;
+	case PlayerState::SHIELDED:
+		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x01', Constants::Color::LIGHT_BLUE);
 		break;
 	case PlayerState::NORMAL:
 		romFontManager.DrawCharacter(renderer, gameData.GetTailPosition(gameData.GetTailLength() - 1), (int)gameData.GetTailLength() - 1, '\x02', Constants::Color::WHITE);

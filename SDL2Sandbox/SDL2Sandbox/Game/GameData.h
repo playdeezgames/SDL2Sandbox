@@ -23,7 +23,7 @@ enum class PowerUpType
 	SLOW_DOWN,
 	SPEED_NORMAL,
 	INSTANT_BOMB,
-	SHIELD //e9
+	SHIELD
 };
 enum class PlayerState
 {
@@ -108,5 +108,6 @@ public:
 	void SetGameState(const GameState&);
 	int GetScoreMultiplier() const;
 	int GetScoreDivisor() const;
+	int GetShield() const;
 };
 

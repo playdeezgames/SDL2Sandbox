@@ -24,6 +24,12 @@ namespace Constants::Game
 		const int SCORE_DIVISOR = 1;
 		const int SHIELD = 0;
 	}
+	namespace Maximums
+	{
+		const int BOMBS = 99;
+		const int LIVES = 99;
+		const int SHIELD = 99;
+	}
 	namespace Counters
 	{
 		const int SCROLL = 100;

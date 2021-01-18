@@ -103,6 +103,11 @@ void GameData::UpdateGameStatus()
 				soundManager.PlaySound(Constants::Sound::Name::CHOMP);
 				AddScore(Constants::Game::BLOCK_EAT_SCORE);
 				break;
+			case PlayerState::SHIELDED:
+				shield--;
+				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
+				//TODO: play sound
+				break;
 			default:
 				LoseLife();
 				break;
@@ -121,6 +126,17 @@ void GameData::UpdateGameStatus()
 		{
 			switch (powerUpPositions[row].type)
 			{
+			case PowerUpType::SHIELD:
+				if (shield < Constants::Game::Maximums::SHIELD)
+				{
+					shield++;
+					//TODO: shield
+				}
+				else
+				{
+					soundManager.PlaySound(Constants::Sound::Name::NOPE);
+				}
+				break;
 			case PowerUpType::INSTANT_BOMB:
 				bombs++;
 				UseBomb();
@@ -163,11 +179,15 @@ void GameData::UpdateGameStatus()
 				//TODO: sound
 				break;
 			case PowerUpType::BOMB:
-				if (bombs < 99)
+				if (bombs < Constants::Game::Maximums::BOMBS)
 				{
 					bombs++;
+					soundManager.PlaySound(Constants::Sound::Name::YOINK);
 				}
-				soundManager.PlaySound(Constants::Sound::Name::YOINK);
+				else
+				{
+					soundManager.PlaySound(Constants::Sound::Name::NOPE);
+				}
 				break;
 			case PowerUpType::DIAMOND:
 				AddScore(Constants::PowerUp::DIAMOND_BONUS);
@@ -198,7 +218,7 @@ void GameData::UpdateGameStatus()
 				soundManager.PlaySound(Constants::Sound::Name::CHARGE);
 				break;
 			case PowerUpType::EXTRA_LIFE:
-				if (lives < 99)
+				if (lives < Constants::Game::Maximums::LIVES)
 				{
 					lives++;
 					soundManager.PlaySound(Constants::Sound::Name::WOOHOO);
@@ -365,18 +385,21 @@ PowerUpType GameData::GeneratePowerUp()
 	{
 		powerUpGenerator[PowerUpType::PENNY] = 1;
 		powerUpGenerator[PowerUpType::DOLLAR] = 1;
-		powerUpGenerator[PowerUpType::POUND] = 1;
 		powerUpGenerator[PowerUpType::DIAMOND] = 1;
+		powerUpGenerator[PowerUpType::POUND] = 1;
 		powerUpGenerator[PowerUpType::YEN] = 1;
-		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
-		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
-		powerUpGenerator[PowerUpType::BOMB] = 1;
-		powerUpGenerator[PowerUpType::EXTRA_LIFE] = 1;
+
 		powerUpGenerator[PowerUpType::SCORE_NORMAL] = 1;
 		powerUpGenerator[PowerUpType::SCORE_DOUBLE] = 1;
 		powerUpGenerator[PowerUpType::SCORE_QUADRUPAL] = 1;
 		powerUpGenerator[PowerUpType::SCORE_HALF] = 1;
 		powerUpGenerator[PowerUpType::SCORE_QUARTER] = 1;
+
+		powerUpGenerator[PowerUpType::INVINCIBLE] = 1;
+		powerUpGenerator[PowerUpType::REVERSE_KEYS] = 1;
+		powerUpGenerator[PowerUpType::BOMB] = 1;
+		powerUpGenerator[PowerUpType::EXTRA_LIFE] = 1;
+
 		powerUpGenerator[PowerUpType::SPEED_UP] = 1;
 		powerUpGenerator[PowerUpType::SLOW_DOWN] = 1;
 		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 1;
@@ -422,6 +445,10 @@ PlayerState GameData::GetState() const
 	else if (invincibility > 0)
 	{
 		return PlayerState::INVINCIBILITY_WEARING_OFF;
+	}
+	else if (shield > 0)
+	{
+		return PlayerState::SHIELDED;
 	}
 	else
 	{
@@ -486,4 +513,9 @@ int GameData::GetScoreMultiplier() const
 int GameData::GetScoreDivisor() const
 {
 	return scoreDivisor;
+}
+
+int GameData::GetShield() const
+{
+	return shield;
 }
