@@ -26,6 +26,8 @@ namespace Constants::Game
 	namespace Counters
 	{
 		const int SCROLL = 100;
+		const int SLOW_SCROLL = 200;
+		const int FAST_SCROLL = 50;
 		const int INVINCIBILITY = 64;
 		const int INVINCIBILITY_WEAR_OFF = 8;
 	}

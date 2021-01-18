@@ -120,6 +120,18 @@ void GameData::UpdateGameStatus()
 		{
 			switch (powerUpPositions[row].type)
 			{
+			case PowerUpType::SPEED_NORMAL:
+				//TODO: sound
+				scrollCounterMaximum = Constants::Game::Counters::SCROLL;
+				break;
+			case PowerUpType::SPEED_UP:
+				//TODO: sound
+				scrollCounterMaximum = Constants::Game::Counters::FAST_SCROLL;
+				break;
+			case PowerUpType::SLOW_DOWN:
+				//TODO: sound
+				scrollCounterMaximum = Constants::Game::Counters::SLOW_SCROLL;
+				break;
 			case PowerUpType::SCORE_DOUBLE:
 				scoreMultiplier = 2;
 				scoreDivisor = 1;
