@@ -120,6 +120,10 @@ void GameData::UpdateGameStatus()
 		{
 			switch (powerUpPositions[row].type)
 			{
+			case PowerUpType::INSTANT_BOMB:
+				bombs++;
+				UseBomb();
+				break;
 			case PowerUpType::SPEED_NORMAL:
 				//TODO: sound
 				scrollCounterMaximum = Constants::Game::Counters::SCROLL;
@@ -374,6 +378,7 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::SPEED_UP] = 1;
 		powerUpGenerator[PowerUpType::SLOW_DOWN] = 1;
 		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 1;
+		powerUpGenerator[PowerUpType::INSTANT_BOMB] = 1;
 
 	}
 	int tally = 0;
