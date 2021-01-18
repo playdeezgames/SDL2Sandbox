@@ -359,6 +359,8 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::SCORE_QUADRUPAL] = 1;
 		powerUpGenerator[PowerUpType::SCORE_HALF] = 1;
 		powerUpGenerator[PowerUpType::SCORE_QUARTER] = 1;
+		powerUpGenerator[PowerUpType::SPEED_UP] = 1;
+		powerUpGenerator[PowerUpType::SLOW_DOWN] = 1;
 
 	}
 	int tally = 0;

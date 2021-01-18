@@ -143,6 +143,14 @@ void JetLag2021Renderer::DrawPickUps()
 		SDL_Color color = Constants::Color::BLACK;
 		switch (gameData.GetPowerUp(row))
 		{
+		case PowerUpType::SPEED_UP:
+			color = Constants::Color::MAGENTA;
+			ch = '\x18';
+			break;
+		case PowerUpType::SLOW_DOWN:
+			color = Constants::Color::MAGENTA;
+			ch = '\x19';
+			break;
 		case PowerUpType::SCORE_DOUBLE:
 			color = Constants::Color::GREEN;
 			ch = '2';
