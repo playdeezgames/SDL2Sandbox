@@ -141,6 +141,10 @@ void GameData::UpdateGameStatus()
 				bombs++;
 				UseBomb();
 				break;
+			case PowerUpType::CHANGE_DIRECTION:
+				//TODO: sound
+				direction = -direction;
+				break;
 			case PowerUpType::SPEED_NORMAL:
 				//TODO: sound
 				scrollCounterMaximum = Constants::Game::Counters::SCROLL;
@@ -405,7 +409,7 @@ PowerUpType GameData::GeneratePowerUp()
 		powerUpGenerator[PowerUpType::SPEED_NORMAL] = 1;
 		powerUpGenerator[PowerUpType::INSTANT_BOMB] = 1;
 		powerUpGenerator[PowerUpType::SHIELD] = 1;
-		powerUpGenerator[PowerUpType::CHANGE_DIRECTION] = 1;
+		powerUpGenerator[PowerUpType::CHANGE_DIRECTION] = 100;
 
 	}
 	int tally = 0;
