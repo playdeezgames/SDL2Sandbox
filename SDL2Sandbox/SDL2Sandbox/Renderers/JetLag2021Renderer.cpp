@@ -38,6 +38,25 @@ void JetLag2021Renderer::Draw()
 	DrawScore();
 	DrawBombs();
 	DrawLives();
+	DrawScoreMultiplier();
+}
+
+void JetLag2021Renderer::DrawScoreMultiplier()
+{
+	char ch = '1';
+	switch (gameData.GetScoreDivisor())
+	{
+	case 4:
+		ch = '\xac';
+		break;
+	case 2:
+		ch = '\xab';
+		break;
+	default:
+		ch = '0' + gameData.GetScoreMultiplier();
+	}
+	romFontManager.DrawCharacter(GetMainRenderer(), Constants::Board::COLUMNS - 10, 0, 'x', Constants::Color::BLACK);
+	romFontManager.DrawCharacter(GetMainRenderer(),Constants::Board::COLUMNS - 9, 0, ch, Constants::Color::BLACK);
 }
 
 void JetLag2021Renderer::DrawBackground()

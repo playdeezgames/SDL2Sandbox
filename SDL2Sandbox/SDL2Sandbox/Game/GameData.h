@@ -56,6 +56,8 @@ private:
 	bool keysReversed;
 	int bombs;
 	int lives;
+	int scoreMultiplier;
+	int scoreDivisor;
 
 	static std::map<PowerUpType, int> powerUpGenerator;
 	static PowerUpType GeneratePowerUp();
@@ -90,5 +92,7 @@ public:
 	void LoseLife();
 	int GetLives() const;
 	void SetGameState(const GameState&);
+	int GetScoreMultiplier() const;
+	int GetScoreDivisor() const;
 };
 

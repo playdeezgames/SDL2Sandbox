@@ -21,6 +21,8 @@ GameData::GameData(tggd::common::SoundManager& sndMan, GameState& gameState)
 	, keysReversed(Constants::Game::InitialValues::KEYS_REVERSED)
 	, bombs(Constants::Game::InitialValues::BOMBS)
 	, lives(Constants::Game::InitialValues::LIVES)
+	, scoreMultiplier(Constants::Game::InitialValues::SCORE_MULTIPLIER)
+	, scoreDivisor(Constants::Game::InitialValues::SCORE_DIVISOR)
 {
 
 }
@@ -411,4 +413,14 @@ void GameData::LoseLife()
 int GameData::GetLives() const
 {
 	return lives;
+}
+
+int GameData::GetScoreMultiplier() const
+{
+	return scoreMultiplier;
+}
+
+int GameData::GetScoreDivisor() const
+{
+	return scoreDivisor;
 }

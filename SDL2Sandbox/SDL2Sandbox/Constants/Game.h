@@ -20,6 +20,8 @@ namespace Constants::Game
 		const bool KEYS_REVERSED = false;
 		const int BOMBS = 3;
 		const int LIVES = 3;
+		const int SCORE_MULTIPLIER = 1;
+		const int SCORE_DIVISOR = 1;
 	}
 	namespace Counters
 	{
