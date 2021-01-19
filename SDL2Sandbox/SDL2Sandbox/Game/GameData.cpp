@@ -141,15 +141,15 @@ void GameData::UpdateGameStatus()
 				direction = -direction;
 				break;
 			case PowerUpType::SPEED_NORMAL:
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::NORMALSPEED);
 				scrollCounterMaximum = Constants::Game::Counters::SCROLL;
 				break;
 			case PowerUpType::SPEED_UP:
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::SPEEDUP);
 				scrollCounterMaximum = Constants::Game::Counters::FAST_SCROLL;
 				break;
 			case PowerUpType::SLOW_DOWN:
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::SLOWDOWN);
 				scrollCounterMaximum = Constants::Game::Counters::SLOW_SCROLL;
 				break;
 			case PowerUpType::SCORE_DOUBLE:

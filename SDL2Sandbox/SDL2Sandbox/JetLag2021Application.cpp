@@ -73,6 +73,9 @@ void JetLag2021Application::Start()
 	soundManager.AddSound(Constants::Sound::Name::YOINK, Constants::Sound::FileName::YOINK);
 	soundManager.AddSound(Constants::Sound::Name::NOPE, Constants::Sound::FileName::NOPE);
 	soundManager.AddSound(Constants::Sound::Name::WOOHOO, Constants::Sound::FileName::WOOHOO);
+	soundManager.AddSound(Constants::Sound::Name::SPEEDUP, Constants::Sound::FileName::SPEEDUP);
+	soundManager.AddSound(Constants::Sound::Name::SLOWDOWN, Constants::Sound::FileName::SLOWDOWN);
+	soundManager.AddSound(Constants::Sound::Name::NORMALSPEED, Constants::Sound::FileName::NORMALSPEED);
 
 	soundManager.AddMusic(Constants::Sound::Name::SONG, Constants::Sound::FileName::SONG);
 

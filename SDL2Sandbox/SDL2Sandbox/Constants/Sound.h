@@ -15,6 +15,9 @@ namespace Constants::Sound
 		const std::string SONG = "song";
 		const std::string NOPE = "nope";
 		const std::string WOOHOO = "woohoo";
+		const std::string SPEEDUP = "speedup";
+		const std::string SLOWDOWN = "slowdown";
+		const std::string NORMALSPEED = "normalspeed";
 	}
 	namespace FileName
 	{
@@ -28,6 +31,10 @@ namespace Constants::Sound
 		const std::string WHOOPS = "assets/sounds/whoops.wav";
 		const std::string BOOM = "assets/sounds/boom.wav";
 		const std::string YOINK = "assets/sounds/yoink.wav";
+		const std::string SPEEDUP = "assets/sounds/speedup.wav";
+		const std::string SLOWDOWN = "assets/sounds/slowdown.wav";
+		const std::string NORMALSPEED = "assets/sounds/normalspeed.wav";
+
 		const std::string SONG = "assets/music/song.ogg";
 
 	}
