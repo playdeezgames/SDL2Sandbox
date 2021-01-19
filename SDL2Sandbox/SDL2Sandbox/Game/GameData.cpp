@@ -101,7 +101,7 @@ void GameData::UpdateGameStatus()
 			case PlayerState::SHIELDED:
 				shield--;
 				blockPositions[row] = Constants::Block::INITIAL_COLUMN;
-				//TODO: play sound
+				soundManager.PlaySound(Constants::Sound::Name::SHIELDDOWN);
 				break;
 			default:
 				LoseLife();
@@ -132,7 +132,7 @@ void GameData::UpdateGameStatus()
 				if (shield < Constants::Game::Maximums::SHIELD)
 				{
 					shield++;
-					//TODO: shield
+					soundManager.PlaySound(Constants::Sound::Name::SHIELDUP);
 				}
 				else
 				{

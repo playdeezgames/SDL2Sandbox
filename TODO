@@ -2,7 +2,7 @@ Sounds:
     ✔ diamond @done(21-01-11 05:08)
     ✔ turn @done(21-01-11 05:08)
     ✔ invincible @done(21-01-11 05:19)
-    ☐ out of lives
+    ✔ out of lives @done(21-01-19 04:23)
     ☐ multiplier x 1/4
     ☐ multiplier x 1/2
     ☐ multiplier x 1
@@ -14,7 +14,7 @@ Sounds:
     ✔ slow down @done(21-01-19 04:16)
     ✔ normal speed @done(21-01-19 04:16)
     ✘ instant bomb @cancelled(21-01-18 05:18)
-    ☐ change direction
+    ✔ change direction @done(21-01-19 04:24)
 Power Ups:
     ✔ cent (+1) (0x9b) @done(21-01-11 05:36)
     ✔ dollar (+100) (0x24) @done(21-01-11 05:36)
