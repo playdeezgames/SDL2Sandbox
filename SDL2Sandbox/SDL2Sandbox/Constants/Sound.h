@@ -18,6 +18,7 @@ namespace Constants::Sound
 		const std::string SPEEDUP = "speedup";
 		const std::string SLOWDOWN = "slowdown";
 		const std::string NORMALSPEED = "normalspeed";
+		const std::string GAMEOVER = "gameover";
 	}
 	namespace FileName
 	{
@@ -34,6 +35,7 @@ namespace Constants::Sound
 		const std::string SPEEDUP = "assets/sounds/speedup.wav";
 		const std::string SLOWDOWN = "assets/sounds/slowdown.wav";
 		const std::string NORMALSPEED = "assets/sounds/normalspeed.wav";
+		const std::string GAMEOVER = "assets/sounds/gameover.wav";
 
 		const std::string SONG = "assets/music/song.ogg";
 

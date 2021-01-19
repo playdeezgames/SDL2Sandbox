@@ -76,6 +76,8 @@ void JetLag2021Application::Start()
 	soundManager.AddSound(Constants::Sound::Name::SPEEDUP, Constants::Sound::FileName::SPEEDUP);
 	soundManager.AddSound(Constants::Sound::Name::SLOWDOWN, Constants::Sound::FileName::SLOWDOWN);
 	soundManager.AddSound(Constants::Sound::Name::NORMALSPEED, Constants::Sound::FileName::NORMALSPEED);
+	soundManager.AddSound(Constants::Sound::Name::GAMEOVER, Constants::Sound::FileName::GAMEOVER);
+
 
 	soundManager.AddMusic(Constants::Sound::Name::SONG, Constants::Sound::FileName::SONG);
 

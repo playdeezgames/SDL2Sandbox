@@ -113,7 +113,14 @@ void GameData::UpdateGameStatus()
 	if (gameState == GameState::GAME_OVER || gameState == GameState::END_RUN)
 	{
 		dead = true;
-		soundManager.PlaySound(Constants::Sound::Name::DEATH);
+		if (gameState == GameState::GAME_OVER)
+		{
+			soundManager.PlaySound(Constants::Sound::Name::GAMEOVER);
+		}
+		else
+		{
+			soundManager.PlaySound(Constants::Sound::Name::DEATH);
+		}
 	}
 	else
 	{
@@ -137,7 +144,7 @@ void GameData::UpdateGameStatus()
 				UseBomb();
 				break;
 			case PowerUpType::CHANGE_DIRECTION:
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::WHOOPS);
 				direction = -direction;
 				break;
 			case PowerUpType::SPEED_NORMAL:
