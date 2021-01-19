@@ -162,27 +162,27 @@ void GameData::UpdateGameStatus()
 			case PowerUpType::SCORE_DOUBLE:
 				scoreMultiplier = 2;
 				scoreDivisor = 1;
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::DOUBLESCORE);
 				break;
 			case PowerUpType::SCORE_HALF:
 				scoreMultiplier = 1;
 				scoreDivisor = 2;
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::HALFSCORE);
 				break;
 			case PowerUpType::SCORE_NORMAL:
 				scoreMultiplier = 1;
 				scoreDivisor = 1;
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::NORMALSCORE);
 				break;
 			case PowerUpType::SCORE_QUADRUPAL:
 				scoreMultiplier = 4;
 				scoreDivisor = 1;
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::QUADRUPALSCORE);
 				break;
 			case PowerUpType::SCORE_QUARTER:
 				scoreMultiplier = 1;
 				scoreDivisor = 4;
-				//TODO: sound
+				soundManager.PlaySound(Constants::Sound::Name::QUARTERSCORE);
 				break;
 			case PowerUpType::BOMB:
 				if (bombs < Constants::Game::Maximums::BOMBS)

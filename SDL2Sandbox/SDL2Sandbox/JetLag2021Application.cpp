@@ -80,6 +80,11 @@ void JetLag2021Application::Start()
 	soundManager.AddSound(Constants::Sound::Name::SHIELDUP, Constants::Sound::FileName::SHIELDUP);
 	soundManager.AddSound(Constants::Sound::Name::SHIELDDOWN, Constants::Sound::FileName::SHIELDDOWN);
 
+	soundManager.AddSound(Constants::Sound::Name::QUADRUPALSCORE, Constants::Sound::FileName::QUADRUPALSCORE);
+	soundManager.AddSound(Constants::Sound::Name::QUARTERSCORE, Constants::Sound::FileName::QUARTERSCORE);
+	soundManager.AddSound(Constants::Sound::Name::NORMALSCORE, Constants::Sound::FileName::NORMALSCORE);
+	soundManager.AddSound(Constants::Sound::Name::HALFSCORE, Constants::Sound::FileName::HALFSCORE);
+	soundManager.AddSound(Constants::Sound::Name::DOUBLESCORE, Constants::Sound::FileName::DOUBLESCORE);
 
 	soundManager.AddMusic(Constants::Sound::Name::SONG, Constants::Sound::FileName::SONG);
 

@@ -21,6 +21,12 @@ namespace Constants::Sound
 		const std::string GAMEOVER = "gameover";
 		const std::string SHIELDUP = "shieldup";
 		const std::string SHIELDDOWN = "shielddown";
+		const std::string QUARTERSCORE = "quarterscore";
+		const std::string HALFSCORE = "halfscore";
+		const std::string NORMALSCORE = "normalscore";
+		const std::string DOUBLESCORE = "doublescore";
+		const std::string QUADRUPALSCORE = "quadrupalscore";
+
 	}
 	namespace FileName
 	{
@@ -40,8 +46,13 @@ namespace Constants::Sound
 		const std::string GAMEOVER = "assets/sounds/gameover.wav";
 		const std::string SHIELDUP = "assets/sounds/shieldup.wav";
 		const std::string SHIELDDOWN = "assets/sounds/shielddown.wav";
-		const std::string SONG = "assets/music/song.ogg";
+		const std::string QUARTERSCORE = "assets/sounds/quarterscore.wav";
+		const std::string HALFSCORE = "assets/sounds/halfscore.wav";
+		const std::string NORMALSCORE = "assets/sounds/normalscore.wav";
+		const std::string DOUBLESCORE = "assets/sounds/doublescore.wav";
+		const std::string QUADRUPALSCORE = "assets/sounds/quadrupalscore.wav";
 
+		const std::string SONG = "assets/music/song.ogg";
 	}
 }
 
