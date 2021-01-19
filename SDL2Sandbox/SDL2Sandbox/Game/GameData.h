@@ -2,54 +2,9 @@
 #include <vector>
 #include <map>
 #include "..\Common\SoundManager.h"
-enum class PowerUpType
-{
-	NONE,
-	DIAMOND,
-	PENNY,
-	DOLLAR,
-	POUND,
-	YEN,
-	INVINCIBLE,
-	REVERSE_KEYS,
-	BOMB,
-	EXTRA_LIFE,
-	SCORE_NORMAL,
-	SCORE_DOUBLE,
-	SCORE_QUADRUPAL,
-	SCORE_HALF,
-	SCORE_QUARTER,
-	SPEED_UP,
-	SLOW_DOWN,
-	SPEED_NORMAL,
-	INSTANT_BOMB,
-	SHIELD,
-	CHANGE_DIRECTION //1d
-};
-enum class PlayerState
-{
-	NORMAL,
-	INVINCIBLE,
-	INVINCIBILITY_WEARING_OFF,
-	SHIELDED,
-	DEAD
-};
-enum class GameState
-{
-	GAME_OVER,
-	IN_PLAY,
-	TITLE_SCREEN,
-	INSTRUCTIONS,
-	ABOUT,
-	OPTIONS,
-	CONFIRM_QUIT,
-	END_RUN
-};
-struct PowerUp
-{
-	PowerUpType type;
-	int position;
-};
+#include "PlayerState.h"
+#include "PowerUp.h"
+#include "GameState.h"
 class GameData
 {
 private:
@@ -99,14 +54,12 @@ public:
 	int GetPowerUpPosition(int) const;
 	PowerUpType GetPowerUp(int) const;
 	int GetScore() const;
-	GameState GetGameState() const;
 	PlayerState GetState() const;
 	void Update(int);
 	void UseBomb();
 	int GetBombs() const;
 	void LoseLife();
 	int GetLives() const;
-	void SetGameState(const GameState&);
 	int GetScoreMultiplier() const;
 	int GetScoreDivisor() const;
 	int GetShield() const;

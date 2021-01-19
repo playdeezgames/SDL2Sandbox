@@ -180,8 +180,12 @@
     <ClInclude Include="Common\Updater.h" />
     <ClInclude Include="Constants\Joystick.h" />
     <ClInclude Include="EventHandlers\EndRunEventHandler.h" />
+    <ClInclude Include="Game\GameState.h" />
     <ClInclude Include="Game\MainMenuItem.h" />
     <ClInclude Include="Game\OptionsState.h" />
+    <ClInclude Include="Game\PlayerState.h" />
+    <ClInclude Include="Game\PowerUp.h" />
+    <ClInclude Include="Game\PowerUpType.h" />
     <ClInclude Include="Renderers\BaseRenderer.h" />
     <ClInclude Include="Renderers\AboutRenderer.h" />
     <ClInclude Include="Renderers\ConfirmQuitRenderer.h" />

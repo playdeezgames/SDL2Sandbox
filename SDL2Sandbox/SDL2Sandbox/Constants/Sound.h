@@ -28,7 +28,7 @@ namespace Constants::Sound
 		const std::string WHOOPS = "assets/sounds/whoops.wav";
 		const std::string BOOM = "assets/sounds/boom.wav";
 		const std::string YOINK = "assets/sounds/yoink.wav";
-		const std::string SONG = "assets/music/IDidAThing.ogg";
+		const std::string SONG = "assets/music/song.ogg";
 
 	}
 }

@@ -221,5 +221,17 @@
     <ClInclude Include="EventHandlers\BaseEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\PowerUpType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PlayerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\PowerUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

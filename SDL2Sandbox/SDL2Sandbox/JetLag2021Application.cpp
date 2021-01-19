@@ -128,7 +128,7 @@ void JetLag2021Application::Finish()
 
 bool JetLag2021Application::OnEvent(const SDL_Event& evt)
 {
-	bool result = eventHandlers[gameData.GetGameState()]->OnEvent(evt);
+	bool result = eventHandlers[gameState]->OnEvent(evt);
 	if (!result)
 	{
 		SDL_Log("wat");
@@ -144,7 +144,7 @@ void JetLag2021Application::Update(int milliseconds)
 void JetLag2021Application::Draw()
 {
 	renderer.Draw();
-	auto stateRenderer = renderers.find(gameData.GetGameState());
+	auto stateRenderer = renderers.find(gameState);
 	if (stateRenderer != renderers.end())
 	{
 		stateRenderer->second->Draw();

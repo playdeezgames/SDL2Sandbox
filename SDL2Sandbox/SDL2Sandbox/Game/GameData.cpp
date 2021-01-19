@@ -55,11 +55,6 @@ void GameData::SetNextDirection(int nextDirection)
 	}
 }
 
-GameState GameData::GetGameState() const
-{
-	return gameState;
-}
-
 void GameData::UpdateTail()
 {
 	for (size_t row = 0; row < tailPositions.size() - 1; ++row)
@@ -484,11 +479,6 @@ int GameData::GetBombs() const
 }
 
 
-void GameData::SetGameState(const GameState& state)
-{
-	gameState = state;
-}
-
 void GameData::LoseLife()
 {
 	if (lives > 0)
@@ -496,11 +486,11 @@ void GameData::LoseLife()
 		lives--;
 		if (lives > 0)
 		{
-			SetGameState(GameState::END_RUN);
+			gameState = GameState::END_RUN;
 		}
 		else
 		{
-			SetGameState(GameState::GAME_OVER);
+			gameState = GameState::GAME_OVER;
 		}
 	}
 }
