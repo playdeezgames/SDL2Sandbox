@@ -3,6 +3,7 @@
 
 #include "Constants\Sound.h"
 #include "Constants\Window.h"
+#include "Constants\UI.h"
 
 #include "EventHandlers\AboutEventHandler.h"
 #include "EventHandlers\ConfirmQuitEventHandler.h"
@@ -60,6 +61,11 @@ void JetLag2021Application::Start()
 	renderers[GameState::OPTIONS] = new OptionsRenderer(GetMainRenderer(), romFontManager, optionsState, soundManager);
 
 	IMG_Init(IMG_INIT_PNG);
+	
+	auto s = IMG_Load(Constants::UI::ICON_FILE_NAME.c_str());
+	SDL_SetWindowIcon(GetMainWindow(), s);
+	SDL_FreeSurface(s);
+
 	romFontManager.Start(GetMainRenderer());
 	renderer.Start(GetMainRenderer());
 
